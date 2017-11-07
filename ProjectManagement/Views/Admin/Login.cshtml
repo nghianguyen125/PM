@@ -1,0 +1,36 @@
+﻿@model ProjectManagement.Models.TaiKhoan
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form_login">
+        <div class="bor_top"></div>
+        <span class="glyphicon glyphicon-pencil icon_login"></span>
+        <p>Đăng Nhập</p>
+        @Html.ValidationSummary(true)
+
+        <div class="login">
+            @Html.ValidationMessage("error", "", new { @class = "text-danger", style="text-align:center; display: block" })
+            <h5>Tên đăng nhập (*)</h5>
+            @Html.TextBoxFor(model => model.Username, new { @class = "" })
+            @Html.ValidationMessageFor(model => model.Username, String.Empty, new { @class = "text-danger" })
+            <h5>Mật khẩu (*)</h5>
+            @Html.PasswordFor(model => model.Password, new { @class = "" })
+            @Html.ValidationMessageFor(model => model.Password, String.Empty, new { @class = "text-danger" })
+            @*<h5>Mã xác nhận (*)</h5>
+            @Html.TextBox("captchaText", String.Empty, new { style = "width: 65%;float: left;margin-right: 10px;" })
+            <img src="@Url.Action("GetCaptchaImage","Admin")" style="height: 40px;" />*@
+            <input class="bt_lg btn btn-default" type="submit" value="Đăng nhập" />
+        </div>
+        <div class="bor_bottom">
+            @*<a href="#">Quên mật khẩu?</a>*@
+        </div>
+    </div>
+}
+@section Scripts {
+    @*@Scripts.Render("~/bundles/jqueryval")*@
+}
+

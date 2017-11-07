@@ -1,0 +1,1751 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ProjectManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BinhLuans">
+          <Key>
+            <PropertyRef Name="BinhLuanId" />
+          </Key>
+          <Property Name="BinhLuanId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="NguoiBinhLuan" Type="nvarchar" MaxLength="250" />
+          <Property Name="NoiDungBinhLuan" Type="nvarchar" MaxLength="500" />
+          <Property Name="ThoiGianBinhLuan" Type="datetime" />
+          <Property Name="DeTaiId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DanhGiaDeTai">
+          <Key>
+            <PropertyRef Name="DeTaiId" />
+            <PropertyRef Name="SinhVienId" />
+            <PropertyRef Name="GiangVienId" />
+          </Key>
+          <Property Name="DeTaiId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="SinhVienId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="GiangVienId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Diem" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="NoiDungDanhGia" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="DeTais">
+          <Key>
+            <PropertyRef Name="DeTaiId" />
+          </Key>
+          <Property Name="DeTaiId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="TenDeTai" Type="nvarchar(max)" />
+          <Property Name="MoTa" Type="nvarchar(max)" />
+          <Property Name="SoLuongThanhVien" Type="int" />
+          <Property Name="NgayTao" Type="datetime" />
+          <Property Name="NgayDangKy" Type="datetime" />
+        </EntityType>
+        <EntityType Name="DotKhoaLuan">
+          <Key>
+            <PropertyRef Name="DotKhoaLuanId" />
+          </Key>
+          <Property Name="DotKhoaLuanId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="TenDotKhoaLuan" Type="nvarchar" MaxLength="250" />
+          <Property Name="NamHocHocKyId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GiangViens">
+          <Key>
+            <PropertyRef Name="GiangVienId" />
+          </Key>
+          <Property Name="GiangVienId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="GioiTinh" Type="bit" Nullable="false" />
+          <Property Name="HoTen" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="GiangVienThuocKhoa">
+          <Key>
+            <PropertyRef Name="KhoaId" />
+            <PropertyRef Name="GiangVienId" />
+            <PropertyRef Name="TuNgay" />
+          </Key>
+          <Property Name="KhoaId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="GiangVienId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TuNgay" Type="datetime" Nullable="false" />
+          <Property Name="DenNgay" Type="datetime" />
+        </EntityType>
+        <EntityType Name="KhoaHoc">
+          <Key>
+            <PropertyRef Name="KhoaHocID" />
+          </Key>
+          <Property Name="KhoaHocID" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="TenKhoaHoc" Type="nvarchar" MaxLength="250" />
+          <Property Name="NamHocHocKyId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Khoas">
+          <Key>
+            <PropertyRef Name="KhoaId" />
+          </Key>
+          <Property Name="KhoaId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="TenKhoa" Type="nvarchar" MaxLength="250" />
+          <Property Name="DiaChi" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="LoaiTaiKhoans">
+          <Key>
+            <PropertyRef Name="LoaiTaiKhoanId" />
+          </Key>
+          <Property Name="LoaiTaiKhoanId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="TenLoaiTaiKhoan" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="NamHocs">
+          <Key>
+            <PropertyRef Name="NamHocHocKyId" />
+          </Key>
+          <Property Name="NamHocHocKyId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="TenNamHocHocKy" Type="nvarchar" MaxLength="250" />
+          <Property Name="TuNgay" Type="datetime" />
+          <Property Name="DenNgay" Type="datetime" />
+          <Property Name="NamHocHocKyIdRoot" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Nganhs">
+          <Key>
+            <PropertyRef Name="NganhId" />
+          </Key>
+          <Property Name="NganhId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="TenNganh" Type="nvarchar(max)" />
+          <Property Name="KhoaId" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="NhomSVs">
+          <Key>
+            <PropertyRef Name="NhomSVId" />
+          </Key>
+          <Property Name="NhomSVId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="TenNhom" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="PhanDeTaiChoDotKhoaLuan">
+          <Key>
+            <PropertyRef Name="DotKhoaLuanId" />
+            <PropertyRef Name="DeTaiId" />
+          </Key>
+          <Property Name="DotKhoaLuanId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="DeTaiId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="NgayPhanDeTai" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PhanDeTaiChoGiangVien">
+          <Key>
+            <PropertyRef Name="GiangVienId" />
+            <PropertyRef Name="DeTaiId" />
+          </Key>
+          <Property Name="GiangVienId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DeTaiId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="NgayPhanDeTai" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PhanDeTaiChoNhomSV">
+          <Key>
+            <PropertyRef Name="NhomSVId" />
+            <PropertyRef Name="DeTaiId" />
+          </Key>
+          <Property Name="NhomSVId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="DeTaiId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="NgayPhanDeTai" Type="datetime" />
+          <Property Name="GhiChu" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="QuanLyLiches">
+          <Key>
+            <PropertyRef Name="DotKhoaLuanId" />
+            <PropertyRef Name="MocThoiGian" />
+          </Key>
+          <Property Name="DotKhoaLuanId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="MocThoiGian" Type="datetime" Nullable="false" />
+          <Property Name="NoiDung" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="SinhVienKhoaHoc">
+          <Key>
+            <PropertyRef Name="KhoaHocID" />
+            <PropertyRef Name="SinhVienId" />
+            <PropertyRef Name="NganhId" />
+            <PropertyRef Name="TuNgay" />
+          </Key>
+          <Property Name="KhoaHocID" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="SinhVienId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NganhId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="TuNgay" Type="datetime" Nullable="false" />
+          <Property Name="DenNgay" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SinhViens">
+          <Key>
+            <PropertyRef Name="SinhVienId" />
+          </Key>
+          <Property Name="SinhVienId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="GioiTinh" Type="bit" />
+          <Property Name="HoTen" Type="nvarchar" MaxLength="250" />
+          <Property Name="NgaySinh" Type="datetime" />
+          <Property Name="SoTCHT" Type="int" />
+          <Property Name="SoTCCL" Type="int" />
+          <Property Name="TrangThaiId" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="SinhVienThuocKhoa">
+          <Key>
+            <PropertyRef Name="KhoaId" />
+            <PropertyRef Name="SinhVienId" />
+            <PropertyRef Name="TuNgay" />
+          </Key>
+          <Property Name="KhoaId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="SinhVienId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TuNgay" Type="datetime" Nullable="false" />
+          <Property Name="DenNgay" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SinhVienThuocNhomSV">
+          <Key>
+            <PropertyRef Name="NhomSVId" />
+            <PropertyRef Name="SinhVienId" />
+          </Key>
+          <Property Name="NhomSVId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="SinhVienId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NgayPhan" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TaiKhoans">
+          <Key>
+            <PropertyRef Name="TaiKhoanId" />
+          </Key>
+          <Property Name="TaiKhoanId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Username" Type="nvarchar(max)" />
+          <Property Name="Password" Type="nvarchar(max)" />
+          <Property Name="HoTen" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="SDT" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="SDTK" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="LoaiTaiKhoanId" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="SinhVienId" Type="nvarchar" MaxLength="50" />
+          <Property Name="GiangVienId" Type="nvarchar" MaxLength="50" />
+          <Property Name="LaQuanTri" Type="bit" />
+        </EntityType>
+        <EntityType Name="TaiLieux">
+          <Key>
+            <PropertyRef Name="TaiLieuId" />
+          </Key>
+          <Property Name="TaiLieuId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="TenTaiLieu" Type="nvarchar" MaxLength="250" />
+          <Property Name="TepTinDinhKem" Type="nvarchar" MaxLength="250" />
+          <Property Name="DeTaiId" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="TinTucThongBaos">
+          <Key>
+            <PropertyRef Name="TinTucId" />
+          </Key>
+          <Property Name="TinTucId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="TieuDe" Type="nvarchar(max)" />
+          <Property Name="NoiDung" Type="nvarchar(max)" />
+          <Property Name="NgayDang" Type="datetime" />
+          <Property Name="TaiKhoanId" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="TrangThais">
+          <Key>
+            <PropertyRef Name="TrangThaiId" />
+          </Key>
+          <Property Name="TrangThaiId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_BinhLuans_DeTais">
+          <End Role="DeTais" Type="Self.DeTais" Multiplicity="1" />
+          <End Role="BinhLuans" Type="Self.BinhLuans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeTais">
+              <PropertyRef Name="DeTaiId" />
+            </Principal>
+            <Dependent Role="BinhLuans">
+              <PropertyRef Name="DeTaiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DanhGiaDeTai_DeTais">
+          <End Role="DeTais" Type="Self.DeTais" Multiplicity="1" />
+          <End Role="DanhGiaDeTai" Type="Self.DanhGiaDeTai" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeTais">
+              <PropertyRef Name="DeTaiId" />
+            </Principal>
+            <Dependent Role="DanhGiaDeTai">
+              <PropertyRef Name="DeTaiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DanhGiaDeTai_SinhViens">
+          <End Role="SinhViens" Type="Self.SinhViens" Multiplicity="1" />
+          <End Role="DanhGiaDeTai" Type="Self.DanhGiaDeTai" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SinhViens">
+              <PropertyRef Name="SinhVienId" />
+            </Principal>
+            <Dependent Role="DanhGiaDeTai">
+              <PropertyRef Name="SinhVienId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Nganhs_dbo_Khoas_KhoaId">
+          <End Role="Khoas" Type="Self.Khoas" Multiplicity="0..1" />
+          <End Role="Nganhs" Type="Self.Nganhs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Khoas">
+              <PropertyRef Name="KhoaId" />
+            </Principal>
+            <Dependent Role="Nganhs">
+              <PropertyRef Name="KhoaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_SinhViens_dbo_TrangThais_TrangThaiId">
+          <End Role="TrangThais" Type="Self.TrangThais" Multiplicity="0..1" />
+          <End Role="SinhViens" Type="Self.SinhViens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TrangThais">
+              <PropertyRef Name="TrangThaiId" />
+            </Principal>
+            <Dependent Role="SinhViens">
+              <PropertyRef Name="TrangThaiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_TaiKhoans_dbo_LoaiTaiKhoans_LoaiTaiKhoanId">
+          <End Role="LoaiTaiKhoans" Type="Self.LoaiTaiKhoans" Multiplicity="0..1" />
+          <End Role="TaiKhoans" Type="Self.TaiKhoans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoaiTaiKhoans">
+              <PropertyRef Name="LoaiTaiKhoanId" />
+            </Principal>
+            <Dependent Role="TaiKhoans">
+              <PropertyRef Name="LoaiTaiKhoanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_TaiLieux_dbo_DeTais_DeTaiId">
+          <End Role="DeTais" Type="Self.DeTais" Multiplicity="0..1" />
+          <End Role="TaiLieux" Type="Self.TaiLieux" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeTais">
+              <PropertyRef Name="DeTaiId" />
+            </Principal>
+            <Dependent Role="TaiLieux">
+              <PropertyRef Name="DeTaiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_TinTucs_dbo_TaiKhoans_TaiKhoanId">
+          <End Role="TaiKhoans" Type="Self.TaiKhoans" Multiplicity="0..1" />
+          <End Role="TinTucThongBaos" Type="Self.TinTucThongBaos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaiKhoans">
+              <PropertyRef Name="TaiKhoanId" />
+            </Principal>
+            <Dependent Role="TinTucThongBaos">
+              <PropertyRef Name="TaiKhoanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GiangVienThuocKhoa_GiangViens">
+          <End Role="GiangViens" Type="Self.GiangViens" Multiplicity="1" />
+          <End Role="GiangVienThuocKhoa" Type="Self.GiangVienThuocKhoa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GiangViens">
+              <PropertyRef Name="GiangVienId" />
+            </Principal>
+            <Dependent Role="GiangVienThuocKhoa">
+              <PropertyRef Name="GiangVienId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GiangVienThuocKhoa_Khoas">
+          <End Role="Khoas" Type="Self.Khoas" Multiplicity="1" />
+          <End Role="GiangVienThuocKhoa" Type="Self.GiangVienThuocKhoa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Khoas">
+              <PropertyRef Name="KhoaId" />
+            </Principal>
+            <Dependent Role="GiangVienThuocKhoa">
+              <PropertyRef Name="KhoaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KhoaHoc_NamHocs">
+          <End Role="NamHocs" Type="Self.NamHocs" Multiplicity="1" />
+          <End Role="KhoaHoc" Type="Self.KhoaHoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NamHocs">
+              <PropertyRef Name="NamHocHocKyId" />
+            </Principal>
+            <Dependent Role="KhoaHoc">
+              <PropertyRef Name="NamHocHocKyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NamHocs_NamHocs">
+          <End Role="NamHocs" Type="Self.NamHocs" Multiplicity="0..1" />
+          <End Role="NamHocs1" Type="Self.NamHocs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NamHocs">
+              <PropertyRef Name="NamHocHocKyId" />
+            </Principal>
+            <Dependent Role="NamHocs1">
+              <PropertyRef Name="NamHocHocKyIdRoot" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhanDeTaiChoDotKhoaLuan_DeTais">
+          <End Role="DeTais" Type="Self.DeTais" Multiplicity="1" />
+          <End Role="PhanDeTaiChoDotKhoaLuan" Type="Self.PhanDeTaiChoDotKhoaLuan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeTais">
+              <PropertyRef Name="DeTaiId" />
+            </Principal>
+            <Dependent Role="PhanDeTaiChoDotKhoaLuan">
+              <PropertyRef Name="DeTaiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhanDeTaiChoDotKhoaLuan_DotKhoaLuan">
+          <End Role="DotKhoaLuan" Type="Self.DotKhoaLuan" Multiplicity="1" />
+          <End Role="PhanDeTaiChoDotKhoaLuan" Type="Self.PhanDeTaiChoDotKhoaLuan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DotKhoaLuan">
+              <PropertyRef Name="DotKhoaLuanId" />
+            </Principal>
+            <Dependent Role="PhanDeTaiChoDotKhoaLuan">
+              <PropertyRef Name="DotKhoaLuanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhanDeTaiChoGiangVien_DeTais">
+          <End Role="DeTais" Type="Self.DeTais" Multiplicity="1" />
+          <End Role="PhanDeTaiChoGiangVien" Type="Self.PhanDeTaiChoGiangVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeTais">
+              <PropertyRef Name="DeTaiId" />
+            </Principal>
+            <Dependent Role="PhanDeTaiChoGiangVien">
+              <PropertyRef Name="DeTaiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhanDeTaiChoGiangVien_GiangViens1">
+          <End Role="GiangViens" Type="Self.GiangViens" Multiplicity="1" />
+          <End Role="PhanDeTaiChoGiangVien" Type="Self.PhanDeTaiChoGiangVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GiangViens">
+              <PropertyRef Name="GiangVienId" />
+            </Principal>
+            <Dependent Role="PhanDeTaiChoGiangVien">
+              <PropertyRef Name="GiangVienId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhanDeTaiChoNhomSV_DeTais">
+          <End Role="DeTais" Type="Self.DeTais" Multiplicity="1" />
+          <End Role="PhanDeTaiChoNhomSV" Type="Self.PhanDeTaiChoNhomSV" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeTais">
+              <PropertyRef Name="DeTaiId" />
+            </Principal>
+            <Dependent Role="PhanDeTaiChoNhomSV">
+              <PropertyRef Name="DeTaiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhanDeTaiChoNhomSV_NhomSVs">
+          <End Role="NhomSVs" Type="Self.NhomSVs" Multiplicity="1" />
+          <End Role="PhanDeTaiChoNhomSV" Type="Self.PhanDeTaiChoNhomSV" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhomSVs">
+              <PropertyRef Name="NhomSVId" />
+            </Principal>
+            <Dependent Role="PhanDeTaiChoNhomSV">
+              <PropertyRef Name="NhomSVId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuanLyLiches_DotKhoaLuan">
+          <End Role="DotKhoaLuan" Type="Self.DotKhoaLuan" Multiplicity="1" />
+          <End Role="QuanLyLiches" Type="Self.QuanLyLiches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DotKhoaLuan">
+              <PropertyRef Name="DotKhoaLuanId" />
+            </Principal>
+            <Dependent Role="QuanLyLiches">
+              <PropertyRef Name="DotKhoaLuanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SinhVienKhoaHoc_KhoaHoc">
+          <End Role="KhoaHoc" Type="Self.KhoaHoc" Multiplicity="1" />
+          <End Role="SinhVienKhoaHoc" Type="Self.SinhVienKhoaHoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhoaHoc">
+              <PropertyRef Name="KhoaHocID" />
+            </Principal>
+            <Dependent Role="SinhVienKhoaHoc">
+              <PropertyRef Name="KhoaHocID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SinhVienKhoaHoc_Nganhs">
+          <End Role="Nganhs" Type="Self.Nganhs" Multiplicity="1" />
+          <End Role="SinhVienKhoaHoc" Type="Self.SinhVienKhoaHoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nganhs">
+              <PropertyRef Name="NganhId" />
+            </Principal>
+            <Dependent Role="SinhVienKhoaHoc">
+              <PropertyRef Name="NganhId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SinhVienKhoaHoc_SinhViens">
+          <End Role="SinhViens" Type="Self.SinhViens" Multiplicity="1" />
+          <End Role="SinhVienKhoaHoc" Type="Self.SinhVienKhoaHoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SinhViens">
+              <PropertyRef Name="SinhVienId" />
+            </Principal>
+            <Dependent Role="SinhVienKhoaHoc">
+              <PropertyRef Name="SinhVienId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SinhVienThuocKhoa_Khoas">
+          <End Role="Khoas" Type="Self.Khoas" Multiplicity="1" />
+          <End Role="SinhVienThuocKhoa" Type="Self.SinhVienThuocKhoa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Khoas">
+              <PropertyRef Name="KhoaId" />
+            </Principal>
+            <Dependent Role="SinhVienThuocKhoa">
+              <PropertyRef Name="KhoaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SinhVienThuocKhoa_SinhViens">
+          <End Role="SinhViens" Type="Self.SinhViens" Multiplicity="1" />
+          <End Role="SinhVienThuocKhoa" Type="Self.SinhVienThuocKhoa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SinhViens">
+              <PropertyRef Name="SinhVienId" />
+            </Principal>
+            <Dependent Role="SinhVienThuocKhoa">
+              <PropertyRef Name="SinhVienId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SinhVienThuocNhomSV_NhomSVs">
+          <End Role="NhomSVs" Type="Self.NhomSVs" Multiplicity="1" />
+          <End Role="SinhVienThuocNhomSV" Type="Self.SinhVienThuocNhomSV" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhomSVs">
+              <PropertyRef Name="NhomSVId" />
+            </Principal>
+            <Dependent Role="SinhVienThuocNhomSV">
+              <PropertyRef Name="NhomSVId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SinhVienThuocNhomSV_SinhViens">
+          <End Role="SinhViens" Type="Self.SinhViens" Multiplicity="1" />
+          <End Role="SinhVienThuocNhomSV" Type="Self.SinhVienThuocNhomSV" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SinhViens">
+              <PropertyRef Name="SinhVienId" />
+            </Principal>
+            <Dependent Role="SinhVienThuocNhomSV">
+              <PropertyRef Name="SinhVienId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaiKhoans_GiangViens">
+          <End Role="GiangViens" Type="Self.GiangViens" Multiplicity="0..1" />
+          <End Role="TaiKhoans" Type="Self.TaiKhoans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GiangViens">
+              <PropertyRef Name="GiangVienId" />
+            </Principal>
+            <Dependent Role="TaiKhoans">
+              <PropertyRef Name="GiangVienId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaiKhoans_SinhViens">
+          <End Role="SinhViens" Type="Self.SinhViens" Multiplicity="0..1" />
+          <End Role="TaiKhoans" Type="Self.TaiKhoans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SinhViens">
+              <PropertyRef Name="SinhVienId" />
+            </Principal>
+            <Dependent Role="TaiKhoans">
+              <PropertyRef Name="SinhVienId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProjectManagementModelStoreContainer">
+          <EntitySet Name="BinhLuans" EntityType="Self.BinhLuans" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DanhGiaDeTai" EntityType="Self.DanhGiaDeTai" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DeTais" EntityType="Self.DeTais" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DotKhoaLuan" EntityType="Self.DotKhoaLuan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GiangViens" EntityType="Self.GiangViens" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GiangVienThuocKhoa" EntityType="Self.GiangVienThuocKhoa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KhoaHoc" EntityType="Self.KhoaHoc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Khoas" EntityType="Self.Khoas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoaiTaiKhoans" EntityType="Self.LoaiTaiKhoans" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NamHocs" EntityType="Self.NamHocs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Nganhs" EntityType="Self.Nganhs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NhomSVs" EntityType="Self.NhomSVs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhanDeTaiChoDotKhoaLuan" EntityType="Self.PhanDeTaiChoDotKhoaLuan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhanDeTaiChoGiangVien" EntityType="Self.PhanDeTaiChoGiangVien" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhanDeTaiChoNhomSV" EntityType="Self.PhanDeTaiChoNhomSV" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuanLyLiches" EntityType="Self.QuanLyLiches" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SinhVienKhoaHoc" EntityType="Self.SinhVienKhoaHoc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SinhViens" EntityType="Self.SinhViens" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SinhVienThuocKhoa" EntityType="Self.SinhVienThuocKhoa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SinhVienThuocNhomSV" EntityType="Self.SinhVienThuocNhomSV" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaiKhoans" EntityType="Self.TaiKhoans" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaiLieux" EntityType="Self.TaiLieux" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TinTucThongBaos" EntityType="Self.TinTucThongBaos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TrangThais" EntityType="Self.TrangThais" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BinhLuans_DeTais" Association="Self.FK_BinhLuans_DeTais">
+            <End Role="DeTais" EntitySet="DeTais" />
+            <End Role="BinhLuans" EntitySet="BinhLuans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DanhGiaDeTai_DeTais" Association="Self.FK_DanhGiaDeTai_DeTais">
+            <End Role="DeTais" EntitySet="DeTais" />
+            <End Role="DanhGiaDeTai" EntitySet="DanhGiaDeTai" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DanhGiaDeTai_SinhViens" Association="Self.FK_DanhGiaDeTai_SinhViens">
+            <End Role="SinhViens" EntitySet="SinhViens" />
+            <End Role="DanhGiaDeTai" EntitySet="DanhGiaDeTai" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Nganhs_dbo_Khoas_KhoaId" Association="Self.FK_dbo_Nganhs_dbo_Khoas_KhoaId">
+            <End Role="Khoas" EntitySet="Khoas" />
+            <End Role="Nganhs" EntitySet="Nganhs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_SinhViens_dbo_TrangThais_TrangThaiId" Association="Self.FK_dbo_SinhViens_dbo_TrangThais_TrangThaiId">
+            <End Role="TrangThais" EntitySet="TrangThais" />
+            <End Role="SinhViens" EntitySet="SinhViens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_TaiKhoans_dbo_LoaiTaiKhoans_LoaiTaiKhoanId" Association="Self.FK_dbo_TaiKhoans_dbo_LoaiTaiKhoans_LoaiTaiKhoanId">
+            <End Role="LoaiTaiKhoans" EntitySet="LoaiTaiKhoans" />
+            <End Role="TaiKhoans" EntitySet="TaiKhoans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_TaiLieux_dbo_DeTais_DeTaiId" Association="Self.FK_dbo_TaiLieux_dbo_DeTais_DeTaiId">
+            <End Role="DeTais" EntitySet="DeTais" />
+            <End Role="TaiLieux" EntitySet="TaiLieux" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_TinTucs_dbo_TaiKhoans_TaiKhoanId" Association="Self.FK_dbo_TinTucs_dbo_TaiKhoans_TaiKhoanId">
+            <End Role="TaiKhoans" EntitySet="TaiKhoans" />
+            <End Role="TinTucThongBaos" EntitySet="TinTucThongBaos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GiangVienThuocKhoa_GiangViens" Association="Self.FK_GiangVienThuocKhoa_GiangViens">
+            <End Role="GiangViens" EntitySet="GiangViens" />
+            <End Role="GiangVienThuocKhoa" EntitySet="GiangVienThuocKhoa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GiangVienThuocKhoa_Khoas" Association="Self.FK_GiangVienThuocKhoa_Khoas">
+            <End Role="Khoas" EntitySet="Khoas" />
+            <End Role="GiangVienThuocKhoa" EntitySet="GiangVienThuocKhoa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KhoaHoc_NamHocs" Association="Self.FK_KhoaHoc_NamHocs">
+            <End Role="NamHocs" EntitySet="NamHocs" />
+            <End Role="KhoaHoc" EntitySet="KhoaHoc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NamHocs_NamHocs" Association="Self.FK_NamHocs_NamHocs">
+            <End Role="NamHocs" EntitySet="NamHocs" />
+            <End Role="NamHocs1" EntitySet="NamHocs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhanDeTaiChoDotKhoaLuan_DeTais" Association="Self.FK_PhanDeTaiChoDotKhoaLuan_DeTais">
+            <End Role="DeTais" EntitySet="DeTais" />
+            <End Role="PhanDeTaiChoDotKhoaLuan" EntitySet="PhanDeTaiChoDotKhoaLuan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhanDeTaiChoDotKhoaLuan_DotKhoaLuan" Association="Self.FK_PhanDeTaiChoDotKhoaLuan_DotKhoaLuan">
+            <End Role="DotKhoaLuan" EntitySet="DotKhoaLuan" />
+            <End Role="PhanDeTaiChoDotKhoaLuan" EntitySet="PhanDeTaiChoDotKhoaLuan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhanDeTaiChoGiangVien_DeTais" Association="Self.FK_PhanDeTaiChoGiangVien_DeTais">
+            <End Role="DeTais" EntitySet="DeTais" />
+            <End Role="PhanDeTaiChoGiangVien" EntitySet="PhanDeTaiChoGiangVien" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhanDeTaiChoGiangVien_GiangViens1" Association="Self.FK_PhanDeTaiChoGiangVien_GiangViens1">
+            <End Role="GiangViens" EntitySet="GiangViens" />
+            <End Role="PhanDeTaiChoGiangVien" EntitySet="PhanDeTaiChoGiangVien" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhanDeTaiChoNhomSV_DeTais" Association="Self.FK_PhanDeTaiChoNhomSV_DeTais">
+            <End Role="DeTais" EntitySet="DeTais" />
+            <End Role="PhanDeTaiChoNhomSV" EntitySet="PhanDeTaiChoNhomSV" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhanDeTaiChoNhomSV_NhomSVs" Association="Self.FK_PhanDeTaiChoNhomSV_NhomSVs">
+            <End Role="NhomSVs" EntitySet="NhomSVs" />
+            <End Role="PhanDeTaiChoNhomSV" EntitySet="PhanDeTaiChoNhomSV" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuanLyLiches_DotKhoaLuan" Association="Self.FK_QuanLyLiches_DotKhoaLuan">
+            <End Role="DotKhoaLuan" EntitySet="DotKhoaLuan" />
+            <End Role="QuanLyLiches" EntitySet="QuanLyLiches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SinhVienKhoaHoc_KhoaHoc" Association="Self.FK_SinhVienKhoaHoc_KhoaHoc">
+            <End Role="KhoaHoc" EntitySet="KhoaHoc" />
+            <End Role="SinhVienKhoaHoc" EntitySet="SinhVienKhoaHoc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SinhVienKhoaHoc_Nganhs" Association="Self.FK_SinhVienKhoaHoc_Nganhs">
+            <End Role="Nganhs" EntitySet="Nganhs" />
+            <End Role="SinhVienKhoaHoc" EntitySet="SinhVienKhoaHoc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SinhVienKhoaHoc_SinhViens" Association="Self.FK_SinhVienKhoaHoc_SinhViens">
+            <End Role="SinhViens" EntitySet="SinhViens" />
+            <End Role="SinhVienKhoaHoc" EntitySet="SinhVienKhoaHoc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SinhVienThuocKhoa_Khoas" Association="Self.FK_SinhVienThuocKhoa_Khoas">
+            <End Role="Khoas" EntitySet="Khoas" />
+            <End Role="SinhVienThuocKhoa" EntitySet="SinhVienThuocKhoa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SinhVienThuocKhoa_SinhViens" Association="Self.FK_SinhVienThuocKhoa_SinhViens">
+            <End Role="SinhViens" EntitySet="SinhViens" />
+            <End Role="SinhVienThuocKhoa" EntitySet="SinhVienThuocKhoa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SinhVienThuocNhomSV_NhomSVs" Association="Self.FK_SinhVienThuocNhomSV_NhomSVs">
+            <End Role="NhomSVs" EntitySet="NhomSVs" />
+            <End Role="SinhVienThuocNhomSV" EntitySet="SinhVienThuocNhomSV" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SinhVienThuocNhomSV_SinhViens" Association="Self.FK_SinhVienThuocNhomSV_SinhViens">
+            <End Role="SinhViens" EntitySet="SinhViens" />
+            <End Role="SinhVienThuocNhomSV" EntitySet="SinhVienThuocNhomSV" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaiKhoans_GiangViens" Association="Self.FK_TaiKhoans_GiangViens">
+            <End Role="GiangViens" EntitySet="GiangViens" />
+            <End Role="TaiKhoans" EntitySet="TaiKhoans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaiKhoans_SinhViens" Association="Self.FK_TaiKhoans_SinhViens">
+            <End Role="SinhViens" EntitySet="SinhViens" />
+            <End Role="TaiKhoans" EntitySet="TaiKhoans" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProjectManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ProjectManagementEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BinhLuans" EntityType="ProjectManagementModel.BinhLuan" />
+          <EntitySet Name="DanhGiaDeTais" EntityType="ProjectManagementModel.DanhGiaDeTai" />
+          <EntitySet Name="DeTais" EntityType="ProjectManagementModel.DeTai" />
+          <EntitySet Name="DotKhoaLuans" EntityType="ProjectManagementModel.DotKhoaLuan" />
+          <EntitySet Name="GiangViens" EntityType="ProjectManagementModel.GiangVien" />
+          <EntitySet Name="GiangVienThuocKhoas" EntityType="ProjectManagementModel.GiangVienThuocKhoa" />
+          <EntitySet Name="KhoaHocs" EntityType="ProjectManagementModel.KhoaHoc" />
+          <EntitySet Name="Khoas" EntityType="ProjectManagementModel.Khoa" />
+          <EntitySet Name="LoaiTaiKhoans" EntityType="ProjectManagementModel.LoaiTaiKhoan" />
+          <EntitySet Name="NamHocs" EntityType="ProjectManagementModel.NamHoc" />
+          <EntitySet Name="Nganhs" EntityType="ProjectManagementModel.Nganh" />
+          <EntitySet Name="NhomSVs" EntityType="ProjectManagementModel.NhomSV" />
+          <EntitySet Name="PhanDeTaiChoDotKhoaLuans" EntityType="ProjectManagementModel.PhanDeTaiChoDotKhoaLuan" />
+          <EntitySet Name="PhanDeTaiChoGiangViens" EntityType="ProjectManagementModel.PhanDeTaiChoGiangVien" />
+          <EntitySet Name="PhanDeTaiChoNhomSVs" EntityType="ProjectManagementModel.PhanDeTaiChoNhomSV" />
+          <EntitySet Name="QuanLyLiches" EntityType="ProjectManagementModel.QuanLyLich" />
+          <EntitySet Name="SinhVienKhoaHocs" EntityType="ProjectManagementModel.SinhVienKhoaHoc" />
+          <EntitySet Name="SinhViens" EntityType="ProjectManagementModel.SinhVien" />
+          <EntitySet Name="SinhVienThuocKhoas" EntityType="ProjectManagementModel.SinhVienThuocKhoa" />
+          <EntitySet Name="SinhVienThuocNhomSVs" EntityType="ProjectManagementModel.SinhVienThuocNhomSV" />
+          <EntitySet Name="TaiKhoans" EntityType="ProjectManagementModel.TaiKhoan" />
+          <EntitySet Name="TaiLieux" EntityType="ProjectManagementModel.TaiLieu" />
+          <EntitySet Name="TinTucThongBaos" EntityType="ProjectManagementModel.TinTucThongBao" />
+          <EntitySet Name="TrangThais" EntityType="ProjectManagementModel.TrangThai" />
+          <AssociationSet Name="FK_BinhLuans_DeTais" Association="ProjectManagementModel.FK_BinhLuans_DeTais">
+            <End Role="DeTai" EntitySet="DeTais" />
+            <End Role="BinhLuan" EntitySet="BinhLuans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DanhGiaDeTai_DeTais" Association="ProjectManagementModel.FK_DanhGiaDeTai_DeTais">
+            <End Role="DeTai" EntitySet="DeTais" />
+            <End Role="DanhGiaDeTai" EntitySet="DanhGiaDeTais" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DanhGiaDeTai_SinhViens" Association="ProjectManagementModel.FK_DanhGiaDeTai_SinhViens">
+            <End Role="SinhVien" EntitySet="SinhViens" />
+            <End Role="DanhGiaDeTai" EntitySet="DanhGiaDeTais" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_TaiLieux_dbo_DeTais_DeTaiId" Association="ProjectManagementModel.FK_dbo_TaiLieux_dbo_DeTais_DeTaiId">
+            <End Role="DeTai" EntitySet="DeTais" />
+            <End Role="TaiLieu" EntitySet="TaiLieux" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhanDeTaiChoDotKhoaLuan_DeTais" Association="ProjectManagementModel.FK_PhanDeTaiChoDotKhoaLuan_DeTais">
+            <End Role="DeTai" EntitySet="DeTais" />
+            <End Role="PhanDeTaiChoDotKhoaLuan" EntitySet="PhanDeTaiChoDotKhoaLuans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhanDeTaiChoGiangVien_DeTais" Association="ProjectManagementModel.FK_PhanDeTaiChoGiangVien_DeTais">
+            <End Role="DeTai" EntitySet="DeTais" />
+            <End Role="PhanDeTaiChoGiangVien" EntitySet="PhanDeTaiChoGiangViens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhanDeTaiChoNhomSV_DeTais" Association="ProjectManagementModel.FK_PhanDeTaiChoNhomSV_DeTais">
+            <End Role="DeTai" EntitySet="DeTais" />
+            <End Role="PhanDeTaiChoNhomSV" EntitySet="PhanDeTaiChoNhomSVs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhanDeTaiChoDotKhoaLuan_DotKhoaLuan" Association="ProjectManagementModel.FK_PhanDeTaiChoDotKhoaLuan_DotKhoaLuan">
+            <End Role="DotKhoaLuan" EntitySet="DotKhoaLuans" />
+            <End Role="PhanDeTaiChoDotKhoaLuan" EntitySet="PhanDeTaiChoDotKhoaLuans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuanLyLiches_DotKhoaLuan" Association="ProjectManagementModel.FK_QuanLyLiches_DotKhoaLuan">
+            <End Role="DotKhoaLuan" EntitySet="DotKhoaLuans" />
+            <End Role="QuanLyLich" EntitySet="QuanLyLiches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GiangVienThuocKhoa_GiangViens" Association="ProjectManagementModel.FK_GiangVienThuocKhoa_GiangViens">
+            <End Role="GiangVien" EntitySet="GiangViens" />
+            <End Role="GiangVienThuocKhoa" EntitySet="GiangVienThuocKhoas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhanDeTaiChoGiangVien_GiangViens1" Association="ProjectManagementModel.FK_PhanDeTaiChoGiangVien_GiangViens1">
+            <End Role="GiangVien" EntitySet="GiangViens" />
+            <End Role="PhanDeTaiChoGiangVien" EntitySet="PhanDeTaiChoGiangViens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaiKhoans_GiangViens" Association="ProjectManagementModel.FK_TaiKhoans_GiangViens">
+            <End Role="GiangVien" EntitySet="GiangViens" />
+            <End Role="TaiKhoan" EntitySet="TaiKhoans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GiangVienThuocKhoa_Khoas" Association="ProjectManagementModel.FK_GiangVienThuocKhoa_Khoas">
+            <End Role="Khoa" EntitySet="Khoas" />
+            <End Role="GiangVienThuocKhoa" EntitySet="GiangVienThuocKhoas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KhoaHoc_NamHocs" Association="ProjectManagementModel.FK_KhoaHoc_NamHocs">
+            <End Role="NamHoc" EntitySet="NamHocs" />
+            <End Role="KhoaHoc" EntitySet="KhoaHocs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SinhVienKhoaHoc_KhoaHoc" Association="ProjectManagementModel.FK_SinhVienKhoaHoc_KhoaHoc">
+            <End Role="KhoaHoc" EntitySet="KhoaHocs" />
+            <End Role="SinhVienKhoaHoc" EntitySet="SinhVienKhoaHocs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Nganhs_dbo_Khoas_KhoaId" Association="ProjectManagementModel.FK_dbo_Nganhs_dbo_Khoas_KhoaId">
+            <End Role="Khoa" EntitySet="Khoas" />
+            <End Role="Nganh" EntitySet="Nganhs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SinhVienThuocKhoa_Khoas" Association="ProjectManagementModel.FK_SinhVienThuocKhoa_Khoas">
+            <End Role="Khoa" EntitySet="Khoas" />
+            <End Role="SinhVienThuocKhoa" EntitySet="SinhVienThuocKhoas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_TaiKhoans_dbo_LoaiTaiKhoans_LoaiTaiKhoanId" Association="ProjectManagementModel.FK_dbo_TaiKhoans_dbo_LoaiTaiKhoans_LoaiTaiKhoanId">
+            <End Role="LoaiTaiKhoan" EntitySet="LoaiTaiKhoans" />
+            <End Role="TaiKhoan" EntitySet="TaiKhoans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NamHocs_NamHocs" Association="ProjectManagementModel.FK_NamHocs_NamHocs">
+            <End Role="NamHoc" EntitySet="NamHocs" />
+            <End Role="NamHoc1" EntitySet="NamHocs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SinhVienKhoaHoc_Nganhs" Association="ProjectManagementModel.FK_SinhVienKhoaHoc_Nganhs">
+            <End Role="Nganh" EntitySet="Nganhs" />
+            <End Role="SinhVienKhoaHoc" EntitySet="SinhVienKhoaHocs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhanDeTaiChoNhomSV_NhomSVs" Association="ProjectManagementModel.FK_PhanDeTaiChoNhomSV_NhomSVs">
+            <End Role="NhomSV" EntitySet="NhomSVs" />
+            <End Role="PhanDeTaiChoNhomSV" EntitySet="PhanDeTaiChoNhomSVs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SinhVienThuocNhomSV_NhomSVs" Association="ProjectManagementModel.FK_SinhVienThuocNhomSV_NhomSVs">
+            <End Role="NhomSV" EntitySet="NhomSVs" />
+            <End Role="SinhVienThuocNhomSV" EntitySet="SinhVienThuocNhomSVs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SinhVienKhoaHoc_SinhViens" Association="ProjectManagementModel.FK_SinhVienKhoaHoc_SinhViens">
+            <End Role="SinhVien" EntitySet="SinhViens" />
+            <End Role="SinhVienKhoaHoc" EntitySet="SinhVienKhoaHocs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_SinhViens_dbo_TrangThais_TrangThaiId" Association="ProjectManagementModel.FK_dbo_SinhViens_dbo_TrangThais_TrangThaiId">
+            <End Role="TrangThai" EntitySet="TrangThais" />
+            <End Role="SinhVien" EntitySet="SinhViens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SinhVienThuocKhoa_SinhViens" Association="ProjectManagementModel.FK_SinhVienThuocKhoa_SinhViens">
+            <End Role="SinhVien" EntitySet="SinhViens" />
+            <End Role="SinhVienThuocKhoa" EntitySet="SinhVienThuocKhoas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SinhVienThuocNhomSV_SinhViens" Association="ProjectManagementModel.FK_SinhVienThuocNhomSV_SinhViens">
+            <End Role="SinhVien" EntitySet="SinhViens" />
+            <End Role="SinhVienThuocNhomSV" EntitySet="SinhVienThuocNhomSVs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaiKhoans_SinhViens" Association="ProjectManagementModel.FK_TaiKhoans_SinhViens">
+            <End Role="SinhVien" EntitySet="SinhViens" />
+            <End Role="TaiKhoan" EntitySet="TaiKhoans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_TinTucs_dbo_TaiKhoans_TaiKhoanId" Association="ProjectManagementModel.FK_dbo_TinTucs_dbo_TaiKhoans_TaiKhoanId">
+            <End Role="TaiKhoan" EntitySet="TaiKhoans" />
+            <End Role="TinTucThongBao" EntitySet="TinTucThongBaos" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="BinhLuan">
+          <Key>
+            <PropertyRef Name="BinhLuanId" />
+          </Key>
+          <Property Name="BinhLuanId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="NguoiBinhLuan" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="NoiDungBinhLuan" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ThoiGianBinhLuan" Type="DateTime" Precision="3" />
+          <Property Name="DeTaiId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <NavigationProperty Name="DeTai" Relationship="ProjectManagementModel.FK_BinhLuans_DeTais" FromRole="BinhLuan" ToRole="DeTai" />
+        </EntityType>
+        <EntityType Name="DanhGiaDeTai">
+          <Key>
+            <PropertyRef Name="DeTaiId" />
+            <PropertyRef Name="SinhVienId" />
+            <PropertyRef Name="GiangVienId" />
+          </Key>
+          <Property Name="DeTaiId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="SinhVienId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GiangVienId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Diem" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="NoiDungDanhGia" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DeTai" Relationship="ProjectManagementModel.FK_DanhGiaDeTai_DeTais" FromRole="DanhGiaDeTai" ToRole="DeTai" />
+          <NavigationProperty Name="SinhVien" Relationship="ProjectManagementModel.FK_DanhGiaDeTai_SinhViens" FromRole="DanhGiaDeTai" ToRole="SinhVien" />
+        </EntityType>
+        <EntityType Name="DeTai">
+          <Key>
+            <PropertyRef Name="DeTaiId" />
+          </Key>
+          <Property Name="DeTaiId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="TenDeTai" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SoLuongThanhVien" Type="Int32" />
+          <Property Name="NgayTao" Type="DateTime" Precision="3" />
+          <Property Name="NgayDangKy" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="BinhLuans" Relationship="ProjectManagementModel.FK_BinhLuans_DeTais" FromRole="DeTai" ToRole="BinhLuan" />
+          <NavigationProperty Name="DanhGiaDeTais" Relationship="ProjectManagementModel.FK_DanhGiaDeTai_DeTais" FromRole="DeTai" ToRole="DanhGiaDeTai" />
+          <NavigationProperty Name="TaiLieux" Relationship="ProjectManagementModel.FK_dbo_TaiLieux_dbo_DeTais_DeTaiId" FromRole="DeTai" ToRole="TaiLieu" />
+          <NavigationProperty Name="PhanDeTaiChoDotKhoaLuans" Relationship="ProjectManagementModel.FK_PhanDeTaiChoDotKhoaLuan_DeTais" FromRole="DeTai" ToRole="PhanDeTaiChoDotKhoaLuan" />
+          <NavigationProperty Name="PhanDeTaiChoGiangViens" Relationship="ProjectManagementModel.FK_PhanDeTaiChoGiangVien_DeTais" FromRole="DeTai" ToRole="PhanDeTaiChoGiangVien" />
+          <NavigationProperty Name="PhanDeTaiChoNhomSVs" Relationship="ProjectManagementModel.FK_PhanDeTaiChoNhomSV_DeTais" FromRole="DeTai" ToRole="PhanDeTaiChoNhomSV" />
+        </EntityType>
+        <EntityType Name="DotKhoaLuan">
+          <Key>
+            <PropertyRef Name="DotKhoaLuanId" />
+          </Key>
+          <Property Name="DotKhoaLuanId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="TenDotKhoaLuan" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="NamHocHocKyId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <NavigationProperty Name="PhanDeTaiChoDotKhoaLuans" Relationship="ProjectManagementModel.FK_PhanDeTaiChoDotKhoaLuan_DotKhoaLuan" FromRole="DotKhoaLuan" ToRole="PhanDeTaiChoDotKhoaLuan" />
+          <NavigationProperty Name="QuanLyLiches" Relationship="ProjectManagementModel.FK_QuanLyLiches_DotKhoaLuan" FromRole="DotKhoaLuan" ToRole="QuanLyLich" />
+        </EntityType>
+        <EntityType Name="GiangVien">
+          <Key>
+            <PropertyRef Name="GiangVienId" />
+          </Key>
+          <Property Name="GiangVienId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GioiTinh" Type="Boolean" Nullable="false" />
+          <Property Name="HoTen" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="GiangVienThuocKhoas" Relationship="ProjectManagementModel.FK_GiangVienThuocKhoa_GiangViens" FromRole="GiangVien" ToRole="GiangVienThuocKhoa" />
+          <NavigationProperty Name="PhanDeTaiChoGiangViens" Relationship="ProjectManagementModel.FK_PhanDeTaiChoGiangVien_GiangViens1" FromRole="GiangVien" ToRole="PhanDeTaiChoGiangVien" />
+          <NavigationProperty Name="TaiKhoans" Relationship="ProjectManagementModel.FK_TaiKhoans_GiangViens" FromRole="GiangVien" ToRole="TaiKhoan" />
+        </EntityType>
+        <EntityType Name="GiangVienThuocKhoa">
+          <Key>
+            <PropertyRef Name="KhoaId" />
+            <PropertyRef Name="GiangVienId" />
+            <PropertyRef Name="TuNgay" />
+          </Key>
+          <Property Name="KhoaId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="GiangVienId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TuNgay" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DenNgay" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="GiangVien" Relationship="ProjectManagementModel.FK_GiangVienThuocKhoa_GiangViens" FromRole="GiangVienThuocKhoa" ToRole="GiangVien" />
+          <NavigationProperty Name="Khoa" Relationship="ProjectManagementModel.FK_GiangVienThuocKhoa_Khoas" FromRole="GiangVienThuocKhoa" ToRole="Khoa" />
+        </EntityType>
+        <EntityType Name="KhoaHoc">
+          <Key>
+            <PropertyRef Name="KhoaHocID" />
+          </Key>
+          <Property Name="KhoaHocID" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="TenKhoaHoc" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="NamHocHocKyId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <NavigationProperty Name="NamHoc" Relationship="ProjectManagementModel.FK_KhoaHoc_NamHocs" FromRole="KhoaHoc" ToRole="NamHoc" />
+          <NavigationProperty Name="SinhVienKhoaHocs" Relationship="ProjectManagementModel.FK_SinhVienKhoaHoc_KhoaHoc" FromRole="KhoaHoc" ToRole="SinhVienKhoaHoc" />
+        </EntityType>
+        <EntityType Name="Khoa">
+          <Key>
+            <PropertyRef Name="KhoaId" />
+          </Key>
+          <Property Name="KhoaId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="TenKhoa" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChi" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="GiangVienThuocKhoas" Relationship="ProjectManagementModel.FK_GiangVienThuocKhoa_Khoas" FromRole="Khoa" ToRole="GiangVienThuocKhoa" />
+          <NavigationProperty Name="Nganhs" Relationship="ProjectManagementModel.FK_dbo_Nganhs_dbo_Khoas_KhoaId" FromRole="Khoa" ToRole="Nganh" />
+          <NavigationProperty Name="SinhVienThuocKhoas" Relationship="ProjectManagementModel.FK_SinhVienThuocKhoa_Khoas" FromRole="Khoa" ToRole="SinhVienThuocKhoa" />
+        </EntityType>
+        <EntityType Name="LoaiTaiKhoan">
+          <Key>
+            <PropertyRef Name="LoaiTaiKhoanId" />
+          </Key>
+          <Property Name="LoaiTaiKhoanId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="TenLoaiTaiKhoan" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TaiKhoans" Relationship="ProjectManagementModel.FK_dbo_TaiKhoans_dbo_LoaiTaiKhoans_LoaiTaiKhoanId" FromRole="LoaiTaiKhoan" ToRole="TaiKhoan" />
+        </EntityType>
+        <EntityType Name="NamHoc">
+          <Key>
+            <PropertyRef Name="NamHocHocKyId" />
+          </Key>
+          <Property Name="NamHocHocKyId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="TenNamHocHocKy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="TuNgay" Type="DateTime" Precision="3" />
+          <Property Name="DenNgay" Type="DateTime" Precision="3" />
+          <Property Name="NamHocHocKyIdRoot" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="KhoaHocs" Relationship="ProjectManagementModel.FK_KhoaHoc_NamHocs" FromRole="NamHoc" ToRole="KhoaHoc" />
+          <NavigationProperty Name="NamHocs1" Relationship="ProjectManagementModel.FK_NamHocs_NamHocs" FromRole="NamHoc" ToRole="NamHoc1" />
+          <NavigationProperty Name="NamHoc1" Relationship="ProjectManagementModel.FK_NamHocs_NamHocs" FromRole="NamHoc1" ToRole="NamHoc" />
+        </EntityType>
+        <EntityType Name="Nganh">
+          <Key>
+            <PropertyRef Name="NganhId" />
+          </Key>
+          <Property Name="NganhId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="TenNganh" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="KhoaId" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Khoa" Relationship="ProjectManagementModel.FK_dbo_Nganhs_dbo_Khoas_KhoaId" FromRole="Nganh" ToRole="Khoa" />
+          <NavigationProperty Name="SinhVienKhoaHocs" Relationship="ProjectManagementModel.FK_SinhVienKhoaHoc_Nganhs" FromRole="Nganh" ToRole="SinhVienKhoaHoc" />
+        </EntityType>
+        <EntityType Name="NhomSV">
+          <Key>
+            <PropertyRef Name="NhomSVId" />
+          </Key>
+          <Property Name="NhomSVId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="TenNhom" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PhanDeTaiChoNhomSVs" Relationship="ProjectManagementModel.FK_PhanDeTaiChoNhomSV_NhomSVs" FromRole="NhomSV" ToRole="PhanDeTaiChoNhomSV" />
+          <NavigationProperty Name="SinhVienThuocNhomSVs" Relationship="ProjectManagementModel.FK_SinhVienThuocNhomSV_NhomSVs" FromRole="NhomSV" ToRole="SinhVienThuocNhomSV" />
+        </EntityType>
+        <EntityType Name="PhanDeTaiChoDotKhoaLuan">
+          <Key>
+            <PropertyRef Name="DotKhoaLuanId" />
+            <PropertyRef Name="DeTaiId" />
+          </Key>
+          <Property Name="DotKhoaLuanId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="DeTaiId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="NgayPhanDeTai" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="DeTai" Relationship="ProjectManagementModel.FK_PhanDeTaiChoDotKhoaLuan_DeTais" FromRole="PhanDeTaiChoDotKhoaLuan" ToRole="DeTai" />
+          <NavigationProperty Name="DotKhoaLuan" Relationship="ProjectManagementModel.FK_PhanDeTaiChoDotKhoaLuan_DotKhoaLuan" FromRole="PhanDeTaiChoDotKhoaLuan" ToRole="DotKhoaLuan" />
+        </EntityType>
+        <EntityType Name="PhanDeTaiChoGiangVien">
+          <Key>
+            <PropertyRef Name="GiangVienId" />
+            <PropertyRef Name="DeTaiId" />
+          </Key>
+          <Property Name="GiangVienId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DeTaiId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="NgayPhanDeTai" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="DeTai" Relationship="ProjectManagementModel.FK_PhanDeTaiChoGiangVien_DeTais" FromRole="PhanDeTaiChoGiangVien" ToRole="DeTai" />
+          <NavigationProperty Name="GiangVien" Relationship="ProjectManagementModel.FK_PhanDeTaiChoGiangVien_GiangViens1" FromRole="PhanDeTaiChoGiangVien" ToRole="GiangVien" />
+        </EntityType>
+        <EntityType Name="PhanDeTaiChoNhomSV">
+          <Key>
+            <PropertyRef Name="NhomSVId" />
+            <PropertyRef Name="DeTaiId" />
+          </Key>
+          <Property Name="NhomSVId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="DeTaiId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="NgayPhanDeTai" Type="DateTime" Precision="3" />
+          <Property Name="GhiChu" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DeTai" Relationship="ProjectManagementModel.FK_PhanDeTaiChoNhomSV_DeTais" FromRole="PhanDeTaiChoNhomSV" ToRole="DeTai" />
+          <NavigationProperty Name="NhomSV" Relationship="ProjectManagementModel.FK_PhanDeTaiChoNhomSV_NhomSVs" FromRole="PhanDeTaiChoNhomSV" ToRole="NhomSV" />
+        </EntityType>
+        <EntityType Name="QuanLyLich">
+          <Key>
+            <PropertyRef Name="DotKhoaLuanId" />
+            <PropertyRef Name="MocThoiGian" />
+          </Key>
+          <Property Name="DotKhoaLuanId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="MocThoiGian" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DotKhoaLuan" Relationship="ProjectManagementModel.FK_QuanLyLiches_DotKhoaLuan" FromRole="QuanLyLich" ToRole="DotKhoaLuan" />
+        </EntityType>
+        <EntityType Name="SinhVienKhoaHoc">
+          <Key>
+            <PropertyRef Name="KhoaHocID" />
+            <PropertyRef Name="SinhVienId" />
+            <PropertyRef Name="NganhId" />
+            <PropertyRef Name="TuNgay" />
+          </Key>
+          <Property Name="KhoaHocID" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="SinhVienId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NganhId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="TuNgay" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DenNgay" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="KhoaHoc" Relationship="ProjectManagementModel.FK_SinhVienKhoaHoc_KhoaHoc" FromRole="SinhVienKhoaHoc" ToRole="KhoaHoc" />
+          <NavigationProperty Name="Nganh" Relationship="ProjectManagementModel.FK_SinhVienKhoaHoc_Nganhs" FromRole="SinhVienKhoaHoc" ToRole="Nganh" />
+          <NavigationProperty Name="SinhVien" Relationship="ProjectManagementModel.FK_SinhVienKhoaHoc_SinhViens" FromRole="SinhVienKhoaHoc" ToRole="SinhVien" />
+        </EntityType>
+        <EntityType Name="SinhVien">
+          <Key>
+            <PropertyRef Name="SinhVienId" />
+          </Key>
+          <Property Name="SinhVienId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GioiTinh" Type="Boolean" />
+          <Property Name="HoTen" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="NgaySinh" Type="DateTime" Precision="3" />
+          <Property Name="SoTCHT" Type="Int32" />
+          <Property Name="SoTCCL" Type="Int32" />
+          <Property Name="TrangThaiId" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="DanhGiaDeTais" Relationship="ProjectManagementModel.FK_DanhGiaDeTai_SinhViens" FromRole="SinhVien" ToRole="DanhGiaDeTai" />
+          <NavigationProperty Name="SinhVienKhoaHocs" Relationship="ProjectManagementModel.FK_SinhVienKhoaHoc_SinhViens" FromRole="SinhVien" ToRole="SinhVienKhoaHoc" />
+          <NavigationProperty Name="TrangThai" Relationship="ProjectManagementModel.FK_dbo_SinhViens_dbo_TrangThais_TrangThaiId" FromRole="SinhVien" ToRole="TrangThai" />
+          <NavigationProperty Name="SinhVienThuocKhoas" Relationship="ProjectManagementModel.FK_SinhVienThuocKhoa_SinhViens" FromRole="SinhVien" ToRole="SinhVienThuocKhoa" />
+          <NavigationProperty Name="SinhVienThuocNhomSVs" Relationship="ProjectManagementModel.FK_SinhVienThuocNhomSV_SinhViens" FromRole="SinhVien" ToRole="SinhVienThuocNhomSV" />
+          <NavigationProperty Name="TaiKhoans" Relationship="ProjectManagementModel.FK_TaiKhoans_SinhViens" FromRole="SinhVien" ToRole="TaiKhoan" />
+        </EntityType>
+        <EntityType Name="SinhVienThuocKhoa">
+          <Key>
+            <PropertyRef Name="KhoaId" />
+            <PropertyRef Name="SinhVienId" />
+            <PropertyRef Name="TuNgay" />
+          </Key>
+          <Property Name="KhoaId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="SinhVienId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TuNgay" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DenNgay" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Khoa" Relationship="ProjectManagementModel.FK_SinhVienThuocKhoa_Khoas" FromRole="SinhVienThuocKhoa" ToRole="Khoa" />
+          <NavigationProperty Name="SinhVien" Relationship="ProjectManagementModel.FK_SinhVienThuocKhoa_SinhViens" FromRole="SinhVienThuocKhoa" ToRole="SinhVien" />
+        </EntityType>
+        <EntityType Name="SinhVienThuocNhomSV">
+          <Key>
+            <PropertyRef Name="NhomSVId" />
+            <PropertyRef Name="SinhVienId" />
+          </Key>
+          <Property Name="NhomSVId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="SinhVienId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NgayPhan" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="NhomSV" Relationship="ProjectManagementModel.FK_SinhVienThuocNhomSV_NhomSVs" FromRole="SinhVienThuocNhomSV" ToRole="NhomSV" />
+          <NavigationProperty Name="SinhVien" Relationship="ProjectManagementModel.FK_SinhVienThuocNhomSV_SinhViens" FromRole="SinhVienThuocNhomSV" ToRole="SinhVien" />
+        </EntityType>
+        <EntityType Name="TaiKhoan">
+          <Key>
+            <PropertyRef Name="TaiKhoanId" />
+          </Key>
+          <Property Name="TaiKhoanId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Username" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HoTen" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SDT" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SDTK" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="LoaiTaiKhoanId" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SinhVienId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GiangVienId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LaQuanTri" Type="Boolean" />
+          <NavigationProperty Name="GiangVien" Relationship="ProjectManagementModel.FK_TaiKhoans_GiangViens" FromRole="TaiKhoan" ToRole="GiangVien" />
+          <NavigationProperty Name="LoaiTaiKhoan" Relationship="ProjectManagementModel.FK_dbo_TaiKhoans_dbo_LoaiTaiKhoans_LoaiTaiKhoanId" FromRole="TaiKhoan" ToRole="LoaiTaiKhoan" />
+          <NavigationProperty Name="SinhVien" Relationship="ProjectManagementModel.FK_TaiKhoans_SinhViens" FromRole="TaiKhoan" ToRole="SinhVien" />
+          <NavigationProperty Name="TinTucThongBaos" Relationship="ProjectManagementModel.FK_dbo_TinTucs_dbo_TaiKhoans_TaiKhoanId" FromRole="TaiKhoan" ToRole="TinTucThongBao" />
+        </EntityType>
+        <EntityType Name="TaiLieu">
+          <Key>
+            <PropertyRef Name="TaiLieuId" />
+          </Key>
+          <Property Name="TaiLieuId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="TenTaiLieu" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="TepTinDinhKem" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="DeTaiId" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="DeTai" Relationship="ProjectManagementModel.FK_dbo_TaiLieux_dbo_DeTais_DeTaiId" FromRole="TaiLieu" ToRole="DeTai" />
+        </EntityType>
+        <EntityType Name="TinTucThongBao">
+          <Key>
+            <PropertyRef Name="TinTucId" />
+          </Key>
+          <Property Name="TinTucId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="TieuDe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NgayDang" Type="DateTime" Precision="3" />
+          <Property Name="TaiKhoanId" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="TaiKhoan" Relationship="ProjectManagementModel.FK_dbo_TinTucs_dbo_TaiKhoans_TaiKhoanId" FromRole="TinTucThongBao" ToRole="TaiKhoan" />
+        </EntityType>
+        <EntityType Name="TrangThai">
+          <Key>
+            <PropertyRef Name="TrangThaiId" />
+          </Key>
+          <Property Name="TrangThaiId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="SinhViens" Relationship="ProjectManagementModel.FK_dbo_SinhViens_dbo_TrangThais_TrangThaiId" FromRole="TrangThai" ToRole="SinhVien" />
+        </EntityType>
+        <Association Name="FK_BinhLuans_DeTais">
+          <End Type="ProjectManagementModel.DeTai" Role="DeTai" Multiplicity="1" />
+          <End Type="ProjectManagementModel.BinhLuan" Role="BinhLuan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeTai">
+              <PropertyRef Name="DeTaiId" />
+            </Principal>
+            <Dependent Role="BinhLuan">
+              <PropertyRef Name="DeTaiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DanhGiaDeTai_DeTais">
+          <End Type="ProjectManagementModel.DeTai" Role="DeTai" Multiplicity="1" />
+          <End Type="ProjectManagementModel.DanhGiaDeTai" Role="DanhGiaDeTai" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeTai">
+              <PropertyRef Name="DeTaiId" />
+            </Principal>
+            <Dependent Role="DanhGiaDeTai">
+              <PropertyRef Name="DeTaiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DanhGiaDeTai_SinhViens">
+          <End Type="ProjectManagementModel.SinhVien" Role="SinhVien" Multiplicity="1" />
+          <End Type="ProjectManagementModel.DanhGiaDeTai" Role="DanhGiaDeTai" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SinhVien">
+              <PropertyRef Name="SinhVienId" />
+            </Principal>
+            <Dependent Role="DanhGiaDeTai">
+              <PropertyRef Name="SinhVienId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_TaiLieux_dbo_DeTais_DeTaiId">
+          <End Type="ProjectManagementModel.DeTai" Role="DeTai" Multiplicity="0..1" />
+          <End Type="ProjectManagementModel.TaiLieu" Role="TaiLieu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeTai">
+              <PropertyRef Name="DeTaiId" />
+            </Principal>
+            <Dependent Role="TaiLieu">
+              <PropertyRef Name="DeTaiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhanDeTaiChoDotKhoaLuan_DeTais">
+          <End Type="ProjectManagementModel.DeTai" Role="DeTai" Multiplicity="1" />
+          <End Type="ProjectManagementModel.PhanDeTaiChoDotKhoaLuan" Role="PhanDeTaiChoDotKhoaLuan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeTai">
+              <PropertyRef Name="DeTaiId" />
+            </Principal>
+            <Dependent Role="PhanDeTaiChoDotKhoaLuan">
+              <PropertyRef Name="DeTaiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhanDeTaiChoGiangVien_DeTais">
+          <End Type="ProjectManagementModel.DeTai" Role="DeTai" Multiplicity="1" />
+          <End Type="ProjectManagementModel.PhanDeTaiChoGiangVien" Role="PhanDeTaiChoGiangVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeTai">
+              <PropertyRef Name="DeTaiId" />
+            </Principal>
+            <Dependent Role="PhanDeTaiChoGiangVien">
+              <PropertyRef Name="DeTaiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhanDeTaiChoNhomSV_DeTais">
+          <End Type="ProjectManagementModel.DeTai" Role="DeTai" Multiplicity="1" />
+          <End Type="ProjectManagementModel.PhanDeTaiChoNhomSV" Role="PhanDeTaiChoNhomSV" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeTai">
+              <PropertyRef Name="DeTaiId" />
+            </Principal>
+            <Dependent Role="PhanDeTaiChoNhomSV">
+              <PropertyRef Name="DeTaiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhanDeTaiChoDotKhoaLuan_DotKhoaLuan">
+          <End Type="ProjectManagementModel.DotKhoaLuan" Role="DotKhoaLuan" Multiplicity="1" />
+          <End Type="ProjectManagementModel.PhanDeTaiChoDotKhoaLuan" Role="PhanDeTaiChoDotKhoaLuan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DotKhoaLuan">
+              <PropertyRef Name="DotKhoaLuanId" />
+            </Principal>
+            <Dependent Role="PhanDeTaiChoDotKhoaLuan">
+              <PropertyRef Name="DotKhoaLuanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuanLyLiches_DotKhoaLuan">
+          <End Type="ProjectManagementModel.DotKhoaLuan" Role="DotKhoaLuan" Multiplicity="1" />
+          <End Type="ProjectManagementModel.QuanLyLich" Role="QuanLyLich" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DotKhoaLuan">
+              <PropertyRef Name="DotKhoaLuanId" />
+            </Principal>
+            <Dependent Role="QuanLyLich">
+              <PropertyRef Name="DotKhoaLuanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GiangVienThuocKhoa_GiangViens">
+          <End Type="ProjectManagementModel.GiangVien" Role="GiangVien" Multiplicity="1" />
+          <End Type="ProjectManagementModel.GiangVienThuocKhoa" Role="GiangVienThuocKhoa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GiangVien">
+              <PropertyRef Name="GiangVienId" />
+            </Principal>
+            <Dependent Role="GiangVienThuocKhoa">
+              <PropertyRef Name="GiangVienId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhanDeTaiChoGiangVien_GiangViens1">
+          <End Type="ProjectManagementModel.GiangVien" Role="GiangVien" Multiplicity="1" />
+          <End Type="ProjectManagementModel.PhanDeTaiChoGiangVien" Role="PhanDeTaiChoGiangVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GiangVien">
+              <PropertyRef Name="GiangVienId" />
+            </Principal>
+            <Dependent Role="PhanDeTaiChoGiangVien">
+              <PropertyRef Name="GiangVienId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaiKhoans_GiangViens">
+          <End Type="ProjectManagementModel.GiangVien" Role="GiangVien" Multiplicity="0..1" />
+          <End Type="ProjectManagementModel.TaiKhoan" Role="TaiKhoan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GiangVien">
+              <PropertyRef Name="GiangVienId" />
+            </Principal>
+            <Dependent Role="TaiKhoan">
+              <PropertyRef Name="GiangVienId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GiangVienThuocKhoa_Khoas">
+          <End Type="ProjectManagementModel.Khoa" Role="Khoa" Multiplicity="1" />
+          <End Type="ProjectManagementModel.GiangVienThuocKhoa" Role="GiangVienThuocKhoa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Khoa">
+              <PropertyRef Name="KhoaId" />
+            </Principal>
+            <Dependent Role="GiangVienThuocKhoa">
+              <PropertyRef Name="KhoaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KhoaHoc_NamHocs">
+          <End Type="ProjectManagementModel.NamHoc" Role="NamHoc" Multiplicity="1" />
+          <End Type="ProjectManagementModel.KhoaHoc" Role="KhoaHoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NamHoc">
+              <PropertyRef Name="NamHocHocKyId" />
+            </Principal>
+            <Dependent Role="KhoaHoc">
+              <PropertyRef Name="NamHocHocKyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SinhVienKhoaHoc_KhoaHoc">
+          <End Type="ProjectManagementModel.KhoaHoc" Role="KhoaHoc" Multiplicity="1" />
+          <End Type="ProjectManagementModel.SinhVienKhoaHoc" Role="SinhVienKhoaHoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhoaHoc">
+              <PropertyRef Name="KhoaHocID" />
+            </Principal>
+            <Dependent Role="SinhVienKhoaHoc">
+              <PropertyRef Name="KhoaHocID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Nganhs_dbo_Khoas_KhoaId">
+          <End Type="ProjectManagementModel.Khoa" Role="Khoa" Multiplicity="0..1" />
+          <End Type="ProjectManagementModel.Nganh" Role="Nganh" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Khoa">
+              <PropertyRef Name="KhoaId" />
+            </Principal>
+            <Dependent Role="Nganh">
+              <PropertyRef Name="KhoaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SinhVienThuocKhoa_Khoas">
+          <End Type="ProjectManagementModel.Khoa" Role="Khoa" Multiplicity="1" />
+          <End Type="ProjectManagementModel.SinhVienThuocKhoa" Role="SinhVienThuocKhoa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Khoa">
+              <PropertyRef Name="KhoaId" />
+            </Principal>
+            <Dependent Role="SinhVienThuocKhoa">
+              <PropertyRef Name="KhoaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_TaiKhoans_dbo_LoaiTaiKhoans_LoaiTaiKhoanId">
+          <End Type="ProjectManagementModel.LoaiTaiKhoan" Role="LoaiTaiKhoan" Multiplicity="0..1" />
+          <End Type="ProjectManagementModel.TaiKhoan" Role="TaiKhoan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoaiTaiKhoan">
+              <PropertyRef Name="LoaiTaiKhoanId" />
+            </Principal>
+            <Dependent Role="TaiKhoan">
+              <PropertyRef Name="LoaiTaiKhoanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NamHocs_NamHocs">
+          <End Type="ProjectManagementModel.NamHoc" Role="NamHoc" Multiplicity="0..1" />
+          <End Type="ProjectManagementModel.NamHoc" Role="NamHoc1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NamHoc">
+              <PropertyRef Name="NamHocHocKyId" />
+            </Principal>
+            <Dependent Role="NamHoc1">
+              <PropertyRef Name="NamHocHocKyIdRoot" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SinhVienKhoaHoc_Nganhs">
+          <End Type="ProjectManagementModel.Nganh" Role="Nganh" Multiplicity="1" />
+          <End Type="ProjectManagementModel.SinhVienKhoaHoc" Role="SinhVienKhoaHoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nganh">
+              <PropertyRef Name="NganhId" />
+            </Principal>
+            <Dependent Role="SinhVienKhoaHoc">
+              <PropertyRef Name="NganhId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhanDeTaiChoNhomSV_NhomSVs">
+          <End Type="ProjectManagementModel.NhomSV" Role="NhomSV" Multiplicity="1" />
+          <End Type="ProjectManagementModel.PhanDeTaiChoNhomSV" Role="PhanDeTaiChoNhomSV" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhomSV">
+              <PropertyRef Name="NhomSVId" />
+            </Principal>
+            <Dependent Role="PhanDeTaiChoNhomSV">
+              <PropertyRef Name="NhomSVId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SinhVienThuocNhomSV_NhomSVs">
+          <End Type="ProjectManagementModel.NhomSV" Role="NhomSV" Multiplicity="1" />
+          <End Type="ProjectManagementModel.SinhVienThuocNhomSV" Role="SinhVienThuocNhomSV" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhomSV">
+              <PropertyRef Name="NhomSVId" />
+            </Principal>
+            <Dependent Role="SinhVienThuocNhomSV">
+              <PropertyRef Name="NhomSVId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SinhVienKhoaHoc_SinhViens">
+          <End Type="ProjectManagementModel.SinhVien" Role="SinhVien" Multiplicity="1" />
+          <End Type="ProjectManagementModel.SinhVienKhoaHoc" Role="SinhVienKhoaHoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SinhVien">
+              <PropertyRef Name="SinhVienId" />
+            </Principal>
+            <Dependent Role="SinhVienKhoaHoc">
+              <PropertyRef Name="SinhVienId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_SinhViens_dbo_TrangThais_TrangThaiId">
+          <End Type="ProjectManagementModel.TrangThai" Role="TrangThai" Multiplicity="0..1" />
+          <End Type="ProjectManagementModel.SinhVien" Role="SinhVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TrangThai">
+              <PropertyRef Name="TrangThaiId" />
+            </Principal>
+            <Dependent Role="SinhVien">
+              <PropertyRef Name="TrangThaiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SinhVienThuocKhoa_SinhViens">
+          <End Type="ProjectManagementModel.SinhVien" Role="SinhVien" Multiplicity="1" />
+          <End Type="ProjectManagementModel.SinhVienThuocKhoa" Role="SinhVienThuocKhoa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SinhVien">
+              <PropertyRef Name="SinhVienId" />
+            </Principal>
+            <Dependent Role="SinhVienThuocKhoa">
+              <PropertyRef Name="SinhVienId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SinhVienThuocNhomSV_SinhViens">
+          <End Type="ProjectManagementModel.SinhVien" Role="SinhVien" Multiplicity="1" />
+          <End Type="ProjectManagementModel.SinhVienThuocNhomSV" Role="SinhVienThuocNhomSV" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SinhVien">
+              <PropertyRef Name="SinhVienId" />
+            </Principal>
+            <Dependent Role="SinhVienThuocNhomSV">
+              <PropertyRef Name="SinhVienId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaiKhoans_SinhViens">
+          <End Type="ProjectManagementModel.SinhVien" Role="SinhVien" Multiplicity="0..1" />
+          <End Type="ProjectManagementModel.TaiKhoan" Role="TaiKhoan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SinhVien">
+              <PropertyRef Name="SinhVienId" />
+            </Principal>
+            <Dependent Role="TaiKhoan">
+              <PropertyRef Name="SinhVienId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_TinTucs_dbo_TaiKhoans_TaiKhoanId">
+          <End Type="ProjectManagementModel.TaiKhoan" Role="TaiKhoan" Multiplicity="0..1" />
+          <End Type="ProjectManagementModel.TinTucThongBao" Role="TinTucThongBao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaiKhoan">
+              <PropertyRef Name="TaiKhoanId" />
+            </Principal>
+            <Dependent Role="TinTucThongBao">
+              <PropertyRef Name="TaiKhoanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ProjectManagementModelStoreContainer" CdmEntityContainer="ProjectManagementEntities">
+          <EntitySetMapping Name="BinhLuans">
+            <EntityTypeMapping TypeName="ProjectManagementModel.BinhLuan">
+              <MappingFragment StoreEntitySet="BinhLuans">
+                <ScalarProperty Name="DeTaiId" ColumnName="DeTaiId" />
+                <ScalarProperty Name="ThoiGianBinhLuan" ColumnName="ThoiGianBinhLuan" />
+                <ScalarProperty Name="NoiDungBinhLuan" ColumnName="NoiDungBinhLuan" />
+                <ScalarProperty Name="NguoiBinhLuan" ColumnName="NguoiBinhLuan" />
+                <ScalarProperty Name="BinhLuanId" ColumnName="BinhLuanId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DanhGiaDeTais">
+            <EntityTypeMapping TypeName="ProjectManagementModel.DanhGiaDeTai">
+              <MappingFragment StoreEntitySet="DanhGiaDeTai">
+                <ScalarProperty Name="NoiDungDanhGia" ColumnName="NoiDungDanhGia" />
+                <ScalarProperty Name="Diem" ColumnName="Diem" />
+                <ScalarProperty Name="GiangVienId" ColumnName="GiangVienId" />
+                <ScalarProperty Name="SinhVienId" ColumnName="SinhVienId" />
+                <ScalarProperty Name="DeTaiId" ColumnName="DeTaiId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DeTais">
+            <EntityTypeMapping TypeName="ProjectManagementModel.DeTai">
+              <MappingFragment StoreEntitySet="DeTais">
+                <ScalarProperty Name="NgayDangKy" ColumnName="NgayDangKy" />
+                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+                <ScalarProperty Name="SoLuongThanhVien" ColumnName="SoLuongThanhVien" />
+                <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+                <ScalarProperty Name="TenDeTai" ColumnName="TenDeTai" />
+                <ScalarProperty Name="DeTaiId" ColumnName="DeTaiId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DotKhoaLuans">
+            <EntityTypeMapping TypeName="ProjectManagementModel.DotKhoaLuan">
+              <MappingFragment StoreEntitySet="DotKhoaLuan">
+                <ScalarProperty Name="NamHocHocKyId" ColumnName="NamHocHocKyId" />
+                <ScalarProperty Name="TenDotKhoaLuan" ColumnName="TenDotKhoaLuan" />
+                <ScalarProperty Name="DotKhoaLuanId" ColumnName="DotKhoaLuanId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GiangViens">
+            <EntityTypeMapping TypeName="ProjectManagementModel.GiangVien">
+              <MappingFragment StoreEntitySet="GiangViens">
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="GiangVienId" ColumnName="GiangVienId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GiangVienThuocKhoas">
+            <EntityTypeMapping TypeName="ProjectManagementModel.GiangVienThuocKhoa">
+              <MappingFragment StoreEntitySet="GiangVienThuocKhoa">
+                <ScalarProperty Name="DenNgay" ColumnName="DenNgay" />
+                <ScalarProperty Name="TuNgay" ColumnName="TuNgay" />
+                <ScalarProperty Name="GiangVienId" ColumnName="GiangVienId" />
+                <ScalarProperty Name="KhoaId" ColumnName="KhoaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KhoaHocs">
+            <EntityTypeMapping TypeName="ProjectManagementModel.KhoaHoc">
+              <MappingFragment StoreEntitySet="KhoaHoc">
+                <ScalarProperty Name="NamHocHocKyId" ColumnName="NamHocHocKyId" />
+                <ScalarProperty Name="TenKhoaHoc" ColumnName="TenKhoaHoc" />
+                <ScalarProperty Name="KhoaHocID" ColumnName="KhoaHocID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Khoas">
+            <EntityTypeMapping TypeName="ProjectManagementModel.Khoa">
+              <MappingFragment StoreEntitySet="Khoas">
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="TenKhoa" ColumnName="TenKhoa" />
+                <ScalarProperty Name="KhoaId" ColumnName="KhoaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoaiTaiKhoans">
+            <EntityTypeMapping TypeName="ProjectManagementModel.LoaiTaiKhoan">
+              <MappingFragment StoreEntitySet="LoaiTaiKhoans">
+                <ScalarProperty Name="TenLoaiTaiKhoan" ColumnName="TenLoaiTaiKhoan" />
+                <ScalarProperty Name="LoaiTaiKhoanId" ColumnName="LoaiTaiKhoanId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NamHocs">
+            <EntityTypeMapping TypeName="ProjectManagementModel.NamHoc">
+              <MappingFragment StoreEntitySet="NamHocs">
+                <ScalarProperty Name="NamHocHocKyIdRoot" ColumnName="NamHocHocKyIdRoot" />
+                <ScalarProperty Name="DenNgay" ColumnName="DenNgay" />
+                <ScalarProperty Name="TuNgay" ColumnName="TuNgay" />
+                <ScalarProperty Name="TenNamHocHocKy" ColumnName="TenNamHocHocKy" />
+                <ScalarProperty Name="NamHocHocKyId" ColumnName="NamHocHocKyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Nganhs">
+            <EntityTypeMapping TypeName="ProjectManagementModel.Nganh">
+              <MappingFragment StoreEntitySet="Nganhs">
+                <ScalarProperty Name="KhoaId" ColumnName="KhoaId" />
+                <ScalarProperty Name="TenNganh" ColumnName="TenNganh" />
+                <ScalarProperty Name="NganhId" ColumnName="NganhId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NhomSVs">
+            <EntityTypeMapping TypeName="ProjectManagementModel.NhomSV">
+              <MappingFragment StoreEntitySet="NhomSVs">
+                <ScalarProperty Name="TenNhom" ColumnName="TenNhom" />
+                <ScalarProperty Name="NhomSVId" ColumnName="NhomSVId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhanDeTaiChoDotKhoaLuans">
+            <EntityTypeMapping TypeName="ProjectManagementModel.PhanDeTaiChoDotKhoaLuan">
+              <MappingFragment StoreEntitySet="PhanDeTaiChoDotKhoaLuan">
+                <ScalarProperty Name="NgayPhanDeTai" ColumnName="NgayPhanDeTai" />
+                <ScalarProperty Name="DeTaiId" ColumnName="DeTaiId" />
+                <ScalarProperty Name="DotKhoaLuanId" ColumnName="DotKhoaLuanId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhanDeTaiChoGiangViens">
+            <EntityTypeMapping TypeName="ProjectManagementModel.PhanDeTaiChoGiangVien">
+              <MappingFragment StoreEntitySet="PhanDeTaiChoGiangVien">
+                <ScalarProperty Name="NgayPhanDeTai" ColumnName="NgayPhanDeTai" />
+                <ScalarProperty Name="DeTaiId" ColumnName="DeTaiId" />
+                <ScalarProperty Name="GiangVienId" ColumnName="GiangVienId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhanDeTaiChoNhomSVs">
+            <EntityTypeMapping TypeName="ProjectManagementModel.PhanDeTaiChoNhomSV">
+              <MappingFragment StoreEntitySet="PhanDeTaiChoNhomSV">
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="NgayPhanDeTai" ColumnName="NgayPhanDeTai" />
+                <ScalarProperty Name="DeTaiId" ColumnName="DeTaiId" />
+                <ScalarProperty Name="NhomSVId" ColumnName="NhomSVId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuanLyLiches">
+            <EntityTypeMapping TypeName="ProjectManagementModel.QuanLyLich">
+              <MappingFragment StoreEntitySet="QuanLyLiches">
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="MocThoiGian" ColumnName="MocThoiGian" />
+                <ScalarProperty Name="DotKhoaLuanId" ColumnName="DotKhoaLuanId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SinhVienKhoaHocs">
+            <EntityTypeMapping TypeName="ProjectManagementModel.SinhVienKhoaHoc">
+              <MappingFragment StoreEntitySet="SinhVienKhoaHoc">
+                <ScalarProperty Name="DenNgay" ColumnName="DenNgay" />
+                <ScalarProperty Name="TuNgay" ColumnName="TuNgay" />
+                <ScalarProperty Name="NganhId" ColumnName="NganhId" />
+                <ScalarProperty Name="SinhVienId" ColumnName="SinhVienId" />
+                <ScalarProperty Name="KhoaHocID" ColumnName="KhoaHocID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SinhViens">
+            <EntityTypeMapping TypeName="ProjectManagementModel.SinhVien">
+              <MappingFragment StoreEntitySet="SinhViens">
+                <ScalarProperty Name="TrangThaiId" ColumnName="TrangThaiId" />
+                <ScalarProperty Name="SoTCCL" ColumnName="SoTCCL" />
+                <ScalarProperty Name="SoTCHT" ColumnName="SoTCHT" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="SinhVienId" ColumnName="SinhVienId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SinhVienThuocKhoas">
+            <EntityTypeMapping TypeName="ProjectManagementModel.SinhVienThuocKhoa">
+              <MappingFragment StoreEntitySet="SinhVienThuocKhoa">
+                <ScalarProperty Name="DenNgay" ColumnName="DenNgay" />
+                <ScalarProperty Name="TuNgay" ColumnName="TuNgay" />
+                <ScalarProperty Name="SinhVienId" ColumnName="SinhVienId" />
+                <ScalarProperty Name="KhoaId" ColumnName="KhoaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SinhVienThuocNhomSVs">
+            <EntityTypeMapping TypeName="ProjectManagementModel.SinhVienThuocNhomSV">
+              <MappingFragment StoreEntitySet="SinhVienThuocNhomSV">
+                <ScalarProperty Name="NgayPhan" ColumnName="NgayPhan" />
+                <ScalarProperty Name="SinhVienId" ColumnName="SinhVienId" />
+                <ScalarProperty Name="NhomSVId" ColumnName="NhomSVId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaiKhoans">
+            <EntityTypeMapping TypeName="ProjectManagementModel.TaiKhoan">
+              <MappingFragment StoreEntitySet="TaiKhoans">
+                <ScalarProperty Name="LaQuanTri" ColumnName="LaQuanTri" />
+                <ScalarProperty Name="GiangVienId" ColumnName="GiangVienId" />
+                <ScalarProperty Name="SinhVienId" ColumnName="SinhVienId" />
+                <ScalarProperty Name="LoaiTaiKhoanId" ColumnName="LoaiTaiKhoanId" />
+                <ScalarProperty Name="SDTK" ColumnName="SDTK" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="TaiKhoanId" ColumnName="TaiKhoanId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaiLieux">
+            <EntityTypeMapping TypeName="ProjectManagementModel.TaiLieu">
+              <MappingFragment StoreEntitySet="TaiLieux">
+                <ScalarProperty Name="DeTaiId" ColumnName="DeTaiId" />
+                <ScalarProperty Name="TepTinDinhKem" ColumnName="TepTinDinhKem" />
+                <ScalarProperty Name="TenTaiLieu" ColumnName="TenTaiLieu" />
+                <ScalarProperty Name="TaiLieuId" ColumnName="TaiLieuId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TinTucThongBaos">
+            <EntityTypeMapping TypeName="ProjectManagementModel.TinTucThongBao">
+              <MappingFragment StoreEntitySet="TinTucThongBaos">
+                <ScalarProperty Name="TaiKhoanId" ColumnName="TaiKhoanId" />
+                <ScalarProperty Name="NgayDang" ColumnName="NgayDang" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="TieuDe" ColumnName="TieuDe" />
+                <ScalarProperty Name="TinTucId" ColumnName="TinTucId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TrangThais">
+            <EntityTypeMapping TypeName="ProjectManagementModel.TrangThai">
+              <MappingFragment StoreEntitySet="TrangThais">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="TrangThaiId" ColumnName="TrangThaiId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

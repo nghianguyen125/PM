@@ -1,0 +1,82 @@
+﻿@using System.Linq
+@using ProjectManagement.Models
+@using ProjectManagement.App_Start.Classes
+@model IEnumerable<ProjectManagement.Models.TinTuc>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<section class="content-header">
+    <h1>Danh sách Tin</h1>
+</section>
+<section class="content">
+    <div class="row" style="padding-bottom: 10px;">
+        <div class="col-md-12">
+            @Html.ActionLink("Tạo mới", "Create", null, new { @class = "btn btn-primary pull-left" })
+        </div>
+    </div>
+    <div class="box">
+        <table class="table table-bordered table-hover">
+            <tbody>
+                <tr>
+                    <th style="width: 50px;">STT</th>
+                    <th>
+                        Mã Tin
+                    </th>
+                    <th>
+                        Tiêu Đề
+                    </th>
+                    <th>
+                        Nội Dung
+                    </th>
+                    <th>
+                        Ngày Đăng
+                    </th>
+                    <th style="width: 50px; text-align: center">Chức năng</th>
+                </tr>
+                @{
+                    int stt = 0;
+                    ProjectManagementEntities db = new ProjectManagementEntities();
+                }
+                @foreach (var item in Model)
+                {
+                    stt++;
+                    List<TinTuc> userCreatedBy = db.TinTucs.ToList();
+                    <tr>
+                        <td>@stt</td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TinTucId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TieuDe)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NoiDung)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NgayDang)
+                        </td>
+                        <td align="center">
+                            @*@Html.ActionLink("Sửa", "Edit", new {id = item.USER_ID}) |
+                                @Html.ActionLink("Xóa", "Delete", new {id = item.USER_ID})*@
+                            <ul class="contro_function" style="width: 70px">
+                                <li>
+                                    <a title="Cập nhật" href="@Url.Action("Edit", new { id = item.TinTucId})">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                </li>
+                                <li>|</li>
+                                <li>
+                                    <a title="Xóa" href="@Url.Action("Delete", new { id = item.TinTucId })">
+                                        <i class="fa fa-remove" style="color:red;"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>

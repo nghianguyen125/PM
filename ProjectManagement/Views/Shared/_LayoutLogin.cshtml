@@ -1,0 +1,30 @@
+﻿@using ProjectManagement.App_Start.Classes
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @*<link type="image/x-icon" href="../../images/xagan-ico.png" rel="Shortcut Icon" />*@
+    <title>@ViewBag.Title - Lăng kính Giới trẻ</title>
+    @*<link href="@Url.Content("~/Css/bootstrap.css")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Content/Admin/css/login.css")" rel="stylesheet" type="text/css" />*@
+    @Styles.Render("~/bundles/logincss")
+    @*@Scripts.Render("~/bundles/modernizr")*@
+</head>
+<body style="background: #f5f5f5">
+    <section class="admin_top">        
+        <a href="~/" style="font-size: 25px;"><span class="glyphicon glyphicon-home"></span></a>
+    </section>
+    <section style="padding-top: 100px">
+        @RenderBody()
+    </section>
+    <footer>
+        <p align="center">
+            Copyright &copy; @(DateTime.Today.Year + "" == "2017" ? "2017" : "2017 - " + DateTime.Today.Year). All rights reserved.
+        </p>
+    </footer>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
