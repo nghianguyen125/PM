@@ -192,7 +192,7 @@ namespace ProjectManagement.Controllers.Admin
         }
 
         // GET: /User/Delete/5
-        public ActionResult Delete(decimal id)
+        public ActionResult Delete(decimal? id)
         {
             //if (!UserManager.Authenticated)
             //{

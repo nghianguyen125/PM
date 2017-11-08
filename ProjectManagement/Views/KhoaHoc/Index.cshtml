@@ -1,7 +1,7 @@
 ﻿@using System.Linq
 @using ProjectManagement.App_Start.Classes
 @using ProjectManagement.Models
-@model IEnumerable<ProjectManagement.Models.NhomSV>
+@model IEnumerable<ProjectManagement.Models.KhoaHoc>
 
 @{
     ViewBag.Title = "Index";
@@ -9,7 +9,7 @@
 }
 
 <section class="content-header">
-    <h1>Danh sách Người dùng</h1>
+    <h1>Danh sách các Khoa</h1>
 </section>
 <section class="content">
     <div class="row" style="padding-bottom: 10px;">
@@ -23,10 +23,10 @@
                 <tr>
                     <th style="width: 50px">STT</th>
                     <th>
-                        Mã nhóm
+                        Tên Khóa Học
                     </th>
                     <th>
-                        Tên nhóm
+                        Năm Học 
                     </th>
                     <th style="width: 50px; text-align: center">Chức năng</th>
                 </tr>
@@ -37,27 +37,27 @@
                 @foreach (var item in Model)
                 {
                     stt++;
-                    List<NhomSV> userCreatedBy = db.NhomSVs.ToList();
+                    List<KhoaHoc> userCreatedBy = db.KhoaHocs.ToList();
                     <tr>
                         <td>@stt</td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.NhomSVId)
+                            @Html.DisplayFor(modelItem => item.TenKhoaHoc)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.TenNhom)
+                            @Html.DisplayFor(modelItem => item.NamHoc)
                         </td>
                         <td align="center">
                             @*@Html.ActionLink("Sửa", "Edit", new {id = item.USER_ID}) |
                                 @Html.ActionLink("Xóa", "Delete", new {id = item.USER_ID})*@
                             <ul class="contro_function" style="width: 70px">
                                 <li>
-                                    <a title="Cập nhật" href="@Url.Action("Edit", new { id = item.NhomSVId })">
+                                    <a title="Cập nhật" href="@Url.Action("Edit", new { id = item.KhoaHocID })">
                                         <i class="fa fa-edit"></i>
                                     </a>
                                 </li>
                                 <li>|</li>
                                 <li>
-                                    <a title="Xóa" href="@Url.Action("Delete", new { id = item.NhomSVId })">
+                                    <a title="Xóa" href="@Url.Action("Delete", new { id = item.KhoaHocID })">
                                         <i class="fa fa-remove" style="color:red;"></i>
                                     </a>
                                 </li>

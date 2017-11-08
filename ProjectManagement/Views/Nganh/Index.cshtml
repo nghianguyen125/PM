@@ -1,15 +1,14 @@
 ﻿@using System.Linq
 @using ProjectManagement.App_Start.Classes
 @using ProjectManagement.Models
-@model IEnumerable<ProjectManagement.Models.NhomSV>
+@model IEnumerable<ProjectManagement.Models.Nganh>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
-
 <section class="content-header">
-    <h1>Danh sách nhóm sinh viên</h1>
+    <h1>Danh sách Ngành</h1>
 </section>
 <section class="content">
     <div class="row" style="padding-bottom: 10px;">
@@ -23,7 +22,13 @@
                 <tr>
                     <th style="width: 50px">STT</th>
                     <th>
-                        Tên nhóm
+                        Mã Ngành
+                    </th>
+                    <th>
+                        Tên Ngành
+                    </th>
+                    <th>
+                        Khoa
                     </th>
                     <th style="width: 50px; text-align: center">Chức năng</th>
                 </tr>
@@ -34,24 +39,31 @@
                 @foreach (var item in Model)
                 {
                     stt++;
-                    List<NhomSV> userCreatedBy = db.NhomSVs.ToList();
+                    List<Nganh> userCreatedBy = db.Nganhs.ToList();
                     <tr>
                         <td>@stt</td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.TenNhom)
+                            @Html.DisplayFor(modelItem => item.NganhId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TenNganh)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.KhoaId)
                         </td>
                         <td align="center">
-                            @*@Html.ActionLink("Sửa", "Edit", new {id = item.NhomSVId}) |
-                                @Html.ActionLink("Xóa", "Delete", new {id = item.NhomSVId})*@
+                            @*@Html.ActionLink("Sửa", "Edit", new {id = item.USER_ID}) |
+                                @Html.ActionLink("Xóa", "Delete", new {id = item.USER_ID})*@
                             <ul class="contro_function" style="width: 70px">
                                 <li>
-                                    <a title="Cập nhật" href="@Url.Action("Edit", new { id = item.NhomSVId })">
+                                    <a title="Cập nhật" href="@Url.Action("Edit", new { id = item.NganhId })">
                                         <i class="fa fa-edit"></i>
                                     </a>
                                 </li>
                                 <li>|</li>
                                 <li>
-                                    <a title="Xóa" href="@Url.Action("Delete", new { id = item.NhomSVId })">
+                                    <a title="Xóa" href="@Url.Action("Delete", new { id = item.NganhId })">
                                         <i class="fa fa-remove" style="color:red;"></i>
                                     </a>
                                 </li>
@@ -66,4 +78,3 @@
         </table>
     </div>
 </section>
-

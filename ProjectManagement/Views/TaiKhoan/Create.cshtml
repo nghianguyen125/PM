@@ -7,7 +7,7 @@
 }
 
 <section class="content-header">
-    <h1>Tạo mới Người dùng</h1>
+    <h1>Tài khoản</h1>
 </section>
 <section class="content">
     @{
@@ -52,8 +52,8 @@
                 <div class="form-group">
                     @Html.Label("Vai trò", new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.DropDownList("LoaiTaiKhoanId", null, String.Empty, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.LoaiTaiKhoanId)
+                        @Html.DropDownList("LoaiTaiKhoan.ChiTiet", null, String.Empty, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.LoaiTaiKhoan.ChiTiet)
                     </div>
                 </div>                
             </div>

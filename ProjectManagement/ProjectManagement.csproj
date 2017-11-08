@@ -197,7 +197,7 @@
     <Compile Include="Controllers\Admin\AdminController.cs" />
     <Compile Include="Controllers\Admin\KhoaController.cs" />
     <Compile Include="Controllers\Admin\LichController.cs" />
-    <Compile Include="Controllers\Admin\LoaiTaiKhoanController.cs" />
+    <Compile Include="Controllers\Admin\NamHocController.cs" />
     <Compile Include="Controllers\Admin\NhomSVController.cs" />
     <Compile Include="Controllers\Admin\TaiKhoanController.cs" />
     <Compile Include="Controllers\Admin\TinTucController.cs" />
@@ -2031,21 +2031,11 @@
     <Content Include="Views\TaiKhoan\Delete.cshtml" />
     <Content Include="Views\TaiKhoan\Details.cshtml" />
     <Content Include="Views\TaiKhoan\Edit.cshtml" />
-    <Content Include="Views\NhomSVs\Create.cshtml" />
-    <Content Include="Views\NhomSVs\Delete.cshtml" />
-    <Content Include="Views\NhomSVs\Details.cshtml" />
-    <Content Include="Views\NhomSVs\Edit.cshtml" />
-    <Content Include="Views\NhomSVs\Index.cshtml" />
     <Content Include="Views\Khoas\Create.cshtml" />
     <Content Include="Views\Khoas\Delete.cshtml" />
     <Content Include="Views\Khoas\Details.cshtml" />
     <Content Include="Views\Khoas\Edit.cshtml" />
     <Content Include="Views\Khoas\Index.cshtml" />
-    <Content Include="Views\NhomSV\Create.cshtml" />
-    <Content Include="Views\NhomSV\Delete.cshtml" />
-    <Content Include="Views\NhomSV\Details.cshtml" />
-    <Content Include="Views\NhomSV\Edit.cshtml" />
-    <Content Include="Views\NhomSV\Index.cshtml" />
     <Content Include="Views\Khoa\Create.cshtml" />
     <Content Include="Views\Khoa\Delete.cshtml" />
     <Content Include="Views\Khoa\Details.cshtml" />
@@ -2076,6 +2066,21 @@
     <Content Include="Views\LoaiTaiKhoan\Details.cshtml" />
     <Content Include="Views\LoaiTaiKhoan\Edit.cshtml" />
     <Content Include="Views\LoaiTaiKhoan\Index.cshtml" />
+    <Content Include="Views\KhoaHoc\Create.cshtml" />
+    <Content Include="Views\KhoaHoc\Delete.cshtml" />
+    <Content Include="Views\KhoaHoc\Details.cshtml" />
+    <Content Include="Views\KhoaHoc\Edit.cshtml" />
+    <Content Include="Views\KhoaHoc\Index.cshtml" />
+    <Content Include="Views\Nganh\Create.cshtml" />
+    <Content Include="Views\Nganh\Delete.cshtml" />
+    <Content Include="Views\Nganh\Details.cshtml" />
+    <Content Include="Views\Nganh\Edit.cshtml" />
+    <Content Include="Views\Nganh\Index.cshtml" />
+    <Content Include="Views\NamHoc\Create.cshtml" />
+    <Content Include="Views\NamHoc\Delete.cshtml" />
+    <Content Include="Views\NamHoc\Details.cshtml" />
+    <Content Include="Views\NamHoc\Edit.cshtml" />
+    <Content Include="Views\NamHoc\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

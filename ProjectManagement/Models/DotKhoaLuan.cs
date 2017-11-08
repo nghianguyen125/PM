@@ -21,7 +21,7 @@ namespace ProjectManagement.Models
         }
     
         public decimal DotKhoaLuanId { get; set; }
-        public string TenDotKhoaLuan { get; set; }
+        public string ChiTietDotKhoaLuan { get; set; }
         public decimal NamHocHocKyId { get; set; }
     
         public virtual ICollection<PhanDeTaiChoDotKhoaLuan> PhanDeTaiChoDotKhoaLuans { get; set; }

@@ -66,17 +66,19 @@
                     <!--menu-->
                     <li class="treeview menu-open">
                         <a href="#">
-                            <i class="fa fa-book"></i> <span>Quản lý Đề tài</span>
+                            <i class="fa fa-book"></i> <span>Quản lý Danh mục</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="#"><i class="fa fa-circle-o"></i>Danh sách Đề tài</a></li>
-                            <li><a href="#"><i class="fa fa-circle-o"></i>Phân Đề tài</a></li>
-                            <li><a href="#"><i class="fa fa-circle-o"></i>Chức năng 3</a></li>
+                            <li><a href="@(urlHome+"Admin/Khoa/Index")"><i class="fa fa-circle-o"></i>Quản Lý Khoa</a></li>
+                            <li><a href="@(urlHome+"Admin/KhoaHoc/Index")"><i class="fa fa-circle-o"></i>Quản Lý Khóa Học</a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i> Quản Lý Năm Học-Học Kỳ</a></li>
+                            <li><a href="@(urlHome+"Admin/Nganh/Index")"><i class="fa fa-circle-o"></i>Quản Lý Ngành Học</a></li>
                         </ul>
                     </li>
+                    
                     <li class="treeview menu-open">
                         <a href="#">
                             <i class="fa fa-users"></i> <span>Quản lý Sinh viên</span>
@@ -86,8 +88,8 @@
                         </a>
                         <ul class="treeview-menu">
                             <li><a href="#"><i class="fa fa-circle-o"></i>Danh sách Sinh viên</a></li>
-                            <li><a href="#"><i class="fa fa-circle-o"></i>Phân Sinh Viên Cho Khoa</a></li>
-                            <li><a href="#"><i class="fa fa-circle-o"></i>Phân Sinh Viên Cho Khóa Học</a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i>Phân Sinh Viên-Khoa</a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i>Phân Sinh Viên-Khóa Học</a></li>
                         </ul>
                     </li>
                     <li class="treeview menu-open">
@@ -99,28 +101,36 @@
                         </a>
                         <ul class="treeview-menu">
                             <li><a href="#"><i class="fa fa-circle-o"></i>Danh sách Giảng viên</a></li>
-                            <li><a href="#"><i class="fa fa-circle-o"></i>Chức năng 2</a></li>
-                            <li><a href="#"><i class="fa fa-circle-o"></i>Chức năng 3</a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i>Phân Giảng Viên-Khoa</a></li>
                         </ul>
                     </li>
+
                     <li class="treeview menu-open">
                         <a href="#">
-                            <i class="fa fa-book"></i> <span>Quản lý Danh mục</span>
+                            <i class="fa fa-book"></i> <span>Quản lý Đợt Khóa Luận</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="#"><i class="fa fa-circle-o"></i>Quản Lý Khoa</a></li>
-                            <li><a href="#"><i class="fa fa-circle-o"></i>Quản Lý Khóa Học</a></li>
-                            <li><a href=""><i class="fa fa-circle-o"></i> Quản Lý Năm Học-Học Kỳ</a></li>
-                            <li><a href="#"><i class="fa fa-circle-o"></i>Quản Lý Ngành Học</a></li>
-                            <li><a href="#"><i class="fa fa-circle-o"></i>Quản Lý Trạng Thái</a></li>
-                            <li><a href="#"><i class="fa fa-circle-o"></i>Quản Lý Tài Khoản</a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i>Danh sách Đợt Khóa Luận</a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i>Phân Đồ Án</a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i>Tạo Lịch</a></li>
                         </ul>
                     </li>
-                    <li><a href="@(urlHome+"Admin/TaiKhoan/Index")"><i class="fa fa-users"></i><span>Quản lý Tài khoản</span></a></li>
-                    <li><a href="@(urlHome+"Admin/LoaiTaiKhoan/Index")"><i class="fa fa-user-md"></i><span>Quản lý Loại tài khoản</span></a></li>
+
+                    <li class="treeview menu-open">
+                        <a href="#">
+                            <i class="fa fa-book"></i> <span>Tài Khoản</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="@(urlHome+"Admin/TaiKhoan/Index")"><i class="fa fa-users"></i><span>Quản lý Tài khoản</span></a></li>
+                            <li><a href="@(urlHome+"Admin/LoaiTaiKhoan/Index")"><i class="fa fa-user-md"></i><span>Quản lý Loại tài khoản</span></a></li>
+                        </ul>
+                    </li>
                 </ul>
             </section>
         </aside>
