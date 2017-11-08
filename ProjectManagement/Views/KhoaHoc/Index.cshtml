@@ -9,7 +9,7 @@
 }
 
 <section class="content-header">
-    <h1>Danh sách các Khoa</h1>
+    <h1>Khóa Học</h1>
 </section>
 <section class="content">
     <div class="row" style="padding-bottom: 10px;">
@@ -23,12 +23,12 @@
                 <tr>
                     <th style="width: 50px">STT</th>
                     <th>
-                        Tên Khóa Học
+                        Mã Khóa học
                     </th>
                     <th>
-                        Năm Học 
+                        Năm học
                     </th>
-                    <th style="width: 50px; text-align: center">Chức năng</th>
+                    <th style="width: 10%; text-align: center">Chức năng</th>
                 </tr>
                 @{
                     int stt = 0;
@@ -41,15 +41,16 @@
                     <tr>
                         <td>@stt</td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.TenKhoaHoc)
+                            @Html.DisplayFor(modelItem => item.KhoaHocID)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.NamHoc)
+                            @Html.DisplayFor(modelItem => item.TenKhoaHoc)
                         </td>
+
                         <td align="center">
                             @*@Html.ActionLink("Sửa", "Edit", new {id = item.USER_ID}) |
                                 @Html.ActionLink("Xóa", "Delete", new {id = item.USER_ID})*@
-                            <ul class="contro_function" style="width: 70px">
+                            <ul class="contro_function">
                                 <li>
                                     <a title="Cập nhật" href="@Url.Action("Edit", new { id = item.KhoaHocID })">
                                         <i class="fa fa-edit"></i>

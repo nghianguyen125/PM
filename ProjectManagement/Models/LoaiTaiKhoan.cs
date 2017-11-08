@@ -20,7 +20,7 @@ namespace ProjectManagement.Models
         }
     
         public decimal LoaiTaiKhoanId { get; set; }
-        public string ChiTiet { get; set; }
+        public string TenLoaiTaiKhoan { get; set; }
     
         public virtual ICollection<TaiKhoan> TaiKhoans { get; set; }
     }

@@ -21,7 +21,7 @@ namespace ProjectManagement.Models
         }
     
         public decimal NamHocHocKyId { get; set; }
-        public string ChiTiet { get; set; }
+        public string TenNamHocHocKy { get; set; }
         public Nullable<System.DateTime> TuNgay { get; set; }
         public Nullable<System.DateTime> DenNgay { get; set; }
         public Nullable<decimal> NamHocHocKyIdRoot { get; set; }

@@ -196,8 +196,10 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\Admin\AdminController.cs" />
     <Compile Include="Controllers\Admin\KhoaController.cs" />
+    <Compile Include="Controllers\Admin\KhoaHocController.cs" />
     <Compile Include="Controllers\Admin\LichController.cs" />
     <Compile Include="Controllers\Admin\NamHocController.cs" />
+    <Compile Include="Controllers\Admin\NganhController.cs" />
     <Compile Include="Controllers\Admin\NhomSVController.cs" />
     <Compile Include="Controllers\Admin\TaiKhoanController.cs" />
     <Compile Include="Controllers\Admin\TinTucController.cs" />

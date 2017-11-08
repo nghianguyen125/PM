@@ -20,10 +20,10 @@ namespace ProjectManagement.Models
         }
     
         public decimal KhoaHocID { get; set; }
-        public string ChiTiet { get; set; }
+        public string TenKhoaHoc { get; set; }
         public decimal NamHocHocKyId { get; set; }
     
-        public virtual NamHoc NamHoc { get; set; }
         public virtual ICollection<SinhVienKhoaHoc> SinhVienKhoaHocs { get; set; }
+        public virtual NamHoc NamHoc { get; set; }
     }
 }

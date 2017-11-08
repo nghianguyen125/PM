@@ -22,7 +22,7 @@ namespace ProjectManagement.Controllers.Admin
         }
 
         // GET: NamHoc/Details/5
-        public ActionResult Details(decimal? id)
+        public ActionResult Details(decimal id)
         {
             if (id == null)
             {
@@ -62,7 +62,7 @@ namespace ProjectManagement.Controllers.Admin
         }
 
         // GET: NamHoc/Edit/5
-        public ActionResult Edit(decimal? id)
+        public ActionResult Edit(decimal id)
         {
             if (id == null)
             {
@@ -95,7 +95,7 @@ namespace ProjectManagement.Controllers.Admin
         }
 
         // GET: NamHoc/Delete/5
-        public ActionResult Delete(decimal? id)
+        public ActionResult Delete(decimal id)
         {
             if (id == null)
             {

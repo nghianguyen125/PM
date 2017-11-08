@@ -1,5 +1,4 @@
-﻿@using ProjectManagement.Models
-@model ProjectManagement.Models.Nganh
+﻿@model ProjectManagement.Models.Nganh
 
 @{
     ViewBag.Title = "Create";
@@ -7,7 +6,7 @@
 }
 
 <section class="content-header">
-    <h1>Tạo mới Ngành</h1>
+    <h1>Ngành Học</h1>
 </section>
 <section class="content">
     @{
@@ -20,32 +19,32 @@
     }
     <div class="box box-info">
         <div class="box-header with-border">
-            <h3 class="box-title">Tạo mới Ngành</h3>
+            <h3 class="box-title">Tạo mới Ngành học</h3>
         </div>
 
-        @using (Html.BeginForm("Create", "TaiKhoan", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal" }))
+        @using (Html.BeginForm("Create", "KhoaHoc", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal" }))
         {
             @Html.AntiForgeryToken()
 
             <div class="box-body">
                 <div class="form-group">
-                    @Html.Label("Mã Ngành", new { @class = "control-label col-md-2" })
+                    @Html.Label("Mã Ngành học", new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.TextBoxFor(model => model.NganhId, new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.NganhId)
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.Label("Tên Ngành", new { @class = "control-label col-md-2" })
+                    @Html.Label("Tên Ngành học", new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.TextBoxFor(model => model.TenNganh, new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.TenNganh)
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.Label("Mã Khoa", new { @class = "control-label col-md-2" })
+                    @Html.Label("Khoa", new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.TextBoxFor(model => model.KhoaId, new { @class = "form-control", type = "password" })
+                        @Html.DropDownList("KhoaId", null, String.Empty, new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.KhoaId)
                     </div>
                 </div>

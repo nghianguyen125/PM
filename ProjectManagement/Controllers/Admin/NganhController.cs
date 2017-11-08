@@ -10,107 +10,112 @@ using ProjectManagement.Models;
 
 namespace ProjectManagement.Controllers.Admin
 {
-    public class KhoaController : Controller
+    public class NganhController : Controller
     {
         private ProjectManagementEntities db = new ProjectManagementEntities();
 
-        // GET: Khoa
+        // GET: Nganh
         public ActionResult Index()
         {
-            return View(db.Khoas.ToList());
+            var nganhs = db.Nganhs.Include(n => n.Khoa);
+            return View(nganhs.ToList());
         }
 
-        // GET: Khoa/Details/5
+        // GET: Nganh/Details/5
         public ActionResult Details(decimal id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Khoa khoa = db.Khoas.Find(id);
-            if (khoa == null)
+            Nganh nganh = db.Nganhs.Find(id);
+            if (nganh == null)
             {
                 return HttpNotFound();
             }
-            return View(khoa);
+            return View(nganh);
         }
 
-        // GET: Khoa/Create
+        // GET: Nganh/Create
         public ActionResult Create()
         {
+            ViewBag.KhoaId = new SelectList(db.Khoas, "KhoaId", "TenKhoa");
             return View();
         }
 
-        // POST: Khoa/Create
+        // POST: Nganh/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "KhoaId,TenKhoa,DiaChi")] Khoa khoa)
+        public ActionResult Create([Bind(Include = "NganhId,TenNganh,KhoaId")] Nganh nganh)
         {
             if (ModelState.IsValid)
             {
-                db.Khoas.Add(khoa);
+                db.Nganhs.Add(nganh);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(khoa);
+            ViewBag.KhoaId = new SelectList(db.Khoas, "KhoaId", "TenKhoa", nganh.KhoaId);
+            return View(nganh);
         }
 
-        // GET: Khoa/Edit/5
-        public ActionResult Edit(decimal? id)
+        // GET: Nganh/Edit/5
+        public ActionResult Edit(decimal id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Khoa khoa = db.Khoas.Find(id);
-            if (khoa == null)
+            Nganh nganh = db.Nganhs.Find(id);
+            if (nganh == null)
             {
                 return HttpNotFound();
             }
-            return View(khoa);
+            ViewBag.KhoaId = new SelectList(db.Khoas, "KhoaId", "TenKhoa", nganh.KhoaId);
+            return View(nganh);
         }
 
-        // POST: Khoa/Edit/5
+        // POST: Nganh/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "KhoaId,TenKhoa")] Khoa khoa)
+        public ActionResult Edit([Bind(Include = "NganhId,TenNganh,KhoaId")] Nganh nganh)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(khoa).State = EntityState.Modified;
+                db.Entry(nganh).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(khoa);
+            ViewBag.KhoaId = new SelectList(db.Khoas, "KhoaId", "TenKhoa", nganh.KhoaId);
+            return View(nganh);
         }
 
-        // GET: Khoa/Delete/5
+        // GET: Nganh/Delete/5
         public ActionResult Delete(decimal id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Khoa khoa = db.Khoas.Find(id);
-            if (khoa == null)
+            Nganh nganh = db.Nganhs.Find(id);
+            if (nganh == null)
             {
                 return HttpNotFound();
             }
-            return View(khoa);
+            return View(nganh);
         }
 
-        // POST: Khoa/Delete/5
+        // POST: Nganh/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(decimal id)
         {
-            Khoa khoa = db.Khoas.Find(id);
-            db.Khoas.Remove(khoa);
+            Nganh nganh = db.Nganhs.Find(id);
+            db.Nganhs.Remove(nganh);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

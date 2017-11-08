@@ -7,8 +7,9 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+
 <section class="content-header">
-    <h1>Danh sách Ngành</h1>
+    <h1>Ngành Học</h1>
 </section>
 <section class="content">
     <div class="row" style="padding-bottom: 10px;">
@@ -22,15 +23,15 @@
                 <tr>
                     <th style="width: 50px">STT</th>
                     <th>
-                        Mã Ngành
+                        Mã Ngành học
                     </th>
                     <th>
-                        Tên Ngành
+                        Tên Ngành học
                     </th>
                     <th>
                         Khoa
                     </th>
-                    <th style="width: 50px; text-align: center">Chức năng</th>
+                    <th style="width: 10%; text-align: center">Chức năng</th>
                 </tr>
                 @{
                     int stt = 0;
@@ -48,14 +49,14 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.TenNganh)
                         </td>
-
                         <td>
-                            @Html.DisplayFor(modelItem => item.KhoaId)
+                            @Html.DisplayFor(modelItem => item.Khoa.TenKhoa)
                         </td>
+
                         <td align="center">
                             @*@Html.ActionLink("Sửa", "Edit", new {id = item.USER_ID}) |
                                 @Html.ActionLink("Xóa", "Delete", new {id = item.USER_ID})*@
-                            <ul class="contro_function" style="width: 70px">
+                            <ul class="contro_function">
                                 <li>
                                     <a title="Cập nhật" href="@Url.Action("Edit", new { id = item.NganhId })">
                                         <i class="fa fa-edit"></i>
