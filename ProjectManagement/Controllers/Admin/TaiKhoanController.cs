@@ -52,7 +52,7 @@ namespace ProjectManagement.Controllers.Admin
             //{
             //    return RedirectToAction("Login", "Admin");
             //}
-            ViewBag.LoaiTaiKhoanId = new SelectList(db.LoaiTaiKhoans, "LoaiTaiKhoanId", "LoaiTaiKhoanId");
+            ViewBag.LoaiTaiKhoanId = new SelectList(db.LoaiTaiKhoans, "LoaiTaiKhoanId", "TenLoaiTaiKhoan");
             return View();
         }
 

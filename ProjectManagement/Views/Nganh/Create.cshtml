@@ -1,4 +1,5 @@
-﻿@model ProjectManagement.Models.Nganh
+﻿@using ProjectManagement.Models
+@model ProjectManagement.Models.Nganh
 
 @{
     ViewBag.Title = "Create";
@@ -22,7 +23,7 @@
             <h3 class="box-title">Tạo mới Ngành học</h3>
         </div>
 
-        @using (Html.BeginForm("Create", "KhoaHoc", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal" }))
+        @using (Html.BeginForm("Create", "Nganh", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal" }))
         {
             @Html.AntiForgeryToken()
 

@@ -26,6 +26,9 @@
                         Mã Khóa học
                     </th>
                     <th>
+                        Tên Khóa học
+                    </th>
+                    <th>
                         Năm học
                     </th>
                     <th style="width: 10%; text-align: center">Chức năng</th>
@@ -46,7 +49,9 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.TenKhoaHoc)
                         </td>
-
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NamHoc.TenNamHocHocKy)
+                        </td>
                         <td align="center">
                             @*@Html.ActionLink("Sửa", "Edit", new {id = item.USER_ID}) |
                                 @Html.ActionLink("Xóa", "Delete", new {id = item.USER_ID})*@

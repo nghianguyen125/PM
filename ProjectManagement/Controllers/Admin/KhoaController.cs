@@ -78,7 +78,7 @@ namespace ProjectManagement.Controllers.Admin
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "KhoaId,TenKhoa")] Khoa khoa)
+        public ActionResult Edit([Bind(Include = "KhoaId,TenKhoa,DiaChi")] Khoa khoa)
         {
             if (ModelState.IsValid)
             {
