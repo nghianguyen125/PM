@@ -1,11 +1,11 @@
-﻿@model ProjectManagement.Models.KhoaHoc
+﻿@model ProjectManagement.Models.SinhVien
 
 @{
     ViewBag.Title = "Delete";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 <section class="content-header">
-    <h1>Khóa Học</h1>
+    <h1>Sinh Viên</h1>
 </section>
 <section class="content">
     <div class="box box-info">
@@ -14,23 +14,48 @@
         </div>
         <dl class="dl-horizontal">
             <dt>
-                Mã Khóa học
+                Mã Sinh viên:
             </dt>
             <dd>
-                @Html.DisplayFor(model => model.KhoaHocID)
+                @Html.DisplayFor(model => model.SinhVienId)
             </dd>
             <dt>
-                Họ tên:
+                Tên Sinh viên:
             </dt>
             <dd>
-                @Html.DisplayFor(model => model.TenKhoaHoc)
+                @Html.DisplayFor(model => model.HoTen)
             </dd>
             <dt>
-                Năm học:
+                Giới tính:
             </dt>
             <dd>
-                @Html.DisplayFor(model => model.NamHoc.NamHocHocKyId)
+                @Html.DisplayFor(model => model.GioiTinh)
             </dd>
+            <dt>
+                Ngày sinh:
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.NgaySinh)
+            </dd>
+            <dt>
+                Số TCHT:
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.SoTCHT)
+            </dd>
+            <dt>
+                Số TCCL:
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.SoTCCL)
+            </dd>
+            <dt>
+                Trạng thái:
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.TrangThai)
+            </dd>
+
         </dl>
 
         @using (Html.BeginForm())

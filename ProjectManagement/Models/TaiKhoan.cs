@@ -33,7 +33,7 @@ namespace ProjectManagement.Models
     
         public virtual GiangVien GiangVien { get; set; }
         public virtual LoaiTaiKhoan LoaiTaiKhoan { get; set; }
-        public virtual SinhVien SinhVien { get; set; }
         public virtual ICollection<TinTucThongBao> TinTucThongBaos { get; set; }
+        public virtual SinhVien SinhVien { get; set; }
     }
 }

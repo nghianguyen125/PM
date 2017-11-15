@@ -1,7 +1,4 @@
-﻿@using System.Linq
-@using ProjectManagement.App_Start.Classes
-@using ProjectManagement.Models
-@model IEnumerable<ProjectManagement.Models.Khoa>
+﻿@model IEnumerable<ProjectManagement.Models.SinhVien>
 
 @{
     ViewBag.Title = "Index";
@@ -9,7 +6,7 @@
 }
 
 <section class="content-header">
-    <h1>Khoa</h1>
+    <h1>Khóa Học</h1>
 </section>
 <section class="content">
     <div class="row" style="padding-bottom: 10px;">
@@ -23,15 +20,15 @@
                 <tr>
                     <th style="width: 50px">STT</th>
                     <th>
-                        Mã Khoa
+                        Mã Khóa học
                     </th>
                     <th>
-                        Tên Khoa
+                        Tên Khóa học
                     </th>
                     <th>
-                        Địa Chỉ
+                        Năm học
                     </th>
-                    <th style="width: 50px; text-align: center">Chức năng</th>
+                    <th style="width: 10%; text-align: center">Chức năng</th>
                 </tr>
                 @{
                     int stt = 0;
@@ -40,30 +37,30 @@
                 @foreach (var item in Model)
                 {
                     stt++;
-                    List<Khoa> userCreatedBy = db.Khoas.ToList();
+                    List<KhoaHoc> userCreatedBy = db.KhoaHocs.ToList();
                     <tr>
                         <td>@stt</td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.KhoaId)
+                            @Html.DisplayFor(modelItem => item.KhoaHocID)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.TenKhoa)
+                            @Html.DisplayFor(modelItem => item.TenKhoaHoc)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.DiaChi)
+                            @Html.DisplayFor(modelItem => item.NamHoc.TenNamHocHocKy)
                         </td>
                         <td align="center">
                             @*@Html.ActionLink("Sửa", "Edit", new {id = item.USER_ID}) |
                                 @Html.ActionLink("Xóa", "Delete", new {id = item.USER_ID})*@
-                            <ul class="contro_function" style="width: 70px">
+                            <ul class="contro_function">
                                 <li>
-                                    <a title="Cập nhật" href="@Url.Action("Edit", new { id = item.KhoaId })">
+                                    <a title="Cập nhật" href="@Url.Action("Edit", new { id = item.KhoaHocID })">
                                         <i class="fa fa-edit"></i>
                                     </a>
                                 </li>
                                 <li>|</li>
                                 <li>
-                                    <a title="Xóa" href="@Url.Action("Delete", new { id = item.KhoaId })">
+                                    <a title="Xóa" href="@Url.Action("Delete", new { id = item.KhoaHocID })">
                                         <i class="fa fa-remove" style="color:red;"></i>
                                     </a>
                                 </li>
@@ -72,9 +69,6 @@
                     </tr>
                 }
             </tbody>
-
-
-
         </table>
     </div>
 </section>

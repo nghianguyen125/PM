@@ -23,7 +23,7 @@ namespace ProjectManagement.Models
         public string TenKhoaHoc { get; set; }
         public decimal NamHocHocKyId { get; set; }
     
-        public virtual ICollection<SinhVienKhoaHoc> SinhVienKhoaHocs { get; set; }
         public virtual NamHoc NamHoc { get; set; }
+        public virtual ICollection<SinhVienKhoaHoc> SinhVienKhoaHocs { get; set; }
     }
 }

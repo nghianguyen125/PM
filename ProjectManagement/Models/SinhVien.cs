@@ -29,11 +29,10 @@ namespace ProjectManagement.Models
         public Nullable<System.DateTime> NgaySinh { get; set; }
         public Nullable<int> SoTCHT { get; set; }
         public Nullable<int> SoTCCL { get; set; }
-        public Nullable<decimal> TrangThaiId { get; set; }
+        public Nullable<bool> TrangThai { get; set; }
     
         public virtual ICollection<DanhGiaDeTai> DanhGiaDeTais { get; set; }
         public virtual ICollection<SinhVienKhoaHoc> SinhVienKhoaHocs { get; set; }
-        public virtual TrangThai TrangThai { get; set; }
         public virtual ICollection<SinhVienThuocKhoa> SinhVienThuocKhoas { get; set; }
         public virtual ICollection<SinhVienThuocNhomSV> SinhVienThuocNhomSVs { get; set; }
         public virtual ICollection<TaiKhoan> TaiKhoans { get; set; }

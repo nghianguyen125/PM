@@ -1,5 +1,5 @@
 ﻿@using ProjectManagement.Models
-@model ProjectManagement.Models.Khoa
+@model ProjectManagement.Models.SinhVienThuocKhoa
 
 @{
     ViewBag.Title = "Create";
@@ -7,7 +7,7 @@
 }
 
 <section class="content-header">
-    <h1>Khoa</h1>
+    <h1>Sinh Viên / Khoa</h1>
 </section>
 <section class="content">
     @{
@@ -20,33 +20,33 @@
     }
     <div class="box box-info">
         <div class="box-header with-border">
-            <h3 class="box-title">Tạo mới Khoa</h3>
+            <h3 class="box-title">Sinh Viên / Khoa</h3>
         </div>
 
-        @using (Html.BeginForm("Create", "Khoa", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal" }))
+        @using (Html.BeginForm("Create", "SinhVienThuocKhoa", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal" }))
         {
             @Html.AntiForgeryToken()
 
             <div class="box-body">
                 <div class="form-group">
-                    @Html.Label("Mã Khoa", new { @class = "control-label col-md-2" })
+                    @Html.Label("Tên Sinh viên", new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.TextBoxFor(model => model.KhoaId, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.KhoaId)
+                        @Html.DropDownList("SinhVienId", null, String.Empty, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.SinhVienId)
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.Label("Tên Khoa", new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.TextBoxFor(model => model.TenKhoa, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.TenKhoa)
+                        @Html.DropDownList("KhoaId", null, String.Empty, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.KhoaId)
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.Label("Địa Chỉ", new { @class = "control-label col-md-2" })
+                    @Html.Label("Ngày Bắt đầu", new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.TextBoxFor(model => model.DiaChi, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.DiaChi)
+                        @Html.TextBoxFor(model => model.TuNgay, new { @class = "form-control", type = "date" })
+                        @Html.ValidationMessageFor(model => model.TuNgay)
                     </div>
                 </div>
             </div>
