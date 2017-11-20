@@ -14,16 +14,10 @@ namespace ProjectManagement.Models
     
     public partial class Nganh
     {
-        public Nganh()
-        {
-            this.SinhVienNganhHocs = new HashSet<SinhVienNganhHoc>();
-        }
-    
         public decimal NganhId { get; set; }
         public string TenNganh { get; set; }
         public Nullable<decimal> KhoaId { get; set; }
     
         public virtual Khoa Khoa { get; set; }
-        public virtual ICollection<SinhVienNganhHoc> SinhVienNganhHocs { get; set; }
     }
 }

@@ -2113,11 +2113,6 @@
     <Content Include="Views\SinhVienKhoaHocs\Details.cshtml" />
     <Content Include="Views\SinhVienKhoaHocs\Edit.cshtml" />
     <Content Include="Views\SinhVienKhoaHocs\Index.cshtml" />
-    <Content Include="Views\DotKhoaLuan\Create.cshtml" />
-    <Content Include="Views\DotKhoaLuan\Delete.cshtml" />
-    <Content Include="Views\DotKhoaLuan\Details.cshtml" />
-    <Content Include="Views\DotKhoaLuan\Edit.cshtml" />
-    <Content Include="Views\DotKhoaLuan\Index.cshtml" />
     <Content Include="Views\SinhVienKhoaHoc\DSSV.cshtml" />
     <Content Include="Views\SinhVienThuocKhoa\DSSV.cshtml" />
     <Content Include="Views\SinhVienNganhHoc\Create.cshtml" />
@@ -2125,6 +2120,12 @@
     <Content Include="Views\SinhVienNganhHoc\Details.cshtml" />
     <Content Include="Views\SinhVienNganhHoc\Edit.cshtml" />
     <Content Include="Views\SinhVienNganhHoc\Index.cshtml" />
+    <Content Include="Views\SinhVienNganhHoc\DSSV.cshtml" />
+    <Content Include="Views\DotKhoaLuan\Create.cshtml" />
+    <Content Include="Views\DotKhoaLuan\Delete.cshtml" />
+    <Content Include="Views\DotKhoaLuan\Details.cshtml" />
+    <Content Include="Views\DotKhoaLuan\Edit.cshtml" />
+    <Content Include="Views\DotKhoaLuan\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

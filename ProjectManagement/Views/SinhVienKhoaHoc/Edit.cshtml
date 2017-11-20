@@ -21,7 +21,7 @@
     }
     <div class="box box-info">
         <div class="box-header with-border">
-            <h3 class="box-title">@tenKhoaHoc</h3>
+            <h3 class="box-title"><strong>@tenKhoaHoc</strong></h3>
         </div>
         @using (Html.BeginForm("Edit", "SinhVienKhoaHoc", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal" }))
         {
@@ -59,7 +59,8 @@
                 </div>
             <div class="box-footer">
                 @*<button type="submit" class="btn btn-default">Cancel</button>*@
-                @Html.ActionLink("Back to List", "DSSV", null, new { @class = "btn btn-default" })
+                @*@Html.ActionLink("Back to List", "DSSV", null, new { @class = "btn btn-default" })*@
+                <a href="/Admin/SinhVienKhoaHoc/DSSV?KHId=@idKhoaHoc" class="btn btn-default">Back to List</a>
                 <input type="submit" value="Save" class="btn btn-primary pull-right" />
             </div>
         }

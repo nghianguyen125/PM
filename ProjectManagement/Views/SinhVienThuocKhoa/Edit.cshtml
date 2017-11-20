@@ -28,21 +28,6 @@
             @Html.AntiForgeryToken()
 
             @Html.HiddenFor(model => model.SinhVienId)
-            <div class="form-group">
-                @Html.Label("Tên Sinh Viên", new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("SinhVienId", null, String.Empty, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.SinhVien.HoTen)
-                </div>
-            </div>
-
-                <div class="form-group">
-                    @Html.Label("Tên Khoa", new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.DropDownList("KhoaId", null, String.Empty, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.Khoa.TenKhoa)
-                    </div>
-                </div>
                 <div class="form-group">
                     @Html.Label("Ngày Bắt đầu", new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
@@ -59,7 +44,8 @@
                 </div>
                 <div class="box-footer">
                     @*<button type="submit" class="btn btn-default">Cancel</button>*@
-                    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+                    @*@Html.ActionLink("Back to List", "D", null, new { @class = "btn btn-default" })*@
+                    <a href="/Admin/SinhVienThuocKhoa/DSSV?KId=@idKhoa" class="btn btn-default">Cancel</a>
                     <input type="submit" value="Save" class="btn btn-primary pull-right" />
                 </div>
         }
