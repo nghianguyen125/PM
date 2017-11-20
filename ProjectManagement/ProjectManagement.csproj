@@ -195,6 +195,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\Admin\AdminController.cs" />
+    <Compile Include="Controllers\Admin\DotKhoaLuanController.cs" />
     <Compile Include="Controllers\Admin\KhoaController.cs" />
     <Compile Include="Controllers\Admin\KhoaHocController.cs" />
     <Compile Include="Controllers\Admin\LichController.cs" />
@@ -203,6 +204,7 @@
     <Compile Include="Controllers\Admin\NhomSVController.cs" />
     <Compile Include="Controllers\Admin\SinhVienController.cs" />
     <Compile Include="Controllers\Admin\SinhVienKhoaHocController.cs" />
+    <Compile Include="Controllers\Admin\SinhVienNganhHocController.cs" />
     <Compile Include="Controllers\Admin\SinhVienThuocKhoaController.cs" />
     <Compile Include="Controllers\Admin\TaiKhoanController.cs" />
     <Compile Include="Controllers\Admin\TinTucController.cs" />
@@ -283,6 +285,9 @@
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SinhVienKhoaHoc.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SinhVienNganhHoc.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SinhVienThuocKhoa.cs">
@@ -2103,6 +2108,23 @@
     <Content Include="Views\SinhVienThuocKhoa\Details.cshtml" />
     <Content Include="Views\SinhVienThuocKhoa\Edit.cshtml" />
     <Content Include="Views\SinhVienThuocKhoa\Index.cshtml" />
+    <Content Include="Views\SinhVienKhoaHocs\Create.cshtml" />
+    <Content Include="Views\SinhVienKhoaHocs\Delete.cshtml" />
+    <Content Include="Views\SinhVienKhoaHocs\Details.cshtml" />
+    <Content Include="Views\SinhVienKhoaHocs\Edit.cshtml" />
+    <Content Include="Views\SinhVienKhoaHocs\Index.cshtml" />
+    <Content Include="Views\DotKhoaLuan\Create.cshtml" />
+    <Content Include="Views\DotKhoaLuan\Delete.cshtml" />
+    <Content Include="Views\DotKhoaLuan\Details.cshtml" />
+    <Content Include="Views\DotKhoaLuan\Edit.cshtml" />
+    <Content Include="Views\DotKhoaLuan\Index.cshtml" />
+    <Content Include="Views\SinhVienKhoaHoc\DSSV.cshtml" />
+    <Content Include="Views\SinhVienThuocKhoa\DSSV.cshtml" />
+    <Content Include="Views\SinhVienNganhHoc\Create.cshtml" />
+    <Content Include="Views\SinhVienNganhHoc\Delete.cshtml" />
+    <Content Include="Views\SinhVienNganhHoc\Details.cshtml" />
+    <Content Include="Views\SinhVienNganhHoc\Edit.cshtml" />
+    <Content Include="Views\SinhVienNganhHoc\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

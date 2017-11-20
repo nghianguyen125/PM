@@ -1,0 +1,68 @@
+﻿@model ProjectManagement.Models.SinhVienKhoaHoc
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>SinhVienKhoaHoc</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        <div class="form-group">
+            @Html.LabelFor(model => model.KhoaHocID, "KhoaHocID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("KhoaHocID", String.Empty)
+                @Html.ValidationMessageFor(model => model.KhoaHocID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SinhVienId, "SinhVienId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("SinhVienId", String.Empty)
+                @Html.ValidationMessageFor(model => model.SinhVienId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NganhId, "NganhId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("NganhId", String.Empty)
+                @Html.ValidationMessageFor(model => model.NganhId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TuNgay, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TuNgay)
+                @Html.ValidationMessageFor(model => model.TuNgay)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DenNgay, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DenNgay)
+                @Html.ValidationMessageFor(model => model.DenNgay)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

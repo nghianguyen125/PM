@@ -1,4 +1,4 @@
-﻿@model ProjectManagement.Models.SinhVienKhoaHoc
+﻿@model ProjectManagement.Models.SinhVienNganhHoc
 
 @{
     ViewBag.Title = "Details";
@@ -8,7 +8,7 @@
 <h2>Details</h2>
 
 <div>
-    <h4>SinhVienKhoaHoc</h4>
+    <h4>SinhVienNganhHoc</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -28,11 +28,19 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.KhoaHoc.TenKhoaHoc)
+            @Html.DisplayNameFor(model => model.KhoaHocID)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.KhoaHoc.TenKhoaHoc)
+            @Html.DisplayFor(model => model.KhoaHocID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nganh.TenNganh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nganh.TenNganh)
         </dd>
 
         <dt>

@@ -1,0 +1,65 @@
+﻿@model ProjectManagement.Models.SinhVienNganhHoc
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>SinhVienNganhHoc</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TuNgay)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TuNgay)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DenNgay)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DenNgay)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KhoaHocID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KhoaHocID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nganh.TenNganh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nganh.TenNganh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SinhVien.HoTen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SinhVien.HoTen)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

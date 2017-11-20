@@ -1,20 +1,22 @@
-﻿@using System.Linq
-@using ProjectManagement.App_Start.Classes
-@using ProjectManagement.Models
-@model IEnumerable<ProjectManagement.Models.SinhVien>
+﻿@using ProjectManagement.Models
+@model IEnumerable<ProjectManagement.Models.SinhVienKhoaHoc>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "DSSV";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    string tenKhoaHoc = ViewBag.TenKhoaHoc + "";
+    string idKhoaHoc = ViewBag.IdKhoaHoc + "";
 }
 
 <section class="content-header">
-    <h1>Sinh Viên</h1>
+    <h1>Sinh Viên / Khóa Học</h1>
 </section>
 <section class="content">
+    <h1>@tenKhoaHoc</h1>
     <div class="row" style="padding-bottom: 10px;">
         <div class="col-md-12">
-            @Html.ActionLink("Tạo mới", "Create", null, new { @class = "btn btn-primary pull-left" })
+            @*@Html.ActionLink("Tạo mới", "Create", null, new { @class = "btn btn-primary pull-left" })*@
+            <a href="/Admin/SinhVienKhoaHoc/Create?KHId=@idKhoaHoc" class="btn btn-primary pull-left">Tạo mới</a>
         </div>
     </div>
     <div class="box">
@@ -29,21 +31,12 @@
                         Tên Sinh viên
                     </th>
                     <th>
-                        Giới tính
-                    </th>
-                    <th>
                         Ngày sinh
                     </th>
                     <th>
-                        Số TCHT
+                        Ngày Bắt đầu
                     </th>
-                    <th>
-                        Số TCCL
-                    </th>
-                    <th>
-                        Trạng thái
-                    </th>
-                    <th style="width: 10%; text-align: center">Chức năng</th>
+                    <th style="width: 50px; text-align: center">Chức năng</th>
                 </tr>
                 @{
                     int stt = 0;
@@ -52,56 +45,33 @@
                 @foreach (var item in Model)
                 {
                     stt++;
-                    List<SinhVien> userCreatedBy = db.SinhViens.ToList();
+                    List<SinhVienKhoaHoc> userCreatedBy = db.SinhVienKhoaHocs.ToList();
                     <tr>
                         <td>@stt</td>
                         <td>
                             @Html.DisplayFor(modelItem => item.SinhVienId)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.HoTen)
+                            @Html.DisplayFor(modelItem => item.SinhVien.HoTen)
                         </td>
                         <td>
-                            @if (item.GioiTinh == true)
-                            {
-                                @Html.DisplayName("Nam")
-                            }
-                            else
-                            {
-                                @Html.DisplayName("Nữ")
-                            }
+                            @Html.DisplayFor(modelItem => item.SinhVien.NgaySinh)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.NgaySinh)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.SoTCHT)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.SoTCCL)
-                        </td>
-                        <td>
-                            @if (item.TrangThai == true)
-                            {
-                                @Html.DisplayName("Good")
-                            }
-                            else
-                            {
-                                @Html.DisplayName("Warning")
-                            }
+                            @Html.DisplayFor(modelItem => item.TuNgay)
                         </td>
                         <td align="center">
                             @*@Html.ActionLink("Sửa", "Edit", new {id = item.USER_ID}) |
                                 @Html.ActionLink("Xóa", "Delete", new {id = item.USER_ID})*@
-                            <ul class="contro_function">
+                            <ul class="contro_function" style="width: 70px">
                                 <li>
-                                    <a title="Cập nhật" href="@Url.Action("Edit", new { id = item.SinhVienId })">
+                                    <a title="Chỉnh Sửa" href="@Url.Action("Edit", new { KHId = item.KhoaHocID, SVId = item.SinhVienId })">
                                         <i class="fa fa-edit"></i>
                                     </a>
                                 </li>
                                 <li>|</li>
                                 <li>
-                                    <a title="Xóa" href="@Url.Action("Delete", new { id = item.SinhVienId })">
+                                    <a title="Xóa" href="@Url.Action("Delete", new { KHId = item.KhoaHocID, SVId = item.SinhVienId })">
                                         <i class="fa fa-remove" style="color:red;"></i>
                                     </a>
                                 </li>

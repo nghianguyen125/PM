@@ -1,0 +1,35 @@
+﻿@model ProjectManagement.Models.DotKhoaLuan
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DotKhoaLuan</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenDotKhoaLuan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenDotKhoaLuan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NamHoc.TenNamHocHocKy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NamHoc.TenNamHocHocKy)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.DotKhoaLuanId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -42,6 +42,7 @@ namespace ProjectManagement.Models
         public virtual DbSet<PhanDeTaiChoNhomSV> PhanDeTaiChoNhomSVs { get; set; }
         public virtual DbSet<QuanLyLich> QuanLyLiches { get; set; }
         public virtual DbSet<SinhVienKhoaHoc> SinhVienKhoaHocs { get; set; }
+        public virtual DbSet<SinhVienNganhHoc> SinhVienNganhHocs { get; set; }
         public virtual DbSet<SinhVienThuocKhoa> SinhVienThuocKhoas { get; set; }
         public virtual DbSet<SinhVienThuocNhomSV> SinhVienThuocNhomSVs { get; set; }
         public virtual DbSet<TaiKhoan> TaiKhoans { get; set; }

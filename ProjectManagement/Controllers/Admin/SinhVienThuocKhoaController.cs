@@ -17,8 +17,7 @@ namespace ProjectManagement.Controllers.Admin
         // GET: SinhVienThuocKhoa
         public ActionResult Index()
         {
-            var sinhVienThuocKhoas = db.SinhVienThuocKhoas.Include(s => s.Khoa).Include(s => s.SinhVien);
-            return View(sinhVienThuocKhoas.ToList());
+            return View(db.Khoas.ToList());
         }
 
         // GET: SinhVienThuocKhoa/Details/5
@@ -36,10 +35,50 @@ namespace ProjectManagement.Controllers.Admin
             return View(sinhVienThuocKhoa);
         }
 
-        // GET: SinhVienThuocKhoa/Create
-        public ActionResult Create()
+        public ActionResult DSSV(decimal KId = 0)
         {
-            ViewBag.KhoaId = new SelectList(db.Khoas, "KhoaId", "TenKhoa");
+            if(KId == 0)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var sinhVienKhoa = db.SinhVienThuocKhoas.Where(n => n.KhoaId == KId).ToList();
+            if (sinhVienKhoa == null)
+            {
+                return HttpNotFound();
+            }
+            var kh = db.Khoas.Where(n => n.KhoaId == KId).SingleOrDefault();
+            if (kh != null)
+            {
+                ViewBag.KhoaId   = kh.KhoaId;
+                ViewBag.TenKhoa = kh.TenKhoa;
+            }
+            return View(sinhVienKhoa.ToList());
+        }
+
+
+        // GET: SinhVienThuocKhoa/Create
+        public ActionResult Create(decimal? KId = 0)
+        {
+            if (KId == 0)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var sinhVienThuocKhoa = db.SinhVienThuocKhoas.Where(n => n.KhoaId == KId).ToList();
+            if (sinhVienThuocKhoa == null)
+            {
+                return HttpNotFound();
+            }
+            var kh = db.Khoas.Where(n => n.KhoaId == KId).SingleOrDefault();
+            if (kh != null)
+            {
+                ViewBag.TenKhoa = kh.TenKhoa;
+                ViewBag.IdKhoa = kh.KhoaId;
+                ViewBag.KhoaID = new SelectList(db.Khoas, "KhoaId", "TenKhoa", kh.KhoaId);
+            }
+            else
+            {
+                ViewBag.KhoaID = new SelectList(db.Khoas, "KhoaId", "TenKhoa");
+            }
             ViewBag.SinhVienId = new SelectList(db.SinhViens, "SinhVienId", "HoTen");
             return View();
         }
@@ -53,32 +92,49 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (ModelState.IsValid)
             {
-                DateTime ngay = sinhVienThuocKhoa.TuNgay;
-                ngay = new DateTime(ngay.Year, ngay.Month, ngay.Day);
-                sinhVienThuocKhoa.TuNgay = ngay;
                 db.SinhVienThuocKhoas.Add(sinhVienThuocKhoa);
                 db.SaveChanges();
-                return RedirectToAction("Index");
-            }
 
-            ViewBag.KhoaId = new SelectList(db.Khoas, "KhoaId", "TenKhoa", sinhVienThuocKhoa.KhoaId);
-            ViewBag.SinhVienId = new SelectList(db.SinhViens, "SinhVienId", "HoTen", sinhVienThuocKhoa.SinhVienId);
+                var svKh = db.SinhVienThuocKhoas.Where(n => n.KhoaId == sinhVienThuocKhoa.KhoaId).ToList();
+                if (svKh == null)
+                {
+                    return HttpNotFound();
+                }
+                var kh = db.Khoas.Where(n => n.KhoaId == sinhVienThuocKhoa.KhoaId).SingleOrDefault();
+                if (kh != null)
+                {
+                    ViewBag.IdKhoaHoc = kh.KhoaId;
+                    ViewBag.TenKhoaHoc = kh.TenKhoa;
+                }
+                return RedirectToAction("DSSV", new { KId = sinhVienThuocKhoa.KhoaId });
+            }
             return View(sinhVienThuocKhoa);
         }
 
         // GET: SinhVienThuocKhoa/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult Edit(decimal KId = 0, string SVId = null)
         {
-            if (id == null)
+            if (KId == 0 || SVId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SinhVienThuocKhoa sinhVienThuocKhoa = db.SinhVienThuocKhoas.Find(id);
-            if (sinhVienThuocKhoa == null)
+            SinhVienThuocKhoa sinhVienThuocKhoa = db.SinhVienThuocKhoas.Find(KId, SVId);
+            if (sinhVienThuocKhoa== null)
             {
                 return HttpNotFound();
             }
-            ViewBag.KhoaId = new SelectList(db.Khoas, "KhoaId", "TenKhoa", sinhVienThuocKhoa.KhoaId);
+            var kh = db.Khoas.Where(n => n.KhoaId == KId).SingleOrDefault();
+            if (kh != null)
+            {
+                ViewBag.TenKhoa = kh.TenKhoa;
+                ViewBag.IdKhoa = kh.KhoaId;
+                ViewBag.KhoaID = new SelectList(db.Khoas, "KhoaId", "TenKhoa", kh.KhoaId);
+            }
+            else
+            {
+                ViewBag.KhoaID = new SelectList(db.Khoas, "KhoaId", "TenKhoa");
+            }
+            ViewBag.KhoaID = new SelectList(db.Khoas, "KhoaId", "TenKhoa", sinhVienThuocKhoa.KhoaId);
             ViewBag.SinhVienId = new SelectList(db.SinhViens, "SinhVienId", "HoTen", sinhVienThuocKhoa.SinhVienId);
             return View(sinhVienThuocKhoa);
         }
@@ -94,7 +150,7 @@ namespace ProjectManagement.Controllers.Admin
             {
                 db.Entry(sinhVienThuocKhoa).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("DSSV", new { KId = sinhVienThuocKhoa.KhoaId });
             }
             ViewBag.KhoaId = new SelectList(db.Khoas, "KhoaId", "TenKhoa", sinhVienThuocKhoa.KhoaId);
             ViewBag.SinhVienId = new SelectList(db.SinhViens, "SinhVienId", "HoTen", sinhVienThuocKhoa.SinhVienId);
@@ -102,16 +158,22 @@ namespace ProjectManagement.Controllers.Admin
         }
 
         // GET: SinhVienThuocKhoa/Delete/5
-        public ActionResult Delete(string id)
+        public ActionResult Delete(decimal? KId, string SVId)
         {
-            if (id == null)
+            if (KId == 0 || SVId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SinhVienThuocKhoa sinhVienThuocKhoa = db.SinhVienThuocKhoas.Find(id);
+            SinhVienThuocKhoa sinhVienThuocKhoa = db.SinhVienThuocKhoas.Find(KId, SVId);
             if (sinhVienThuocKhoa == null)
             {
                 return HttpNotFound();
+            }
+            var kh = db.Khoas.Where(n => n.KhoaId == KId).SingleOrDefault();
+            if (kh != null)
+            {
+                ViewBag.IdKhoa = kh.KhoaId;
+                ViewBag.TenKhoa = kh.TenKhoa;
             }
             return View(sinhVienThuocKhoa);
         }
@@ -119,12 +181,12 @@ namespace ProjectManagement.Controllers.Admin
         // POST: SinhVienThuocKhoa/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(decimal id)
+        public ActionResult DeleteConfirmed(decimal? KId, string SVId)
         {
-            SinhVienThuocKhoa sinhVienThuocKhoa = db.SinhVienThuocKhoas.Find(id);
+            SinhVienThuocKhoa sinhVienThuocKhoa = db.SinhVienThuocKhoas.Find(KId, SVId);
             db.SinhVienThuocKhoas.Remove(sinhVienThuocKhoa);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("DSSV", new { KId = sinhVienThuocKhoa.KhoaId });
         }
 
         protected override void Dispose(bool disposing)

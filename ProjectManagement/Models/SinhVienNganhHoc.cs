@@ -12,14 +12,15 @@ namespace ProjectManagement.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class SinhVienKhoaHoc
+    public partial class SinhVienNganhHoc
     {
-        public decimal KhoaHocID { get; set; }
         public string SinhVienId { get; set; }
+        public decimal NganhId { get; set; }
         public System.DateTime TuNgay { get; set; }
         public Nullable<System.DateTime> DenNgay { get; set; }
+        public decimal KhoaHocID { get; set; }
     
-        public virtual KhoaHoc KhoaHoc { get; set; }
+        public virtual Nganh Nganh { get; set; }
         public virtual SinhVien SinhVien { get; set; }
     }
 }

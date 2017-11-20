@@ -17,96 +17,14 @@ namespace ProjectManagement.Controllers.Admin
         // GET: SinhVienKhoaHoc
         public ActionResult Index()
         {
-            var sinhVienKhoaHocs = db.SinhVienKhoaHocs.Include(s => s.KhoaHoc).Include(s => s.Nganh).Include(s => s.SinhVien);
-            return View(sinhVienKhoaHocs.ToList());
+            //var sinhVienKhoaHocs = db.SinhVienKhoaHocs.Include(s => s.KhoaHoc).Include(s => s.SinhVien);
+            //return View(sinhVienKhoaHocs.ToList());
+            var khoaHocs = db.KhoaHocs.Include(k => k.NamHoc).ToList();
+            return View(khoaHocs);
         }
 
         // GET: SinhVienKhoaHoc/Details/5
-        public ActionResult Details(decimal KHId = 0, string SVId = null, decimal NId = 0, DateTime? TuNg = null)
-        {
-            if (KHId == 0 || SVId == null || NId == 0 || TuNg == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            SinhVienKhoaHoc sinhVienKhoaHoc = db.SinhVienKhoaHocs.Find(KHId, SVId, NId, TuNg);
-            if (sinhVienKhoaHoc == null)
-            {
-                return HttpNotFound();
-            }
-            return View(sinhVienKhoaHoc);
-        }
-
-        // GET: SinhVienKhoaHoc/Create
-        public ActionResult Create()
-        {
-            ViewBag.KhoaHocID = new SelectList(db.KhoaHocs, "KhoaHocID", "TenKhoaHoc");
-            ViewBag.NganhId = new SelectList(db.Nganhs, "NganhId", "TenNganh");
-            ViewBag.SinhVienId = new SelectList(db.SinhViens, "SinhVienId", "HoTen");
-            return View();
-        }
-
-        // POST: SinhVienKhoaHoc/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "KhoaHocID,SinhVienId,NganhId,TuNgay,DenNgay")] SinhVienKhoaHoc sinhVienKhoaHoc)
-        {
-            if (ModelState.IsValid)
-            {
-                DateTime ngay = sinhVienKhoaHoc.TuNgay;
-                ngay = new DateTime(ngay.Year, ngay.Month, ngay.Day);
-                sinhVienKhoaHoc.TuNgay = ngay;
-                db.SinhVienKhoaHocs.Add(sinhVienKhoaHoc);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.KhoaHocID = new SelectList(db.KhoaHocs, "KhoaHocID", "TenKhoaHoc", sinhVienKhoaHoc.KhoaHocID);
-            ViewBag.NganhId = new SelectList(db.Nganhs, "NganhId", "TenNganh", sinhVienKhoaHoc.NganhId);
-            ViewBag.SinhVienId = new SelectList(db.SinhViens, "SinhVienId", "HoTen", sinhVienKhoaHoc.SinhVienId);
-            return View(sinhVienKhoaHoc);
-        }
-
-        // GET: SinhVienKhoaHoc/Edit/5
-        public ActionResult Edit(decimal KHId = 0, string SVId = null, decimal NId = 0, DateTime? TuNg = null)
-        {
-            if (KHId == 0 || SVId == null || NId == 0 || TuNg == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            SinhVienKhoaHoc sinhVienKhoaHoc = db.SinhVienKhoaHocs.Find(KHId, SVId, NId, TuNg);
-            if (sinhVienKhoaHoc == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.KhoaHocID = new SelectList(db.KhoaHocs, "KhoaHocID", "TenKhoaHoc", sinhVienKhoaHoc.KhoaHocID);
-            ViewBag.NganhId = new SelectList(db.Nganhs, "NganhId", "TenNganh", sinhVienKhoaHoc.NganhId);
-            ViewBag.SinhVienId = new SelectList(db.SinhViens, "SinhVienId", "HoTen", sinhVienKhoaHoc.SinhVienId);
-            return View(sinhVienKhoaHoc);
-        }
-
-        // POST: SinhVienKhoaHoc/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "KhoaHocID,SinhVienId,NganhId,TuNgay,DenNgay")] SinhVienKhoaHoc sinhVienKhoaHoc)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(sinhVienKhoaHoc).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.KhoaHocID = new SelectList(db.KhoaHocs, "KhoaHocID", "TenKhoaHoc", sinhVienKhoaHoc.KhoaHocID);
-            ViewBag.NganhId = new SelectList(db.Nganhs, "NganhId", "TenNganh", sinhVienKhoaHoc.NganhId);
-            ViewBag.SinhVienId = new SelectList(db.SinhViens, "SinhVienId", "HoTen", sinhVienKhoaHoc.SinhVienId);
-            return View(sinhVienKhoaHoc);
-        }
-
-        // GET: SinhVienKhoaHoc/Delete/5
-        public ActionResult Delete(decimal id)
+        public ActionResult Details(decimal id)
         {
             if (id == null)
             {
@@ -120,15 +38,159 @@ namespace ProjectManagement.Controllers.Admin
             return View(sinhVienKhoaHoc);
         }
 
+        public ActionResult DSSV(decimal? KHId)
+        {
+            if (KHId == 0)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var sinhVienKhoaHoc = db.SinhVienKhoaHocs.Where(n => n.KhoaHocID == KHId).ToList();
+            if (sinhVienKhoaHoc == null)
+            {
+                return HttpNotFound();
+            }
+            var kh = db.KhoaHocs.Where(n => n.KhoaHocID == KHId).SingleOrDefault();
+            if (kh != null)
+            {
+                ViewBag.IdKhoaHoc = kh.KhoaHocID;
+                ViewBag.TenKhoaHoc = kh.TenKhoaHoc;
+            }
+                
+            //var sinhVienKhoaHocs = db.SinhVienKhoaHocs.Include(s => s.KhoaHoc).Include(s => s.SinhVien).Where(n => (n.KhoaHocID == KHId && n.SinhVienId == SVId));
+            return View(sinhVienKhoaHoc.ToList());
+        }
+
+        // GET: SinhVienKhoaHoc/Create
+        public ActionResult Create(decimal? KHId)
+        {
+            if (KHId == 0)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var sinhVienKhoaHoc = db.SinhVienKhoaHocs.Where(n => n.KhoaHocID == KHId).ToList();
+            if (sinhVienKhoaHoc == null)
+            {
+                return HttpNotFound();
+            }
+            var kh = db.KhoaHocs.Where(n => n.KhoaHocID == KHId).SingleOrDefault();
+            if (kh != null)
+            {
+                ViewBag.TenKhoaHoc = kh.TenKhoaHoc;
+                ViewBag.IdKhoaHoc = kh.KhoaHocID;
+                ViewBag.KhoaHocID = new SelectList(db.KhoaHocs, "KhoaHocID", "TenKhoaHoc", kh.KhoaHocID);
+            }
+            else
+            {
+                ViewBag.KhoaHocID = new SelectList(db.KhoaHocs, "KhoaHocID", "TenKhoaHoc");
+            }
+            ViewBag.SinhVienId = new SelectList(db.SinhViens, "SinhVienId", "HoTen");
+            return View();
+        }
+
+        // POST: SinhVienKhoaHoc/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "KhoaHocID,SinhVienId,TuNgay,DenNgay")] SinhVienKhoaHoc sinhVienKhoaHoc)
+        {
+            if (ModelState.IsValid)
+            {
+                db.SinhVienKhoaHocs.Add(sinhVienKhoaHoc);
+                db.SaveChanges();
+
+                var svKh = db.SinhVienKhoaHocs.Where(n => n.KhoaHocID == sinhVienKhoaHoc.KhoaHocID).ToList();
+                if (svKh == null)
+                {
+                    return HttpNotFound();
+                }
+                var kh = db.KhoaHocs.Where(n => n.KhoaHocID == sinhVienKhoaHoc.KhoaHocID).SingleOrDefault();
+                if (kh != null)
+                {
+                    ViewBag.IdKhoaHoc = kh.KhoaHocID;
+                    ViewBag.TenKhoaHoc = kh.TenKhoaHoc;
+                }
+                return RedirectToAction("DSSV", new { KHId = sinhVienKhoaHoc.KhoaHocID });
+            }            
+            return View(sinhVienKhoaHoc);
+        }
+
+        // GET: SinhVienKhoaHoc/Edit/5
+        public ActionResult Edit(decimal? KHId, string SVId)
+        {
+            if (KHId == 0 || SVId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            SinhVienKhoaHoc sinhVienKhoaHoc = db.SinhVienKhoaHocs.Find(KHId, SVId);
+            if (sinhVienKhoaHoc == null)
+            {
+                return HttpNotFound();
+            }
+            var kh = db.KhoaHocs.Where(n => n.KhoaHocID == KHId).SingleOrDefault();
+            if (kh != null)
+            {
+                ViewBag.TenKhoaHoc = kh.TenKhoaHoc;
+                ViewBag.IdKhoaHoc = kh.KhoaHocID;
+                ViewBag.KhoaHocID = new SelectList(db.KhoaHocs, "KhoaHocID", "TenKhoaHoc", kh.KhoaHocID);
+            }
+            else
+            {
+                ViewBag.KhoaHocID = new SelectList(db.KhoaHocs, "KhoaHocID", "TenKhoaHoc");
+            }
+            ViewBag.KhoaHocID = new SelectList(db.KhoaHocs, "KhoaHocID", "TenKhoaHoc", sinhVienKhoaHoc.KhoaHocID);
+            ViewBag.SinhVienId = new SelectList(db.SinhViens, "SinhVienId", "HoTen", sinhVienKhoaHoc.SinhVienId);
+            return View(sinhVienKhoaHoc);
+        }
+
+        // POST: SinhVienKhoaHoc/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "KhoaHocID,SinhVienId,TuNgay,DenNgay")] SinhVienKhoaHoc sinhVienKhoaHoc)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(sinhVienKhoaHoc).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("DSSV", new { KHId = sinhVienKhoaHoc.KhoaHocID });
+            }
+            ViewBag.KhoaHocID = new SelectList(db.KhoaHocs, "KhoaHocID", "TenKhoaHoc", sinhVienKhoaHoc.KhoaHocID);
+            ViewBag.SinhVienId = new SelectList(db.SinhViens, "SinhVienId", "HoTen", sinhVienKhoaHoc.SinhVienId);
+            return View(sinhVienKhoaHoc);
+        }
+
+        // GET: SinhVienKhoaHoc/Delete/5
+        public ActionResult Delete(decimal? KHId, string SVId)
+        {
+            if (KHId == 0 || SVId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            SinhVienKhoaHoc sinhVienKhoaHoc = db.SinhVienKhoaHocs.Find(KHId, SVId);
+            if (sinhVienKhoaHoc == null)
+            {
+                return HttpNotFound();
+            }
+            var kh = db.KhoaHocs.Where(n => n.KhoaHocID == KHId).SingleOrDefault();
+            if (kh != null)
+            {
+                ViewBag.IdKhoaHoc = kh.KhoaHocID;
+                ViewBag.TenKhoaHoc = kh.TenKhoaHoc;
+            }
+            return View(sinhVienKhoaHoc);
+        }
+
         // POST: SinhVienKhoaHoc/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(decimal id)
+        public ActionResult DeleteConfirmed(decimal? KHId, string SVId)
         {
-            SinhVienKhoaHoc sinhVienKhoaHoc = db.SinhVienKhoaHocs.Find(id);
+            SinhVienKhoaHoc sinhVienKhoaHoc = db.SinhVienKhoaHocs.Find(KHId, SVId);
             db.SinhVienKhoaHocs.Remove(sinhVienKhoaHoc);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("DSSV", new { KHId = sinhVienKhoaHoc.KhoaHocID });
         }
 
         protected override void Dispose(bool disposing)
