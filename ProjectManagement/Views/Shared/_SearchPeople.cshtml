@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ProjectManagement.Models.GiangVien>
+@using ProjectManagement.Models
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td style="text-align: center;">stt</td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GiangVienId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HoTen)
+        </td>
+        <td>
+            @if (item.GioiTinh == true)
+            {
+                @Html.DisplayName("Nam")
+            }
+            else
+            {
+                @Html.DisplayName("Nữ")
+            }
+        </td>
+        <td style="text-align: center;">
+            <ul class="contro_function">
+                <li>
+                    <a title="Cập nhật" href="@Url.Action("Edit", new { id = item.GiangVienId })">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                </li>
+                <li>|</li>
+                <li>
+                    <a title="Xóa" href="@Url.Action("Delete", new { id = item.GiangVienId})">
+                        <i class="fa fa-eraser"></i>
+                    </a>
+                </li>
+            </ul>
+        </td>
+
+    </tr>
+}

@@ -1,0 +1,93 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if IE 9]>         <html class="no-js lt-ie10"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html class="no-js">
+ <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+
+    <title>Login</title>
+
+    <meta name="description" content="ProUI is a Responsive Bootstrap Admin Template created by pixelcave and published on Themeforest.">
+    <meta name="author" content="pixelcave">
+    <meta name="robots" content="noindex, nofollow">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0">
+
+    <!-- Icons -->
+    <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
+    <link rel="shortcut icon" href="~/images/favicon.png">
+    <link rel="apple-touch-icon" href="~/images/icon57.png" sizes="57x57">
+    <link rel="apple-touch-icon" href="~/images/icon72.png" sizes="72x72">
+    <link rel="apple-touch-icon" href="~/images/icon76.png" sizes="76x76">
+    <link rel="apple-touch-icon" href="~/images/icon114.png" sizes="114x114">
+    <link rel="apple-touch-icon" href="~/images/icon120.png" sizes="120x120">
+    <link rel="apple-touch-icon" href="~/images/icon144.png" sizes="144x144">
+    <link rel="apple-touch-icon" href="~/images/icon152.png" sizes="152x152">
+    <link rel="apple-touch-icon" href="~/images/icon180.png" sizes="180x180">
+    <!-- END Icons -->
+    <!-- Stylesheets -->
+    <!-- Bootstrap is included in its original form, unaltered -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <link href="~/Css/login.css" rel="stylesheet" />
+    <!-- Related styles of various icon packs and plugins -->
+    <link href="~/Css/login.css" rel="stylesheet" />
+    <!-- The main stylesheet of this template. All Bootstrap overwrites are defined in here -->
+
+    <!-- Include a specific file here from css/themes/ folder to alter the default theme of the template -->
+    <!-- The themes stylesheet of this template (for using specific theme color in individual elements - must included last) -->
+    <!-- END Stylesheets -->
+    <!-- Modernizr (browser feature detection library) & Respond.js (Enable responsive CSS code on browsers that don't support it, eg IE8) -->
+    <script src="~/js/login.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="pr-wrap">
+                    <div class="pass-reset">
+                        <label>
+                            Enter the email you signed up with
+                        </label>
+                        <input type="email" placeholder="Email" />
+                        <input type="submit" value="Submit" class="pass-reset-submit btn btn-success btn-sm" />
+                    </div>
+                </div>
+                <div class="wrap">
+                    <p class="form-title">
+                        Sign In
+                    </p>
+                    <form class="login">
+                        <input type="text" placeholder="Username" />
+                        <input type="password" placeholder="Password" />
+                        <input type="submit" value="Sign In" class="btn btn-success btn-sm" />
+                        <div class="remember-forgot">
+                            @*<div class="row">
+                                <div class="col-md-6">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" />
+                                            Remember Me
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 forgot-pass-content">
+                                    <a href="javascription:void(0)" class="forgot-pass">Forgot Password</a>
+                                </div>
+                            </div>*@
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        @*<div class="posted-by">Posted By: <a href="http://www.jquery2dotnet.com">Bhaumik Patel</a></div>*@
+    </div>
+
+</body>
+</html>

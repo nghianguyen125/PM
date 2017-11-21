@@ -1,13 +1,12 @@
-﻿@using ProjectManagement.Models
-@model ProjectManagement.Models.GiangVien
-
+﻿@model ProjectManagement.Models.GiangVien
+@using ProjectManagement.Models
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 <section class="content-header">
-    <h1>Giảng Viên</h1>
+    <h1>Giang Vien</h1>
 </section>
 <section class="content">
     @{
@@ -20,7 +19,7 @@
     }
     <div class="box box-info">
         <div class="box-header with-border">
-            <h3 class="box-title">Tạo mới Giảng Viên</h3>
+            <h3 class="box-title">Tạo mới Giang Vien</h3>
         </div>
 
         @using (Html.BeginForm("Create", "GiangVien", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal" }))
@@ -36,14 +35,14 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.Label("Tên Giảng Viên", new { @class = "control-label col-md-2" })
+                    @Html.Label("Họ Tên", new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.TextBoxFor(model => model.HoTen, new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.HoTen)
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.Label("Gioi Tinh", new { @class = "control-label col-md-2" })
+                    @Html.Label("Giới Tính", new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.CheckBoxFor(model => model.GioiTinh, new { @checked = "checked" })
                         @Html.ValidationMessageFor(model => model.GioiTinh)
@@ -58,3 +57,4 @@
         }
     </div>
 </section>
+
