@@ -1,44 +1,171 @@
-﻿<!DOCTYPE html>
-<html>
+﻿
+<!DOCTYPE html>
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+ <!--<![endif]-->
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <meta charset="utf-8">
 
+    <title>@ViewBag.Title</title>
+
+    <meta name="description" content="ProUI Frontend is a Responsive Bootstrap Site Template created by pixelcave and added as a bonus in ProUI Admin Template package which is published on Themeforest.">
+    <meta name="author" content="pixelcave">
+    <meta name="robots" content="noindex,   nofollow">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0">
+
+    <!-- Icons -->
+    <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
+    <link rel="shortcut icon" href="images/comment.png">
+    <link rel="apple-touch-icon" href="images/icon57.png" sizes="57x57">
+    <link rel="apple-touch-icon" href="images/icon72.png" sizes="72x72">
+    <link rel="apple-touch-icon" href="images/icon76.png" sizes="76x76">
+    <link rel="apple-touch-icon" href="images/icon114.png" sizes="114x114">
+    <link rel="apple-touch-icon" href="images/icon120.png" sizes="120x120">
+    <link rel="apple-touch-icon" href="images/icon144.png" sizes="144x144">
+    <link rel="apple-touch-icon" href="images/icon152.png" sizes="152x152">
+    <link rel="apple-touch-icon" href="images/icon180.png" sizes="180x180">
+    <!-- END Icons -->
+    <!-- Stylesheets -->
+    <!-- Bootstrap is included in its original form, unaltered -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+
+    <!-- Related styles of various icon packs and plugins -->
+    <link rel="stylesheet" href="~/css/plugins.css">
+
+    <!-- The main stylesheet of this template. All Bootstrap overwrites are defined in here -->
+    <link rel="stylesheet" href="~/css/main.css">
+
+    <!-- The themes stylesheet of this template (for using specific theme color in individual elements - must included last) -->
+    <link rel="stylesheet" href="~/css/themes.css">
+    <!-- END Stylesheets -->
+    <!-- Modernizr (browser feature detection library) & Respond.js (Enable responsive CSS code on browsers that don't support it, eg IE8) -->
+    <script src="~/js/vendor/modernizr-2.7.1-respond-1.4.2.min.js"></script>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", null, new { @class = "navbar-brand" })
+    <!-- Page Container -->
+    <!-- In the PHP version you can set the following options from inc/config file -->
+    <!-- 'boxed' class for a boxed layout -->
+    <div id="page-container">
+        <!-- Site Header -->
+        <header>
+            <div class="container">
+                <!-- Site Logo -->
+                <a href="#" class="site-logo">
+                    <i class="fa fa-bolt"></i> <strong>DTU</strong>Thesis
+                </a>
+                <!-- Site Logo -->
+                <!-- Site Navigation -->
+                <nav>
+                    <!-- Menu Toggle -->
+                    <!-- Toggles menu on small screens -->
+                    <a href="javascript:void(0)" class="btn btn-default site-menu-toggle visible-xs visible-sm">
+                        <i class="fa fa-bars"></i>
+                    </a>
+                    <!-- END Menu Toggle -->
+                    <!-- Main Menu -->
+                    <ul class="site-nav">
+                        <!-- Toggles menu on small screens -->
+      
+                        <!-- END Menu Toggle -->
+                        <li>
+                            <a href="#">Home</a>
+                        </li>
+                        <li>
+                            <a href="#">My Group</a>
+                        </li>
+                        <li>
+                            <a href="#">My Thesis</a>
+                        </li>
+                        <li>
+                            <a href="#">Registration</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" class="site-nav-sub"><i class="fa fa-angle-down site-nav-arrow"></i>Account</a>
+                            <ul>
+                                <li>
+                                    <a href="#"><i class="fa fa-info-circle"></i> My Account</a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-sign-out"></i> Logout</a>
+                                </li>            
+                            </ul>
+                        </li>
+                       
+                    </ul>
+                    <!-- END Main Menu -->
+                </nav>
+                <!-- END Site Navigation -->
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
+        </header>
+        <!-- END Site Header -->
+        <!-- Intro -->
+        <section class="site-section site-section-light site-section-top themed-background-dark">
+            <div class="container">
+                <h1 class="animation-slideDown"><strong>Latest News</strong></h1>
+                <h2 class="h3 animation-slideUp">Learn about our progress and offers!</h2>
             </div>
-        </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+        </section>
+        <!-- END Intro -->
+        <!-- Content -->
+        <section class="site-content site-section">
+            @RenderBody()
+        </section>           
+            <!-- END Content -->
+            <!-- Footer -->
+            <footer class="site-footer site-section">
+                <div class="container">
+                    <!-- Footer Links -->
+                    <div class="row">
+                        <div class="col-sm-6 col-md-3">
+                            <h4 class="footer-heading">About Us</h4>
+                            <ul class="footer-nav list-inline">
+                                <li><a href="#">Company</a></li>
+                                <li><a href="#">Contact</a></li>
+                                <li><a href="#">Support</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                            <h4 class="footer-heading">Legal</h4>
+                            <ul class="footer-nav list-inline">
+                                <li><a href="javascript:void(0)">Licensing</a></li>
+                                <li><a href="javascript:void(0)">Privacy Policy</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                            <h4 class="footer-heading">Follow Us</h4>
+                            <ul class="footer-nav footer-nav-social list-inline">
+                                <li><a href="javascript:void(0)"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="javascript:void(0)"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="javascript:void(0)"><i class="fa fa-google-plus"></i></a></li>
+                                <li><a href="javascript:void(0)"><i class="fa fa-dribbble"></i></a></li>
+                                <li><a href="javascript:void(0)"><i class="fa fa-rss"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                            <h4 class="footer-heading"><span id="">2017-Capstone</span> &copy; <a href="#">Duy Tan University</a></h4>
+                            <ul class="footer-nav list-inline">
+                                <li>Created<i class="fa fa-heart text-danger"></i> by <a href="http://goo.gl/vNS3I">Twenty Team</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- END Footer Links -->
+                </div>
+            </footer>
+            <!-- END Footer -->
+</div>
+    <!-- END Page Container -->
+    <!-- Scroll to top link, initialized in js/app.js - scrollToTop() -->
+    <a href="#" id="to-top"><i class="fa fa-angle-up"></i></a>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    <!-- Include Jquery library from Google's CDN but if something goes wrong get Jquery from local file (Remove 'http:' if you have SSL) -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script>!window.jQuery && document.write(decodeURI('%3Cscript src="js/vendor/jquery-1.11.1.min.js"%3E%3C/script%3E'));</script>
+
+    <!-- Bootstrap.js, Jquery plugins and Custom JS code -->
+    <script src="~/js/vendor/bootstrap.min.js"></script>
+    <script src="~/js/plugins.js"></script>
+    <script src="~/js/app.js"></script>
 </body>
 </html>

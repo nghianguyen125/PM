@@ -56,8 +56,6 @@ namespace ProjectManagement.Controllers.Admin
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            ViewBag.KhoaId = new SelectList(db.Khoas, "KhoaId", "TenKhoa", nganh.KhoaId);
             return View(nganh);
         }
 

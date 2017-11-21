@@ -34,6 +34,7 @@ namespace ProjectManagement.Models
         public virtual DbSet<KhoaHoc> KhoaHocs { get; set; }
         public virtual DbSet<Khoa> Khoas { get; set; }
         public virtual DbSet<LoaiTaiKhoan> LoaiTaiKhoans { get; set; }
+        public virtual DbSet<NamHoc> NamHocs { get; set; }
         public virtual DbSet<Nganh> Nganhs { get; set; }
         public virtual DbSet<NhomSV> NhomSVs { get; set; }
         public virtual DbSet<PhanDeTaiChoDotKhoaLuan> PhanDeTaiChoDotKhoaLuans { get; set; }
@@ -48,6 +49,5 @@ namespace ProjectManagement.Models
         public virtual DbSet<TaiLieu> TaiLieux { get; set; }
         public virtual DbSet<TinTucThongBao> TinTucThongBaos { get; set; }
         public virtual DbSet<TrangThai> TrangThais { get; set; }
-        public virtual DbSet<NamHoc> NamHocs { get; set; }
     }
 }

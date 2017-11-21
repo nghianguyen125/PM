@@ -105,7 +105,6 @@ namespace ProjectManagement.Controllers.Admin
                     return RedirectToAction("Index");
                 }
             }
-
             ViewBag.LoaiTaiKhoanId = new SelectList(db.LoaiTaiKhoans, "LoaiTaiKhoanId", "TenLoaiTaiKhoan", user.LoaiTaiKhoanId);
             return View(user);
         }

@@ -1,0 +1,96 @@
+﻿@using System.Linq
+@using ProjectManagement.App_Start.Classes
+@using ProjectManagement.Models
+@model PagedList.IPagedList<ProjectManagement.Models.GiangVien>
+@using PagedList;
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<section class="content-header">
+    <h1>
+        Giảng Viên
+    </h1>
+</section>
+<section class="content">
+    <div class="row" style="padding-bottom: 10px;">
+        <div class="col-md-12">
+            @Html.ActionLink("Tạo Mới", "Create", null, new { @class = "btn btn-primary pull-left" })
+            @using (Html.BeginForm("index", "GiangVien", FormMethod.Get, new { @class = "navbar-form navbar-right", role = "search", id = "search-form" }))
+            {
+                <div class="form-group">
+                   @Html.TextBox("searchString",null, new { @class = "form-control", placeholder = "Tìm kiếm giảng viên theo tên" })
+                </div>
+                <div class="form-group">
+                   <button type="submit" value="Search" class="btn btn-default hidden-xs"><i class="glyphicon glyphicon-search"></i></button>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="box">
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th style="width: 50px; text-align: center;"> STT </th>
+                    <th> Mã Giảng Viên </th>
+                    <th> Họ Tên </th>
+                    <th> Giới Tính </th>
+                    <th style="width: 10%; text-align: center;"> Chỉnh Sửa </th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int stt = 0;
+                    ProjectManagementEntities db = new ProjectManagementEntities();
+                }
+                @foreach (var item in Model)
+                {
+                    stt++;
+                    List<GiangVien> giangvien = db.GiangViens.ToList();
+                    <tr>
+                        <td style="text-align: center;">@stt</td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.GiangVienId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.HoTen)
+                        </td>
+                        <td>
+                            @if (item.GioiTinh == true)
+                            {
+                                @Html.DisplayName("Nam")
+                            }
+                            else
+                            {
+                                @Html.DisplayName("Nữ")
+                            }
+                        </td>
+                        <td style="text-align: center;">
+                            <ul class="contro_function">
+                                <li>
+                                    <a title="Cập nhật" href="@Url.Action("Edit", new { id = item.GiangVienId })">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                </li>
+                                <li>|</li>
+                                <li>
+                                    <a title="Xóa" href="@Url.Action("Delete", new { id = item.GiangVienId})">
+                                        <i class="fa fa-eraser"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div style="text-align:center">
+            @*Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount*@
+         @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+        </div>
+    </div>
+</section>
