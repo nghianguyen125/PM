@@ -10,107 +10,112 @@ using ProjectManagement.Models;
 
 namespace ProjectManagement.Controllers.Admin
 {
-    public class NhomSVController : Controller
+    public class QuanLyLicheController : Controller
     {
         private ProjectManagementEntities db = new ProjectManagementEntities();
 
-        // GET: NhomSV
+        // GET: QuanLyLiche
         public ActionResult Index()
         {
-            return View(db.NhomSVs.ToList());
+            var quanLyLiches = db.QuanLyLiches.Include(q => q.DotKhoaLuan);
+            return View(quanLyLiches.ToList());
         }
 
-        // GET: NhomSV/Details/5
-        public ActionResult Details(decimal Nid)
+        // GET: QuanLyLiche/Details/5
+        public ActionResult Details(decimal id)
         {
-            if (Nid == null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            NhomSV nhomSV = db.NhomSVs.Find(Nid);
-            if (nhomSV == null)
+            QuanLyLich quanLyLich = db.QuanLyLiches.Find(id);
+            if (quanLyLich == null)
             {
                 return HttpNotFound();
             }
-            return View(nhomSV);
+            return View(quanLyLich);
         }
 
-        // GET: NhomSV/Create
+        // GET: QuanLyLiche/Create
         public ActionResult Create()
         {
+            ViewBag.DotKhoaLuanId = new SelectList(db.DotKhoaLuans, "DotKhoaLuanId", "TenDotKhoaLuan");
             return View();
         }
 
-        // POST: NhomSV/Create
+        // POST: QuanLyLiche/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "NhomSVId,TenNhom")] NhomSV nhomSV)
+        public ActionResult Create([Bind(Include = "DotKhoaLuanId,MocThoiGian,NoiDung")] QuanLyLich quanLyLich)
         {
             if (ModelState.IsValid)
             {
-                db.NhomSVs.Add(nhomSV);
+                db.QuanLyLiches.Add(quanLyLich);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(nhomSV);
+            ViewBag.DotKhoaLuanId = new SelectList(db.DotKhoaLuans, "DotKhoaLuanId", "TenDotKhoaLuan", quanLyLich.DotKhoaLuanId);
+            return View(quanLyLich);
         }
 
-        // GET: NhomSV/Edit/5
-        public ActionResult Edit(decimal Nid)
+        // GET: QuanLyLiche/Edit/5
+        public ActionResult Edit(decimal? DId)
         {
-            if (Nid == null)
+            if (DId == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            NhomSV nhomSV = db.NhomSVs.Find(Nid);
-            if (nhomSV == null)
+            QuanLyLich quanLyLich = db.QuanLyLiches.Find(DId);
+            if (quanLyLich == null)
             {
                 return HttpNotFound();
             }
-            return View(nhomSV);
+            ViewBag.DotKhoaLuanId = new SelectList(db.DotKhoaLuans, "DotKhoaLuanId", "TenDotKhoaLuan", quanLyLich.DotKhoaLuanId);
+            return View(quanLyLich);
         }
 
-        // POST: NhomSV/Edit/5
+        // POST: QuanLyLiche/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "NhomSVId,TenNhom")] NhomSV nhomSV)
+        public ActionResult Edit([Bind(Include = "DotKhoaLuanId,MocThoiGian,NoiDung")] QuanLyLich quanLyLich)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(nhomSV).State = EntityState.Modified;
+                db.Entry(quanLyLich).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(nhomSV);
+            ViewBag.DotKhoaLuanId = new SelectList(db.DotKhoaLuans, "DotKhoaLuanId", "TenDotKhoaLuan", quanLyLich.DotKhoaLuanId);
+            return View(quanLyLich);
         }
 
-        // GET: NhomSV/Delete/5
-        public ActionResult Delete(decimal Nid)
+        // GET: QuanLyLiche/Delete/5
+        public ActionResult Delete(decimal? DId)
         {
-            if (Nid == null)
+            if (DId == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            NhomSV nhomSV = db.NhomSVs.Find(Nid);
-            if (nhomSV == null)
+            QuanLyLich quanLyLich = db.QuanLyLiches.Find(DId);
+            if (quanLyLich == null)
             {
                 return HttpNotFound();
             }
-            return View(nhomSV);
+            return View(quanLyLich);
         }
 
-        // POST: NhomSV/Delete/5
+        // POST: QuanLyLiche/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(decimal Nid)
+        public ActionResult DeleteConfirmed(decimal? Did)
         {
-            NhomSV nhomSV = db.NhomSVs.Find(Nid);
-            db.NhomSVs.Remove(nhomSV);
+            QuanLyLich quanLyLich = db.QuanLyLiches.Find(Did);
+            db.QuanLyLiches.Remove(quanLyLich);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

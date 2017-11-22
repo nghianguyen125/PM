@@ -92,9 +92,11 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (ModelState.IsValid)
             {
-                db.SinhVienThuocKhoas.Add(sinhVienThuocKhoa);
-                db.SaveChanges();
-
+                //if (db.SinhVienThuocKhoas.Any(p => p.SinhVienId == sinhVienThuocKhoa.SinhVienId))
+                //{
+                //    ModelState.AddModelError("TenSinhVien", "Sinh Vien Da Ton Tai.");
+                //}
+                
                 var svKh = db.SinhVienThuocKhoas.Where(n => n.KhoaId == sinhVienThuocKhoa.KhoaId).ToList();
                 if (svKh == null)
                 {
@@ -106,6 +108,9 @@ namespace ProjectManagement.Controllers.Admin
                     ViewBag.IdKhoaHoc = kh.KhoaId;
                     ViewBag.TenKhoaHoc = kh.TenKhoa;
                 }
+
+                db.SinhVienThuocKhoas.Add(sinhVienThuocKhoa);
+                db.SaveChanges();
                 return RedirectToAction("DSSV", new { KId = sinhVienThuocKhoa.KhoaId });
             }
             return View(sinhVienThuocKhoa);

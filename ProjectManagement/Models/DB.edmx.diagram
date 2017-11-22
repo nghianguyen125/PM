@@ -20,7 +20,6 @@
         <EntityTypeShape EntityType="ProjectManagementModel.PhanDeTaiChoDotKhoaLuan" Width="1.5" PointX="9" PointY="13.625" />
         <EntityTypeShape EntityType="ProjectManagementModel.PhanDeTaiChoGiangVien" Width="1.5" PointX="9" PointY="9.75" />
         <EntityTypeShape EntityType="ProjectManagementModel.PhanDeTaiChoNhomSV" Width="1.5" PointX="6" PointY="2" />
-        <EntityTypeShape EntityType="ProjectManagementModel.QuanLyLich" Width="1.5" PointX="6" PointY="29.25" />
         <EntityTypeShape EntityType="ProjectManagementModel.SinhVienKhoaHoc" Width="1.5" PointX="6" PointY="15.375" />
         <EntityTypeShape EntityType="ProjectManagementModel.SinhVienNganhHoc" Width="1.5" PointX="3" PointY="20.125" />
         <EntityTypeShape EntityType="ProjectManagementModel.SinhVien" Width="1.5" PointX="0.75" PointY="11.625" />
@@ -38,7 +37,6 @@
         <AssociationConnector Association="ProjectManagementModel.FK_PhanDeTaiChoNhomSV_DeTais" />
         <AssociationConnector Association="ProjectManagementModel.FK_DotKhoaLuan_NamHocs" />
         <AssociationConnector Association="ProjectManagementModel.FK_PhanDeTaiChoDotKhoaLuan_DotKhoaLuan" />
-        <AssociationConnector Association="ProjectManagementModel.FK_QuanLyLiches_DotKhoaLuan" />
         <AssociationConnector Association="ProjectManagementModel.FK_GiangVienThuocKhoa_GiangViens" />
         <AssociationConnector Association="ProjectManagementModel.FK_PhanDeTaiChoGiangVien_GiangViens1" />
         <AssociationConnector Association="ProjectManagementModel.FK_TaiKhoans_GiangViens" />
@@ -57,6 +55,8 @@
         <AssociationConnector Association="ProjectManagementModel.FK_SinhVienThuocNhomSV_SinhViens" />
         <AssociationConnector Association="ProjectManagementModel.FK_TaiKhoans_SinhViens" />
         <AssociationConnector Association="ProjectManagementModel.FK_dbo_TinTucs_dbo_TaiKhoans_TaiKhoanId" />
+        <EntityTypeShape EntityType="ProjectManagementModel.QuanLyLich" Width="1.5" PointX="6" PointY="26.625" />
+        <AssociationConnector Association="ProjectManagementModel.FK_QuanLyLiches_DotKhoaLuan" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

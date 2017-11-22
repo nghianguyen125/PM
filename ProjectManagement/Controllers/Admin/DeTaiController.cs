@@ -10,112 +10,107 @@ using ProjectManagement.Models;
 
 namespace ProjectManagement.Controllers.Admin
 {
-    public class DotKhoaLuanController : Controller
+    public class DeTaiController : Controller
     {
         private ProjectManagementEntities db = new ProjectManagementEntities();
 
-        // GET: DotKhoaLuan
+        // GET: DeTai
         public ActionResult Index()
         {
-            var dotKhoaLuans = db.DotKhoaLuans.Include(d => d.NamHoc);
-            return View(dotKhoaLuans.ToList());
+            return View(db.DeTais.ToList());
         }
 
-        // GET: DotKhoaLuan/Details/5
+        // GET: DeTai/Details/5
         public ActionResult Details(decimal id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DotKhoaLuan dotKhoaLuan = db.DotKhoaLuans.Find(id);
-            if (dotKhoaLuan == null)
+            DeTai deTai = db.DeTais.Find(id);
+            if (deTai == null)
             {
                 return HttpNotFound();
             }
-            return View(dotKhoaLuan);
+            return View(deTai);
         }
 
-        // GET: DotKhoaLuan/Create
+        // GET: DeTai/Create
         public ActionResult Create()
         {
-            ViewBag.NamHocHocKyId = new SelectList(db.NamHocs, "NamHocHocKyId", "TenNamHocHocKy");
             return View();
         }
 
-        // POST: DotKhoaLuan/Create
+        // POST: DeTai/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "DotKhoaLuanId,TenDotKhoaLuan,NamHocHocKyId")] DotKhoaLuan dotKhoaLuan)
+        public ActionResult Create([Bind(Include = "DeTaiId,TenDeTai,MoTa,SoLuongThanhVien,NgayTao,NgayDangKy")] DeTai deTai)
         {
             if (ModelState.IsValid)
             {
-                db.DotKhoaLuans.Add(dotKhoaLuan);
+                db.DeTais.Add(deTai);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.NamHocHocKyId = new SelectList(db.NamHocs, "NamHocHocKyId", "TenNamHocHocKy", dotKhoaLuan.NamHocHocKyId);
-            return View(dotKhoaLuan);
+            return View(deTai);
         }
 
-        // GET: DotKhoaLuan/Edit/5
+        // GET: DeTai/Edit/5
         public ActionResult Edit(decimal id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DotKhoaLuan dotKhoaLuan = db.DotKhoaLuans.Find(id);
-            if (dotKhoaLuan == null)
+            DeTai deTai = db.DeTais.Find(id);
+            if (deTai == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.NamHocHocKyId = new SelectList(db.NamHocs, "NamHocHocKyId", "TenNamHocHocKy", dotKhoaLuan.NamHocHocKyId);
-            return View(dotKhoaLuan);
+            return View(deTai);
         }
 
-        // POST: DotKhoaLuan/Edit/5
+        // POST: DeTai/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "DotKhoaLuanId,TenDotKhoaLuan,NamHocHocKyId")] DotKhoaLuan dotKhoaLuan)
+        public ActionResult Edit([Bind(Include = "DeTaiId,TenDeTai,MoTa,SoLuongThanhVien,NgayTao,NgayDangKy")] DeTai deTai)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(dotKhoaLuan).State = EntityState.Modified;
+                db.Entry(deTai).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.NamHocHocKyId = new SelectList(db.NamHocs, "NamHocHocKyId", "TenNamHocHocKy", dotKhoaLuan.NamHocHocKyId);
-            return View(dotKhoaLuan);
+            return View(deTai);
         }
 
-        // GET: DotKhoaLuan/Delete/5
+        // GET: DeTai/Delete/5
         public ActionResult Delete(decimal id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DotKhoaLuan dotKhoaLuan = db.DotKhoaLuans.Find(id);
-            if (dotKhoaLuan == null)
+            DeTai deTai = db.DeTais.Find(id);
+            if (deTai == null)
             {
                 return HttpNotFound();
             }
-            return View(dotKhoaLuan);
+            return View(deTai);
         }
 
-        // POST: DotKhoaLuan/Delete/5
+        // POST: DeTai/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(decimal id)
         {
-            DotKhoaLuan dotKhoaLuan = db.DotKhoaLuans.Find(id);
-            db.DotKhoaLuans.Remove(dotKhoaLuan);
+            DeTai deTai = db.DeTais.Find(id);
+            db.DeTais.Remove(deTai);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

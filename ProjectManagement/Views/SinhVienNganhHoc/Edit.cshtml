@@ -31,14 +31,14 @@
                 <div class="form-group">
                     @Html.Label("Ngày Bắt đầu", new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.TextBoxFor(model => model.TuNgay, "{0:dd/MM/yyyy}", new { @class = "form-control" })
+                        @Html.TextBoxFor(model => model.TuNgay, "{0:dd/MM/yyyy}", new { @Value = DateTime.Now.ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture), @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.TuNgay)
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.Label("Đến Ngày", new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.TextBoxFor(model => model.DenNgay, "{0:dd/MM/yyyy}", new { @class = "form-control" })
+                        @Html.TextBoxFor(model => model.DenNgay, "{0:dd/MM/yyyy}", new { @Value = DateTime.Now.ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture), @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.DenNgay)
                     </div>
                 </div>
