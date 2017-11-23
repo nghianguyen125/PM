@@ -664,6 +664,7 @@ a[data-toggle="lightbox-image"]:hover img {
     background-color: #ffffff;
     opacity: 0.2;
     filter: alpha(opacity=20);
+    width: 60px;
 }
 
 #to-top:hover {

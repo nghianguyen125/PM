@@ -217,8 +217,10 @@
     <Compile Include="Controllers\Admin\TinTucController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\User\MainPageController.cs" />
-    <Compile Include="Controllers\User\UserController.cs" />
+    <Compile Include="Controllers\MainPageController.cs" />
+    <Compile Include="Controllers\SinhVienThuocNhomSVsController.cs" />
+    <Compile Include="Controllers\TinTucThongBaosController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DataAccess\BusinessService\ConnectBase.cs" />
     <Compile Include="DataAccess\BusinessService\DataAccessService.cs" />
     <Compile Include="DataAccess\Entity\DataAccess.cs" />
@@ -1645,10 +1647,12 @@
     <Content Include="Css\jquery-ui.css" />
     <Content Include="Css\login.css" />
     <Content Include="Css\main.css" />
+    <Content Include="Css\main1.css" />
     <Content Include="Css\modify.css" />
     <Content Include="Css\open-sans.css" />
     <Content Include="Css\owl.carousel.css" />
     <Content Include="Css\plugins.css" />
+    <Content Include="Css\plugins1.css" />
     <Content Include="Css\respontive.css" />
     <Content Include="Css\Search.css" />
     <Content Include="Css\style.css" />
@@ -1884,7 +1888,10 @@
     <Content Include="images\xagan-ico.png" />
     <Content Include="images\xemnn_bg.gif" />
     <Content Include="js\app.js" />
+    <Content Include="js\app1.js" />
     <Content Include="js\login.js" />
+    <Content Include="js\pages\compCalendar.js" />
+    <Content Include="js\plugins1.js" />
     <Content Include="js\vendor\bootstrap.min.js" />
     <Content Include="js\config.js" />
     <Content Include="js\html5shiv.js" />
@@ -2170,7 +2177,21 @@
     <Content Include="Views\GiangVien\Delete.cshtml" />
     <Content Include="Views\GiangVien\Details.cshtml" />
     <Content Include="Views\GiangVien\Edit.cshtml" />
-    <Content Include="Views\GiangVien\Index.cshtml" />
+    <Content Include="Views\GiangVienThuocKhoa\Create.cshtml" />
+    <Content Include="Views\GiangVienThuocKhoa\Delete.cshtml" />
+    <Content Include="Views\GiangVienThuocKhoa\Details.cshtml" />
+    <Content Include="Views\GiangVienThuocKhoa\Edit.cshtml" />
+    <Content Include="Views\GiangVienThuocKhoa\Index.cshtml" />
+    <Content Include="Views\Shared\_SearchPeople.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\MainPage\Index.cshtml" />
+    <Content Include="Views\User\Logon.cshtml" />
+    <Content Include="Views\SinhVienThuocNhomSVs\Create.cshtml" />
+    <Content Include="Views\SinhVienThuocNhomSVs\Delete.cshtml" />
+    <Content Include="Views\SinhVienThuocNhomSVs\Details.cshtml" />
+    <Content Include="Views\SinhVienThuocNhomSVs\Edit.cshtml" />
+    <Content Include="Views\SinhVienThuocNhomSVs\Index.cshtml" />
+    <Content Include="Views\TinTucThongBaos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
