@@ -33,10 +33,10 @@
 
     <!-- Related styles of various icon packs and plugins -->
     <link rel="stylesheet" href="~/css/plugins.css">
-
+    <link rel="stylesheet" href="~/css/plugins1.css">
     <!-- The main stylesheet of this template. All Bootstrap overwrites are defined in here -->
     <link rel="stylesheet" href="~/css/main.css">
-
+    <link rel="stylesheet" href="~/css/main1.css">
     <!-- The themes stylesheet of this template (for using specific theme color in individual elements - must included last) -->
     <link rel="stylesheet" href="~/css/themes.css">
     <!-- END Stylesheets -->
@@ -44,6 +44,12 @@
     <script src="~/js/vendor/modernizr-2.7.1-respond-1.4.2.min.js"></script>
 </head>
 <body>
+    @{
+        string strUrl = Request.Url.AbsoluteUri;
+        string strPath = Request.ApplicationPath;
+        string host = Request.Url.Host;
+        string urlHome = "/";
+    }
     <!-- Page Container -->
     <!-- In the PHP version you can set the following options from inc/config file -->
     <!-- 'boxed' class for a boxed layout -->
@@ -70,16 +76,16 @@
       
                         <!-- END Menu Toggle -->
                         <li>
-                            <a href="#">Home</a>
+                            <a href="@(urlHome + "MainPage/Index")">Home</a>
                         </li>
                         <li>
-                            <a href="#">My Group</a>
+                            <a href="@(urlHome + "TinTucThongBaos/Index")">News</a>
+                        </li>
+                        <li>
+                            <a href="@(urlHome + "SinhVienThuocNhomSVs/Index")">My Group</a>
                         </li>
                         <li>
                             <a href="#">My Thesis</a>
-                        </li>
-                        <li>
-                            <a href="#">Registration</a>
                         </li>
                         <li>
                             <a href="javascript:void(0)" class="site-nav-sub"><i class="fa fa-angle-down site-nav-arrow"></i>Account</a>
@@ -110,7 +116,9 @@
         <!-- END Intro -->
         <!-- Content -->
         <section class="site-content site-section">
-            @RenderBody()
+            <div class="container">
+                @RenderBody()
+            </div>
         </section>           
             <!-- END Content -->
             <!-- Footer -->
@@ -161,11 +169,18 @@
 
     <!-- Include Jquery library from Google's CDN but if something goes wrong get Jquery from local file (Remove 'http:' if you have SSL) -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script>!window.jQuery && document.write(decodeURI('%3Cscript src="js/vendor/jquery-1.11.1.min.js"%3E%3C/script%3E'));</script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script>!window.jQuery && document.write(decodeURI('%3Cscript src="~/js/vendor/jquery-1.11.1.min.js"%3E%3C/script%3E'));</script>
 
     <!-- Bootstrap.js, Jquery plugins and Custom JS code -->
     <script src="~/js/vendor/bootstrap.min.js"></script>
+    <script src="~/js/plugins1.js"></script>
+    <script src="~/js/app1.js"></script>
     <script src="~/js/plugins.js"></script>
     <script src="~/js/app.js"></script>
+
+    <!-- Load and execute javascript code used only in this page -->
+    <script src="~/js/pages/compCalendar.js"></script>
+    <script>$(function(){ CompCalendar.init(); });</script>
 </body>
-</html>
+</html> 

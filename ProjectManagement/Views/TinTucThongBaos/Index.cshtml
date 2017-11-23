@@ -1,0 +1,80 @@
+﻿@model IEnumerable<ProjectManagement.Models.TinTucThongBao>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TieuDe)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NoiDung)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayDang)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TaiKhoan.Username)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TieuDe)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoiDung)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayDang)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaiKhoan.Username)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.TinTucId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.TinTucId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.TinTucId })
+            </td>
+        </tr>
+    }
+
+</table>
+
+@foreach (var item in Model)
+{
+    <div class="row">
+        <div class="col-sm-8 col-md-9">
+            <!-- Blog Post -->
+            <div class="site-block">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h3 class="site-heading"><strong>@Html.DisplayFor(modelItem => item.TieuDe)</strong></h3>
+                        <p>Donec lacinia venenatis metus at bibendum? In hac habitasse platea dictumst. Proin ac nibh rutrum lectus rhoncus eleifend. Sed porttitor pretium venenatis. Suspendisse potenti. Aliquam quis ligula elit. Aliquam at orci ac neque semper dictum. Sed tincidunt scelerisque ligula, et facilisis nulla hendrerit non. Suspendisse potenti. Pellentesque non accumsan orci. [...]</p>
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <p class="pull-right">
+                        <a href="blog_post.html" class="label label-primary">Read more..</a>
+                    </p>
+                    <ul class="list-inline pull-left">
+                        <li><i class="fa fa-calendar"></i>@Html.DisplayFor(modelItem => item.NgayDang)</li>
+                        <li><i class="fa fa-user"></i> by <a href="javascript:void(0)">@Html.DisplayFor(modelItem => item.TaiKhoan.Username)</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+    
