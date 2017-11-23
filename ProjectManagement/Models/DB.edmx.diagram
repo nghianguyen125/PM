@@ -12,13 +12,13 @@
         <EntityTypeShape EntityType="ProjectManagementModel.GiangVien" Width="1.5" PointX="6" PointY="15.75" />
         <EntityTypeShape EntityType="ProjectManagementModel.GiangVienThuocKhoa" Width="1.5" PointX="11.25" PointY="15.875" />
         <EntityTypeShape EntityType="ProjectManagementModel.KhoaHoc" Width="1.5" PointX="3" PointY="1.25" />
-        <EntityTypeShape EntityType="ProjectManagementModel.Khoa" Width="1.5" PointX="0.75" PointY="12.25" />
+        <EntityTypeShape EntityType="ProjectManagementModel.Khoa" Width="1.5" PointX="1.125" PointY="12.125" />
         <EntityTypeShape EntityType="ProjectManagementModel.LoaiTaiKhoan" Width="1.5" PointX="6" PointY="20.375" />
         <EntityTypeShape EntityType="ProjectManagementModel.NamHoc" Width="1.5" PointX="0.75" PointY="1" />
         <EntityTypeShape EntityType="ProjectManagementModel.Nganh" Width="1.5" PointX="3" PointY="12.375" />
         <EntityTypeShape EntityType="ProjectManagementModel.NhomSV" Width="1.5" PointX="3" PointY="4.875" />
         <EntityTypeShape EntityType="ProjectManagementModel.PhanDeTaiChoDotKhoaLuan" Width="1.5" PointX="11.25" PointY="1.75" />
-        <EntityTypeShape EntityType="ProjectManagementModel.PhanDeTaiChoGiangVien" Width="1.5" PointX="11.25" PointY="12.375" />
+        <EntityTypeShape EntityType="ProjectManagementModel.PhanDeTaiChoGiangVien" Width="2.375" PointX="11.25" PointY="12.375" />
         <EntityTypeShape EntityType="ProjectManagementModel.PhanDeTaiChoNhomSV" Width="2.125" PointX="8.25" PointY="0.75" />
         <EntityTypeShape EntityType="ProjectManagementModel.QuanLyLich" Width="1.5" PointX="11.25" PointY="19.875" />
         <EntityTypeShape EntityType="ProjectManagementModel.SinhVienKhoaHoc" Width="1.5" PointX="5.25" PointY="8.5" />
