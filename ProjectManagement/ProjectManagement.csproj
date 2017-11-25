@@ -198,7 +198,6 @@
     <Compile Include="Controllers\Admin\AdminController.cs" />
     <Compile Include="Controllers\Admin\DeTaiController.cs" />
     <Compile Include="Controllers\Admin\GiangVienController.cs" />
-    <Compile Include="Controllers\Admin\GiangVienController.cs" />
     <Compile Include="Controllers\Admin\GiangVienThuocKhoaController.cs" />
     <Compile Include="Controllers\Admin\KhoaController.cs" />
     <Compile Include="Controllers\Admin\LichController.cs" />
@@ -229,6 +228,9 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BinhLuan.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\C__MigrationHistory.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DanhGiaDeTai.cs">
@@ -307,6 +309,9 @@
     <Compile Include="Models\SinhVienThuocNhomSV.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TaiKhoan.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
@@ -314,6 +319,9 @@
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TinTucThongBao.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TrangThai.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
