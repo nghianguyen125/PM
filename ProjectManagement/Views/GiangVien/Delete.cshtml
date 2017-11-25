@@ -1,4 +1,5 @@
-﻿@model ProjectManagement.Models.GiangVien
+﻿@using ProjectManagement.Models
+@model ProjectManagement.Models.GiangVien
 
 @{
     ViewBag.Title = "Delete";
@@ -20,10 +21,23 @@
                 @Html.DisplayFor(model => model.GiangVienId)
             </dd>
             <dt>
-                Tên Khoa:
+                Tên Giảng Viên:
             </dt>
             <dd>
-                @Html.DisplayFor(model => model.GiangVienId)
+                @Html.DisplayFor(model => model.HoTen)
+            </dd>
+            <dt>
+                Giới Tính: 
+            </dt>
+            <dd>
+                @if (Model.GioiTinh == true)
+                {
+                    @Html.DisplayName("Nam")
+                }
+                else
+                {
+                    @Html.DisplayName("Nu")
+                }
             </dd>
         </dl>
 

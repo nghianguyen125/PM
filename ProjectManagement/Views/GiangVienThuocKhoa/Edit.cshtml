@@ -1,0 +1,71 @@
+﻿@model ProjectManagement.Models.GiangVienThuocKhoa
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<script>
+  $( function() {
+      $("#datepicker").datepicker(
+      {
+          //dateFormat: 'dd/mm/yy'
+      });
+  })
+</script>
+<section class="content-header">
+    <h1>Cập nhật Giảng viên - Khoa</h1>
+</section>
+
+<section class="content">
+    @{
+        int countError = ViewBag.CountError != null ? (int)ViewBag.CountError : 0;
+        if (countError > 0)
+        {
+            @Html.ValidationSummary(true)
+            @Html.ValidationMessage("error", "", new { @class = "alert alert-danger alert-dismissable", style = "text-align:left; display: block" })
+        }
+    }
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">Cập nhật Giảng Viên</h3>
+        </div>
+        @using (Html.BeginForm("Edit", "GiangVienThuocKhoa", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="box-body">
+
+                @Html.HiddenFor(model => model.GiangVienId)
+                @Html.HiddenFor(model => model.KhoaId)
+                <div class="form-group">
+                    @Html.Label("Tên Giảng Viên", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.GiangVien.HoTen, new { @class = "form-control", @readonly = true })
+                        @Html.ValidationMessageFor(model => model.GiangVienId)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Tên Khoa", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.Khoa.TenKhoa, (SelectList)@ViewBag.KhoaId, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => mode    l.KhoaId)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Từ Ngày", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.TuNgay, new { @class = "form-control", id = "datepicker" })
+                        @Html.ValidationMessageFor(model => model.TuNgay)
+                    </div>
+                </div>
+            </div>
+            <div class="box-footer">
+                @*<button type="submit" class="btn btn-default">Cancel</button>*@
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+                <input type="submit" value="Save" class="btn btn-primary pull-right" />
+            </div>
+        }
+    </div>
+
+</section>
+

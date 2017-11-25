@@ -1,0 +1,39 @@
+﻿@model IEnumerable<ProjectManagement.Models.SinhVienThuocNhomSV>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayPhan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NhomSV.TenNhom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SinhVien.HoTen)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayPhan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NhomSV.TenNhom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SinhVien.HoTen)
+        </td>
+    </tr>
+}
+
+</table>
