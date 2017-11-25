@@ -22,7 +22,9 @@ namespace ProjectManagement.Models
     
         public decimal NhomSVId { get; set; }
         public string TenNhom { get; set; }
+        public Nullable<decimal> KhoaId { get; set; }
     
+        public virtual Khoa Khoa { get; set; }
         public virtual ICollection<PhanDeTaiChoNhomSV> PhanDeTaiChoNhomSVs { get; set; }
         public virtual ICollection<SinhVienThuocNhomSV> SinhVienThuocNhomSVs { get; set; }
     }

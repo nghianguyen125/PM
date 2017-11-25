@@ -19,7 +19,9 @@ namespace ProjectManagement.Models
         public string NoiDung { get; set; }
         public Nullable<System.DateTime> NgayDang { get; set; }
         public Nullable<decimal> TaiKhoanId { get; set; }
+        public Nullable<decimal> KhoaId { get; set; }
     
+        public virtual Khoa Khoa { get; set; }
         public virtual TaiKhoan TaiKhoan { get; set; }
     }
 }

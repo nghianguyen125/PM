@@ -196,6 +196,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\Admin\AdminController.cs" />
     <Compile Include="Controllers\Admin\DeTaiController.cs" />
+    <Compile Include="Controllers\Admin\GiangVienController.cs" />
     <Compile Include="Controllers\Admin\KhoaController.cs" />
     <Compile Include="Controllers\Admin\KhoaHocController.cs" />
     <Compile Include="Controllers\Admin\LichController.cs" />
@@ -2152,6 +2153,11 @@
     <Content Include="Views\QuanLyLiche\Details.cshtml" />
     <Content Include="Views\QuanLyLiche\Edit.cshtml" />
     <Content Include="Views\QuanLyLiche\Index.cshtml" />
+    <Content Include="Views\GiangVien\Create.cshtml" />
+    <Content Include="Views\GiangVien\Delete.cshtml" />
+    <Content Include="Views\GiangVien\Details.cshtml" />
+    <Content Include="Views\GiangVien\Edit.cshtml" />
+    <Content Include="Views\GiangVien\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
