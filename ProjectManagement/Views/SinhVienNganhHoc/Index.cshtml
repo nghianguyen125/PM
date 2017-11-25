@@ -1,0 +1,61 @@
+﻿@using ProjectManagement.App_Start.Classes
+@using ProjectManagement.Models
+@model IEnumerable<ProjectManagement.Models.Nganh>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<section class="content-header">
+    <h1>Khoa</h1>
+</section>
+<section class="content">
+    <div class="row" style="padding-bottom: 10px;">
+        <div class="col-md-12">
+            <h3>Danh Sách Khoa</h3>
+        </div>
+    </div>
+    <div class="box">
+        <table class="table table-hover table-bordered">
+            <tbody>
+                <tr>
+                    <th style="width: 50px">STT</th>
+                    <th>
+                        Mã Ngành
+                    </th>
+                    <th>
+                        Tên Ngành
+                    </th>
+                    <th>
+                        Danh sách Sinh viên
+                    </th>
+                </tr>
+                @{
+                    int stt = 0;
+                    ProjectManagementEntities db = new ProjectManagementEntities();
+                }
+                @foreach (var item in Model)
+                {
+                    stt++;
+                    List<Nganh> userCreatedBy = db.Nganhs.ToList();
+                    <tr>
+                        <td>@stt</td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NganhId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TenNganh)
+                        </td>
+                        <td>
+                            <a href="@Url.Action("DSSV", new { NId = item.NganhId })">Danh sách Sinh viên </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+
+
+        </table>
+    </div>
+</section>

@@ -9,7 +9,7 @@
 }
 
 <section class="content-header">
-    <h1>Danh sách các Khoa</h1>
+    <h1>Khoa</h1>
 </section>
 <section class="content">
     <div class="row" style="padding-bottom: 10px;">
@@ -28,6 +28,9 @@
                     <th>
                         Tên Khoa
                     </th>
+                    <th>
+                        Địa Chỉ
+                    </th>
                     <th style="width: 50px; text-align: center">Chức năng</th>
                 </tr>
                 @{
@@ -45,6 +48,9 @@
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.TenKhoa)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DiaChi)
                         </td>
                         <td align="center">
                             @*@Html.ActionLink("Sửa", "Edit", new {id = item.USER_ID}) |

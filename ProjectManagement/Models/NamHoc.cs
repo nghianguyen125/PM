@@ -16,6 +16,7 @@ namespace ProjectManagement.Models
     {
         public NamHoc()
         {
+            this.DotKhoaLuans = new HashSet<DotKhoaLuan>();
             this.KhoaHocs = new HashSet<KhoaHoc>();
             this.NamHocs1 = new HashSet<NamHoc>();
         }
@@ -26,6 +27,7 @@ namespace ProjectManagement.Models
         public Nullable<System.DateTime> DenNgay { get; set; }
         public Nullable<decimal> NamHocHocKyIdRoot { get; set; }
     
+        public virtual ICollection<DotKhoaLuan> DotKhoaLuans { get; set; }
         public virtual ICollection<KhoaHoc> KhoaHocs { get; set; }
         public virtual ICollection<NamHoc> NamHocs1 { get; set; }
         public virtual NamHoc NamHoc1 { get; set; }

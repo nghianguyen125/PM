@@ -1,0 +1,35 @@
+﻿@model ProjectManagement.Models.KhoaHoc
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>KhoaHoc</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ChiTiet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChiTiet)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NamHoc.ChiTiet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NamHoc.ChiTiet)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.KhoaHocID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

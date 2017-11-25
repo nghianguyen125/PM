@@ -21,13 +21,13 @@ namespace ProjectManagement.Controllers.Admin
         }
 
         // GET: NhomSV/Details/5
-        public ActionResult Details(decimal id)
+        public ActionResult Details(decimal Nid)
         {
-            if (id == null)
+            if (Nid == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            NhomSV nhomSV = db.NhomSVs.Find(id);
+            NhomSV nhomSV = db.NhomSVs.Find(Nid);
             if (nhomSV == null)
             {
                 return HttpNotFound();
@@ -59,13 +59,13 @@ namespace ProjectManagement.Controllers.Admin
         }
 
         // GET: NhomSV/Edit/5
-        public ActionResult Edit(decimal id)
+        public ActionResult Edit(decimal Nid)
         {
-            if (id == null)
+            if (Nid == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            NhomSV nhomSV = db.NhomSVs.Find(id);
+            NhomSV nhomSV = db.NhomSVs.Find(Nid);
             if (nhomSV == null)
             {
                 return HttpNotFound();
@@ -90,13 +90,13 @@ namespace ProjectManagement.Controllers.Admin
         }
 
         // GET: NhomSV/Delete/5
-        public ActionResult Delete(decimal id)
+        public ActionResult Delete(decimal Nid)
         {
-            if (id == null)
+            if (Nid == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            NhomSV nhomSV = db.NhomSVs.Find(id);
+            NhomSV nhomSV = db.NhomSVs.Find(Nid);
             if (nhomSV == null)
             {
                 return HttpNotFound();
@@ -107,9 +107,9 @@ namespace ProjectManagement.Controllers.Admin
         // POST: NhomSV/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(decimal id)
+        public ActionResult DeleteConfirmed(decimal Nid)
         {
-            NhomSV nhomSV = db.NhomSVs.Find(id);
+            NhomSV nhomSV = db.NhomSVs.Find(Nid);
             db.NhomSVs.Remove(nhomSV);
             db.SaveChanges();
             return RedirectToAction("Index");

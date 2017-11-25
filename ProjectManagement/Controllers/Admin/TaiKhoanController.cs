@@ -52,7 +52,7 @@ namespace ProjectManagement.Controllers.Admin
             //{
             //    return RedirectToAction("Login", "Admin");
             //}
-            ViewBag.LoaiTaiKhoanId = new SelectList(db.LoaiTaiKhoans, "LoaiTaiKhoanId", "LoaiTaiKhoanId");
+            ViewBag.LoaiTaiKhoanId = new SelectList(db.LoaiTaiKhoans, "LoaiTaiKhoanId", "TenLoaiTaiKhoan");
             return View();
         }
 
@@ -192,7 +192,7 @@ namespace ProjectManagement.Controllers.Admin
         }
 
         // GET: /User/Delete/5
-        public ActionResult Delete(decimal id)
+        public ActionResult Delete(decimal? id)
         {
             //if (!UserManager.Authenticated)
             //{

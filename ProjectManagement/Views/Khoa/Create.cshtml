@@ -7,7 +7,7 @@
 }
 
 <section class="content-header">
-    <h1>Tạo mới Khoa</h1>
+    <h1>Khoa</h1>
 </section>
 <section class="content">
     @{
@@ -40,6 +40,13 @@
                     <div class="col-md-10">
                         @Html.TextBoxFor(model => model.TenKhoa, new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.TenKhoa)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Địa Chỉ", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.DiaChi, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DiaChi)
                     </div>
                 </div>
             </div>

@@ -18,22 +18,23 @@ namespace ProjectManagement.Models
         {
             this.DanhGiaDeTais = new HashSet<DanhGiaDeTai>();
             this.SinhVienKhoaHocs = new HashSet<SinhVienKhoaHoc>();
+            this.SinhVienNganhHocs = new HashSet<SinhVienNganhHoc>();
             this.SinhVienThuocKhoas = new HashSet<SinhVienThuocKhoa>();
             this.SinhVienThuocNhomSVs = new HashSet<SinhVienThuocNhomSV>();
             this.TaiKhoans = new HashSet<TaiKhoan>();
         }
     
         public string SinhVienId { get; set; }
-        public Nullable<bool> GioiTinh { get; set; }
+        public bool GioiTinh { get; set; }
         public string HoTen { get; set; }
         public Nullable<System.DateTime> NgaySinh { get; set; }
         public Nullable<int> SoTCHT { get; set; }
         public Nullable<int> SoTCCL { get; set; }
-        public Nullable<decimal> TrangThaiId { get; set; }
+        public bool TrangThai { get; set; }
     
         public virtual ICollection<DanhGiaDeTai> DanhGiaDeTais { get; set; }
         public virtual ICollection<SinhVienKhoaHoc> SinhVienKhoaHocs { get; set; }
-        public virtual TrangThai TrangThai { get; set; }
+        public virtual ICollection<SinhVienNganhHoc> SinhVienNganhHocs { get; set; }
         public virtual ICollection<SinhVienThuocKhoa> SinhVienThuocKhoas { get; set; }
         public virtual ICollection<SinhVienThuocNhomSV> SinhVienThuocNhomSVs { get; set; }
         public virtual ICollection<TaiKhoan> TaiKhoans { get; set; }

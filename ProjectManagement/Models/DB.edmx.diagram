@@ -5,30 +5,30 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="6c3283ee5371478baf5b286b81915e9c" Name="Diagram1">
-        <EntityTypeShape EntityType="ProjectManagementModel.BinhLuan" Width="1.5" PointX="8.25" PointY="26.5" />
-        <EntityTypeShape EntityType="ProjectManagementModel.DanhGiaDeTai" Width="1.5" PointX="8.25" PointY="9.625" />
-        <EntityTypeShape EntityType="ProjectManagementModel.DeTai" Width="1.5" PointX="6" PointY="16.125" />
-        <EntityTypeShape EntityType="ProjectManagementModel.DotKhoaLuan" Width="1.5" PointX="6" PointY="20.875" />
-        <EntityTypeShape EntityType="ProjectManagementModel.GiangVien" Width="1.5" PointX="3" PointY="0.875" />
-        <EntityTypeShape EntityType="ProjectManagementModel.GiangVienThuocKhoa" Width="1.5" PointX="8.25" PointY="0.875" />
-        <EntityTypeShape EntityType="ProjectManagementModel.KhoaHoc" Width="1.5" PointX="3" PointY="14.5" />
-        <EntityTypeShape EntityType="ProjectManagementModel.Khoa" Width="1.5" PointX="6" PointY="0.75" />
-        <EntityTypeShape EntityType="ProjectManagementModel.LoaiTaiKhoan" Width="1.5" PointX="3" PointY="4.625" />
-        <EntityTypeShape EntityType="ProjectManagementModel.NamHoc" Width="1.5" PointX="0.75" PointY="14.25" />
-        <EntityTypeShape EntityType="ProjectManagementModel.Nganh" Width="1.5" PointX="3" PointY="17.5" />
-        <EntityTypeShape EntityType="ProjectManagementModel.NhomSV" Width="1.5" PointX="3" PointY="21" />
-        <EntityTypeShape EntityType="ProjectManagementModel.PhanDeTaiChoDotKhoaLuan" Width="1.5" PointX="8.25" PointY="16.875" />
-        <EntityTypeShape EntityType="ProjectManagementModel.PhanDeTaiChoGiangVien" Width="1.5" PointX="11.25" PointY="9.25" />
-        <EntityTypeShape EntityType="ProjectManagementModel.PhanDeTaiChoNhomSV" Width="1.5" PointX="8.25" PointY="20.375" />
-        <EntityTypeShape EntityType="ProjectManagementModel.QuanLyLich" Width="1.5" PointX="8.25" PointY="14" />
-        <EntityTypeShape EntityType="ProjectManagementModel.SinhVienKhoaHoc" Width="1.5" PointX="5.25" PointY="9.5" />
-        <EntityTypeShape EntityType="ProjectManagementModel.SinhVien" Width="1.5" PointX="3" PointY="9.125" />
-        <EntityTypeShape EntityType="ProjectManagementModel.SinhVienThuocKhoa" Width="1.5" PointX="8.25" PointY="6.75" />
-        <EntityTypeShape EntityType="ProjectManagementModel.SinhVienThuocNhomSV" Width="1.5" PointX="5.25" PointY="12.875" />
-        <EntityTypeShape EntityType="ProjectManagementModel.TaiKhoan" Width="1.5" PointX="5.25" PointY="4.875" />
-        <EntityTypeShape EntityType="ProjectManagementModel.TaiLieu" Width="1.5" PointX="8.25" PointY="23.75" />
-        <EntityTypeShape EntityType="ProjectManagementModel.TinTucThongBao" Width="1.5" PointX="7.5" PointY="3.75" />
-        <EntityTypeShape EntityType="ProjectManagementModel.TrangThai" Width="1.5" PointX="0.75" PointY="10" />
+        <EntityTypeShape EntityType="ProjectManagementModel.BinhLuan" Width="1.5" PointX="6" PointY="2.25" />
+        <EntityTypeShape EntityType="ProjectManagementModel.DanhGiaDeTai" Width="1.5" PointX="6" PointY="5.875" />
+        <EntityTypeShape EntityType="ProjectManagementModel.DeTai" Width="1.5" PointX="3.75" PointY="2.375" />
+        <EntityTypeShape EntityType="ProjectManagementModel.DotKhoaLuan" Width="1.5" PointX="3.75" PointY="21.875" />
+        <EntityTypeShape EntityType="ProjectManagementModel.GiangVien" Width="1.5" PointX="3.75" PointY="18.125" />
+        <EntityTypeShape EntityType="ProjectManagementModel.GiangVienThuocKhoa" Width="1.5" PointX="11" PointY="9.875" />
+        <EntityTypeShape EntityType="ProjectManagementModel.KhoaHoc" Width="1.5" PointX="0.75" PointY="14" />
+        <EntityTypeShape EntityType="ProjectManagementModel.Khoa" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="ProjectManagementModel.LoaiTaiKhoan" Width="1.5" PointX="3.75" PointY="15.75" />
+        <EntityTypeShape EntityType="ProjectManagementModel.NamHoc" Width="1.5" PointX="1.5" PointY="17.625" />
+        <EntityTypeShape EntityType="ProjectManagementModel.Nganh" Width="1.5" PointX="3" PointY="30" />
+        <EntityTypeShape EntityType="ProjectManagementModel.NhomSV" Width="1.5" PointX="0.75" PointY="21.875" />
+        <EntityTypeShape EntityType="ProjectManagementModel.PhanDeTaiChoDotKhoaLuan" Width="1.5" PointX="6" PointY="14.25" />
+        <EntityTypeShape EntityType="ProjectManagementModel.PhanDeTaiChoGiangVien" Width="1.5" PointX="9" PointY="13.375" />
+        <EntityTypeShape EntityType="ProjectManagementModel.PhanDeTaiChoNhomSV" Width="1.5" PointX="9" PointY="16.125" />
+        <EntityTypeShape EntityType="ProjectManagementModel.QuanLyLich" Width="1.5" PointX="6" PointY="22.125" />
+        <EntityTypeShape EntityType="ProjectManagementModel.SinhVienKhoaHoc" Width="1.5" PointX="3" PointY="9.875" />
+        <EntityTypeShape EntityType="ProjectManagementModel.SinhVienNganhHoc" Width="1.5" PointX="3" PointY="26.25" />
+        <EntityTypeShape EntityType="ProjectManagementModel.SinhVien" Width="1.5" PointX="0.75" PointY="9.25" />
+        <EntityTypeShape EntityType="ProjectManagementModel.SinhVienThuocKhoa" Width="1.5" PointX="3" PointY="6.875" />
+        <EntityTypeShape EntityType="ProjectManagementModel.SinhVienThuocNhomSV" Width="1.5" PointX="3" PointY="13" />
+        <EntityTypeShape EntityType="ProjectManagementModel.TaiKhoan" Width="1.5" PointX="6" PointY="9" />
+        <EntityTypeShape EntityType="ProjectManagementModel.TaiLieu" Width="1.5" PointX="6" PointY="17.125" />
+        <EntityTypeShape EntityType="ProjectManagementModel.TinTucThongBao" Width="1.5" PointX="8.25" PointY="9.75" />
         <AssociationConnector Association="ProjectManagementModel.FK_BinhLuans_DeTais" />
         <AssociationConnector Association="ProjectManagementModel.FK_DanhGiaDeTai_DeTais" />
         <AssociationConnector Association="ProjectManagementModel.FK_DanhGiaDeTai_SinhViens" />
@@ -36,6 +36,7 @@
         <AssociationConnector Association="ProjectManagementModel.FK_PhanDeTaiChoDotKhoaLuan_DeTais" />
         <AssociationConnector Association="ProjectManagementModel.FK_PhanDeTaiChoGiangVien_DeTais" />
         <AssociationConnector Association="ProjectManagementModel.FK_PhanDeTaiChoNhomSV_DeTais" />
+        <AssociationConnector Association="ProjectManagementModel.FK_DotKhoaLuan_NamHocs" />
         <AssociationConnector Association="ProjectManagementModel.FK_PhanDeTaiChoDotKhoaLuan_DotKhoaLuan" />
         <AssociationConnector Association="ProjectManagementModel.FK_QuanLyLiches_DotKhoaLuan" />
         <AssociationConnector Association="ProjectManagementModel.FK_GiangVienThuocKhoa_GiangViens" />
@@ -45,14 +46,15 @@
         <AssociationConnector Association="ProjectManagementModel.FK_KhoaHoc_NamHocs" />
         <AssociationConnector Association="ProjectManagementModel.FK_SinhVienKhoaHoc_KhoaHoc" />
         <AssociationConnector Association="ProjectManagementModel.FK_dbo_Nganhs_dbo_Khoas_KhoaId" />
+        <AssociationConnector Association="ProjectManagementModel.FK_NhomSVs_Khoas" />
         <AssociationConnector Association="ProjectManagementModel.FK_SinhVienThuocKhoa_Khoas" />
+        <AssociationConnector Association="ProjectManagementModel.FK_TinTucThongBaos_Khoas" />
         <AssociationConnector Association="ProjectManagementModel.FK_dbo_TaiKhoans_dbo_LoaiTaiKhoans_LoaiTaiKhoanId" />
         <AssociationConnector Association="ProjectManagementModel.FK_NamHocs_NamHocs" />
-        <AssociationConnector Association="ProjectManagementModel.FK_SinhVienKhoaHoc_Nganhs" />
         <AssociationConnector Association="ProjectManagementModel.FK_PhanDeTaiChoNhomSV_NhomSVs" />
         <AssociationConnector Association="ProjectManagementModel.FK_SinhVienThuocNhomSV_NhomSVs" />
         <AssociationConnector Association="ProjectManagementModel.FK_SinhVienKhoaHoc_SinhViens" />
-        <AssociationConnector Association="ProjectManagementModel.FK_dbo_SinhViens_dbo_TrangThais_TrangThaiId" />
+        <AssociationConnector Association="ProjectManagementModel.FK_SinhVienNganhHoc_SinhViens" />
         <AssociationConnector Association="ProjectManagementModel.FK_SinhVienThuocKhoa_SinhViens" />
         <AssociationConnector Association="ProjectManagementModel.FK_SinhVienThuocNhomSV_SinhViens" />
         <AssociationConnector Association="ProjectManagementModel.FK_TaiKhoans_SinhViens" />

@@ -1,0 +1,118 @@
+﻿@using System.Linq
+@using ProjectManagement.App_Start.Classes
+@using ProjectManagement.Models
+@model IEnumerable<ProjectManagement.Models.SinhVien>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<section class="content-header">
+    <h1>Sinh Viên</h1>
+</section>
+<section class="content">
+    <div class="row" style="padding-bottom: 10px;">
+        <div class="col-md-12">
+            @Html.ActionLink("Tạo mới", "Create", null, new { @class = "btn btn-primary pull-left" })
+        </div>
+    </div>
+    <div class="box">
+        <table class="table table-hover table-bordered">
+            <tbody>
+                <tr>
+                    <th style="width: 50px">STT</th>
+                    <th>
+                        Mã Sinh viên
+                    </th>
+                    <th>
+                        Tên Sinh viên
+                    </th>
+                    <th>
+                        Giới tính
+                    </th>
+                    <th>
+                        Ngày sinh
+                    </th>
+                    <th>
+                        Số TCHT
+                    </th>
+                    <th>
+                        Số TCCL
+                    </th>
+                    <th>
+                        Trạng thái
+                    </th>
+                    <th style="width: 10%; text-align: center">Chức năng</th>
+                </tr>
+                @{
+                    int stt = 0;
+                    ProjectManagementEntities db = new ProjectManagementEntities();
+                }
+                @foreach (var item in Model)
+                {
+                    stt++;
+                    List<SinhVien> userCreatedBy = db.SinhViens.ToList();
+                    <tr>
+                        <td>@stt</td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SinhVienId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.HoTen)
+                        </td>
+                        <td>
+                            @if (item.GioiTinh == true)
+                            {
+                                @Html.DisplayName("Nam")
+                            }
+                            else
+                            {
+                                @Html.DisplayName("Nữ")
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NgaySinh)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SoTCHT)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SoTCCL)
+                        </td>
+                        <td>
+                            @if (item.TrangThai == true)
+                            {
+                                @Html.DisplayName("Good")
+                            }
+                            else
+                            {
+                                @Html.DisplayName("Warning")
+                            }
+                        </td>
+                        <td align="center">
+                            @*@Html.ActionLink("Sửa", "Edit", new {id = item.USER_ID}) |
+                                @Html.ActionLink("Xóa", "Delete", new {id = item.USER_ID})*@
+                            <ul class="contro_function">
+                                <li>
+                                    <a title="Cập nhật" href="@Url.Action("Edit", new { id = item.SinhVienId })">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                </li>
+                                <li>|</li>
+                                <li>
+                                    <a title="Xóa" href="@Url.Action("Delete", new { id = item.SinhVienId })">
+                                        <i class="fa fa-remove" style="color:red;"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+
+
+        </table>
+    </div>
+</section>

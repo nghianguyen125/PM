@@ -195,10 +195,22 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\Admin\AdminController.cs" />
+    <Compile Include="Controllers\Admin\DeTaiController.cs" />
+    <Compile Include="Controllers\Admin\GiangVienController.cs" />
     <Compile Include="Controllers\Admin\KhoaController.cs" />
+    <Compile Include="Controllers\Admin\KhoaHocController.cs" />
     <Compile Include="Controllers\Admin\LichController.cs" />
-    <Compile Include="Controllers\Admin\LoaiTaiKhoanController.cs" />
+    <Compile Include="Controllers\Admin\NamHocController.cs" />
+    <Compile Include="Controllers\Admin\NganhController.cs" />
     <Compile Include="Controllers\Admin\NhomSVController.cs" />
+    <Compile Include="Controllers\Admin\PhanDeTaiChoDotKhoaLuanController.cs" />
+    <Compile Include="Controllers\Admin\PhanDeTaiChoNhomSVController.cs" />
+    <Compile Include="Controllers\Admin\QuanLyLicheController.cs" />
+    <Compile Include="Controllers\Admin\SinhVienController.cs" />
+    <Compile Include="Controllers\Admin\SinhVienKhoaHocController.cs" />
+    <Compile Include="Controllers\Admin\SinhVienNganhHocController.cs" />
+    <Compile Include="Controllers\Admin\SinhVienThuocKhoaController.cs" />
+    <Compile Include="Controllers\Admin\SinhVienThuocNhomSVController.cs" />
     <Compile Include="Controllers\Admin\TaiKhoanController.cs" />
     <Compile Include="Controllers\Admin\TinTucController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -280,6 +292,9 @@
     <Compile Include="Models\SinhVienKhoaHoc.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SinhVienNganhHoc.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SinhVienThuocKhoa.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
@@ -293,9 +308,6 @@
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TinTucThongBao.cs">
-      <DependentUpon>DB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TrangThai.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -2031,21 +2043,11 @@
     <Content Include="Views\TaiKhoan\Delete.cshtml" />
     <Content Include="Views\TaiKhoan\Details.cshtml" />
     <Content Include="Views\TaiKhoan\Edit.cshtml" />
-    <Content Include="Views\NhomSVs\Create.cshtml" />
-    <Content Include="Views\NhomSVs\Delete.cshtml" />
-    <Content Include="Views\NhomSVs\Details.cshtml" />
-    <Content Include="Views\NhomSVs\Edit.cshtml" />
-    <Content Include="Views\NhomSVs\Index.cshtml" />
     <Content Include="Views\Khoas\Create.cshtml" />
     <Content Include="Views\Khoas\Delete.cshtml" />
     <Content Include="Views\Khoas\Details.cshtml" />
     <Content Include="Views\Khoas\Edit.cshtml" />
     <Content Include="Views\Khoas\Index.cshtml" />
-    <Content Include="Views\NhomSV\Create.cshtml" />
-    <Content Include="Views\NhomSV\Delete.cshtml" />
-    <Content Include="Views\NhomSV\Details.cshtml" />
-    <Content Include="Views\NhomSV\Edit.cshtml" />
-    <Content Include="Views\NhomSV\Index.cshtml" />
     <Content Include="Views\Khoa\Create.cshtml" />
     <Content Include="Views\Khoa\Delete.cshtml" />
     <Content Include="Views\Khoa\Details.cshtml" />
@@ -2076,6 +2078,86 @@
     <Content Include="Views\LoaiTaiKhoan\Details.cshtml" />
     <Content Include="Views\LoaiTaiKhoan\Edit.cshtml" />
     <Content Include="Views\LoaiTaiKhoan\Index.cshtml" />
+    <Content Include="Views\KhoaHoc\Create.cshtml" />
+    <Content Include="Views\KhoaHoc\Delete.cshtml" />
+    <Content Include="Views\KhoaHoc\Details.cshtml" />
+    <Content Include="Views\KhoaHoc\Edit.cshtml" />
+    <Content Include="Views\KhoaHoc\Index.cshtml" />
+    <Content Include="Views\Nganh\Create.cshtml" />
+    <Content Include="Views\Nganh\Delete.cshtml" />
+    <Content Include="Views\Nganh\Details.cshtml" />
+    <Content Include="Views\Nganh\Edit.cshtml" />
+    <Content Include="Views\Nganh\Index.cshtml" />
+    <Content Include="Views\NamHoc\Create.cshtml" />
+    <Content Include="Views\NamHoc\Delete.cshtml" />
+    <Content Include="Views\NamHoc\Details.cshtml" />
+    <Content Include="Views\NamHoc\Edit.cshtml" />
+    <Content Include="Views\NamHoc\Index.cshtml" />
+    <Content Include="Views\SinhVienDS\Create.cshtml" />
+    <Content Include="Views\SinhVienDS\Delete.cshtml" />
+    <Content Include="Views\SinhVienDS\Details.cshtml" />
+    <Content Include="Views\SinhVienDS\Edit.cshtml" />
+    <Content Include="Views\SinhVienDS\Index.cshtml" />
+    <Content Include="Views\SinhVien\Create.cshtml" />
+    <Content Include="Views\SinhVien\Delete.cshtml" />
+    <Content Include="Views\SinhVien\Details.cshtml" />
+    <Content Include="Views\SinhVien\Edit.cshtml" />
+    <Content Include="Views\SinhVien\Index.cshtml" />
+    <Content Include="Views\SinhVienKhoaHoc\Create.cshtml" />
+    <Content Include="Views\SinhVienKhoaHoc\Delete.cshtml" />
+    <Content Include="Views\SinhVienKhoaHoc\Details.cshtml" />
+    <Content Include="Views\SinhVienKhoaHoc\Edit.cshtml" />
+    <Content Include="Views\SinhVienKhoaHoc\Index.cshtml" />
+    <Content Include="Views\SinhVienThuocKhoa\Create.cshtml" />
+    <Content Include="Views\SinhVienThuocKhoa\Delete.cshtml" />
+    <Content Include="Views\SinhVienThuocKhoa\Details.cshtml" />
+    <Content Include="Views\SinhVienThuocKhoa\Edit.cshtml" />
+    <Content Include="Views\SinhVienThuocKhoa\Index.cshtml" />
+    <Content Include="Views\SinhVienKhoaHocs\Create.cshtml" />
+    <Content Include="Views\SinhVienKhoaHocs\Delete.cshtml" />
+    <Content Include="Views\SinhVienKhoaHocs\Details.cshtml" />
+    <Content Include="Views\SinhVienKhoaHocs\Edit.cshtml" />
+    <Content Include="Views\SinhVienKhoaHocs\Index.cshtml" />
+    <Content Include="Views\SinhVienKhoaHoc\DSSV.cshtml" />
+    <Content Include="Views\SinhVienThuocKhoa\DSSV.cshtml" />
+    <Content Include="Views\SinhVienNganhHoc\Create.cshtml" />
+    <Content Include="Views\SinhVienNganhHoc\Delete.cshtml" />
+    <Content Include="Views\SinhVienNganhHoc\Details.cshtml" />
+    <Content Include="Views\SinhVienNganhHoc\Edit.cshtml" />
+    <Content Include="Views\SinhVienNganhHoc\Index.cshtml" />
+    <Content Include="Views\SinhVienNganhHoc\DSSV.cshtml" />
+    <Content Include="Views\PhanDeTaiChoDotKhoaLuan\Create.cshtml" />
+    <Content Include="Views\PhanDeTaiChoDotKhoaLuan\Delete.cshtml" />
+    <Content Include="Views\PhanDeTaiChoDotKhoaLuan\Details.cshtml" />
+    <Content Include="Views\PhanDeTaiChoDotKhoaLuan\Edit.cshtml" />
+    <Content Include="Views\PhanDeTaiChoDotKhoaLuan\Index.cshtml" />
+    <Content Include="Views\PhanDeTaiChoDotKhoaLuan\DSDT.cshtml" />
+    <Content Include="Views\PhanDeTaiChoNhomSV\Create.cshtml" />
+    <Content Include="Views\PhanDeTaiChoNhomSV\Delete.cshtml" />
+    <Content Include="Views\PhanDeTaiChoNhomSV\Details.cshtml" />
+    <Content Include="Views\PhanDeTaiChoNhomSV\Edit.cshtml" />
+    <Content Include="Views\PhanDeTaiChoNhomSV\Index.cshtml" />
+    <Content Include="Views\NhomSV\Create.cshtml" />
+    <Content Include="Views\NhomSV\Delete.cshtml" />
+    <Content Include="Views\NhomSV\Details.cshtml" />
+    <Content Include="Views\NhomSV\Edit.cshtml" />
+    <Content Include="Views\NhomSV\Index.cshtml" />
+    <Content Include="Views\SinhVienThuocNhomSV\Create.cshtml" />
+    <Content Include="Views\SinhVienThuocNhomSV\Delete.cshtml" />
+    <Content Include="Views\SinhVienThuocNhomSV\Details.cshtml" />
+    <Content Include="Views\SinhVienThuocNhomSV\Edit.cshtml" />
+    <Content Include="Views\SinhVienThuocNhomSV\Index.cshtml" />
+    <Content Include="Views\SinhVienThuocNhomSV\DSSV.cshtml" />
+    <Content Include="Views\QuanLyLiche\Create.cshtml" />
+    <Content Include="Views\QuanLyLiche\Delete.cshtml" />
+    <Content Include="Views\QuanLyLiche\Details.cshtml" />
+    <Content Include="Views\QuanLyLiche\Edit.cshtml" />
+    <Content Include="Views\QuanLyLiche\Index.cshtml" />
+    <Content Include="Views\GiangVien\Create.cshtml" />
+    <Content Include="Views\GiangVien\Delete.cshtml" />
+    <Content Include="Views\GiangVien\Details.cshtml" />
+    <Content Include="Views\GiangVien\Edit.cshtml" />
+    <Content Include="Views\GiangVien\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

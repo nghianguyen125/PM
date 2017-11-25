@@ -1,5 +1,6 @@
 ﻿@using ProjectManagement.Models
 @model ProjectManagement.Models.TaiKhoan
+
 @{
     ViewBag.Title = "Tạo mới Người dùng";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -7,7 +8,7 @@
 }
 
 <section class="content-header">
-    <h1>Tạo mới Người dùng</h1>
+    <h1>Tài khoản</h1>
 </section>
 <section class="content">
     @{
@@ -48,7 +49,7 @@
                         @Html.TextBoxFor(model => model.Password, new { @class = "form-control", type = "password" })
                         @Html.ValidationMessageFor(model => model.Password)
                     </div>
-                </div>                
+                </div>
                 <div class="form-group">
                     @Html.Label("Vai trò", new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
