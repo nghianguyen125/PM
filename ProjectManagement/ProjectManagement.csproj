@@ -200,6 +200,7 @@
     <Compile Include="Controllers\Admin\GiangVienController.cs" />
     <Compile Include="Controllers\Admin\GiangVienThuocKhoaController.cs" />
     <Compile Include="Controllers\Admin\KhoaController.cs" />
+    <Compile Include="Controllers\Admin\KhoaHocController.cs" />
     <Compile Include="Controllers\Admin\LichController.cs" />
     <Compile Include="Controllers\Admin\NamHocController.cs" />
     <Compile Include="Controllers\Admin\NganhController.cs" />
