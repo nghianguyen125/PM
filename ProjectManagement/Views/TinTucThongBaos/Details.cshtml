@@ -1,0 +1,20 @@
+﻿@model ProjectManagement.Models.TinTucThongBao
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-sm-8 col-md-9">
+        <!-- Blog Post -->
+        <div class="site-block">
+            <div class="row">
+                <div class="col-md-8">
+                    <h3 class="site-heading"><strong>@Html.DisplayFor(model => model.TieuDe)</strong></h3>
+                    <p>@Html.DisplayFor(model => model.NoiDung)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

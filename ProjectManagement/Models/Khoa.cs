@@ -19,6 +19,7 @@ namespace ProjectManagement.Models
             this.GiangVienThuocKhoas = new HashSet<GiangVienThuocKhoa>();
             this.Nganhs = new HashSet<Nganh>();
             this.SinhVienThuocKhoas = new HashSet<SinhVienThuocKhoa>();
+            this.NhomSVs = new HashSet<NhomSV>();
         }
     
         public decimal KhoaId { get; set; }
@@ -28,5 +29,6 @@ namespace ProjectManagement.Models
         public virtual ICollection<GiangVienThuocKhoa> GiangVienThuocKhoas { get; set; }
         public virtual ICollection<Nganh> Nganhs { get; set; }
         public virtual ICollection<SinhVienThuocKhoa> SinhVienThuocKhoas { get; set; }
+        public virtual ICollection<NhomSV> NhomSVs { get; set; }
     }
 }

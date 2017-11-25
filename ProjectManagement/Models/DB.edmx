@@ -112,6 +112,7 @@
           </Key>
           <Property Name="NhomSVId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="TenNhom" Type="nvarchar(max)" />
+          <Property Name="KhoaId" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="PhanDeTaiChoDotKhoaLuan">
           <Key>
@@ -381,6 +382,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_NhomSVs_Khoas">
+          <End Role="Khoas" Type="Self.Khoas" Multiplicity="0..1" />
+          <End Role="NhomSVs" Type="Self.NhomSVs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Khoas">
+              <PropertyRef Name="KhoaId" />
+            </Principal>
+            <Dependent Role="NhomSVs">
+              <PropertyRef Name="KhoaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PhanDeTaiChoDotKhoaLuan_DeTais">
           <End Role="DeTais" Type="Self.DeTais" Multiplicity="1" />
           <End Role="PhanDeTaiChoDotKhoaLuan" Type="Self.PhanDeTaiChoDotKhoaLuan" Multiplicity="*" />
@@ -646,6 +659,10 @@
             <End Role="NamHocs" EntitySet="NamHocs" />
             <End Role="NamHocs1" EntitySet="NamHocs" />
           </AssociationSet>
+          <AssociationSet Name="FK_NhomSVs_Khoas" Association="Self.FK_NhomSVs_Khoas">
+            <End Role="Khoas" EntitySet="Khoas" />
+            <End Role="NhomSVs" EntitySet="NhomSVs" />
+          </AssociationSet>
           <AssociationSet Name="FK_PhanDeTaiChoDotKhoaLuan_DeTais" Association="Self.FK_PhanDeTaiChoDotKhoaLuan_DeTais">
             <End Role="DeTais" EntitySet="DeTais" />
             <End Role="PhanDeTaiChoDotKhoaLuan" EntitySet="PhanDeTaiChoDotKhoaLuan" />
@@ -852,6 +869,10 @@
             <End Role="TaiKhoan" EntitySet="TaiKhoans" />
             <End Role="TinTucThongBao" EntitySet="TinTucThongBaos" />
           </AssociationSet>
+          <AssociationSet Name="FK_NhomSVs_Khoas" Association="ProjectManagementModel.FK_NhomSVs_Khoas">
+            <End Role="Khoa" EntitySet="Khoas" />
+            <End Role="NhomSV" EntitySet="NhomSVs" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="BinhLuan">
           <Key>
@@ -949,6 +970,7 @@
           <NavigationProperty Name="GiangVienThuocKhoas" Relationship="ProjectManagementModel.FK_GiangVienThuocKhoa_Khoas" FromRole="Khoa" ToRole="GiangVienThuocKhoa" />
           <NavigationProperty Name="Nganhs" Relationship="ProjectManagementModel.FK_dbo_Nganhs_dbo_Khoas_KhoaId" FromRole="Khoa" ToRole="Nganh" />
           <NavigationProperty Name="SinhVienThuocKhoas" Relationship="ProjectManagementModel.FK_SinhVienThuocKhoa_Khoas" FromRole="Khoa" ToRole="SinhVienThuocKhoa" />
+          <NavigationProperty Name="NhomSVs" Relationship="ProjectManagementModel.FK_NhomSVs_Khoas" FromRole="Khoa" ToRole="NhomSV" />
         </EntityType>
         <EntityType Name="LoaiTaiKhoan">
           <Key>
@@ -989,6 +1011,8 @@
           <Property Name="TenNhom" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="PhanDeTaiChoNhomSVs" Relationship="ProjectManagementModel.FK_PhanDeTaiChoNhomSV_NhomSVs" FromRole="NhomSV" ToRole="PhanDeTaiChoNhomSV" />
           <NavigationProperty Name="SinhVienThuocNhomSVs" Relationship="ProjectManagementModel.FK_SinhVienThuocNhomSV_NhomSVs" FromRole="NhomSV" ToRole="SinhVienThuocNhomSV" />
+          <Property Name="KhoaId" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Khoa" Relationship="ProjectManagementModel.FK_NhomSVs_Khoas" FromRole="NhomSV" ToRole="Khoa" />
         </EntityType>
         <EntityType Name="PhanDeTaiChoDotKhoaLuan">
           <Key>
@@ -1477,6 +1501,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_NhomSVs_Khoas">
+          <End Type="ProjectManagementModel.Khoa" Role="Khoa" Multiplicity="0..1" />
+          <End Type="ProjectManagementModel.NhomSV" Role="NhomSV" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Khoa">
+              <PropertyRef Name="KhoaId" />
+            </Principal>
+            <Dependent Role="NhomSV">
+              <PropertyRef Name="KhoaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1594,6 +1630,7 @@
           <EntitySetMapping Name="NhomSVs">
             <EntityTypeMapping TypeName="ProjectManagementModel.NhomSV">
               <MappingFragment StoreEntitySet="NhomSVs">
+                <ScalarProperty Name="KhoaId" ColumnName="KhoaId" />
                 <ScalarProperty Name="TenNhom" ColumnName="TenNhom" />
                 <ScalarProperty Name="NhomSVId" ColumnName="NhomSVId" />
               </MappingFragment>

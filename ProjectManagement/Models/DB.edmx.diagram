@@ -57,6 +57,7 @@
         <AssociationConnector Association="ProjectManagementModel.FK_SinhVienThuocNhomSV_SinhViens" />
         <AssociationConnector Association="ProjectManagementModel.FK_TaiKhoans_SinhViens" />
         <AssociationConnector Association="ProjectManagementModel.FK_dbo_TinTucs_dbo_TaiKhoans_TaiKhoanId" />
+        <AssociationConnector Association="ProjectManagementModel.FK_NhomSVs_Khoas" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
