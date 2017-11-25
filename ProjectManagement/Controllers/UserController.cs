@@ -29,7 +29,7 @@ namespace ProjectManagement.Controllers.User
                 //string checkValid = Session["userNameXaGan"].ToString();
                 if (App_Start.Classes.UserManager.Authenticated)
                 {
-                    return RedirectToAction("User/Logon", "User");
+                    return RedirectToAction("Logon", "User");
                 }
 
                 HttpCookie authCookie = System.Web.HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName];
@@ -39,11 +39,11 @@ namespace ProjectManagement.Controllers.User
                 Session.Clear();
                 Session.RemoveAll();
 
-                return RedirectToAction("User/Login");
+                return RedirectToAction("Login");
             }
             else
             {
-                return RedirectToAction("User/Login");
+                return RedirectToAction("Login");
             }
         }
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")] // This is for output cache false
@@ -122,7 +122,7 @@ namespace ProjectManagement.Controllers.User
         {
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("User/Login");
+                return RedirectToAction("Login");
             }
             //decimal aCount = db.ARTICLEs.Count();
             //ViewBag.NumberOfArticles = aCount;

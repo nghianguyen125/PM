@@ -49,6 +49,7 @@
         string strPath = Request.ApplicationPath;
         string host = Request.Url.Host;
         string urlHome = "/";
+        string iduser = ViewBag.sv + "";
     }
     <!-- Page Container -->
     <!-- In the PHP version you can set the following options from inc/config file -->
@@ -88,13 +89,13 @@
                             <a href="#">My Thesis</a>
                         </li>
                         <li>
-                            <a href="javascript:void(0)" class="site-nav-sub"><i class="fa fa-angle-down site-nav-arrow"></i>Account</a>
+                            <a href="javascript:void(0)" class="site-nav-sub"><i class="fa fa-angle-down site-nav-arrow"></i>@ProjectManagement.App_Start.Classes.UserManager.GetUserName</a>
                             <ul>
                                 <li>
-                                    <a href="#"><i class="fa fa-info-circle"></i> My Account</a>
+                                    <a href="#"><i class="fa fa-info-circle fa-fw pull-right"></i> My Account</a>
                                 </li>
                                 <li>
-                                    <a href="#"><i class="fa fa-sign-out"></i> Logout</a>
+                                    <a href="#"><i class="fa fa-sign-out fa-fw pull-right"></i> Logout</a>
                                 </li>            
                             </ul>
                         </li>

@@ -1,7 +1,8 @@
-﻿
+﻿@model ProjectManagement.Models.TaiKhoan
 @{
     Layout = null;
 }
+
 
 <!DOCTYPE html>
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
@@ -22,72 +23,100 @@
 
     <!-- Icons -->
     <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
-    <link rel="shortcut icon" href="~/images/favicon.png">
-    <link rel="apple-touch-icon" href="~/images/icon57.png" sizes="57x57">
-    <link rel="apple-touch-icon" href="~/images/icon72.png" sizes="72x72">
-    <link rel="apple-touch-icon" href="~/images/icon76.png" sizes="76x76">
-    <link rel="apple-touch-icon" href="~/images/icon114.png" sizes="114x114">
-    <link rel="apple-touch-icon" href="~/images/icon120.png" sizes="120x120">
-    <link rel="apple-touch-icon" href="~/images/icon144.png" sizes="144x144">
-    <link rel="apple-touch-icon" href="~/images/icon152.png" sizes="152x152">
-    <link rel="apple-touch-icon" href="~/images/icon180.png" sizes="180x180">
+    <link rel="shortcut icon" href="img/favicon.png">
+    <link rel="apple-touch-icon" href="img/icon57.png" sizes="57x57">
+    <link rel="apple-touch-icon" href="img/icon72.png" sizes="72x72">
+    <link rel="apple-touch-icon" href="img/icon76.png" sizes="76x76">
+    <link rel="apple-touch-icon" href="img/icon114.png" sizes="114x114">
+    <link rel="apple-touch-icon" href="img/icon120.png" sizes="120x120">
+    <link rel="apple-touch-icon" href="img/icon144.png" sizes="144x144">
+    <link rel="apple-touch-icon" href="img/icon152.png" sizes="152x152">
+    <link rel="apple-touch-icon" href="img/icon180.png" sizes="180x180">
     <!-- END Icons -->
     <!-- Stylesheets -->
     <!-- Bootstrap is included in its original form, unaltered -->
     <link rel="stylesheet" href="~/css/bootstrap.min.css">
-    <link href="~/Css/login.css" rel="stylesheet" />
+
     <!-- Related styles of various icon packs and plugins -->
-    <link href="~/Css/login.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/plugins1.css">
+
     <!-- The main stylesheet of this template. All Bootstrap overwrites are defined in here -->
+    <link rel="stylesheet" href="~/css/main1.css">
 
     <!-- Include a specific file here from css/themes/ folder to alter the default theme of the template -->
     <!-- The themes stylesheet of this template (for using specific theme color in individual elements - must included last) -->
+    <link rel="stylesheet" href="~/css/themes1.css">
     <!-- END Stylesheets -->
     <!-- Modernizr (browser feature detection library) & Respond.js (Enable responsive CSS code on browsers that don't support it, eg IE8) -->
-    <script src="~/js/login.js"></script>
+    <script src="~/js/vendor/modernizr-2.7.1-respond-1.4.2.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="pr-wrap">
-                    <div class="pass-reset">
-                        <label>
-                            Enter the email you signed up with
-                        </label>
-                        <input type="email" placeholder="Email" />
-                        <input type="submit" value="Submit" class="pass-reset-submit btn btn-success btn-sm" />
+@using (Html.BeginForm())
+{
+    <!-- Login Full Background -->
+    <!-- For best results use an image with a resolution of 1280x1280 pixels (prefer a blurred image for smaller file size) -->
+    <img src="~/images/login_full_bg.jpg" alt="Login Full Background" class="full-bg animation-pulseSlow">
+    <!-- END Login Full Background -->
+    <!-- Login Container -->
+    @Html.AntiForgeryToken()
+    <div id="login-container" class="animation-fadeIn">
+        <!-- Login Title -->
+        <div class="login-title text-center">
+            <h1><i class="gi gi-flash"></i> <strong>DTU</strong><br><small><strong>Thesis Graduation</strong></small></h1>
+        </div>
+        <!-- END Login Title -->
+        <!-- Login Block -->
+        <div class="block push-bit">
+            <!-- Login Form -->
+            <form action="index.html" method="post" id="form-login" class="form-horizontal form-bordered form-control-borderless">
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        @Html.ValidationSummary(true)
+                        @Html.ValidationMessage("error", "", new { @class = "text-danger", style = "text-align:center; display: block" })
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="gi gi-envelope"></i></span>
+                            @Html.TextBoxFor(model => model.Username, new { @class = "form-control input-lg", placeholder = "UserName" })
+                            @Html.ValidationMessageFor(model => model.Username, String.Empty, new { @class = "text-danger" })
+                        </div>
                     </div>
                 </div>
-                <div class="wrap">
-                    <p class="form-title">
-                        Sign In
-                    </p>
-                    <form class="login">
-                        <input type="text" placeholder="Username" />
-                        <input type="password" placeholder="Password" />
-                        <input type="submit" value="Sign In" class="btn btn-success btn-sm" />
-                        <div class="remember-forgot">
-                            @*<div class="row">
-                                <div class="col-md-6">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" />
-                                            Remember Me
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 forgot-pass-content">
-                                    <a href="javascription:void(0)" class="forgot-pass">Forgot Password</a>
-                                </div>
-                            </div>*@
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="gi gi-asterisk"></i></span>
+                            @Html.PasswordFor(model => model.Password, new { @class = "form-control input-lg", placeholder = "Password" })
+                            @Html.ValidationMessageFor(model => model.Password, String.Empty, new { @class = "text-danger" })
                         </div>
-                    </form>
+                    </div>
                 </div>
-            </div>
+                <div class="form-group form-actions">
+                    <div class="col-xs-4">
+                        
+                    </div>
+                    <div class="col-xs-8 text-right">
+                        <button type="submit" class="btn btn-sm btn-primary" value="Đăng nhập">Login</button>
+                    </div>
+                </div>
+                
+            </form>
+            <!-- END Login Form -->
         </div>
-        @*<div class="posted-by">Posted By: <a href="http://www.jquery2dotnet.com">Bhaumik Patel</a></div>*@
+        <!-- END Login Block -->
     </div>
+    <!-- END Login Container -->
 
+    <!-- Include Jquery library from Google's CDN but if something goes wrong get Jquery from local file (Remove 'http:' if you have SSL) -->
+}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script>!window.jQuery && document.write(decodeURI('%3Cscript src="js/vendor/jquery-1.11.1.min.js"%3E%3C/script%3E'));</script>
+
+    <!-- Bootstrap.js, Jquery plugins and Custom JS code -->
+    <script src="~/js/vendor/bootstrap.min.js"></script>
+    <script src="~/js/plugins1.js"></script>
+    <script src="~/js/app1.js"></script>
+
+    <!-- Load and execute javascript code used only in this page -->
+    <script src="~/js/pages/login.js"></script>
+    <script>$(function(){ Login.init(); });</script>
 </body>
 </html>

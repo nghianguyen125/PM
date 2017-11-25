@@ -2186,12 +2186,10 @@
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\MainPage\Index.cshtml" />
     <Content Include="Views\User\Logon.cshtml" />
-    <Content Include="Views\SinhVienThuocNhomSVs\Create.cshtml" />
-    <Content Include="Views\SinhVienThuocNhomSVs\Delete.cshtml" />
     <Content Include="Views\SinhVienThuocNhomSVs\Details.cshtml" />
-    <Content Include="Views\SinhVienThuocNhomSVs\Edit.cshtml" />
     <Content Include="Views\SinhVienThuocNhomSVs\Index.cshtml" />
     <Content Include="Views\TinTucThongBaos\Index.cshtml" />
+    <Content Include="Views\TinTucThongBaos\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
