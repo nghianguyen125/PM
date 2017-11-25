@@ -1,0 +1,48 @@
+﻿@model ProjectManagement.Models.SinhVienThuocNhomSV
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    string idNhom = ViewBag.IdNhom + "";
+}
+<section class="content-header">
+    <h1>Xóa Sinh Viên Khỏi Nhóm</h1>
+</section>
+<section class="content">
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">Bạn có chắc muốn xóa?</h3>
+        </div>
+        <dl class="dl-horizontal">
+            <dt>
+                Mã Nhóm
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.NhomSVId)
+            </dd>
+            <dt>
+                Tên Sinh viên
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.SinhVien.HoTen)
+            </dd>
+            <dt>
+                Ngày Phân
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.NgayPhan)
+            </dd>
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="box-footer">
+                @*<button type="submit" class="btn btn-default">Cancel</button>*@
+                @*@Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })*@
+                <a href="/Admin/SinhVienThuocNhomSV/DSSV?NId=@idNhom" class="btn btn-primary pull-left">Back to List</a>
+                <input type="submit" value="Delete" class="btn btn-primary pull-right" />
+            </div>
+        }
+    </div>
+</section>
