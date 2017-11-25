@@ -6,6 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
+using Microsoft.AspNet.Identity;
+using ProjectManagement.App_Start.Classes;
 using ProjectManagement.Models;
 
 namespace ProjectManagement.Controllers.Admin
@@ -17,6 +20,28 @@ namespace ProjectManagement.Controllers.Admin
         // GET: DeTai
         public ActionResult Index()
         {
+            if (UserManager.Authenticated)
+            {
+                //string checkValid = Session["userNameXaGan"].ToString();
+                if (App_Start.Classes.UserManager.Authenticated)
+                {
+                    return RedirectToAction("Logon", "User");
+                }
+
+                HttpCookie authCookie = System.Web.HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName];
+                if (authCookie != null) authCookie.Expires = DateTime.Now.AddDays(-1);
+                System.Web.Security.FormsAuthentication.SignOut();
+                Session.Abandon();
+                Session.Clear();
+                Session.RemoveAll();
+
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
+
             return View(db.DeTais.ToList());
         }
 

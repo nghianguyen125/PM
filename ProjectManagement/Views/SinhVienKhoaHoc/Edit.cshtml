@@ -27,22 +27,8 @@
         {
             @Html.AntiForgeryToken()
 
+            @Html.HiddenFor(model => model.KhoaHocID)
             @Html.HiddenFor(model => model.SinhVienId)
-            <div class="form-group">
-                @Html.Label("Tên Sinh Viên", new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("SinhVienId", null, String.Empty, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.SinhVien.HoTen)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.Label("Tên Khóa Học", new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("KhoaHocID", null, String.Empty, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.KhoaHoc.TenKhoaHoc)
-                </div>
-            </div>
                 <div class="form-group">
                     @Html.Label("Ngày Bắt đầu", new { @class = "control-label col-md-2" })
                     <div class="col-md-10">

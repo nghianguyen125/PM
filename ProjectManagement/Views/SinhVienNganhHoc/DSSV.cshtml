@@ -1,22 +1,22 @@
 ﻿@using ProjectManagement.Models
-@model IEnumerable<ProjectManagement.Models.SinhVienKhoaHoc>
+@model IEnumerable<ProjectManagement.Models.SinhVienNganhHoc>
 
 @{
     ViewBag.Title = "DSSV";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-    string tenKhoaHoc = ViewBag.TenKhoaHoc + "";
-    string idKhoaHoc = ViewBag.IdKhoaHoc + "";
+    string tenNganh = ViewBag.TenNganh + "";
+    string idNganh = ViewBag.NganhId + "";
 }
 
 <section class="content-header">
-    <h1>Sinh Viên / Khóa Học</h1>
+    <h1>Sinh Viên / Ngành Học</h1>
 </section>
 <section class="content">
-    <h1>@tenKhoaHoc</h1>
+    <h1>@tenNganh</h1>
     <div class="row" style="padding-bottom: 10px;">
         <div class="col-md-12">
             @*@Html.ActionLink("Tạo mới", "Create", null, new { @class = "btn btn-primary pull-left" })*@
-            <a href="/Admin/SinhVienKhoaHoc/Create?KHId=@idKhoaHoc" class="btn btn-primary pull-left">Tạo mới</a>
+            <a href="/SinhVienNganhHoc/Create?NId=@idNganh" class="btn btn-primary pull-left">Tạo mới</a>
         </div>
     </div>
     <div class="box">
@@ -45,7 +45,7 @@
                 @foreach (var item in Model)
                 {
                     stt++;
-                    List<SinhVienKhoaHoc> userCreatedBy = db.SinhVienKhoaHocs.ToList();
+                    List<SinhVienNganhHoc> userCreatedBy = db.SinhVienNganhHocs.ToList();
                     <tr>
                         <td>@stt</td>
                         <td>
@@ -65,13 +65,13 @@
                                 @Html.ActionLink("Xóa", "Delete", new {id = item.USER_ID})*@
                             <ul class="contro_function" style="width: 70px">
                                 <li>
-                                    <a title="Chỉnh Sửa" href="@Url.Action("Edit", new { KHId = item.KhoaHocID, SVId = item.SinhVienId })">
+                                    <a title="Chỉnh Sửa" href="@Url.Action("Edit", new { NId = item.NganhId, SVId = item.SinhVienId })">
                                         <i class="fa fa-edit"></i>
                                     </a>
                                 </li>
                                 <li>|</li>
                                 <li>
-                                    <a title="Xóa" href="@Url.Action("Delete", new { KHId = item.KhoaHocID, SVId = item.SinhVienId })">
+                                    <a title="Xóa" href="@Url.Action("Delete", new { NId = item.NganhId, SVId = item.SinhVienId })">
                                         <i class="fa fa-remove" style="color:red;"></i>
                                     </a>
                                 </li>
@@ -80,9 +80,6 @@
                     </tr>
                 }
             </tbody>
-
-
-
         </table>
     </div>
     <div class="box-footer">

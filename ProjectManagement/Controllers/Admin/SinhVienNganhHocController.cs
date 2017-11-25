@@ -130,13 +130,13 @@ namespace ProjectManagement.Controllers.Admin
             {
                 ViewBag.TenNganh = kh.TenNganh;
                 ViewBag.IdNganh = kh.NganhId;
-                ViewBag.NganhID = new SelectList(db.Nganhs, "NganhId", "TenNganh", kh.NganhId);
+                //ViewBag.NganhID = new SelectList(db.Nganhs, "NganhId", "TenNganh", kh.NganhId);
             }
             else
             {
                 ViewBag.NganhID = new SelectList(db.Nganhs, "NganhId", "TenNganh");
             }
-            //ViewBag.NganhID = new SelectList(db.Nganhs, "NganhId", "TenNganh", sinhVienNganhHoc.SingleOrDefault().NganhId);
+            ViewBag.NganhID = new SelectList(db.Nganhs, "NganhId", "TenNganh", sinhVienNganhHoc.NganhId);
             ViewBag.SinhVienId = new SelectList(db.SinhViens, "SinhVienId", "HoTen", sinhVienNganhHoc.SinhVienId);
             return View(sinhVienNganhHoc);
         }
