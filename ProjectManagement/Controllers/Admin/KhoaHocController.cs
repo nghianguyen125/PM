@@ -1,4 +1,4 @@
-﻿using System
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -130,6 +130,4 @@ namespace ProjectManagement.Controllers.Admin
         }
     }
 }
-Implementing Basic CRUD Functionality with the Entity Framework in ASP.NET MVC Application
-The Contoso University sample web application demonstrates how to create ASP.NET MVC 5 applications using the Entity Framework 6 Code First and Visual Studio...
-docs.microsoft.com
+
