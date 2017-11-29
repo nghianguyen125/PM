@@ -8,114 +8,109 @@ using System.Web;
 using System.Web.Mvc;
 using ProjectManagement.Models;
 
-namespace ProjectManagement.Controllers.Admin
+namespace ProjectManagement.Controllers
 {
-    public class KhoaHocController : Controller
+    public class DeTaisController : Controller
     {
         private ProjectManagementEntities db = new ProjectManagementEntities();
 
-        // GET: KhoaHoc
-        public ActionResult Index()
+        // GET: DeTais
+        public ActionResult Index(string id)
         {
-            var khoaHocs = db.KhoaHocs.Include(k => k.NamHoc);
-            return View(khoaHocs.ToList());
+            return View(db.DeTais.ToList());
         }
 
-        // GET: KhoaHoc/Details/5
-        public ActionResult Details(decimal? id)
+        // GET: DeTais/Details/5
+        public ActionResult Details(decimal id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            KhoaHoc khoaHoc = db.KhoaHocs.Find(id);
-            if (khoaHoc == null)
+            DeTai deTai = db.DeTais.Find(id);
+            if (deTai == null)
             {
                 return HttpNotFound();
             }
-            return View(khoaHoc);
+            return View(deTai);
         }
 
-        // GET: KhoaHoc/Create
+        // GET: DeTais/Create
         public ActionResult Create()
         {
-            ViewBag.NamHocHocKyId = new SelectList(db.NamHocs, "NamHocHocKyId", "TenNamHocHocKy");
             return View();
         }
 
-        // POST: KhoaHoc/Create
+        // POST: DeTais/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "KhoaHocID,TenKhoaHoc,NamHocHocKyId")] KhoaHoc khoaHoc)
+        public ActionResult Create([Bind(Include = "DeTaiId,TenDeTai,MoTa,SoLuongThanhVien,NgayTao,NgayDangKy")] DeTai deTai)
         {
             if (ModelState.IsValid)
             {
-                db.KhoaHocs.Add(khoaHoc);
+                db.DeTais.Add(deTai);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.NamHocHocKyId = new SelectList(db.KhoaHocs, "NamHocHocKyId", "TenKhoaHoc", khoaHoc.NamHocHocKyId);
-            return View(khoaHoc);
+            return View(deTai);
         }
 
-        // GET: KhoaHoc/Edit/5
-        public ActionResult Edit(decimal? id)
+        // GET: DeTais/Edit/5
+        public ActionResult Edit(decimal id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            KhoaHoc khoaHoc = db.KhoaHocs.Find(id);
-            if (khoaHoc == null)
+            DeTai deTai = db.DeTais.Find(id);
+            if (deTai == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.NamHocHocKyId = new SelectList(db.NamHocs, "NamHocHocKyId", "TenNamHocHocKy", khoaHoc.NamHocHocKyId);
-            return View(khoaHoc);
+            return View(deTai);
         }
 
-        // POST: KhoaHoc/Edit/5
+        // POST: DeTais/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "KhoaHocID,TenKhoaHoc,NamHocHocKyId")] KhoaHoc khoaHoc)
+        public ActionResult Edit([Bind(Include = "DeTaiId,TenDeTai,MoTa,SoLuongThanhVien,NgayTao,NgayDangKy")] DeTai deTai)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(khoaHoc).State = EntityState.Modified;
+                db.Entry(deTai).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.NamHocHocKyId = new SelectList(db.NamHocs, "NamHocHocKyId", "TenKhoaHoc", khoaHoc.NamHocHocKyId);
-            return View(khoaHoc);
+            return View(deTai);
         }
 
-        // GET: KhoaHoc/Delete/5
-        public ActionResult Delete(decimal? id)
+        // GET: DeTais/Delete/5
+        public ActionResult Delete(decimal id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            KhoaHoc khoaHoc = db.KhoaHocs.Find(id);
-            if (khoaHoc == null)
+            DeTai deTai = db.DeTais.Find(id);
+            if (deTai == null)
             {
                 return HttpNotFound();
             }
-            return View(khoaHoc);
+            return View(deTai);
         }
 
-        // POST: KhoaHoc/Delete/5
+        // POST: DeTais/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(decimal id)
         {
-            KhoaHoc khoaHoc = db.KhoaHocs.Find(id);
-            db.KhoaHocs.Remove(khoaHoc);
+            DeTai deTai = db.DeTais.Find(id);
+            db.DeTais.Remove(deTai);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -130,4 +125,3 @@ namespace ProjectManagement.Controllers.Admin
         }
     }
 }
-

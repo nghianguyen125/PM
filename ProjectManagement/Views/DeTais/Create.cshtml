@@ -1,0 +1,79 @@
+﻿@model ProjectManagement.Models.DeTai
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+
+<section class="content">
+    @{
+        int countError = ViewBag.CountError != null ? (int)ViewBag.CountError : 0;
+        if (countError > 0)
+        {
+            @Html.ValidationSummary(true)
+            @Html.ValidationMessage("error", "", new { @class = "alert alert-danger alert-dismissable", style = "text-align:left; display: block" })
+        }
+    }
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">Tạo Đề Tài</h3>
+        </div>
+
+        @using (Html.BeginForm("Create", "DeTais", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="box-body">
+                <div class="form-group">
+                    @Html.Label("Mã Đề Tài", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.DeTaiId, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DeTaiId)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Tên Đề Tài", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.TenDeTai, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.TenDeTai)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Mô Tả", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.MoTa, new { @class = "form-control", @placeholder = "Nhập mô tả...", @cols = "80", @rows = "4" })
+                        @Html.ValidationMessageFor(model => model.MoTa)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Số Lượng Thành Viên", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.SoLuongThanhVien, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.SoLuongThanhVien)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Ngày Tạo", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.NgayTao, "{0:dd/MM/yyyy}", new { @class = "form-control", type = "date", required = "required" })
+                        @Html.ValidationMessageFor(model => model.NgayTao)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Ngày Đăng Ký", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.NgayDangKy, "{0:dd/MM/yyyy}", new { @class = "form-control", type = "date", required = "required" })
+                        @Html.ValidationMessageFor(model => model.NgayDangKy)
+                    </div>
+                </div>
+            </div>
+            <div class="box-footer">
+                @*<button type="submit" class="btn btn-default">Cancel</button>*@
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+                <input type="submit" value="Save" class="btn btn-primary pull-right" />
+            </div>
+        }
+    </div>
+</section>

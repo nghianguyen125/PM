@@ -11,15 +11,18 @@ namespace ProjectManagement.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class LoaiTaiKhoan
     {
         public LoaiTaiKhoan()
         {
             this.TaiKhoans = new HashSet<TaiKhoan>();
         }
-    
+        [Required(ErrorMessage = "Field can't be empty")]
         public decimal LoaiTaiKhoanId { get; set; }
+        [Required(ErrorMessage = "Field can't be empty")]
+        [StringLength(50, ErrorMessage = "Maximum is 50")]
         public string TenLoaiTaiKhoan { get; set; }
     
         public virtual ICollection<TaiKhoan> TaiKhoans { get; set; }

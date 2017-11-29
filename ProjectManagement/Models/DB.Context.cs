@@ -49,6 +49,7 @@ namespace ProjectManagement.Models
         public virtual DbSet<TaiKhoan> TaiKhoans { get; set; }
         public virtual DbSet<TaiLieu> TaiLieux { get; set; }
         public virtual DbSet<TinTucThongBao> TinTucThongBaos { get; set; }
-        public virtual DbSet<TrangThai> TrangThais { get; set; }
+        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

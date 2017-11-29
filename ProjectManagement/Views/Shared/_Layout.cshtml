@@ -1,5 +1,4 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
 <html class="no-js">
@@ -89,13 +88,19 @@
                             <a href="#">My Thesis</a>
                         </li>
                         <li>
+                            <a href="@(urlHome + "DeTais/Create")">Create Topic</a>
+                        </li>
+                        <li>
+                            <a href="@(urlHome + "DanhGiaDeTais/Index")">Review</a>
+                        </li>
+                        <li>
                             <a href="javascript:void(0)" class="site-nav-sub"><i class="fa fa-angle-down site-nav-arrow"></i>@ProjectManagement.App_Start.Classes.UserManager.GetUserName</a>
                             <ul>
                                 <li>
                                     <a href="#"><i class="fa fa-info-circle fa-fw pull-right"></i> My Account</a>
                                 </li>
                                 <li>
-                                    <a href="#"><i class="fa fa-sign-out fa-fw pull-right"></i> Logout</a>
+                                    <a href="@(urlHome + "User/Logout")"><i class="fa fa-sign-out fa-fw pull-right"></i> Logout</a>
                                 </li>            
                             </ul>
                         </li>

@@ -11,16 +11,20 @@ namespace ProjectManagement.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class KhoaHoc
     {
         public KhoaHoc()
         {
             this.SinhVienKhoaHocs = new HashSet<SinhVienKhoaHoc>();
         }
-    
+        [Required(ErrorMessage = "Field can't be empty")]
         public decimal KhoaHocID { get; set; }
+        [Required(ErrorMessage = "Field can't be empty")]
+        [StringLength(100, ErrorMessage = "Maximum is 100")]
         public string TenKhoaHoc { get; set; }
+        [Required(ErrorMessage = "Field can't be empty")]
         public decimal NamHocHocKyId { get; set; }
     
         public virtual NamHoc NamHoc { get; set; }

@@ -11,13 +11,22 @@ namespace ProjectManagement.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class BinhLuan
     {
+        [Required]
         public decimal BinhLuanId { get; set; }
+
+        [Required]
         public string NguoiBinhLuan { get; set; }
+
+        [Required]
+        [StringLength(500, ErrorMessage = "Maximum is 500")]
         public string NoiDungBinhLuan { get; set; }
         public Nullable<System.DateTime> ThoiGianBinhLuan { get; set; }
+
+        [Required]
         public decimal DeTaiId { get; set; }
     
         public virtual DeTai DeTai { get; set; }

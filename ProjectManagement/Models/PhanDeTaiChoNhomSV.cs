@@ -11,12 +11,18 @@ namespace ProjectManagement.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class PhanDeTaiChoNhomSV
     {
+
+        [Required(ErrorMessage = "Field can't be empty")]
         public decimal NhomSVId { get; set; }
+        [Required(ErrorMessage = "Field can't be empty")]
         public decimal DeTaiId { get; set; }
+        [Required(ErrorMessage = "Field can't be empty")]
         public Nullable<System.DateTime> NgayPhanDeTai { get; set; }
+        [StringLength(200, ErrorMessage = "Maximum is 200")]
         public string GhiChu { get; set; }
     
         public virtual DeTai DeTai { get; set; }

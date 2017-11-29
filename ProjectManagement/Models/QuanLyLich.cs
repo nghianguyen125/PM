@@ -11,11 +11,16 @@ namespace ProjectManagement.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class QuanLyLich
     {
+        [Required(ErrorMessage = "Field can't be empty")]
         public decimal DotKhoaLuanId { get; set; }
+        [Required(ErrorMessage = "Field can't be empty")]
         public System.DateTime MocThoiGian { get; set; }
+        [Required(ErrorMessage = "Field can't be empty")]
+        [StringLength(200, ErrorMessage = "Maximum is 200")]
         public string NoiDung { get; set; }
     
         public virtual DotKhoaLuan DotKhoaLuan { get; set; }

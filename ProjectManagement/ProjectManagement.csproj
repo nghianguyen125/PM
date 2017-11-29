@@ -216,6 +216,9 @@
     <Compile Include="Controllers\Admin\TaiKhoanController.cs" />
     <Compile Include="Controllers\Admin\TinTucController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\DanhGiaDeTaisController.cs" />
+    <Compile Include="Controllers\DeTaisController.cs" />
+    <Compile Include="Controllers\DotKhoaLuansController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MainPageController.cs" />
     <Compile Include="Controllers\SinhVienThuocNhomSVsController.cs" />
@@ -228,6 +231,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\BigViewModel.cs" />
     <Compile Include="Models\BinhLuan.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
@@ -320,9 +324,6 @@
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TinTucThongBao.cs">
-      <DependentUpon>DB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TrangThai.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1725,6 +1726,7 @@
     <Content Include="images\hinh.png" />
     <Content Include="images\hn_bottom_bg.png" />
     <Content Include="images\home_icon.png" />
+    <Content Include="images\icon-new.gif" />
     <Content Include="images\icon\a_actived.gif" />
     <Content Include="images\icon\bg.png" />
     <Content Include="images\icon\bg_top.png" />
@@ -2142,11 +2144,6 @@
     <Content Include="Views\SinhVienThuocKhoa\Details.cshtml" />
     <Content Include="Views\SinhVienThuocKhoa\Edit.cshtml" />
     <Content Include="Views\SinhVienThuocKhoa\Index.cshtml" />
-    <Content Include="Views\SinhVienKhoaHocs\Create.cshtml" />
-    <Content Include="Views\SinhVienKhoaHocs\Delete.cshtml" />
-    <Content Include="Views\SinhVienKhoaHocs\Details.cshtml" />
-    <Content Include="Views\SinhVienKhoaHocs\Edit.cshtml" />
-    <Content Include="Views\SinhVienKhoaHocs\Index.cshtml" />
     <Content Include="Views\SinhVienKhoaHoc\DSSV.cshtml" />
     <Content Include="Views\SinhVienThuocKhoa\DSSV.cshtml" />
     <Content Include="Views\SinhVienNganhHoc\Create.cshtml" />
@@ -2199,6 +2196,21 @@
     <Content Include="Views\SinhVienThuocNhomSVs\Index.cshtml" />
     <Content Include="Views\TinTucThongBaos\Index.cshtml" />
     <Content Include="Views\TinTucThongBaos\Details.cshtml" />
+    <Content Include="Views\DotKhoaLuans\Create.cshtml" />
+    <Content Include="Views\DotKhoaLuans\Delete.cshtml" />
+    <Content Include="Views\DotKhoaLuans\Details.cshtml" />
+    <Content Include="Views\DotKhoaLuans\Edit.cshtml" />
+    <Content Include="Views\DotKhoaLuans\Index.cshtml" />
+    <Content Include="Views\DeTais\Create.cshtml" />
+    <Content Include="Views\DeTais\Delete.cshtml" />
+    <Content Include="Views\DeTais\Details.cshtml" />
+    <Content Include="Views\DeTais\Edit.cshtml" />
+    <Content Include="Views\DeTais\Index.cshtml" />
+    <Content Include="Views\DanhGiaDeTais\Create.cshtml" />
+    <Content Include="Views\DanhGiaDeTais\Delete.cshtml" />
+    <Content Include="Views\DanhGiaDeTais\Details.cshtml" />
+    <Content Include="Views\DanhGiaDeTais\Edit.cshtml" />
+    <Content Include="Views\DanhGiaDeTais\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

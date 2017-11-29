@@ -11,7 +11,8 @@ namespace ProjectManagement.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class DeTai
     {
         public DeTai()
@@ -23,12 +24,20 @@ namespace ProjectManagement.Models
             this.PhanDeTaiChoGiangViens = new HashSet<PhanDeTaiChoGiangVien>();
             this.PhanDeTaiChoNhomSVs = new HashSet<PhanDeTaiChoNhomSV>();
         }
-    
+        [Required(ErrorMessage = "Field can't be empty")]
         public decimal DeTaiId { get; set; }
+        [Required(ErrorMessage = "Field can't be empty")]
+        [StringLength(100, ErrorMessage = "Maximum is 100")]
         public string TenDeTai { get; set; }
+        [Required(ErrorMessage = "Field can't be empty")]
+        [StringLength(255, ErrorMessage = "Maximum is 255")]
         public string MoTa { get; set; }
+        [Required(ErrorMessage = "Field can't be empty")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "SLTV must be numeric")]
         public Nullable<int> SoLuongThanhVien { get; set; }
+        [Required(ErrorMessage = "Field can't be empty")]
         public Nullable<System.DateTime> NgayTao { get; set; }
+        [Required(ErrorMessage = "Field can't be empty")]
         public Nullable<System.DateTime> NgayDangKy { get; set; }
     
         public virtual ICollection<BinhLuan> BinhLuans { get; set; }

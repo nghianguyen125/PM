@@ -11,7 +11,8 @@ namespace ProjectManagement.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class GiangVien
     {
         public GiangVien()
@@ -20,9 +21,12 @@ namespace ProjectManagement.Models
             this.PhanDeTaiChoGiangViens = new HashSet<PhanDeTaiChoGiangVien>();
             this.TaiKhoans = new HashSet<TaiKhoan>();
         }
-    
+        [Required(ErrorMessage = "Field can't be empty")]
         public string GiangVienId { get; set; }
+        [Required(ErrorMessage = "Field can't be empty")]
         public bool GioiTinh { get; set; }
+        [Required(ErrorMessage = "Field can't be empty")]
+        [StringLength(200, ErrorMessage = "Maximum is 200")]
         public string HoTen { get; set; }
     
         public virtual ICollection<GiangVienThuocKhoa> GiangVienThuocKhoas { get; set; }

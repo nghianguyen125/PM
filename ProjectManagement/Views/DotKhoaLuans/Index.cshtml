@@ -1,0 +1,47 @@
+﻿@model IEnumerable<ProjectManagement.Models.DotKhoaLuan>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TenDotKhoaLuan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NamHoc.TenNamHocHocKy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QuanLyLich.MocThoiGian)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QuanLyLich.NoiDung)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenDotKhoaLuan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NamHoc.TenNamHocHocKy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QuanLyLich.MocThoiGian)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QuanLyLich.NoiDung)
+        </td>
+    </tr>
+}
+
+</table>
