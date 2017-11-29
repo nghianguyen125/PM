@@ -31,6 +31,13 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    @Html.Label("Tiêu Đề", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.TieuDe, new { @class = "form-control", @placeholder = "Nhập nội dung..."})
+                        @Html.ValidationMessageFor(model => model.TieuDe)
+                    </div>
+                </div>
+                <div class="form-group">
                     @Html.Label("Mốc Thời Gian", new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.TextBoxFor(model => model.MocThoiGian, new { @class = "form-control", type = "date", required = "required" })

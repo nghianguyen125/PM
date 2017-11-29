@@ -83,6 +83,9 @@ namespace ProjectManagement.Controllers.Admin
             {
                 ViewBag.KhoaHocID = new SelectList(db.KhoaHocs, "KhoaHocID", "TenKhoaHoc");
             }
+            //var list1 = db.SinhViens.ToList();
+            //var list2 = db.SinhVienThuocKhoas.ToList();
+            //var sv = list1.Where(p => !list2.Any(p2 => p2.SinhVien.SinhVienId  == p.SinhVienId));
             ViewBag.SinhVienId = new SelectList(db.SinhViens, "SinhVienId", "HoTen");
             return View();
         }

@@ -197,11 +197,13 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\Admin\AdminController.cs" />
     <Compile Include="Controllers\Admin\DeTaiController.cs" />
+    <Compile Include="Controllers\Admin\DotKhoaLuanController.cs" />
     <Compile Include="Controllers\Admin\GiangVienController.cs" />
     <Compile Include="Controllers\Admin\GiangVienThuocKhoaController.cs" />
     <Compile Include="Controllers\Admin\KhoaController.cs" />
     <Compile Include="Controllers\Admin\KhoaHocController.cs" />
     <Compile Include="Controllers\Admin\LichController.cs" />
+    <Compile Include="Controllers\Admin\LoaiTaiKhoanController.cs" />
     <Compile Include="Controllers\Admin\NamHocController.cs" />
     <Compile Include="Controllers\Admin\NganhController.cs" />
     <Compile Include="Controllers\Admin\NhomSVController.cs" />
@@ -1653,10 +1655,13 @@
     <Content Include="Css\owl.carousel.css" />
     <Content Include="Css\plugins.css" />
     <Content Include="Css\plugins1.css" />
+    <Content Include="Css\reset.css" />
+    <Content Include="Css\reset1.css" />
     <Content Include="Css\respontive.css" />
     <Content Include="Css\Search.css" />
     <Content Include="Css\style.css" />
     <Content Include="Css\style1.css" />
+    <Content Include="Css\style2.css" />
     <Content Include="Css\tags.css" />
     <Content Include="Css\themes.css" />
     <Content Include="favicon.ico" />
@@ -1685,6 +1690,7 @@
     <Content Include="images\binhluan.jpg" />
     <Content Include="images\bnav_more.png" />
     <Content Include="images\caption.png" />
+    <Content Include="images\cd-arrow.svg" />
     <Content Include="images\close.png" />
     <Content Include="images\comment.png" />
     <Content Include="images\commentArticle.png" />
@@ -1889,7 +1895,11 @@
     <Content Include="images\xemnn_bg.gif" />
     <Content Include="js\app.js" />
     <Content Include="js\app1.js" />
+    <Content Include="js\jquery-2.1.4.js" />
+    <Content Include="js\jquery.mobile.custom.min.js" />
     <Content Include="js\login.js" />
+    <Content Include="js\main.js" />
+    <Content Include="js\modernizr.js" />
     <Content Include="js\pages\compCalendar.js" />
     <Content Include="js\plugins1.js" />
     <Content Include="js\vendor\bootstrap.min.js" />
@@ -2020,6 +2030,7 @@
     <Content Include="fonts\Semibold\OpenSans-Semibold.woff" />
     <Content Include="fonts\Semibold\OpenSans-Semibold.woff2" />
     <Content Include="images\icon\thongbao.pdf" />
+    <Content Include="js\.DS_Store" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
@@ -2190,9 +2201,15 @@
     <Content Include="Views\SinhVienThuocNhomSVs\Index.cshtml" />
     <Content Include="Views\TinTucThongBaos\Index.cshtml" />
     <Content Include="Views\TinTucThongBaos\Details.cshtml" />
+    <Content Include="Views\DotKhoaLuan\Create.cshtml" />
+    <Content Include="Views\DotKhoaLuan\Delete.cshtml" />
+    <Content Include="Views\DotKhoaLuan\Details.cshtml" />
+    <Content Include="Views\DotKhoaLuan\Edit.cshtml" />
+    <Content Include="Views\DotKhoaLuan\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

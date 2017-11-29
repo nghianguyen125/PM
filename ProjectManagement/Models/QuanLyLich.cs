@@ -15,6 +15,7 @@ namespace ProjectManagement.Models
     public partial class QuanLyLich
     {
         public decimal DotKhoaLuanId { get; set; }
+        public string TieuDe { get; set; }
         public System.DateTime MocThoiGian { get; set; }
         public string NoiDung { get; set; }
     

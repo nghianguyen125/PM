@@ -6,112 +6,111 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Security;
-using Microsoft.AspNet.Identity;
-using ProjectManagement.App_Start.Classes;
 using ProjectManagement.Models;
 
 namespace ProjectManagement.Controllers.Admin
 {
-    public class DeTaiController : Controller
+    public class LoaiTaiKhoanController : Controller
     {
         private ProjectManagementEntities db = new ProjectManagementEntities();
 
-        // GET: DeTai
+        // GET: LoaiTaiKhoan
         public ActionResult Index()
         {
-            return View(db.DeTais.ToList());
+            return View(db.LoaiTaiKhoans.ToList());
         }
 
-        // GET: DeTai/Details/5
+        // GET: LoaiTaiKhoan/Details/5
         public ActionResult Details(decimal id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DeTai deTai = db.DeTais.Find(id);
-            if (deTai == null)
+            LoaiTaiKhoan loaiTaiKhoan = db.LoaiTaiKhoans.Find(id);
+            if (loaiTaiKhoan == null)
             {
                 return HttpNotFound();
             }
-            return View(deTai);
+            return View(loaiTaiKhoan);
         }
 
-        // GET: DeTai/Create
+        // GET: LoaiTaiKhoan/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: DeTai/Create
+        // POST: LoaiTaiKhoan/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "DeTaiId,TenDeTai,MoTa,SoLuongThanhVien,NgayTao,NgayDangKy")] DeTai deTai)
+        public ActionResult Create([Bind(Include = "LoaiTaiKhoanId,TenLoaiTaiKhoan")] LoaiTaiKhoan loaiTaiKhoan)
         {
             if (ModelState.IsValid)
             {
-                db.DeTais.Add(deTai);
+                db.LoaiTaiKhoans.Add(loaiTaiKhoan);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(deTai);
+            return View(loaiTaiKhoan);
         }
 
-        // GET: DeTai/Edit/5
+        // GET: LoaiTaiKhoan/Edit/5
         public ActionResult Edit(decimal id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DeTai deTai = db.DeTais.Find(id);
-            if (deTai == null)
+            LoaiTaiKhoan loaiTaiKhoan = db.LoaiTaiKhoans.Find(id);
+            if (loaiTaiKhoan == null)
             {
                 return HttpNotFound();
             }
-            return View(deTai);
+            return View(loaiTaiKhoan);
         }
 
-        // POST: DeTai/Edit/5
+        // POST: LoaiTaiKhoan/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "DeTaiId,TenDeTai,MoTa,SoLuongThanhVien,NgayTao,NgayDangKy")] DeTai deTai)
+        public ActionResult Edit([Bind(Include = "LoaiTaiKhoanId,TenLoaiTaiKhoan")] LoaiTaiKhoan loaiTaiKhoan)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(deTai).State = EntityState.Modified;
+                db.Entry(loaiTaiKhoan).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(deTai);
+            return View(loaiTaiKhoan);
         }
 
-        // GET: DeTai/Delete/5
+        // GET: LoaiTaiKhoan/Delete/5
         public ActionResult Delete(decimal id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DeTai deTai = db.DeTais.Find(id);
-            if (deTai == null)
+            LoaiTaiKhoan loaiTaiKhoan = db.LoaiTaiKhoans.Find(id);
+            if (loaiTaiKhoan == null)
             {
                 return HttpNotFound();
             }
-            return View(deTai);
+            return View(loaiTaiKhoan);
         }
 
-        // POST: DeTai/Delete/5
+        // POST: LoaiTaiKhoan/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(decimal id)
         {
-            DeTai deTai = db.DeTais.Find(id);
-            db.DeTais.Remove(deTai);
+            LoaiTaiKhoan loaiTaiKhoan = db.LoaiTaiKhoans.Find(id);
+            db.LoaiTaiKhoans.Remove(loaiTaiKhoan);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

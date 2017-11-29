@@ -1,7 +1,7 @@
 ﻿@using System.Linq
 @using ProjectManagement.Models
 @using ProjectManagement.App_Start.Classes
-@model IEnumerable<ProjectManagement.Models.Lich>
+@model IEnumerable<ProjectManagement.Models.QuanLyLich>
 
 @{
     ViewBag.Title = "Index";
@@ -36,7 +36,7 @@
     @foreach (var item in Model)
     {
         stt++;
-        List<Lich> userCreatedBy = db.Liches.ToList();
+        List<QuanLyLich> userCreatedBy = db.QuanLyLiches.ToList();
         <tr>
             <td>@stt</td>
             <td>
