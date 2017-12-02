@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using ProjectManagement.App_Start.Classes;
 using ProjectManagement.Models;
 
 namespace ProjectManagement.Controllers.Admin
@@ -17,29 +19,53 @@ namespace ProjectManagement.Controllers.Admin
         // GET: TinTuc
         public ActionResult Index()
         {
-            return View(db.TinTucThongBaos.ToList());
+            if (!UserManager.Authenticated)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                return View(db.TinTucThongBaos.ToList());
+            }
+               
         }
 
         // GET: TinTuc/Details/5
         public ActionResult Details(decimal id)
         {
-            if (id == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            TinTucThongBao tinTuc = db.TinTucThongBaos.Find(id);
-            if (tinTuc == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                TinTucThongBao tinTuc = db.TinTucThongBaos.Find(id);
+                if (tinTuc == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(tinTuc);
             }
-            return View(tinTuc);
+            
         }
 
         // GET: TinTuc/Create
         public ActionResult Create()
         {
-            ViewBag.TaiKhoanId = new SelectList(db.TaiKhoans, "TaiKhoanId", "Username");
-            return View();
+            if (!UserManager.Authenticated)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                ViewBag.TaiKhoanId = new SelectList(db.TaiKhoans, "TaiKhoanId", "Username");
+                return View();
+            }
+               
         }
 
         // POST: TinTuc/Create
@@ -63,17 +89,25 @@ namespace ProjectManagement.Controllers.Admin
         // GET: TinTuc/Edit/5
         public ActionResult Edit(decimal id)
         {
-            if (id == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            TinTucThongBao tinTuc = db.TinTucThongBaos.Find(id);
-            if (tinTuc == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                TinTucThongBao tinTuc = db.TinTucThongBaos.Find(id);
+                if (tinTuc == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.TaiKhoanId = new SelectList(db.TaiKhoans, "TaiKhoanId", "Username");
+                return View(tinTuc);
             }
-            ViewBag.TaiKhoanId = new SelectList(db.TaiKhoans, "TaiKhoanId", "Username");
-            return View(tinTuc);
+            
         }
 
         // POST: TinTuc/Edit/5
@@ -96,16 +130,24 @@ namespace ProjectManagement.Controllers.Admin
         // GET: TinTuc/Delete/5
         public ActionResult Delete(decimal id)
         {
-            if (id == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            TinTucThongBao tinTuc = db.TinTucThongBaos.Find(id);
-            if (tinTuc == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                TinTucThongBao tinTuc = db.TinTucThongBaos.Find(id);
+                if (tinTuc == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(tinTuc);
             }
-            return View(tinTuc);
+           
         }
 
         // POST: TinTuc/Delete/5

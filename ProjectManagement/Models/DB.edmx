@@ -764,6 +764,7 @@
           <EntitySet Name="PhanDeTaiChoDotKhoaLuans" EntityType="ProjectManagementModel.PhanDeTaiChoDotKhoaLuan" />
           <EntitySet Name="PhanDeTaiChoGiangViens" EntityType="ProjectManagementModel.PhanDeTaiChoGiangVien" />
           <EntitySet Name="PhanDeTaiChoNhomSVs" EntityType="ProjectManagementModel.PhanDeTaiChoNhomSV" />
+          <EntitySet Name="QuanLyLiches" EntityType="ProjectManagementModel.QuanLyLich" />
           <EntitySet Name="SinhVienKhoaHocs" EntityType="ProjectManagementModel.SinhVienKhoaHoc" />
           <EntitySet Name="SinhVienNganhHocs" EntityType="ProjectManagementModel.SinhVienNganhHoc" />
           <EntitySet Name="SinhViens" EntityType="ProjectManagementModel.SinhVien" />
@@ -807,6 +808,10 @@
           <AssociationSet Name="FK_PhanDeTaiChoDotKhoaLuan_DotKhoaLuan" Association="ProjectManagementModel.FK_PhanDeTaiChoDotKhoaLuan_DotKhoaLuan">
             <End Role="DotKhoaLuan" EntitySet="DotKhoaLuans" />
             <End Role="PhanDeTaiChoDotKhoaLuan" EntitySet="PhanDeTaiChoDotKhoaLuans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuanLyLiches_DotKhoaLuan" Association="ProjectManagementModel.FK_QuanLyLiches_DotKhoaLuan">
+            <End Role="DotKhoaLuan" EntitySet="DotKhoaLuans" />
+            <End Role="QuanLyLich" EntitySet="QuanLyLiches" />
           </AssociationSet>
           <AssociationSet Name="FK_GiangVienThuocKhoa_GiangViens" Association="ProjectManagementModel.FK_GiangVienThuocKhoa_GiangViens">
             <End Role="GiangVien" EntitySet="GiangViens" />
@@ -887,11 +892,6 @@
           <AssociationSet Name="FK_dbo_TinTucs_dbo_TaiKhoans_TaiKhoanId" Association="ProjectManagementModel.FK_dbo_TinTucs_dbo_TaiKhoans_TaiKhoanId">
             <End Role="TaiKhoan" EntitySet="TaiKhoans" />
             <End Role="TinTucThongBao" EntitySet="TinTucThongBaos" />
-          </AssociationSet>
-          <EntitySet Name="QuanLyLiches" EntityType="ProjectManagementModel.QuanLyLich" />
-          <AssociationSet Name="FK_QuanLyLiches_DotKhoaLuan" Association="ProjectManagementModel.FK_QuanLyLiches_DotKhoaLuan">
-            <End Role="DotKhoaLuan" EntitySet="DotKhoaLuans" />
-            <End Role="QuanLyLich" EntitySet="QuanLyLiches" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="BinhLuan">
@@ -1068,6 +1068,16 @@
           <Property Name="GhiChu" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="DeTai" Relationship="ProjectManagementModel.FK_PhanDeTaiChoNhomSV_DeTais" FromRole="PhanDeTaiChoNhomSV" ToRole="DeTai" />
           <NavigationProperty Name="NhomSV" Relationship="ProjectManagementModel.FK_PhanDeTaiChoNhomSV_NhomSVs" FromRole="PhanDeTaiChoNhomSV" ToRole="NhomSV" />
+        </EntityType>
+        <EntityType Name="QuanLyLich">
+          <Key>
+            <PropertyRef Name="DotKhoaLuanId" />
+          </Key>
+          <Property Name="DotKhoaLuanId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="TieuDe" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MocThoiGian" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DotKhoaLuan" Relationship="ProjectManagementModel.FK_QuanLyLiches_DotKhoaLuan" FromRole="QuanLyLich" ToRole="DotKhoaLuan" />
         </EntityType>
         <EntityType Name="SinhVienKhoaHoc">
           <Key>
@@ -1281,6 +1291,18 @@
               <PropertyRef Name="DotKhoaLuanId" />
             </Principal>
             <Dependent Role="PhanDeTaiChoDotKhoaLuan">
+              <PropertyRef Name="DotKhoaLuanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuanLyLiches_DotKhoaLuan">
+          <End Type="ProjectManagementModel.DotKhoaLuan" Role="DotKhoaLuan" Multiplicity="1" />
+          <End Type="ProjectManagementModel.QuanLyLich" Role="QuanLyLich" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="DotKhoaLuan">
+              <PropertyRef Name="DotKhoaLuanId" />
+            </Principal>
+            <Dependent Role="QuanLyLich">
               <PropertyRef Name="DotKhoaLuanId" />
             </Dependent>
           </ReferentialConstraint>
@@ -1525,28 +1547,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="QuanLyLich">
-          <Key>
-            <PropertyRef Name="DotKhoaLuanId" />
-          </Key>
-          <Property Name="DotKhoaLuanId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="TieuDe" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="MocThoiGian" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="DotKhoaLuan" Relationship="ProjectManagementModel.FK_QuanLyLiches_DotKhoaLuan" FromRole="QuanLyLich" ToRole="DotKhoaLuan" />
-        </EntityType>
-        <Association Name="FK_QuanLyLiches_DotKhoaLuan">
-          <End Type="ProjectManagementModel.DotKhoaLuan" Role="DotKhoaLuan" Multiplicity="1" />
-          <End Type="ProjectManagementModel.QuanLyLich" Role="QuanLyLich" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="DotKhoaLuan">
-              <PropertyRef Name="DotKhoaLuanId" />
-            </Principal>
-            <Dependent Role="QuanLyLich">
-              <PropertyRef Name="DotKhoaLuanId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1698,6 +1698,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="QuanLyLiches">
+            <EntityTypeMapping TypeName="ProjectManagementModel.QuanLyLich">
+              <MappingFragment StoreEntitySet="QuanLyLiches">
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="MocThoiGian" ColumnName="MocThoiGian" />
+                <ScalarProperty Name="TieuDe" ColumnName="TieuDe" />
+                <ScalarProperty Name="DotKhoaLuanId" ColumnName="DotKhoaLuanId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="SinhVienKhoaHocs">
             <EntityTypeMapping TypeName="ProjectManagementModel.SinhVienKhoaHoc">
               <MappingFragment StoreEntitySet="SinhVienKhoaHoc">
@@ -1787,16 +1797,6 @@
                 <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
                 <ScalarProperty Name="TieuDe" ColumnName="TieuDe" />
                 <ScalarProperty Name="TinTucId" ColumnName="TinTucId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="QuanLyLiches">
-            <EntityTypeMapping TypeName="ProjectManagementModel.QuanLyLich">
-              <MappingFragment StoreEntitySet="QuanLyLiches">
-                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
-                <ScalarProperty Name="MocThoiGian" ColumnName="MocThoiGian" />
-                <ScalarProperty Name="TieuDe" ColumnName="TieuDe" />
-                <ScalarProperty Name="DotKhoaLuanId" ColumnName="DotKhoaLuanId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

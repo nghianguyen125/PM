@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using ProjectManagement.App_Start.Classes;
 using ProjectManagement.Models;
 
 namespace ProjectManagement.Controllers.Admin
@@ -17,77 +19,111 @@ namespace ProjectManagement.Controllers.Admin
         // GET: SinhVienKhoaHoc
         public ActionResult Index()
         {
-            //var sinhVienKhoaHocs = db.SinhVienKhoaHocs.Include(s => s.KhoaHoc).Include(s => s.SinhVien);
-            //return View(sinhVienKhoaHocs.ToList());
-            var khoaHocs = db.KhoaHocs.Include(k => k.NamHoc).ToList();
-            return View(khoaHocs);
+            if (!UserManager.Authenticated)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                //var sinhVienKhoaHocs = db.SinhVienKhoaHocs.Include(s => s.KhoaHoc).Include(s => s.SinhVien);
+                //return View(sinhVienKhoaHocs.ToList());
+                var khoaHocs = db.KhoaHocs.Include(k => k.NamHoc).ToList();
+                return View(khoaHocs);
+            }
+                
         }
 
         // GET: SinhVienKhoaHoc/Details/5
         public ActionResult Details(decimal id)
         {
-            if (id == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            SinhVienKhoaHoc sinhVienKhoaHoc = db.SinhVienKhoaHocs.Find(id);
-            if (sinhVienKhoaHoc == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                SinhVienKhoaHoc sinhVienKhoaHoc = db.SinhVienKhoaHocs.Find(id);
+                if (sinhVienKhoaHoc == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(sinhVienKhoaHoc);
             }
-            return View(sinhVienKhoaHoc);
+
         }
 
         public ActionResult DSSV(decimal? KHId)
         {
-            if (KHId == 0)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            var sinhVienKhoaHoc = db.SinhVienKhoaHocs.Where(n => n.KhoaHocID == KHId).ToList();
-            if (sinhVienKhoaHoc == null)
+            else
             {
-                return HttpNotFound();
+                if (KHId == 0)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                var sinhVienKhoaHoc = db.SinhVienKhoaHocs.Where(n => n.KhoaHocID == KHId).ToList();
+                if (sinhVienKhoaHoc == null)
+                {
+                    return HttpNotFound();
+                }
+                var kh = db.KhoaHocs.Where(n => n.KhoaHocID == KHId).SingleOrDefault();
+                if (kh != null)
+                {
+                    ViewBag.IdKhoaHoc = kh.KhoaHocID;
+                    ViewBag.TenKhoaHoc = kh.TenKhoaHoc;
+                }
+                //var sinhVienKhoaHocs = db.SinhVienKhoaHocs.Include(s => s.KhoaHoc).Include(s => s.SinhVien).Where(n => (n.KhoaHocID == KHId && n.SinhVienId == SVId));
+                return View(sinhVienKhoaHoc.ToList());
             }
-            var kh = db.KhoaHocs.Where(n => n.KhoaHocID == KHId).SingleOrDefault();
-            if (kh != null)
-            {
-                ViewBag.IdKhoaHoc = kh.KhoaHocID;
-                ViewBag.TenKhoaHoc = kh.TenKhoaHoc;
-            }
-                
-            //var sinhVienKhoaHocs = db.SinhVienKhoaHocs.Include(s => s.KhoaHoc).Include(s => s.SinhVien).Where(n => (n.KhoaHocID == KHId && n.SinhVienId == SVId));
-            return View(sinhVienKhoaHoc.ToList());
+
         }
 
         // GET: SinhVienKhoaHoc/Create
         public ActionResult Create(decimal? KHId)
         {
-            if (KHId == 0)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var sinhVienKhoaHoc = db.SinhVienKhoaHocs.Where(n => n.KhoaHocID == KHId).ToList();
-            if (sinhVienKhoaHoc == null)
-            {
-                return HttpNotFound();
-            }
-            var kh = db.KhoaHocs.Where(n => n.KhoaHocID == KHId).SingleOrDefault();
-            if (kh != null)
-            {
-                ViewBag.TenKhoaHoc = kh.TenKhoaHoc;
-                ViewBag.IdKhoaHoc = kh.KhoaHocID;
-                ViewBag.KhoaHocID = new SelectList(db.KhoaHocs, "KhoaHocID", "TenKhoaHoc", kh.KhoaHocID);
+                return RedirectToAction("Login", "Admin");
             }
             else
             {
-                ViewBag.KhoaHocID = new SelectList(db.KhoaHocs, "KhoaHocID", "TenKhoaHoc");
+                if (KHId == 0)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                var sinhVienKhoaHoc = db.SinhVienKhoaHocs.Where(n => n.KhoaHocID == KHId).ToList();
+                if (sinhVienKhoaHoc == null)
+                {
+                    return HttpNotFound();
+                }
+                var kh = db.KhoaHocs.Where(n => n.KhoaHocID == KHId).SingleOrDefault();
+                if (kh != null)
+                {
+                    ViewBag.TenKhoaHoc = kh.TenKhoaHoc;
+                    ViewBag.IdKhoaHoc = kh.KhoaHocID;
+                    ViewBag.KhoaHocID = new SelectList(db.KhoaHocs, "KhoaHocID", "TenKhoaHoc", kh.KhoaHocID);
+                }
+
+                else
+                {
+                    ViewBag.KhoaHocID = new SelectList(db.KhoaHocs, "KhoaHocID", "TenKhoaHoc");
+                }
+
+                var list1 = db.SinhViens.ToList();
+                var list2 = db.SinhVienKhoaHocs.Where(p => p.KhoaHocID == KHId).ToList();
+                var sv = list1.Where(p => !list2.Any(p2 => p2.SinhVienId == p.SinhVienId)).ToList();
+
+                ViewBag.SinhVienId = new SelectList(sv, "SinhVienId", "HoTen");
+                return View();
             }
-            //var list1 = db.SinhViens.ToList();
-            //var list2 = db.SinhVienThuocKhoas.ToList();
-            //var sv = list1.Where(p => !list2.Any(p2 => p2.SinhVien.SinhVienId  == p.SinhVienId));
-            ViewBag.SinhVienId = new SelectList(db.SinhViens, "SinhVienId", "HoTen");
-            return View();
+
         }
 
         // POST: SinhVienKhoaHoc/Create
@@ -121,29 +157,37 @@ namespace ProjectManagement.Controllers.Admin
         // GET: SinhVienKhoaHoc/Edit/5
         public ActionResult Edit(decimal? KHId, string SVId)
         {
-            if (KHId == 0 || SVId == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            SinhVienKhoaHoc sinhVienKhoaHoc = db.SinhVienKhoaHocs.Find(KHId, SVId);
-            if (sinhVienKhoaHoc == null)
-            {
-                return HttpNotFound();
-            }
-            var kh = db.KhoaHocs.Where(n => n.KhoaHocID == KHId).SingleOrDefault();
-            if (kh != null)
-            {
-                ViewBag.TenKhoaHoc = kh.TenKhoaHoc;
-                ViewBag.IdKhoaHoc = kh.KhoaHocID;
-                ViewBag.KhoaHocID = new SelectList(db.KhoaHocs, "KhoaHocID", "TenKhoaHoc", kh.KhoaHocID);
+                return RedirectToAction("Login", "Admin");
             }
             else
             {
-                ViewBag.KhoaHocID = new SelectList(db.KhoaHocs, "KhoaHocID", "TenKhoaHoc");
+                if (KHId == 0 || SVId == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                SinhVienKhoaHoc sinhVienKhoaHoc = db.SinhVienKhoaHocs.Find(KHId, SVId);
+                if (sinhVienKhoaHoc == null)
+                {
+                    return HttpNotFound();
+                }
+                var kh = db.KhoaHocs.Where(n => n.KhoaHocID == KHId).SingleOrDefault();
+                if (kh != null)
+                {
+                    ViewBag.TenKhoaHoc = kh.TenKhoaHoc;
+                    ViewBag.IdKhoaHoc = kh.KhoaHocID;
+                    ViewBag.KhoaHocID = new SelectList(db.KhoaHocs, "KhoaHocID", "TenKhoaHoc", kh.KhoaHocID);
+                }
+                else
+                {
+                    ViewBag.KhoaHocID = new SelectList(db.KhoaHocs, "KhoaHocID", "TenKhoaHoc");
+                }
+                ViewBag.KhoaHocID = new SelectList(db.KhoaHocs, "KhoaHocID", "TenKhoaHoc", sinhVienKhoaHoc.KhoaHocID);
+                ViewBag.SinhVienId = new SelectList(db.SinhViens, "SinhVienId", "HoTen", sinhVienKhoaHoc.SinhVienId);
+                return View(sinhVienKhoaHoc);
             }
-            ViewBag.KhoaHocID = new SelectList(db.KhoaHocs, "KhoaHocID", "TenKhoaHoc", sinhVienKhoaHoc.KhoaHocID);
-            ViewBag.SinhVienId = new SelectList(db.SinhViens, "SinhVienId", "HoTen", sinhVienKhoaHoc.SinhVienId);
-            return View(sinhVienKhoaHoc);
+
         }
 
         // POST: SinhVienKhoaHoc/Edit/5
@@ -167,22 +211,30 @@ namespace ProjectManagement.Controllers.Admin
         // GET: SinhVienKhoaHoc/Delete/5
         public ActionResult Delete(decimal? KHId, string SVId)
         {
-            if (KHId == 0 || SVId == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            SinhVienKhoaHoc sinhVienKhoaHoc = db.SinhVienKhoaHocs.Find(KHId, SVId);
-            if (sinhVienKhoaHoc == null)
+            else
             {
-                return HttpNotFound();
+                if (KHId == 0 || SVId == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                SinhVienKhoaHoc sinhVienKhoaHoc = db.SinhVienKhoaHocs.Find(KHId, SVId);
+                if (sinhVienKhoaHoc == null)
+                {
+                    return HttpNotFound();
+                }
+                var kh = db.KhoaHocs.Where(n => n.KhoaHocID == KHId).SingleOrDefault();
+                if (kh != null)
+                {
+                    ViewBag.IdKhoaHoc = kh.KhoaHocID;
+                    ViewBag.TenKhoaHoc = kh.TenKhoaHoc;
+                }
+                return View(sinhVienKhoaHoc);
             }
-            var kh = db.KhoaHocs.Where(n => n.KhoaHocID == KHId).SingleOrDefault();
-            if (kh != null)
-            {
-                ViewBag.IdKhoaHoc = kh.KhoaHocID;
-                ViewBag.TenKhoaHoc = kh.TenKhoaHoc;
-            }
-            return View(sinhVienKhoaHoc);
+           
         }
 
         // POST: SinhVienKhoaHoc/Delete/5

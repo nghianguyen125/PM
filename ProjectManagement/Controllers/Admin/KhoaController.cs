@@ -6,6 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using PagedList;
+using ProjectManagement.App_Start.Classes;
 using ProjectManagement.Models;
 
 namespace ProjectManagement.Controllers.Admin
@@ -15,30 +18,68 @@ namespace ProjectManagement.Controllers.Admin
         private ProjectManagementEntities db = new ProjectManagementEntities();
 
         // GET: Khoa
-        public ActionResult Index()
+        public ActionResult Index(string searchString, int? page, string sortOrder, string currentFilter)
         {
-            return View(db.Khoas.ToList());
+            if (!UserManager.Authenticated)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                ViewBag.CurrentSort = sortOrder;
+                var khoa = from b in db.Khoas select b;
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    khoa = db.Khoas.Where(s => s.TenKhoa.Contains(searchString));
+                }
+                ViewBag.SearchString = searchString;
+                if (searchString != null)
+                {
+                    page = 1;
+                }
+                else
+                {
+                    searchString = currentFilter;
+                }
+                ViewBag.CurrentFilter = searchString;
+                int pageSize = 5;
+                int pageNumber = (page ?? 1);
+                return View(khoa.OrderBy(s => s.TenKhoa).ToList().ToPagedList(pageNumber, pageSize));
+            }
+                
         }
 
         // GET: Khoa/Details/5
         public ActionResult Details(decimal id)
         {
-            if (id == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            Khoa khoa = db.Khoas.Find(id);
-            if (khoa == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Khoa khoa = db.Khoas.Find(id);
+                if (khoa == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(khoa);
             }
-            return View(khoa);
+
         }
 
         // GET: Khoa/Create
         public ActionResult Create()
         {
-            return View();
+            if (!UserManager.Authenticated)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else return View();
         }
 
         // POST: Khoa/Create
@@ -61,16 +102,24 @@ namespace ProjectManagement.Controllers.Admin
         // GET: Khoa/Edit/5
         public ActionResult Edit(decimal? id)
         {
-            if (id == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            Khoa khoa = db.Khoas.Find(id);
-            if (khoa == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Khoa khoa = db.Khoas.Find(id);
+                if (khoa == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(khoa);
             }
-            return View(khoa);
+
         }
 
         // POST: Khoa/Edit/5
@@ -92,16 +141,24 @@ namespace ProjectManagement.Controllers.Admin
         // GET: Khoa/Delete/5
         public ActionResult Delete(decimal id)
         {
-            if (id == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            Khoa khoa = db.Khoas.Find(id);
-            if (khoa == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Khoa khoa = db.Khoas.Find(id);
+                if (khoa == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(khoa);
             }
-            return View(khoa);
+
         }
 
         // POST: Khoa/Delete/5

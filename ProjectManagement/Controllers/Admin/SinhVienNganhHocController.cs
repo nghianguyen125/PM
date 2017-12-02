@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using ProjectManagement.App_Start.Classes;
 using ProjectManagement.Models;
 
 namespace ProjectManagement.Controllers.Admin
@@ -17,69 +19,101 @@ namespace ProjectManagement.Controllers.Admin
         // GET: SinhVienNganhHoc
         public ActionResult Index()
         {
-            return View(db.Nganhs.ToList());
+            if (!UserManager.Authenticated)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else return View(db.Nganhs.ToList());
         }
 
         // GET: SinhVienNganhHoc/Details/5
         public ActionResult Details(string id)
         {
-            if (id == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            SinhVienNganhHoc sinhVienNganhHoc = db.SinhVienNganhHocs.Find(id);
-            if (sinhVienNganhHoc == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                SinhVienNganhHoc sinhVienNganhHoc = db.SinhVienNganhHocs.Find(id);
+                if (sinhVienNganhHoc == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(sinhVienNganhHoc);
             }
-            return View(sinhVienNganhHoc);
+            
         }
 
         public ActionResult DSSV(decimal? NId)
         {
-            if (NId == 0)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            var sinhVienNganhHoc = db.SinhVienNganhHocs.Where(n => n.NganhId == NId).ToList();
-            if (sinhVienNganhHoc == null)
+            else
             {
-                return HttpNotFound();
+                if (NId == 0)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                var sinhVienNganhHoc = db.SinhVienNganhHocs.Where(n => n.NganhId == NId).ToList();
+                if (sinhVienNganhHoc == null)
+                {
+                    return HttpNotFound();
+                }
+                var kh = db.Nganhs.Where(n => n.NganhId == NId).SingleOrDefault();
+                if (kh != null)
+                {
+                    ViewBag.NganhId = kh.NganhId;
+                    ViewBag.TenNganh = kh.TenNganh;
+                }
+                return View(sinhVienNganhHoc.ToList());
             }
-            var kh = db.Nganhs.Where(n => n.NganhId == NId).SingleOrDefault();
-            if (kh != null)
-            {
-                ViewBag.NganhId = kh.NganhId;
-                ViewBag.TenNganh = kh.TenNganh;
-            }
-            return View(sinhVienNganhHoc.ToList());
+
         }
 
         // GET: SinhVienNganhHoc/Create
         public ActionResult Create(decimal? NId)
         {
-            if (NId == 0)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var sinhVienNganhHoc = db.SinhVienNganhHocs.Where(n => n.NganhId == NId).ToList();
-            if (sinhVienNganhHoc == null)
-            {
-                return HttpNotFound();
-            }
-            var kh = db.Nganhs.Where(n => n.NganhId == NId).SingleOrDefault();
-            if (kh != null)
-            {
-                ViewBag.TenNganh = kh.TenNganh;
-                ViewBag.IdNganh = kh.NganhId;
-                ViewBag.NganhId = new SelectList(db.Nganhs, "NganhId", "TenNganh", kh.NganhId);
+                return RedirectToAction("Login", "Admin");
             }
             else
             {
-                ViewBag.SinhVienId = new SelectList(db.SinhViens, "SinhVienId", "HoTen");
+                if (NId == 0)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                var sinhVienNganhHoc = db.SinhVienNganhHocs.Where(n => n.NganhId == NId).ToList();
+                if (sinhVienNganhHoc == null)
+                {
+                    return HttpNotFound();
+                }
+                var kh = db.Nganhs.Where(n => n.NganhId == NId).SingleOrDefault();
+                if (kh != null)
+                {
+                    ViewBag.TenNganh = kh.TenNganh;
+                    ViewBag.IdNganh = kh.NganhId;
+                    ViewBag.NganhId = new SelectList(db.Nganhs, "NganhId", "TenNganh", kh.NganhId);
+                }
+                else
+                {
+                    ViewBag.SinhVienId = new SelectList(db.SinhViens, "SinhVienId", "HoTen");
+                }
+                var list1 = db.SinhViens.ToList();
+                var list2 = db.SinhVienNganhHocs.Where(p => p.NganhId == NId).ToList();
+                var sv = list1.Where(p => !list2.Any(p2 => p2.SinhVienId == p.SinhVienId)).ToList();
+
+                ViewBag.SinhVienId = new SelectList(sv, "SinhVienId", "HoTen");
+                return View();
             }
-            ViewBag.SinhVienId = new SelectList(db.SinhViens, "SinhVienId", "HoTen");
-            return View();
+            
         }
 
         // POST: SinhVienNganhHoc/Create
@@ -115,30 +149,38 @@ namespace ProjectManagement.Controllers.Admin
         // GET: SinhVienNganhHoc/Edit/5
         public ActionResult Edit(decimal? NId, string SVId)
         {
-            if (NId == 0 || SVId == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            //var sinhVienNganhHoc= db.SinhVienNganhHocs.Where(n => n.NganhId == NId && n.SinhVienId == SVId).ToList();
-            SinhVienNganhHoc sinhVienNganhHoc = db.SinhVienNganhHocs.Find(NId, SVId);
-            if (sinhVienNganhHoc == null)
-            {
-                return HttpNotFound();
-            }
-            var kh = db.Nganhs.Where(n => n.NganhId == NId).SingleOrDefault();
-            if (kh != null)
-            {
-                ViewBag.TenNganh = kh.TenNganh;
-                ViewBag.IdNganh = kh.NganhId;
-                //ViewBag.NganhID = new SelectList(db.Nganhs, "NganhId", "TenNganh", kh.NganhId);
+                return RedirectToAction("Login", "Admin");
             }
             else
             {
-                ViewBag.NganhID = new SelectList(db.Nganhs, "NganhId", "TenNganh");
+                if (NId == 0 || SVId == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                //var sinhVienNganhHoc= db.SinhVienNganhHocs.Where(n => n.NganhId == NId && n.SinhVienId == SVId).ToList();
+                SinhVienNganhHoc sinhVienNganhHoc = db.SinhVienNganhHocs.Find(NId, SVId);
+                if (sinhVienNganhHoc == null)
+                {
+                    return HttpNotFound();
+                }
+                var kh = db.Nganhs.Where(n => n.NganhId == NId).SingleOrDefault();
+                if (kh != null)
+                {
+                    ViewBag.TenNganh = kh.TenNganh;
+                    ViewBag.IdNganh = kh.NganhId;
+                    //ViewBag.NganhID = new SelectList(db.Nganhs, "NganhId", "TenNganh", kh.NganhId);
+                }
+                else
+                {
+                    ViewBag.NganhID = new SelectList(db.Nganhs, "NganhId", "TenNganh");
+                }
+                ViewBag.NganhID = new SelectList(db.Nganhs, "NganhId", "TenNganh", sinhVienNganhHoc.NganhId);
+                ViewBag.SinhVienId = new SelectList(db.SinhViens, "SinhVienId", "HoTen", sinhVienNganhHoc.SinhVienId);
+                return View(sinhVienNganhHoc);
             }
-            ViewBag.NganhID = new SelectList(db.Nganhs, "NganhId", "TenNganh", sinhVienNganhHoc.NganhId);
-            ViewBag.SinhVienId = new SelectList(db.SinhViens, "SinhVienId", "HoTen", sinhVienNganhHoc.SinhVienId);
-            return View(sinhVienNganhHoc);
+           
         }
 
         // POST: SinhVienNganhHoc/Edit/5
@@ -162,22 +204,30 @@ namespace ProjectManagement.Controllers.Admin
         // GET: SinhVienNganhHoc/Delete/5
         public ActionResult Delete(decimal? NId, string SVId)
         {
-            if (NId == 0 || SVId == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            SinhVienNganhHoc sinhVienNganhHoc = db.SinhVienNganhHocs.Find(NId, SVId);
-            if (sinhVienNganhHoc== null)
+            else
             {
-                return HttpNotFound();
+                if (NId == 0 || SVId == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                SinhVienNganhHoc sinhVienNganhHoc = db.SinhVienNganhHocs.Find(NId, SVId);
+                if (sinhVienNganhHoc == null)
+                {
+                    return HttpNotFound();
+                }
+                var kh = db.Nganhs.Where(n => n.NganhId == NId).SingleOrDefault();
+                if (kh != null)
+                {
+                    ViewBag.IdNganhHoc = kh.NganhId;
+                    ViewBag.TenNganhHoc = kh.TenNganh;
+                }
+                return View(sinhVienNganhHoc);
             }
-            var kh = db.Nganhs.Where(n => n.NganhId == NId).SingleOrDefault();
-            if (kh != null)
-            {
-                ViewBag.IdNganhHoc = kh.NganhId;
-                ViewBag.TenNganhHoc = kh.TenNganh;
-            }
-            return View(sinhVienNganhHoc);
+            
         }
 
         // POST: SinhVienNganhHoc/Delete/5

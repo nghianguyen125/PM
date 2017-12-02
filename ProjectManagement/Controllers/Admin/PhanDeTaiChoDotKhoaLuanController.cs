@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using ProjectManagement.App_Start.Classes;
 using ProjectManagement.Models;
 
 namespace ProjectManagement.Controllers.Admin
@@ -17,71 +19,99 @@ namespace ProjectManagement.Controllers.Admin
         // GET: PhanDeTaiChoDotKhoaLuan
         public ActionResult Index()
         {
-            return View(db.DotKhoaLuans.ToList());
+            if (!UserManager.Authenticated)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else return View(db.DotKhoaLuans.ToList());
         }
 
         // GET: PhanDeTaiChoDotKhoaLuan/Details/5
         public ActionResult Details(decimal id)
         {
-            if (id == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            PhanDeTaiChoDotKhoaLuan phanDeTaiChoDotKhoaLuan = db.PhanDeTaiChoDotKhoaLuans.Find(id);
-            if (phanDeTaiChoDotKhoaLuan == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                PhanDeTaiChoDotKhoaLuan phanDeTaiChoDotKhoaLuan = db.PhanDeTaiChoDotKhoaLuans.Find(id);
+                if (phanDeTaiChoDotKhoaLuan == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(phanDeTaiChoDotKhoaLuan);
             }
-            return View(phanDeTaiChoDotKhoaLuan);
+
         }
 
         public ActionResult DSDT(decimal? DId)
         {
-            if (DId == 0)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            var dotKhoaLuan = db.PhanDeTaiChoDotKhoaLuans.Where(n => n.DotKhoaLuanId == DId).ToList();
-            if (dotKhoaLuan == null)
+            else
             {
-                return HttpNotFound();
-            }
-            var kh = db.DotKhoaLuans.Where(n => n.DotKhoaLuanId == DId).SingleOrDefault();
-            if (kh != null)
-            {
-                ViewBag.IdDotKhoaLuan = kh.DotKhoaLuanId;
-                ViewBag.TenDotKhoaLuan = kh.TenDotKhoaLuan;
-            }
+                if (DId == 0)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                var dotKhoaLuan = db.PhanDeTaiChoDotKhoaLuans.Where(n => n.DotKhoaLuanId == DId).ToList();
+                if (dotKhoaLuan == null)
+                {
+                    return HttpNotFound();
+                }
+                var kh = db.DotKhoaLuans.Where(n => n.DotKhoaLuanId == DId).SingleOrDefault();
+                if (kh != null)
+                {
+                    ViewBag.IdDotKhoaLuan = kh.DotKhoaLuanId;
+                    ViewBag.TenDotKhoaLuan = kh.TenDotKhoaLuan;
+                }
 
-            //var sinhVienKhoaHocs = db.SinhVienKhoaHocs.Include(s => s.KhoaHoc).Include(s => s.SinhVien).Where(n => (n.KhoaHocID == KHId && n.SinhVienId == SVId));
-            return View(dotKhoaLuan.ToList());
+                //var sinhVienKhoaHocs = db.SinhVienKhoaHocs.Include(s => s.KhoaHoc).Include(s => s.SinhVien).Where(n => (n.KhoaHocID == KHId && n.SinhVienId == SVId));
+                return View(dotKhoaLuan.ToList());
+            }
+           
         }
 
         // GET: PhanDeTaiChoDotKhoaLuan/Create
         public ActionResult Create(decimal? DId)
         {
-            if (DId == 0)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var phanDeTai = db.PhanDeTaiChoDotKhoaLuans.Where(n => n.DotKhoaLuanId == DId).ToList();
-            if (phanDeTai == null)
-            {
-                return HttpNotFound();
-            }
-            var kh = db.DotKhoaLuans.Where(n => n.DotKhoaLuanId == DId).SingleOrDefault();
-            if (kh != null)
-            {
-                ViewBag.TenDotKhoaLuan = kh.TenDotKhoaLuan;
-                ViewBag.IdDotKhoaLuan = kh.DotKhoaLuanId;
-                ViewBag.DotKhoaLuanID = new SelectList(db.DotKhoaLuans, "DotKhoaLuanId", "TenDotKhoaLuan", kh.DotKhoaLuanId);
+                return RedirectToAction("Login", "Admin");
             }
             else
             {
-                ViewBag.DotKhoaLuanID = new SelectList(db.DotKhoaLuans, "DotKhoaLuanId", "TenDotKhoaLuan");
+                if (DId == 0)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                var phanDeTai = db.PhanDeTaiChoDotKhoaLuans.Where(n => n.DotKhoaLuanId == DId).ToList();
+                if (phanDeTai == null)
+                {
+                    return HttpNotFound();
+                }
+                var kh = db.DotKhoaLuans.Where(n => n.DotKhoaLuanId == DId).SingleOrDefault();
+                if (kh != null)
+                {
+                    ViewBag.TenDotKhoaLuan = kh.TenDotKhoaLuan;
+                    ViewBag.IdDotKhoaLuan = kh.DotKhoaLuanId;
+                    ViewBag.DotKhoaLuanID = new SelectList(db.DotKhoaLuans, "DotKhoaLuanId", "TenDotKhoaLuan", kh.DotKhoaLuanId);
+                }
+                else
+                {
+                    ViewBag.DotKhoaLuanID = new SelectList(db.DotKhoaLuans, "DotKhoaLuanId", "TenDotKhoaLuan");
+                }
+                ViewBag.DeTaiId = new SelectList(db.DeTais, "DeTaiId", "TenDeTai");
+                return View();
             }
-            ViewBag.DeTaiId = new SelectList(db.DeTais, "DeTaiId", "TenDeTai");
-            return View();
+          
         }
 
         // POST: PhanDeTaiChoDotKhoaLuan/Create
@@ -116,29 +146,37 @@ namespace ProjectManagement.Controllers.Admin
         // GET: PhanDeTaiChoDotKhoaLuan/Edit/5
         public ActionResult Edit(decimal? DId, decimal? DTId)
         {
-            if (DId == 0 || DTId == 0)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            PhanDeTaiChoDotKhoaLuan phanDeTai = db.PhanDeTaiChoDotKhoaLuans.Find(DId, DTId);
-            if (phanDeTai == null)
-            {
-                return HttpNotFound();
-            }
-            var kh = db.DotKhoaLuans.Where(n => n.DotKhoaLuanId == DId).SingleOrDefault();
-            if (kh != null)
-            {
-                ViewBag.TenDotKhoaLuan = kh.TenDotKhoaLuan;
-                ViewBag.IdDotKhoaLuan = kh.DotKhoaLuanId;
-                ViewBag.DotKhoaLuanID = new SelectList(db.DotKhoaLuans, "DotKhoaLuanId", "TenDotKhoaLuan", kh.DotKhoaLuanId);
+                return RedirectToAction("Login", "Admin");
             }
             else
             {
-                ViewBag.DotKhoaLuanID = new SelectList(db.DotKhoaLuans, "DotKhoaLuanId", "TenDotKhoaLuan");
+                if (DId == 0 || DTId == 0)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                PhanDeTaiChoDotKhoaLuan phanDeTai = db.PhanDeTaiChoDotKhoaLuans.Find(DId, DTId);
+                if (phanDeTai == null)
+                {
+                    return HttpNotFound();
+                }
+                var kh = db.DotKhoaLuans.Where(n => n.DotKhoaLuanId == DId).SingleOrDefault();
+                if (kh != null)
+                {
+                    ViewBag.TenDotKhoaLuan = kh.TenDotKhoaLuan;
+                    ViewBag.IdDotKhoaLuan = kh.DotKhoaLuanId;
+                    ViewBag.DotKhoaLuanID = new SelectList(db.DotKhoaLuans, "DotKhoaLuanId", "TenDotKhoaLuan", kh.DotKhoaLuanId);
+                }
+                else
+                {
+                    ViewBag.DotKhoaLuanID = new SelectList(db.DotKhoaLuans, "DotKhoaLuanId", "TenDotKhoaLuan");
+                }
+                ViewBag.DotKhoaLuanID = new SelectList(db.DotKhoaLuans, "DotKhoaLuanId", "TenDotKhoaLuan", phanDeTai.DotKhoaLuanId);
+                ViewBag.DeTaiId = new SelectList(db.DeTais, "DeTaiId", "TenDeTai", phanDeTai.DeTaiId);
+                return View(phanDeTai);
             }
-            ViewBag.DotKhoaLuanID = new SelectList(db.DotKhoaLuans, "DotKhoaLuanId", "TenDotKhoaLuan", phanDeTai.DotKhoaLuanId);
-            ViewBag.DeTaiId = new SelectList(db.DeTais, "DeTaiId", "TenDeTai", phanDeTai.DeTaiId);
-            return View(phanDeTai);
+           
         }
 
         // POST: PhanDeTaiChoDotKhoaLuan/Edit/5
@@ -162,22 +200,30 @@ namespace ProjectManagement.Controllers.Admin
         // GET: PhanDeTaiChoDotKhoaLuan/Delete/5
         public ActionResult Delete(decimal? DId, decimal? DTId)
         {
-            if (DId == 0 || DTId == 0)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            PhanDeTaiChoDotKhoaLuan phanDeTai = db.PhanDeTaiChoDotKhoaLuans.Find(DId, DTId);
-            if (phanDeTai == null)
+            else
             {
-                return HttpNotFound();
+                if (DId == 0 || DTId == 0)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                PhanDeTaiChoDotKhoaLuan phanDeTai = db.PhanDeTaiChoDotKhoaLuans.Find(DId, DTId);
+                if (phanDeTai == null)
+                {
+                    return HttpNotFound();
+                }
+                var kh = db.DotKhoaLuans.Where(n => n.DotKhoaLuanId == DId).SingleOrDefault();
+                if (kh != null)
+                {
+                    ViewBag.IdDotKhoaLuan = kh.DotKhoaLuanId;
+                    ViewBag.TenDotKhoaLuan = kh.TenDotKhoaLuan;
+                }
+                return View(phanDeTai);
             }
-            var kh = db.DotKhoaLuans.Where(n => n.DotKhoaLuanId == DId).SingleOrDefault();
-            if (kh != null)
-            {
-                ViewBag.IdDotKhoaLuan = kh.DotKhoaLuanId;
-                ViewBag.TenDotKhoaLuan = kh.TenDotKhoaLuan;
-            }
-            return View(phanDeTai);
+           
         }
 
         // POST: PhanDeTaiChoDotKhoaLuan/Delete/5

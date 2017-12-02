@@ -1,39 +1,46 @@
-﻿@model IEnumerable<ProjectManagement.Models.SinhVienThuocNhomSV>
+﻿@model IEnumerable<object>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    List<ProjectManagement.Models.TaiKhoan> taikhoan = Model.ToList()[0] as List<ProjectManagement.Models.TaiKhoan>;
+    List<ProjectManagement.Models.SinhVienThuocNhomSV> sinhvien = Model.ToList()[1] as List<ProjectManagement.Models.SinhVienThuocNhomSV>;
 }
 
 <h2>Index</h2>
-
-
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.NgayPhan)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NhomSV.TenNhom)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SinhVien.HoTen)
-        </th>
-        <th></th>
+        <th>Tên Nhóm</th>
+        <th>Họ Tên</th>
+        <th>Email</th>
+        <th>SDT</th>
+        <th>Khoa</th>
+        <th>Ngày Phân</th>
     </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NgayPhan)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NhomSV.TenNhom)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SinhVien.HoTen)
-        </td>
-    </tr>
-}
-
+    @foreach (var item in sinhvien)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NhomSV.TenNhom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SinhVien.HoTen)
+            </td>
+            @foreach (var item1 in taikhoan.Where(p => p.SinhVienId == item.SinhVienId))
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item1.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item1.SDT)
+                </td>
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.NhomSV.Khoa.TenKhoa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayPhan)
+            </td>
+        </tr>
+    }
 </table>

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ProjectManagement.Models;
+using Microsoft.AspNet.Identity;
 
 namespace ProjectManagement.Controllers.User
 {
@@ -17,13 +18,16 @@ namespace ProjectManagement.Controllers.User
         // GET: SinhVienThuocNhomSVs
         public ActionResult Index()
         {
-            return View(db.SinhVienThuocNhomSVs.ToList());
+            List<object> model = new List<object>();
+            model.Add(db.TaiKhoans.ToList());
+            model.Add(db.SinhVienThuocNhomSVs.ToList());
+            return View(model.ToList());
         }
 
         // GET: SinhVienThuocNhomSVs/Details/5
         public ActionResult Details(decimal id)
         {
-            if (id == 0)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }

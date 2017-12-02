@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using ProjectManagement.App_Start.Classes;
 using ProjectManagement.Models;
 
 namespace ProjectManagement.Controllers.Admin
@@ -17,31 +19,53 @@ namespace ProjectManagement.Controllers.Admin
         // GET: DotKhoaLuan
         public ActionResult Index()
         {
-            var dotKhoaLuans = db.DotKhoaLuans.Include(d => d.NamHoc).Include(d => d.QuanLyLich);
-            return View(dotKhoaLuans.ToList());
+            if (!UserManager.Authenticated)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                var dotKhoaLuans = db.DotKhoaLuans.Include(d => d.NamHoc).Include(d => d.QuanLyLich);
+                return View(dotKhoaLuans.ToList());
+            }
         }
 
         // GET: DotKhoaLuan/Details/5
         public ActionResult Details(decimal id)
         {
-            if (id == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            DotKhoaLuan dotKhoaLuan = db.DotKhoaLuans.Find(id);
-            if (dotKhoaLuan == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                DotKhoaLuan dotKhoaLuan = db.DotKhoaLuans.Find(id);
+                if (dotKhoaLuan == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(dotKhoaLuan);
             }
-            return View(dotKhoaLuan);
+            
         }
 
         // GET: DotKhoaLuan/Create
         public ActionResult Create()
         {
-            ViewBag.NamHocHocKyId = new SelectList(db.NamHocs, "NamHocHocKyId", "TenNamHocHocKy");
-            ViewBag.DotKhoaLuanId = new SelectList(db.QuanLyLiches, "DotKhoaLuanId", "TieuDe");
-            return View();
+            if (!UserManager.Authenticated)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                ViewBag.NamHocHocKyId = new SelectList(db.NamHocs, "NamHocHocKyId", "TenNamHocHocKy");
+                ViewBag.DotKhoaLuanId = new SelectList(db.QuanLyLiches, "DotKhoaLuanId", "TieuDe");
+                return View();
+            }
         }
 
         // POST: DotKhoaLuan/Create
@@ -66,18 +90,26 @@ namespace ProjectManagement.Controllers.Admin
         // GET: DotKhoaLuan/Edit/5
         public ActionResult Edit(decimal id)
         {
-            if (id == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            DotKhoaLuan dotKhoaLuan = db.DotKhoaLuans.Find(id);
-            if (dotKhoaLuan == null)
+            else
             {
-                return HttpNotFound();
+                if (id == 0)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                DotKhoaLuan dotKhoaLuan = db.DotKhoaLuans.Find(id);
+                if (dotKhoaLuan == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.NamHocHocKyId = new SelectList(db.NamHocs, "NamHocHocKyId", "TenNamHocHocKy", dotKhoaLuan.NamHocHocKyId);
+                ViewBag.DotKhoaLuanId = new SelectList(db.QuanLyLiches, "DotKhoaLuanId", "TieuDe", dotKhoaLuan.DotKhoaLuanId);
+                return View(dotKhoaLuan);
             }
-            ViewBag.NamHocHocKyId = new SelectList(db.NamHocs, "NamHocHocKyId", "TenNamHocHocKy", dotKhoaLuan.NamHocHocKyId);
-            ViewBag.DotKhoaLuanId = new SelectList(db.QuanLyLiches, "DotKhoaLuanId", "TieuDe", dotKhoaLuan.DotKhoaLuanId);
-            return View(dotKhoaLuan);
+            
         }
 
         // POST: DotKhoaLuan/Edit/5
@@ -101,16 +133,24 @@ namespace ProjectManagement.Controllers.Admin
         // GET: DotKhoaLuan/Delete/5
         public ActionResult Delete(decimal id)
         {
-            if (id == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            DotKhoaLuan dotKhoaLuan = db.DotKhoaLuans.Find(id);
-            if (dotKhoaLuan == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                DotKhoaLuan dotKhoaLuan = db.DotKhoaLuans.Find(id);
+                if (dotKhoaLuan == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(dotKhoaLuan);
             }
-            return View(dotKhoaLuan);
+           
         }
 
         // POST: DotKhoaLuan/Delete/5

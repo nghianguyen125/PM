@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using ProjectManagement.Models;
 using System.Web.Mvc;
+using System.Net;
+using Microsoft.AspNet.Identity;
+using ProjectManagement.App_Start.Classes;
 
 namespace ProjectManagement.Controllers.User
 {
@@ -11,9 +14,26 @@ namespace ProjectManagement.Controllers.User
     {
         private ProjectManagementEntities db = new ProjectManagementEntities();
         // GET: MainPage
-        public ActionResult Index()
+        public ActionResult Index(string id)
         {
-            return View(db.QuanLyLiches.ToList());
+            if (!UserManager.Authenticated)
+            {
+                return RedirectToAction("Login", "User");
+            }
+            else
+            {
+                //if (id == null)
+                //{
+                //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //}
+                //SinhVienKhoaHoc sinhVienKhoaHoc = db.SinhVienKhoaHocs.Find(id);
+                //if (sinhVienKhoaHoc == null)
+                //{
+                //    return HttpNotFound();
+                //}
+                return View(db.QuanLyLiches.OrderBy(n => n.MocThoiGian).ToList());
+            }
+               
         }
     }
 }

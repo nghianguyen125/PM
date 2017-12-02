@@ -32,14 +32,14 @@
                 <div class="form-group">
                     @Html.Label("Mã Khóa học", new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.TextBoxFor(model => model.KhoaHocID, new { @class = "form-control" })
+                        @Html.TextBoxFor(model => model.KhoaHocID, new { @class = "form-control", required = "required" })
                         @Html.ValidationMessageFor(model => model.KhoaHocID)
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.Label("Tên Khóa học", new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.TextBoxFor(model => model.TenKhoaHoc, new { @class = "form-control" })
+                        @Html.TextBoxFor(model => model.TenKhoaHoc, new { @class = "form-control", required = "required" })
                         @Html.ValidationMessageFor(model => model.TenKhoaHoc)
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                 <div class="form-group">
                     @Html.Label("Năm học", new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.DropDownList("NamHocHocKyId", null, String.Empty, new { @class = "form-control" })
+                        @Html.DropDownList("NamHocHocKyId", null, String.Empty, new { @class = "form-control", required = "required" })
                         @Html.ValidationMessageFor(model => model.NamHocHocKyId)
                     </div>
                 </div>

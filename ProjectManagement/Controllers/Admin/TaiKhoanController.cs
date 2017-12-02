@@ -17,43 +17,69 @@ namespace ProjectManagement.Controllers.Admin
         // GET: /User/
         public ActionResult Index()
         {
-            //if (!UserManager.Authenticated)
-            //{
-            //    return RedirectToAction("Login", "Admin");
-            //}
-            var TaiKhoans = db.TaiKhoans.Include(u => u.LoaiTaiKhoan);
-            return View(TaiKhoans.ToList());
+            if (!UserManager.Authenticated)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                //if (!UserManager.Authenticated)
+                //{
+                //    return RedirectToAction("Login", "Admin");
+                //}
+                var TaiKhoans = db.TaiKhoans.Include(u => u.LoaiTaiKhoan);
+                return View(TaiKhoans.ToList());
+            }
+                
         }
 
         // GET: /User/Details/5
         public ActionResult Details(decimal? id)
         {
-            if ((id + "").Trim() == "")
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            if (!ValidInput.validDecimal(id + ""))
+            else
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if ((id + "").Trim() == "")
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                if (!ValidInput.validDecimal(id + ""))
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                TaiKhoan user = db.TaiKhoans.Find(id);
+                if (user == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(user);
             }
-            TaiKhoan user = db.TaiKhoans.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
+           
         }
 
         // GET: /User/Create
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")] // This is for output cache false
         public ActionResult Create()
         {
-            //if (!UserManager.Authenticated)
-            //{
-            //    return RedirectToAction("Login", "Admin");
-            //}
-            ViewBag.LoaiTaiKhoanId = new SelectList(db.LoaiTaiKhoans, "LoaiTaiKhoanId", "TenLoaiTaiKhoan");
-            return View();
+            if (!UserManager.Authenticated)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                //if (!UserManager.Authenticated)
+                //{
+                //    return RedirectToAction("Login", "Admin");
+                //}
+                ViewBag.SinhVienId = new SelectList(db.SinhViens, "SinhVienId", "HoTen");
+                ViewBag.GiangVienId = new SelectList(db.GiangViens, "GiangVienId", "HoTen");
+                ViewBag.LoaiTaiKhoanId = new SelectList(db.LoaiTaiKhoans, "LoaiTaiKhoanId", "TenLoaiTaiKhoan");
+                return View();
+            }
+               
         }
 
         // POST: /User/Create
@@ -62,7 +88,7 @@ namespace ProjectManagement.Controllers.Admin
         [HttpPost]
         [ValidateAntiForgeryToken]
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")] // This is for output cache false
-        public ActionResult Create([Bind(Include = "TaiKhoanId,Username,HoTen,Password,LoaiTaiKhoanId")] TaiKhoan user)
+        public ActionResult Create([Bind(Include = "TaiKhoanId,Username,HoTen,Password,LoaiTaiKhoanId,SinhVienId,GiangVienId")] TaiKhoan user)
         {
             if (ModelState.IsValid)
             {
@@ -105,6 +131,8 @@ namespace ProjectManagement.Controllers.Admin
                     return RedirectToAction("Index");
                 }
             }
+            ViewBag.SinhVienId = new SelectList(db.SinhViens, "SinhVienId", "HoTen", user.SinhVienId);
+            ViewBag.GiangVienId = new SelectList(db.GiangViens, "GiangVienId", "HoTen", user.GiangVienId);
             ViewBag.LoaiTaiKhoanId = new SelectList(db.LoaiTaiKhoans, "LoaiTaiKhoanId", "TenLoaiTaiKhoan", user.LoaiTaiKhoanId);
             return View(user);
         }
@@ -112,26 +140,34 @@ namespace ProjectManagement.Controllers.Admin
         // GET: /User/Edit/5
         public ActionResult Edit(decimal? id)
         {
-            //if (!UserManager.Authenticated)
-            //{
-            //    return RedirectToAction("Login", "Admin");
-            //}
-            if ((id + "").Trim() == "")
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            if (!ValidInput.validDecimal(id + ""))
+            else
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //if (!UserManager.Authenticated)
+                //{
+                //    return RedirectToAction("Login", "Admin");
+                //}
+                if ((id + "").Trim() == "")
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                if (!ValidInput.validDecimal(id + ""))
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                TaiKhoan user = db.TaiKhoans.Find(id);
+                if (user == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.UserCreatedBy = db.TaiKhoans.ToList();
+                ViewBag.LoaiTaiKhoanId = new SelectList(db.LoaiTaiKhoans, "LoaiTaiKhoanId", "TenLoaiTaiKhoan", user.LoaiTaiKhoanId);
+                return View(user);
             }
-            TaiKhoan user = db.TaiKhoans.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.UserCreatedBy = db.TaiKhoans.ToList();
-            ViewBag.LoaiTaiKhoanId = new SelectList(db.LoaiTaiKhoans, "LoaiTaiKhoanId", "TenLoaiTaiKhoan", user.LoaiTaiKhoanId);
-            return View(user);
+           
         }
 
         // POST: /User/Edit/5
@@ -193,20 +229,28 @@ namespace ProjectManagement.Controllers.Admin
         // GET: /User/Delete/5
         public ActionResult Delete(decimal? id)
         {
-            //if (!UserManager.Authenticated)
-            //{
-            //    return RedirectToAction("Login", "Admin");
-            //}
-            if (id == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            TaiKhoan user = db.TaiKhoans.Find(id);
-            if (user == null)
+            else
             {
-                return HttpNotFound();
+                //if (!UserManager.Authenticated)
+                //{
+                //    return RedirectToAction("Login", "Admin");
+                //}
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                TaiKhoan user = db.TaiKhoans.Find(id);
+                if (user == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(user);
             }
-            return View(user);
+            
         }
 
         // POST: /User/Delete/5

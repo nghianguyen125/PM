@@ -30,14 +30,14 @@
                 <div class="form-group">
                     @Html.Label("Mã Loại Tài Khoản", new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.TextBoxFor(model => model.LoaiTaiKhoanId, new { @class = "form-control" })
+                        @Html.TextBoxFor(model => model.LoaiTaiKhoanId, new { @class = "form-control", required = "required" })
                         @Html.ValidationMessageFor(model => model.LoaiTaiKhoanId)
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.Label("Tên Đề Tài", new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.TextBoxFor(model => model.TenLoaiTaiKhoan, new { @class = "form-control" })
+                        @Html.TextBoxFor(model => model.TenLoaiTaiKhoan, new { @class = "form-control", required = "required" })
                         @Html.ValidationMessageFor(model => model.TenLoaiTaiKhoan)
                     </div>
                 </div>

@@ -1,6 +1,7 @@
 ﻿@model ProjectManagement.Models.TaiKhoan
 @{
     Layout = null;
+    string giangvienId = ViewBag.GiangVienId + "";
 }
 
 
@@ -66,7 +67,7 @@
         </div>
         <!-- END Login Title -->
         <!-- Login Block -->
-        <div class="block push-bit">
+        @*<div class="block push-bit">*@
             <!-- Login Form -->
             <form action="index.html" method="post" id="form-login" class="form-horizontal form-bordered form-control-borderless">
                 <div class="form-group">
@@ -94,13 +95,13 @@
                         
                     </div>
                     <div class="col-xs-8 text-right">
-                        <button type="submit" class="btn btn-sm btn-primary" value="Đăng nhập">Login</button>
+                        <button type="submit" class="btn btn-sm btn-primary" value="Đăng nhập">Đăng Nhập</button>
                     </div>
                 </div>
                 
             </form>
             <!-- END Login Form -->
-        </div>
+        @*</div>*@
         <!-- END Login Block -->
     </div>
     <!-- END Login Container -->

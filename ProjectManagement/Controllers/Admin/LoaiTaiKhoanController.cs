@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using ProjectManagement.App_Start.Classes;
 using ProjectManagement.Models;
 
 namespace ProjectManagement.Controllers.Admin
@@ -17,28 +19,44 @@ namespace ProjectManagement.Controllers.Admin
         // GET: LoaiTaiKhoan
         public ActionResult Index()
         {
-            return View(db.LoaiTaiKhoans.ToList());
+            if (!UserManager.Authenticated)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else return View(db.LoaiTaiKhoans.ToList());
         }
 
         // GET: LoaiTaiKhoan/Details/5
         public ActionResult Details(decimal id)
         {
-            if (id == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            LoaiTaiKhoan loaiTaiKhoan = db.LoaiTaiKhoans.Find(id);
-            if (loaiTaiKhoan == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                LoaiTaiKhoan loaiTaiKhoan = db.LoaiTaiKhoans.Find(id);
+                if (loaiTaiKhoan == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(loaiTaiKhoan);
             }
-            return View(loaiTaiKhoan);
+
         }
 
         // GET: LoaiTaiKhoan/Create
         public ActionResult Create()
         {
-            return View();
+            if (!UserManager.Authenticated)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else return View();
         }
 
         // POST: LoaiTaiKhoan/Create
@@ -61,16 +79,24 @@ namespace ProjectManagement.Controllers.Admin
         // GET: LoaiTaiKhoan/Edit/5
         public ActionResult Edit(decimal id)
         {
-            if (id == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            LoaiTaiKhoan loaiTaiKhoan = db.LoaiTaiKhoans.Find(id);
-            if (loaiTaiKhoan == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                LoaiTaiKhoan loaiTaiKhoan = db.LoaiTaiKhoans.Find(id);
+                if (loaiTaiKhoan == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(loaiTaiKhoan);
             }
-            return View(loaiTaiKhoan);
+
         }
 
         // POST: LoaiTaiKhoan/Edit/5
@@ -92,16 +118,24 @@ namespace ProjectManagement.Controllers.Admin
         // GET: LoaiTaiKhoan/Delete/5
         public ActionResult Delete(decimal id)
         {
-            if (id == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            LoaiTaiKhoan loaiTaiKhoan = db.LoaiTaiKhoans.Find(id);
-            if (loaiTaiKhoan == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                LoaiTaiKhoan loaiTaiKhoan = db.LoaiTaiKhoans.Find(id);
+                if (loaiTaiKhoan == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(loaiTaiKhoan);
             }
-            return View(loaiTaiKhoan);
+
         }
 
         // POST: LoaiTaiKhoan/Delete/5
