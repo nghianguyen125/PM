@@ -11,8 +11,7 @@ namespace ProjectManagement.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class SinhVien
     {
         public SinhVien()
@@ -24,28 +23,13 @@ namespace ProjectManagement.Models
             this.SinhVienThuocNhomSVs = new HashSet<SinhVienThuocNhomSV>();
             this.TaiKhoans = new HashSet<TaiKhoan>();
         }
-        [Required(ErrorMessage = "Field can't be empty")]
+    
         public string SinhVienId { get; set; }
-
-        [Required(ErrorMessage = "Field can't be empty")]
         public bool GioiTinh { get; set; }
-
-        [Required(ErrorMessage = "Field can't be empty")]
-        [StringLength(100)]
         public string HoTen { get; set; }
-
-        [Required(ErrorMessage = "Field can't be empty")]
         public Nullable<System.DateTime> NgaySinh { get; set; }
-
-        [Required(ErrorMessage = "Field can't be empty")]
-        [Range(0, int.MaxValue, ErrorMessage = "Please enter valid integer Number")]
         public Nullable<int> SoTCHT { get; set; }
-
-        [Required(ErrorMessage = "Field can't be empty")]
-        [Range(0, int.MaxValue, ErrorMessage = "Please enter valid integer Number")]
         public Nullable<int> SoTCCL { get; set; }
-
-        [Required(ErrorMessage = "Field can't be empty")]
         public bool TrangThai { get; set; }
     
         public virtual ICollection<DanhGiaDeTai> DanhGiaDeTais { get; set; }

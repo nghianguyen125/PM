@@ -11,34 +11,21 @@ namespace ProjectManagement.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class TaiKhoan
     {
         public TaiKhoan()
         {
             this.TinTucThongBaos = new HashSet<TinTucThongBao>();
         }
-        [Required(ErrorMessage = "Field can't be empty")]
+    
         public decimal TaiKhoanId { get; set; }
-        [Required(ErrorMessage = "Field can't be empty")]
-        [MinLength(6, ErrorMessage = "Min is 6")]
-        [MaxLength(20, ErrorMessage = "Max is 20")]
         public string Username { get; set; }
-        [Required(ErrorMessage = "Field can't be empty")]
-        [MinLength(6, ErrorMessage = "Minimum is 500")]
-        [MaxLength(20, ErrorMessage = "Maximum is 20")]
         public string Password { get; set; }
-        [Required(ErrorMessage = "Field can't be empty")]
         public string HoTen { get; set; }
-        [Required(ErrorMessage = "Field can't be empty")]
-        [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
         public string Email { get; set; }
-        [Required(ErrorMessage = "Field can't be empty")]
-        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Entered phone format is not valid.")]
         public Nullable<decimal> SDT { get; set; }
         public Nullable<decimal> SDTK { get; set; }
-        [Required(ErrorMessage = "Field can't be empty")]
         public Nullable<decimal> LoaiTaiKhoanId { get; set; }
         public string SinhVienId { get; set; }
         public string GiangVienId { get; set; }

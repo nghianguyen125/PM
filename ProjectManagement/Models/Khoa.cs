@@ -11,8 +11,7 @@ namespace ProjectManagement.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Khoa
     {
         public Khoa()
@@ -23,13 +22,9 @@ namespace ProjectManagement.Models
             this.SinhVienThuocKhoas = new HashSet<SinhVienThuocKhoa>();
             this.TinTucThongBaos = new HashSet<TinTucThongBao>();
         }
-        [Required(ErrorMessage = "Field can't be empty")]
+    
         public decimal KhoaId { get; set; }
-        [Required(ErrorMessage = "Field can't be empty")]
-        [StringLength(100, ErrorMessage = "Maximum is 100")]
         public string TenKhoa { get; set; }
-        [Required(ErrorMessage = "Field can't be empty")]
-        [StringLength(100, ErrorMessage = "Maximum is 100")]
         public string DiaChi { get; set; }
     
         public virtual ICollection<GiangVienThuocKhoa> GiangVienThuocKhoas { get; set; }

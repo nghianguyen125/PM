@@ -4,13 +4,16 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    string idGiangVien = ViewBag.id + "";
 }
 
-<h2>Index</h2>
+<h2>Đánh Giá Sinh Viên</h2>
 <section class="content">
     <div class="row" style="padding-bottom: 10px;">
         <div class="col-md-12">
-            @Html.ActionLink("Tạo mới", "Create", null, new { @class = "btn btn-primary pull-left" })
+            @*@Html.ActionLink("Tạo mới", "Create", null, new { @class = "btn btn-primary pull-left" })*@
+            <a href="/Admin/DanhGiaDeTai/Create?KHId=@idGiangVien" class="btn btn-primary pull-left">Tạo mới</a>
+            <a ></a>
         </div>
     </div>
     <div class="box">
@@ -63,15 +66,16 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.NoiDungDanhGia)
                         </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.GiangVienId)
-                        </td>
+                        @*<td>
+                            <a href="@Url.Action("DSSV", new { KHId = item.KhoaHocID })">Danh sách Sinh Viên</a>
+                        </td>*@
+                        @*@Html.HiddenFor(model => itemModel.)*@
                         <td align="center">
                             @*@Html.ActionLink("Sửa", "Edit", new {id = item.USER_ID}) |
-                                @Html.ActionLink("Xóa", "Delete", new {id = item.USER_ID})*@
+            @Html.ActionLink("Xóa", "Delete", new {id = item.USER_ID})*@
                             <ul class="contro_function" style="width: 70px">
                                 <li>
-                                    <a title="Cập nhật" href="@Url.Action("Edit", new { detaiid = item.DeTaiId, svid = item.SinhVienId, gvid = item.GiangVienId})">
+                                    <a title="Cập nhật" href="@Url.Action("Edit", new { detaiid = item.DeTaiId, svid = item.SinhVienId, gvid = item.GiangVienId })">
                                         <i class="fa fa-edit"></i>
                                     </a>
                                 </li>

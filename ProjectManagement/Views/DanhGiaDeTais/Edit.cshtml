@@ -5,46 +5,55 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>DanhGiaDeTai</h4>
-        <hr />
-        @Html.ValidationSummary(true)
-        @Html.HiddenFor(model => model.DeTaiId)
-
-        @Html.HiddenFor(model => model.SinhVienId)
-
-        @Html.HiddenFor(model => model.GiangVienId)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Diem, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Diem)
-                @Html.ValidationMessageFor(model => model.Diem)
-            </div>
+<section class="content">
+    @{
+        int countError = ViewBag.CountError != null ? (int)ViewBag.CountError : 0;
+        if (countError > 0)
+        {
+            @Html.ValidationSummary(true)
+            @Html.ValidationMessage("error", "", new { @class = "alert alert-danger alert-dismissable", style = "text-align:left; display: block" })
+        }
+    }
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">Cập nhật Điểm</h3>
         </div>
+        @using (Html.BeginForm("Edit", "GiangVien", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            @Html.AntiForgeryToken()
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.NoiDungDanhGia, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.NoiDungDanhGia)
-                @Html.ValidationMessageFor(model => model.NoiDungDanhGia)
-            </div>
-        </div>
+            <div class="box-body">
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                @Html.HiddenFor(model => model.GiangVienId)
+                <div class="form-group">
+                    @Html.Label("Tên Sinh Viên", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.SinhVien.HoTen, new { @class = "form-control", @readonly = "true" })
+                        @Html.ValidationMessageFor(model => model.SinhVien.HoTen)
+                    </div>
+                </div>
+                    <div class="form-group">
+                        @Html.Label("Điểm", new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.Diem, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Diem)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Nội Dung Đánh Giá", new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.NoiDungDanhGia, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.NoiDungDanhGia)
+                        </div>
+                    </div>
+                </div>
+            <div class="box-footer">
+                @*<button type="submit" class="btn btn-default">Cancel</button>*@
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+                <input type="submit" value="Save" class="btn btn-primary pull-right" />
             </div>
-        </div>
+        }
     </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+</section>

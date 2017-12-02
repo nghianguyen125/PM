@@ -15,8 +15,13 @@ namespace ProjectManagement.Controllers
         private ProjectManagementEntities db = new ProjectManagementEntities();
 
         // GET: DanhGiaDeTais
-        public ActionResult Index()
+        public ActionResult Index(string id)
         {
+            var kh = db.DanhGiaDeTais.Where(p => p.GiangVienId == id).SingleOrDefault();
+            if (kh != null)
+            {
+                ViewBag.IdGiangVien = kh.GiangVienId;
+            }
             var danhGiaDeTais = db.DanhGiaDeTais.Include(d => d.DeTai).Include(d => d.SinhVien);
             return View(danhGiaDeTais.ToList());
         }

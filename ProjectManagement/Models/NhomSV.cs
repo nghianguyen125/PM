@@ -11,8 +11,7 @@ namespace ProjectManagement.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class NhomSV
     {
         public NhomSV()
@@ -20,14 +19,9 @@ namespace ProjectManagement.Models
             this.PhanDeTaiChoNhomSVs = new HashSet<PhanDeTaiChoNhomSV>();
             this.SinhVienThuocNhomSVs = new HashSet<SinhVienThuocNhomSV>();
         }
-        [Required(ErrorMessage = "Field can't be empty")]
+    
         public decimal NhomSVId { get; set; }
-
-        [Required(ErrorMessage = "Field can't be empty")]
-        [StringLength(100, ErrorMessage = "Maximum is 100")]
         public string TenNhom { get; set; }
-
-        [Required(ErrorMessage = "Field can't be empty")]
         public Nullable<decimal> KhoaId { get; set; }
     
         public virtual Khoa Khoa { get; set; }

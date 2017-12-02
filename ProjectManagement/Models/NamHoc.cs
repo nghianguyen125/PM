@@ -11,8 +11,7 @@ namespace ProjectManagement.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class NamHoc
     {
         public NamHoc()
@@ -21,14 +20,10 @@ namespace ProjectManagement.Models
             this.KhoaHocs = new HashSet<KhoaHoc>();
             this.NamHocs1 = new HashSet<NamHoc>();
         }
-        [Required(ErrorMessage = "Field can't be empty")]
+    
         public decimal NamHocHocKyId { get; set; }
-        [Required(ErrorMessage = "Field can't be empty")]
-        [StringLength(100, ErrorMessage = "Maximum is 100")]
         public string TenNamHocHocKy { get; set; }
-        [Required(ErrorMessage = "Field can't be empty")]
         public Nullable<System.DateTime> TuNgay { get; set; }
-        [Required(ErrorMessage = "Field can't be empty")]
         public Nullable<System.DateTime> DenNgay { get; set; }
         public Nullable<decimal> NamHocHocKyIdRoot { get; set; }
     

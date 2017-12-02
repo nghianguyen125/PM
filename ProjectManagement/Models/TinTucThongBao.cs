@@ -11,28 +11,14 @@ namespace ProjectManagement.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class TinTucThongBao
     {
-        [Required(ErrorMessage = "Field can't be empty")]
         public decimal TinTucId { get; set; }
-
-        [Required(ErrorMessage = "Field can't be empty")]
-        [StringLength(100, ErrorMessage = "Maximum is 100")]
         public string TieuDe { get; set; }
-
-        [Required(ErrorMessage = "Field can't be empty")]
-        [StringLength(500, ErrorMessage = "Maximum is 500")]
         public string NoiDung { get; set; }
-
-        [Required(ErrorMessage = "Field can't be empty")]
         public Nullable<System.DateTime> NgayDang { get; set; }
-
-        [Required(ErrorMessage = "Field can't be empty")]
         public Nullable<decimal> TaiKhoanId { get; set; }
-
-        [Required(ErrorMessage = "Field can't be empty")]
         public Nullable<decimal> KhoaId { get; set; }
     
         public virtual Khoa Khoa { get; set; }

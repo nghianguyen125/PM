@@ -11,17 +11,11 @@ namespace ProjectManagement.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class SinhVienThuocKhoa
     {
-        [Required(ErrorMessage = "Field can't be empty")]
         public decimal KhoaId { get; set; }
-
-        [Required(ErrorMessage = "Field can't be empty")]
         public string SinhVienId { get; set; }
-
-        [Required(ErrorMessage = "Field can't be empty")]
         public System.DateTime TuNgay { get; set; }
         public Nullable<System.DateTime> DenNgay { get; set; }
     
