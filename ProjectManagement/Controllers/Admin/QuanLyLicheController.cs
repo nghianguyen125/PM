@@ -74,7 +74,7 @@ namespace ProjectManagement.Controllers.Admin
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "DotKhoaLuanId,MocThoiGian,NoiDung")] QuanLyLich quanLyLich)
+        public ActionResult Create([Bind(Include = "DotKhoaLuanId,TieuDe,MocThoiGian,NoiDung")] QuanLyLich quanLyLich)
         {
             if (ModelState.IsValid)
             {
@@ -116,7 +116,7 @@ namespace ProjectManagement.Controllers.Admin
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "DotKhoaLuanId,MocThoiGian,NoiDung")] QuanLyLich quanLyLich)
+        public ActionResult Edit([Bind(Include = "DotKhoaLuanId,TieuDe,MocThoiGian,NoiDung")] QuanLyLich quanLyLich)
         {
             if (ModelState.IsValid)
             {

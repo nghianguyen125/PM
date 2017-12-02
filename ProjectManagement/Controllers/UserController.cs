@@ -109,7 +109,7 @@ namespace ProjectManagement.Controllers.User
                     if(tk.GiangVienId != null)
                     {
                         ViewBag.GiangVienId = tk.GiangVienId;
-                        return RedirectToAction("Index", "MainPage", new { GVId = tk.GiangVienId });
+                        return RedirectToAction("Index", "GiangVienMain", new { GVId = tk.GiangVienId });
                     }
                     if(tk.SinhVienId != null)
                     {

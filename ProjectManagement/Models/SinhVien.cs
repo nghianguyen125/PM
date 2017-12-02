@@ -17,6 +17,7 @@ namespace ProjectManagement.Models
         public SinhVien()
         {
             this.DanhGiaDeTais = new HashSet<DanhGiaDeTai>();
+            this.PhanSinhVienChoDotKhoaLuans = new HashSet<PhanSinhVienChoDotKhoaLuan>();
             this.SinhVienKhoaHocs = new HashSet<SinhVienKhoaHoc>();
             this.SinhVienNganhHocs = new HashSet<SinhVienNganhHoc>();
             this.SinhVienThuocKhoas = new HashSet<SinhVienThuocKhoa>();
@@ -33,6 +34,7 @@ namespace ProjectManagement.Models
         public bool TrangThai { get; set; }
     
         public virtual ICollection<DanhGiaDeTai> DanhGiaDeTais { get; set; }
+        public virtual ICollection<PhanSinhVienChoDotKhoaLuan> PhanSinhVienChoDotKhoaLuans { get; set; }
         public virtual ICollection<SinhVienKhoaHoc> SinhVienKhoaHocs { get; set; }
         public virtual ICollection<SinhVienNganhHoc> SinhVienNganhHocs { get; set; }
         public virtual ICollection<SinhVienThuocKhoa> SinhVienThuocKhoas { get; set; }

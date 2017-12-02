@@ -22,10 +22,10 @@
             @using (Html.BeginForm("index", "GiangVien", FormMethod.Get, new { @class = "navbar-form navbar-right", role = "search", id = "search-form" }))
             {
                 <div class="form-group">
-                   @Html.TextBox("searchString",null, new { @class = "form-control", placeholder = "Tìm kiếm giảng viên theo tên" })
+                    @Html.TextBox("searchString", null, new { @class = "form-control", placeholder = "Tìm kiếm giảng viên theo tên" })
                 </div>
                 <div class="form-group">
-                   <button type="submit" value="Search" class="btn btn-default hidden-xs"><i class="glyphicon glyphicon-search"></i></button>
+                    <button type="submit" value="Search" class="btn btn-default hidden-xs"><i class="glyphicon glyphicon-search"></i></button>
                 </div>
             }
         </div>

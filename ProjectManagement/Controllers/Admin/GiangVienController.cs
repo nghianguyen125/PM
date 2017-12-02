@@ -49,7 +49,7 @@ namespace ProjectManagement.Controllers.Admin
             }
         }
 
-  
+
         // GET: GiangVien/Create
         public ActionResult Create()
         {
@@ -62,7 +62,7 @@ namespace ProjectManagement.Controllers.Admin
                 ViewBag.GiangVienId = new SelectList(db.GiangViens, "GiangVienId", "HoTen", "GioiTinh");
                 return View();
             }
-                
+
         }
 
         // POST: GiangVien/Create

@@ -208,7 +208,9 @@
     <Compile Include="Controllers\Admin\NganhController.cs" />
     <Compile Include="Controllers\Admin\NhomSVController.cs" />
     <Compile Include="Controllers\Admin\PhanDeTaiChoDotKhoaLuanController.cs" />
+    <Compile Include="Controllers\Admin\PhanDeTaiChoGiangVienController.cs" />
     <Compile Include="Controllers\Admin\PhanDeTaiChoNhomSVController.cs" />
+    <Compile Include="Controllers\Admin\PhanSinhVienChoDotKhoaLuanController.cs" />
     <Compile Include="Controllers\Admin\QuanLyLicheController.cs" />
     <Compile Include="Controllers\Admin\SinhVienController.cs" />
     <Compile Include="Controllers\Admin\SinhVienKhoaHocController.cs" />
@@ -220,7 +222,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MainPageController.cs" />
-    <Compile Include="Controllers\SinhVien\PhanDeTaiChoGiangViensController.cs" />
+    <Compile Include="Controllers\SinhVienThuocNhomSVsController.cs" />
     <Compile Include="Controllers\TaiLieuxController.cs" />
     <Compile Include="Controllers\TinTucThongBaosController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -290,6 +292,9 @@
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PhanDeTaiChoNhomSV.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PhanSinhVienChoDotKhoaLuan.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\QuanLyLich.cs">
@@ -2217,9 +2222,32 @@
     <Content Include="Views\PhanDeTaiChoGiangViens\Details.cshtml" />
     <Content Include="Views\PhanDeTaiChoGiangViens\Edit.cshtml" />
     <Content Include="Views\PhanDeTaiChoGiangViens\Index.cshtml" />
+    <Content Include="Views\PhanDeTaiChoGiangVien\Create.cshtml" />
+    <Content Include="Views\PhanDeTaiChoGiangVien\Delete.cshtml" />
+    <Content Include="Views\PhanDeTaiChoGiangVien\Details.cshtml" />
+    <Content Include="Views\PhanDeTaiChoGiangVien\Edit.cshtml" />
+    <Content Include="Views\PhanDeTaiChoGiangVien\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutGiangVien.cshtml" />
+    <Content Include="Views\GiangVien\Index.cshtml" />
+    <Content Include="Views\GiangVienMain\Create.cshtml" />
+    <Content Include="Views\GiangVienMain\Delete.cshtml" />
+    <Content Include="Views\GiangVienMain\Details.cshtml" />
+    <Content Include="Views\GiangVienMain\Edit.cshtml" />
+    <Content Include="Views\GiangVienMain\Index.cshtml" />
+    <Content Include="Views\SinhVienThuocNhomSVs\Create.cshtml" />
+    <Content Include="Views\SinhVienThuocNhomSVs\Delete.cshtml" />
+    <Content Include="Views\SinhVienThuocNhomSVs\Edit.cshtml" />
+    <Content Include="Views\PhanSinhVienChoDotKhoaLuan\Create.cshtml" />
+    <Content Include="Views\PhanSinhVienChoDotKhoaLuan\Delete.cshtml" />
+    <Content Include="Views\PhanSinhVienChoDotKhoaLuan\Details.cshtml" />
+    <Content Include="Views\PhanSinhVienChoDotKhoaLuan\Edit.cshtml" />
+    <Content Include="Views\PhanSinhVienChoDotKhoaLuan\Index.cshtml" />
+    <Content Include="Views\PhanSinhVienChoDotKhoaLuan\DSSV.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Controllers\GiangVien\" />
+    <Folder Include="Controllers\SinhVien\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>

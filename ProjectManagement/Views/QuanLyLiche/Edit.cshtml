@@ -42,7 +42,7 @@
                 <div class="form-group">
                     @Html.Label("Mốc Thời Gian", new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.TextBoxFor(model => model.MocThoiGian, new { @class = "form-control", type = "date", required = "required" })
+                        @Html.TextBoxFor(model => model.MocThoiGian, "{0:dd/MM/yyyy}", new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.MocThoiGian)
                     </div>
                 </div>

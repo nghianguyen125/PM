@@ -17,6 +17,7 @@ namespace ProjectManagement.Models
         public DotKhoaLuan()
         {
             this.PhanDeTaiChoDotKhoaLuans = new HashSet<PhanDeTaiChoDotKhoaLuan>();
+            this.PhanSinhVienChoDotKhoaLuans = new HashSet<PhanSinhVienChoDotKhoaLuan>();
         }
     
         public decimal DotKhoaLuanId { get; set; }
@@ -25,6 +26,7 @@ namespace ProjectManagement.Models
     
         public virtual NamHoc NamHoc { get; set; }
         public virtual ICollection<PhanDeTaiChoDotKhoaLuan> PhanDeTaiChoDotKhoaLuans { get; set; }
+        public virtual ICollection<PhanSinhVienChoDotKhoaLuan> PhanSinhVienChoDotKhoaLuans { get; set; }
         public virtual QuanLyLich QuanLyLich { get; set; }
     }
 }
