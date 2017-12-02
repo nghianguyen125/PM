@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using ProjectManagement.App_Start.Classes;
 using ProjectManagement.Models;
 
 namespace ProjectManagement.Controllers.Admin
@@ -17,30 +19,54 @@ namespace ProjectManagement.Controllers.Admin
         // GET: QuanLyLiche
         public ActionResult Index()
         {
-            var quanLyLiches = db.QuanLyLiches.Include(q => q.DotKhoaLuan);
-            return View(quanLyLiches.ToList());
+            if (!UserManager.Authenticated)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                var quanLyLiches = db.QuanLyLiches.Include(q => q.DotKhoaLuan);
+                return View(quanLyLiches.OrderBy(n => n.MocThoiGian).ToList());
+            }
+                
         }
 
         // GET: QuanLyLiche/Details/5
         public ActionResult Details(decimal id)
         {
-            if (id == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            QuanLyLich quanLyLich = db.QuanLyLiches.Find(id);
-            if (quanLyLich == null)
+            else
             {
-                return HttpNotFound();
+                if (id == 0)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                QuanLyLich quanLyLich = db.QuanLyLiches.Find(id);
+                if (quanLyLich == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(quanLyLich);
             }
-            return View(quanLyLich);
+            
         }
 
         // GET: QuanLyLiche/Create
         public ActionResult Create()
         {
-            ViewBag.DotKhoaLuanId = new SelectList(db.DotKhoaLuans, "DotKhoaLuanId", "TenDotKhoaLuan");
-            return View();
+            if (!UserManager.Authenticated)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                ViewBag.DotKhoaLuanId = new SelectList(db.DotKhoaLuans, "DotKhoaLuanId", "TenDotKhoaLuan");
+                return View();
+            }
+                
         }
 
         // POST: QuanLyLiche/Create
@@ -48,7 +74,7 @@ namespace ProjectManagement.Controllers.Admin
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "DotKhoaLuanId,MocThoiGian,NoiDung")] QuanLyLich quanLyLich)
+        public ActionResult Create([Bind(Include = "DotKhoaLuanId,TieuDe,MocThoiGian,NoiDung")] QuanLyLich quanLyLich)
         {
             if (ModelState.IsValid)
             {
@@ -64,17 +90,25 @@ namespace ProjectManagement.Controllers.Admin
         // GET: QuanLyLiche/Edit/5
         public ActionResult Edit(decimal? DId)
         {
-            if (DId == 0)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            QuanLyLich quanLyLich = db.QuanLyLiches.Find(DId);
-            if (quanLyLich == null)
+            else
             {
-                return HttpNotFound();
+                if (DId == 0)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                QuanLyLich quanLyLich = db.QuanLyLiches.Find(DId);
+                if (quanLyLich == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.DotKhoaLuanId = new SelectList(db.DotKhoaLuans, "DotKhoaLuanId", "TenDotKhoaLuan", quanLyLich.DotKhoaLuanId);
+                return View(quanLyLich);
             }
-            ViewBag.DotKhoaLuanId = new SelectList(db.DotKhoaLuans, "DotKhoaLuanId", "TenDotKhoaLuan", quanLyLich.DotKhoaLuanId);
-            return View(quanLyLich);
+            
         }
 
         // POST: QuanLyLiche/Edit/5
@@ -82,7 +116,7 @@ namespace ProjectManagement.Controllers.Admin
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "DotKhoaLuanId,MocThoiGian,NoiDung")] QuanLyLich quanLyLich)
+        public ActionResult Edit([Bind(Include = "DotKhoaLuanId,TieuDe,MocThoiGian,NoiDung")] QuanLyLich quanLyLich)
         {
             if (ModelState.IsValid)
             {
@@ -97,16 +131,24 @@ namespace ProjectManagement.Controllers.Admin
         // GET: QuanLyLiche/Delete/5
         public ActionResult Delete(decimal? DId)
         {
-            if (DId == 0)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            QuanLyLich quanLyLich = db.QuanLyLiches.Find(DId);
-            if (quanLyLich == null)
+            else
             {
-                return HttpNotFound();
+                if (DId == 0)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                QuanLyLich quanLyLich = db.QuanLyLiches.Find(DId);
+                if (quanLyLich == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(quanLyLich);
             }
-            return View(quanLyLich);
+            
         }
 
         // POST: QuanLyLiche/Delete/5

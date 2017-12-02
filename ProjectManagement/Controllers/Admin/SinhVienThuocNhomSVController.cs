@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using ProjectManagement.App_Start.Classes;
 using ProjectManagement.Models;
 
 namespace ProjectManagement.Controllers.Admin
@@ -17,71 +19,108 @@ namespace ProjectManagement.Controllers.Admin
         // GET: SinhVienThuocNhomSV
         public ActionResult Index()
         {
-            return View(db.NhomSVs.ToList());
+            if (!UserManager.Authenticated)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                return View(db.NhomSVs.ToList());
+            }
+
         }
 
         // GET: SinhVienThuocNhomSV/Details/5
         public ActionResult Details(decimal id)
         {
-            if (id == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            SinhVienThuocNhomSV sinhVienThuocNhomSV = db.SinhVienThuocNhomSVs.Find(id);
-            if (sinhVienThuocNhomSV == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                SinhVienThuocNhomSV sinhVienThuocNhomSV = db.SinhVienThuocNhomSVs.Find(id);
+                if (sinhVienThuocNhomSV == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(sinhVienThuocNhomSV);
             }
-            return View(sinhVienThuocNhomSV);
+            
         }
 
         public ActionResult DSSV(decimal? NId)
         {
-            if (NId == 0)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            var sinhVienThuocNhom = db.SinhVienThuocNhomSVs.Where(n => n.NhomSVId == NId).ToList();
-            if (sinhVienThuocNhom == null)
+            else
             {
-                return HttpNotFound();
-            }
-            var kh = db.NhomSVs.Where(n => n.NhomSVId == NId).SingleOrDefault();
-            if (kh != null)
-            {
-                ViewBag.IdNhom = kh.NhomSVId;
-                ViewBag.TenNhom = kh.TenNhom;
-            }
+                if (NId == 0)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                var sinhVienThuocNhom = db.SinhVienThuocNhomSVs.Where(n => n.NhomSVId == NId).ToList();
+                if (sinhVienThuocNhom == null)
+                {
+                    return HttpNotFound();
+                }
+                var kh = db.NhomSVs.Where(n => n.NhomSVId == NId).SingleOrDefault();
+                if (kh != null)
+                {
+                    ViewBag.IdNhom = kh.NhomSVId;
+                    ViewBag.TenNhom = kh.TenNhom;
+                }
 
-            //var sinhVienKhoaHocs = db.SinhVienKhoaHocs.Include(s => s.KhoaHoc).Include(s => s.SinhVien).Where(n => (n.KhoaHocID == KHId && n.SinhVienId == SVId));
-            return View(sinhVienThuocNhom.ToList());
+                //var sinhVienKhoaHocs = db.SinhVienKhoaHocs.Include(s => s.KhoaHoc).Include(s => s.SinhVien).Where(n => (n.KhoaHocID == KHId && n.SinhVienId == SVId));
+                return View(sinhVienThuocNhom.ToList());
+            }
+          
         }
 
         // GET: SinhVienThuocNhomSV/Create
         public ActionResult Create(decimal? NId)
         {
-            if (NId == 0)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var sinhVienThuocNhom = db.SinhVienThuocNhomSVs.Where(n => n.NhomSVId == NId).ToList();
-            if (sinhVienThuocNhom == null)
-            {
-                return HttpNotFound();
-            }
-            var kh = db.NhomSVs.Where(n => n.NhomSVId == NId).SingleOrDefault();
-            if (kh != null)
-            {
-                ViewBag.TenNhomSV = kh.TenNhom;
-                ViewBag.IdNhomSV = kh.NhomSVId;
-                ViewBag.NhomSVId = new SelectList(db.NhomSVs, "NhomSVId", "TenNhom", kh.NhomSVId);
+                return RedirectToAction("Login", "Admin");
             }
             else
             {
-                ViewBag.NHomSVId = new SelectList(db.NhomSVs, "NhomSVId", "TenNhom");
+                if (NId == 0)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                var sinhVienThuocNhom = db.SinhVienThuocNhomSVs.Where(n => n.NhomSVId == NId).ToList();
+                if (sinhVienThuocNhom == null)
+                {
+                    return HttpNotFound();
+                }
+                var kh = db.NhomSVs.Where(n => n.NhomSVId == NId).SingleOrDefault();
+                if (kh != null)
+                {
+                    ViewBag.TenNhomSV = kh.TenNhom;
+                    ViewBag.IdNhomSV = kh.NhomSVId;
+                    ViewBag.NhomSVId = new SelectList(db.NhomSVs, "NhomSVId", "TenNhom", kh.NhomSVId);
+                }
+                else
+                {
+                    ViewBag.NHomSVId = new SelectList(db.NhomSVs, "NhomSVId", "TenNhom");
+                }
+
+                var list1 = db.SinhViens.ToList();
+                var list2 = db.SinhVienThuocNhomSVs.Where(p => p.NhomSVId == NId).ToList();
+                var sv = list1.Where(p => !list2.Any(p2 => p2.SinhVienId == p.SinhVienId)).ToList();
+
+                ViewBag.SinhVienId = new SelectList(db.SinhViens, "SinhVienId", "HoTen");
+                return View();
             }
-            ViewBag.SinhVienId = new SelectList(db.SinhViens, "SinhVienId", "HoTen");
-            return View();
+           
         }
 
         // POST: SinhVienThuocNhomSV/Create
@@ -115,29 +154,37 @@ namespace ProjectManagement.Controllers.Admin
         // GET: SinhVienThuocNhomSV/Edit/5
         public ActionResult Edit(decimal? NId, string SVId)
         {
-            if (NId == 0 || SVId == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            SinhVienThuocNhomSV sinhVienThuocNhom = db.SinhVienThuocNhomSVs.Find(NId, SVId);
-            if (sinhVienThuocNhom == null)
-            {
-                return HttpNotFound();
-            }
-            var kh = db.NhomSVs.Where(n => n.NhomSVId == NId).SingleOrDefault();
-            if (kh != null)
-            {
-                ViewBag.TenNhomSV = kh.TenNhom;
-                ViewBag.IdNhom = kh.NhomSVId;
-                ViewBag.NhomSVId = new SelectList(db.NhomSVs, "NhomSVId", "TenNhom", kh.NhomSVId);
+                return RedirectToAction("Login", "Admin");
             }
             else
             {
-                ViewBag.NhomSVId = new SelectList(db.NhomSVs, "NhomSVId", "TenNhom");
+                if (NId == 0 || SVId == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                SinhVienThuocNhomSV sinhVienThuocNhom = db.SinhVienThuocNhomSVs.Find(NId, SVId);
+                if (sinhVienThuocNhom == null)
+                {
+                    return HttpNotFound();
+                }
+                var kh = db.NhomSVs.Where(n => n.NhomSVId == NId).SingleOrDefault();
+                if (kh != null)
+                {
+                    ViewBag.TenNhomSV = kh.TenNhom;
+                    ViewBag.IdNhom = kh.NhomSVId;
+                    ViewBag.NhomSVId = new SelectList(db.NhomSVs, "NhomSVId", "TenNhom", kh.NhomSVId);
+                }
+                else
+                {
+                    ViewBag.NhomSVId = new SelectList(db.NhomSVs, "NhomSVId", "TenNhom");
+                }
+                ViewBag.NhomSVId = new SelectList(db.NhomSVs, "NhomSVId", "TenNhom", sinhVienThuocNhom.NhomSVId);
+                ViewBag.SinhVienId = new SelectList(db.SinhViens, "SinhVienId", "HoTen", sinhVienThuocNhom.SinhVienId);
+                return View(sinhVienThuocNhom);
             }
-            ViewBag.NhomSVId = new SelectList(db.NhomSVs, "NhomSVId", "TenNhom", sinhVienThuocNhom.NhomSVId);
-            ViewBag.SinhVienId = new SelectList(db.SinhViens, "SinhVienId", "HoTen", sinhVienThuocNhom.SinhVienId);
-            return View(sinhVienThuocNhom);
+          
         }
 
         // POST: SinhVienThuocNhomSV/Edit/5
@@ -161,22 +208,29 @@ namespace ProjectManagement.Controllers.Admin
         // GET: SinhVienThuocNhomSV/Delete/5
         public ActionResult Delete(decimal? NId, string SVId)
         {
-            if (NId == 0 || SVId == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            SinhVienThuocNhomSV sinhVienThuocNhom = db.SinhVienThuocNhomSVs.Find(NId, SVId);
-            if (sinhVienThuocNhom == null)
+            else
             {
-                return HttpNotFound();
+                if (NId == 0 || SVId == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                SinhVienThuocNhomSV sinhVienThuocNhom = db.SinhVienThuocNhomSVs.Find(NId, SVId);
+                if (sinhVienThuocNhom == null)
+                {
+                    return HttpNotFound();
+                }
+                var kh = db.NhomSVs.Where(n => n.NhomSVId == NId).SingleOrDefault();
+                if (kh != null)
+                {
+                    ViewBag.IdNhom = kh.NhomSVId;
+                    ViewBag.TenNhom = kh.TenNhom;
+                }
+                return View(sinhVienThuocNhom);
             }
-            var kh = db.NhomSVs.Where(n => n.NhomSVId == NId).SingleOrDefault();
-            if (kh != null)
-            {
-                ViewBag.IdNhom = kh.NhomSVId;
-                ViewBag.TenNhom = kh.TenNhom;
-            }
-            return View(sinhVienThuocNhom);
         }
 
         // POST: SinhVienThuocNhomSV/Delete/5

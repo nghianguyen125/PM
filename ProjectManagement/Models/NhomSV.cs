@@ -27,6 +27,5 @@ namespace ProjectManagement.Models
         public virtual Khoa Khoa { get; set; }
         public virtual ICollection<PhanDeTaiChoNhomSV> PhanDeTaiChoNhomSVs { get; set; }
         public virtual ICollection<SinhVienThuocNhomSV> SinhVienThuocNhomSVs { get; set; }
-        public virtual Khoa Khoa { get; set; }
     }
 }

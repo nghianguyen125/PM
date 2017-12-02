@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using ProjectManagement.App_Start.Classes;
 using ProjectManagement.Models;
 
 namespace ProjectManagement.Controllers.Admin
@@ -17,28 +19,44 @@ namespace ProjectManagement.Controllers.Admin
         // GET: Lich
         public ActionResult Index()
         {
-            return View(db.QuanLyLiches.ToList());
+            if (!UserManager.Authenticated)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else return View(db.QuanLyLiches.ToList());
         }
 
         // GET: Lich/Details/5
         public ActionResult Details(decimal id)
         {
-            if (id == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            QuanLyLich lich = db.QuanLyLiches.Find(id);
-            if (lich == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                QuanLyLich lich = db.QuanLyLiches.Find(id);
+                if (lich == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(lich);
             }
-            return View(lich);
+
         }
 
         // GET: Lich/Create
         public ActionResult Create()
         {
-            return View();
+            if (!UserManager.Authenticated)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else return View();
         }
 
         // POST: Lich/Create
@@ -61,16 +79,24 @@ namespace ProjectManagement.Controllers.Admin
         // GET: Lich/Edit/5
         public ActionResult Edit(decimal id)
         {
-            if (id == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            QuanLyLich lich = db.QuanLyLiches.Find(id);
-            if (lich == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                QuanLyLich lich = db.QuanLyLiches.Find(id);
+                if (lich == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(lich);
             }
-            return View(lich);
+
         }
 
         // POST: Lich/Edit/5
@@ -92,16 +118,24 @@ namespace ProjectManagement.Controllers.Admin
         // GET: Lich/Delete/5
         public ActionResult Delete(decimal id)
         {
-            if (id == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            QuanLyLich lich = db.QuanLyLiches.Find(id);
-            if (lich == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                QuanLyLich lich = db.QuanLyLiches.Find(id);
+                if (lich == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(lich);
             }
-            return View(lich);
+
         }
 
         // POST: Lich/Delete/5

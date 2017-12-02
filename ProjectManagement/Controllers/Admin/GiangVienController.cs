@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using ProjectManagement.Models;
 using PagedList;
+using Microsoft.AspNet.Identity;
+using ProjectManagement.App_Start.Classes;
 
 namespace ProjectManagement.Controllers.Admin
 {
@@ -19,35 +21,48 @@ namespace ProjectManagement.Controllers.Admin
         [HttpGet]
         public ActionResult Index(string searchString, int? page, string sortOrder, string currentFilter)
         {
-            ViewBag.CurrentSort = sortOrder;
-            var giangvien = from b in db.GiangViens select b;
-            if (!String.IsNullOrEmpty(searchString))
+            if (!UserManager.Authenticated)
             {
-                giangvien = db.GiangViens.Where(s => s.HoTen.Contains(searchString));
-            }
-            ViewBag.SearchString = searchString;
-            if (searchString != null)
-            {
-                page = 1;
+                return RedirectToAction("Login", "Admin");
             }
             else
             {
-                searchString = currentFilter;
+                ViewBag.CurrentSort = sortOrder;
+                var giangvien = from b in db.GiangViens select b;
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    giangvien = db.GiangViens.Where(s => s.HoTen.Contains(searchString));
+                }
+                ViewBag.SearchString = searchString;
+                if (searchString != null)
+                {
+                    page = 1;
+                }
+                else
+                {
+                    searchString = currentFilter;
+                }
+                ViewBag.CurrentFilter = searchString;
+                int pageSize = 5;
+                int pageNumber = (page ?? 1);
+                return View(giangvien.OrderBy(s => s.HoTen).ToList().ToPagedList(pageNumber, pageSize));
             }
-            ViewBag.CurrentFilter = searchString;
-            int pageSize = 5;
-            int pageNumber = (page ?? 1);
-            return View(giangvien.OrderBy(s => s.HoTen).ToList().ToPagedList(pageNumber, pageSize));
         }
 
- 
 
-  
         // GET: GiangVien/Create
         public ActionResult Create()
         {
-            ViewBag.GiangVienId = new SelectList(db.GiangViens, "GiangVienId", "HoTen", "GioiTinh");
-            return View();
+            if (!UserManager.Authenticated)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                ViewBag.GiangVienId = new SelectList(db.GiangViens, "GiangVienId", "HoTen", "GioiTinh");
+                return View();
+            }
+
         }
 
         // POST: GiangVien/Create
@@ -69,17 +84,24 @@ namespace ProjectManagement.Controllers.Admin
         // GET: Nganh/Edit/5
         public ActionResult Edit(string id)
         {
-            if (id == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            GiangVien giangvien = db.GiangViens.Find(id);
-            if (giangvien == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                GiangVien giangvien = db.GiangViens.Find(id);
+                if (giangvien == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.GiangVienId = new SelectList(db.GiangViens, "GiangVienId", "HoTen", giangvien.GiangVienId);
+                return View(giangvien);
             }
-            ViewBag.GiangVienId = new SelectList(db.GiangViens, "GiangVienId", "HoTen", giangvien.GiangVienId);
-            return View(giangvien);
         }
 
         // POST: Nganh/Edit/5
@@ -102,16 +124,24 @@ namespace ProjectManagement.Controllers.Admin
         // GET: GiangVien/Delete/5
         public ActionResult Delete(string id)
         {
-            if (id == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            GiangVien giangvien = db.GiangViens.Find(id);
-            if (giangvien == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                GiangVien giangvien = db.GiangViens.Find(id);
+                if (giangvien == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(giangvien);
             }
-            return View(giangvien);
+
         }
 
         // POST: Nganh/Delete/5

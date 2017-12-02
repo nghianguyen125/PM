@@ -5,34 +5,50 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Edit</h2>
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>LoaiTaiKhoan</h4>
-        <hr />
-        @Html.ValidationSummary(true)
-        @Html.HiddenFor(model => model.LoaiTaiKhoanId)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Loai, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Loai)
-                @Html.ValidationMessageFor(model => model.Loai)
-            </div>
+<section class="content-header">
+    <h1>Cập Nhật Loại Tài Khoản</h1>
+</section>
+<section class="content">
+    @{
+        int countError = ViewBag.CountError != null ? (int)ViewBag.CountError : 0;
+        if (countError > 0)
+        {
+            @Html.ValidationSummary(true)
+            @Html.ValidationMessage("error", "", new { @class = "alert alert-danger alert-dismissable", style = "text-align:left; display: block" })
+        }
+    }
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">Cập Nhật Loại Tài Khoản</h3>
         </div>
+        @using (Html.BeginForm("Edit", "LoaiTaiKhoan", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            @Html.AntiForgeryToken()
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+            <div class="box-body">
+
+                @Html.HiddenFor(model => model.LoaiTaiKhoanId)
+                <div class="form-group">
+                    @Html.Label("Mã Đề Tài", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.LoaiTaiKhoanId, new { @class = "form-control", @disabled = "disabled", required = "required" })
+                        @Html.ValidationMessageFor(model => model.LoaiTaiKhoanId)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Tên Loại Tài Khoản", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.TenLoaiTaiKhoan, new { @class = "form-control", required = "required" })
+                        @Html.ValidationMessageFor(model => model.TenLoaiTaiKhoan)
+                    </div>
+                </div>
             </div>
-        </div>
+            <div class="box-footer">
+                @*<button type="submit" class="btn btn-default">Cancel</button>*@
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+                <input type="submit" value="Save" class="btn btn-primary pull-right" />
+            </div>
+        }
     </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+</section>

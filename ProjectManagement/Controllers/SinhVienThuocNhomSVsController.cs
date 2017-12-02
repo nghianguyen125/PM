@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ProjectManagement.Models;
+using Microsoft.AspNet.Identity;
 
 namespace ProjectManagement.Controllers.User
 {
@@ -15,21 +16,12 @@ namespace ProjectManagement.Controllers.User
         private ProjectManagementEntities db = new ProjectManagementEntities();
 
         // GET: SinhVienThuocNhomSVs
-        public ActionResult Index(string id)
+        public ActionResult Index()
         {
-            var getid = ProjectManagement.App_Start.Classes.UserManager.GetUserId.ToString();
-            var getuserid = db.SinhVienThuocNhomSVs.Where(n => n.SinhVienId == getid).FirstOrDefault();
-            if (getuserid == null)
-            {
-                return HttpNotFound();
-            }
-            var sinhVienThuocNhomSVs = db.SinhVienThuocNhomSVs.Include(s => s.NhomSV).Include(s => s.SinhVien);
-            var sv = db.SinhVienThuocNhomSVs.Include(s => s.NhomSV).Include(s => s.SinhVien).SingleOrDefault();
-            if (sv != null)
-            {
-                ViewBag.id = sv.SinhVienId;
-            }
-            return View(sinhVienThuocNhomSVs.ToList());
+            List<object> model = new List<object>();
+            model.Add(db.TaiKhoans.ToList());
+            model.Add(db.SinhVienThuocNhomSVs.ToList());
+            return View(model.ToList());
         }
 
         // GET: SinhVienThuocNhomSVs/Details/5

@@ -1,4 +1,4 @@
-﻿using System
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -6,6 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using PagedList;
+using ProjectManagement.App_Start.Classes;
 using ProjectManagement.Models;
 
 namespace ProjectManagement.Controllers.Admin
@@ -15,32 +18,73 @@ namespace ProjectManagement.Controllers.Admin
         private ProjectManagementEntities db = new ProjectManagementEntities();
 
         // GET: KhoaHoc
-        public ActionResult Index()
+        public ActionResult Index(string searchString, int? page, string sortOrder, string currentFilter)
         {
-            var khoaHocs = db.KhoaHocs.Include(k => k.NamHoc);
-            return View(khoaHocs.ToList());
+            if (!UserManager.Authenticated)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                ViewBag.CurrentSort = sortOrder;
+                var khoahoc = from b in db.KhoaHocs select b;
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    khoahoc = db.KhoaHocs.Where(s => s.TenKhoaHoc.Contains(searchString));
+                }
+                ViewBag.SearchString = searchString;
+                if (searchString != null)
+                {
+                    page = 1;
+                }
+                else
+                {
+                    searchString = currentFilter;
+                }
+                ViewBag.CurrentFilter = searchString;
+                int pageSize = 5;
+                int pageNumber = (page ?? 1);
+                return View(khoahoc.OrderBy(s => s.TenKhoaHoc).ToList().ToPagedList(pageNumber, pageSize));
+            }
+                
         }
 
         // GET: KhoaHoc/Details/5
         public ActionResult Details(decimal? id)
         {
-            if (id == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            KhoaHoc khoaHoc = db.KhoaHocs.Find(id);
-            if (khoaHoc == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                KhoaHoc khoaHoc = db.KhoaHocs.Find(id);
+                if (khoaHoc == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(khoaHoc);
             }
-            return View(khoaHoc);
+
         }
 
         // GET: KhoaHoc/Create
         public ActionResult Create()
         {
-            ViewBag.NamHocHocKyId = new SelectList(db.NamHocs, "NamHocHocKyId", "TenNamHocHocKy");
-            return View();
+            if (!UserManager.Authenticated)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                ViewBag.NamHocHocKyId = new SelectList(db.NamHocs, "NamHocHocKyId", "TenNamHocHocKy");
+                return View();
+            }
+ 
         }
 
         // POST: KhoaHoc/Create
@@ -64,17 +108,25 @@ namespace ProjectManagement.Controllers.Admin
         // GET: KhoaHoc/Edit/5
         public ActionResult Edit(decimal? id)
         {
-            if (id == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            KhoaHoc khoaHoc = db.KhoaHocs.Find(id);
-            if (khoaHoc == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                KhoaHoc khoaHoc = db.KhoaHocs.Find(id);
+                if (khoaHoc == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.NamHocHocKyId = new SelectList(db.NamHocs, "NamHocHocKyId", "TenNamHocHocKy", khoaHoc.NamHocHocKyId);
+                return View(khoaHoc);
             }
-            ViewBag.NamHocHocKyId = new SelectList(db.NamHocs, "NamHocHocKyId", "TenNamHocHocKy", khoaHoc.NamHocHocKyId);
-            return View(khoaHoc);
+
         }
 
         // POST: KhoaHoc/Edit/5
@@ -97,16 +149,24 @@ namespace ProjectManagement.Controllers.Admin
         // GET: KhoaHoc/Delete/5
         public ActionResult Delete(decimal? id)
         {
-            if (id == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            KhoaHoc khoaHoc = db.KhoaHocs.Find(id);
-            if (khoaHoc == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                KhoaHoc khoaHoc = db.KhoaHocs.Find(id);
+                if (khoaHoc == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(khoaHoc);
             }
-            return View(khoaHoc);
+
         }
 
         // POST: KhoaHoc/Delete/5
@@ -130,6 +190,3 @@ namespace ProjectManagement.Controllers.Admin
         }
     }
 }
-Implementing Basic CRUD Functionality with the Entity Framework in ASP.NET MVC Application
-The Contoso University sample web application demonstrates how to create ASP.NET MVC 5 applications using the Entity Framework 6 Code First and Visual Studio...
-docs.microsoft.com

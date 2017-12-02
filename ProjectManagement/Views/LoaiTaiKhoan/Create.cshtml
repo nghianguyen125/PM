@@ -6,7 +6,7 @@
 }
 
 <section class="content-header">
-    <h1>Tạo mới Loại tài khoản</h1>
+    <h1>Loại Tài Khoản</h1>
 </section>
 <section class="content">
     @{
@@ -19,10 +19,10 @@
     }
     <div class="box box-info">
         <div class="box-header with-border">
-            <h3 class="box-title">Tạo mới loại tài khoản</h3>
+            <h3 class="box-title">Tạo Loại Tài Khoản</h3>
         </div>
 
-        @using (Html.BeginForm("Create", "Lich", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal" }))
+        @using (Html.BeginForm("Create", "LoaiTaiKhoan", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal" }))
         {
             @Html.AntiForgeryToken()
 
@@ -30,14 +30,14 @@
                 <div class="form-group">
                     @Html.Label("Mã Loại Tài Khoản", new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.TextBoxFor(model => model.LoaiTaiKhoanId, new { @class = "form-control" })
+                        @Html.TextBoxFor(model => model.LoaiTaiKhoanId, new { @class = "form-control", required = "required" })
                         @Html.ValidationMessageFor(model => model.LoaiTaiKhoanId)
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.Label("Tên Loại Tài Khoản", new { @class = "control-label col-md-2" })
+                    @Html.Label("Tên Đề Tài", new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.TextBoxFor(model => model.TenLoaiTaiKhoan, new { @class = "form-control" })
+                        @Html.TextBoxFor(model => model.TenLoaiTaiKhoan, new { @class = "form-control", required = "required" })
                         @Html.ValidationMessageFor(model => model.TenLoaiTaiKhoan)
                     </div>
                 </div>

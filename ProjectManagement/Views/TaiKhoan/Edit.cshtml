@@ -63,10 +63,12 @@
             <div class="form-group">
                 @Html.Label("Vai trò", new {@class = "control-label col-md-2"})
                 <div class="col-md-10">
-                    @Html.DropDownList("LoaiTaiKhoanId", null, String.Empty, new {@class = "form-control"})
+                    @Html.DropDownList("LoaiTaiKhoanId", null, "Chọn Vai Trò", new {@class = "form-control" })
                     @Html.ValidationMessageFor(model => model.LoaiTaiKhoanId)
                 </div>
             </div>
+
+
         </div>
         <div class="box-footer">
             @*<button type="submit" class="btn btn-default">Cancel</button>*@

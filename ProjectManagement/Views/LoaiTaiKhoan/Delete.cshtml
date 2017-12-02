@@ -4,8 +4,9 @@
     ViewBag.Title = "Delete";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+
 <section class="content-header">
-    <h1>Delete</h1>
+    <h1>Loại Tài Khoản</h1>
 </section>
 <section class="content">
     <div class="box box-info">
@@ -14,16 +15,16 @@
         </div>
         <dl class="dl-horizontal">
             <dt>
-                Mã Tin:
+                Mã Loại Tài Khoản
             </dt>
             <dd>
                 @Html.DisplayFor(model => model.LoaiTaiKhoanId)
             </dd>
             <dt>
-                Tiêu Đề:
+                Tên Loại Tài Khoản:
             </dt>
             <dd>
-                @Html.DisplayFor(model => model.Loai)
+                @Html.DisplayFor(model => model.TenLoaiTaiKhoan)
             </dd>
         </dl>
 

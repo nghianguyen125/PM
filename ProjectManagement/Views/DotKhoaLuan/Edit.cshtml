@@ -1,0 +1,61 @@
+﻿@model ProjectManagement.Models.DotKhoaLuan
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<section class="content-header">
+    <h1>Cập Nhật Đợt Khóa Luận</h1>
+</section>
+<section class="content">
+    @{
+        int countError = ViewBag.CountError != null ? (int)ViewBag.CountError : 0;
+        if (countError > 0)
+        {
+            @Html.ValidationSummary(true)
+            @Html.ValidationMessage("error", "", new { @class = "alert alert-danger alert-dismissable", style = "text-align:left; display: block" })
+        }
+    }
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">Cập Nhật Đợt Khóa Luận</h3>
+        </div>
+        @using (Html.BeginForm("Edit", "DotKhoaLuan", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="box-body">
+
+                @Html.HiddenFor(model => model.DotKhoaLuanId)
+                <div class="form-group">
+                    @Html.Label("Mã Đợt Khóa Luận", new { @class = "control-label col-md-2", required = "required" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.DotKhoaLuanId, new { @class = "form-control", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.DotKhoaLuanId)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Tên Đợt Khóa Luận", new { @class = "control-label col-md-2", required = "required" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.TenDotKhoaLuan, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.TenDotKhoaLuan)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Năm Học", new { @class = "control-label col-md-2", required = "required" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("NamHocHocKyId", null, String.Empty, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.NamHocHocKyId)
+                    </div>
+                </div>
+            </div>
+            <div class="box-footer">
+                @*<button type="submit" class="btn btn-default">Cancel</button>*@
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+                <input type="submit" value="Save" class="btn btn-primary pull-right" />
+            </div>
+        }
+    </div>
+
+</section>

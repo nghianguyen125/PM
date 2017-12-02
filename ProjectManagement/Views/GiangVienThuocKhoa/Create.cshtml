@@ -37,19 +37,19 @@
                 <div class="form-group">
                     @Html.Label("Họ Và Tên", new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.DropDownList("GiangVienId", null, String.Empty, new { @class = "form-control" })
+                        @Html.DropDownList("GiangVienId", null, String.Empty, new { @class = "form-control", required = "required" })
                         @Html.ValidationMessageFor(model => model.GiangVienId)
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.Label("Khoa", new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.DropDownList("KhoaId", null, String.Empty, new { @class = "form-control" })
+                        @Html.DropDownList("KhoaId", null, String.Empty, new { @class = "form-control", required = "required" })
                         @Html.ValidationMessageFor(model => model.KhoaId)
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.Label("Từ Ngày", new { @class = "control-label col-md-2" })
+                    @Html.Label("Từ Ngày", new { @class = "control-label col-md-2", required = "required" })
                     <div class="col-md-10">
                         @Html.TextBoxFor(model => model.TuNgay, new { @class = "form-control", id = "datepicker" })
                         @Html.ValidationMessageFor(model => model.TuNgay)

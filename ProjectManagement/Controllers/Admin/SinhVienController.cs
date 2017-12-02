@@ -6,6 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using PagedList;
+using ProjectManagement.App_Start.Classes;
 using ProjectManagement.Models;
 
 namespace ProjectManagement.Controllers.Admin
@@ -15,31 +18,68 @@ namespace ProjectManagement.Controllers.Admin
         private ProjectManagementEntities db = new ProjectManagementEntities();
 
         // GET: SinhVien
-        public ActionResult Index()
+        public ActionResult Index(string searchString, int? page, string sortOrder, string currentFilter, string option)
         {
-            var sinhViens = db.SinhViens;
-            return View(sinhViens.ToList());
+            if (!UserManager.Authenticated)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                ViewBag.CurrentSort = sortOrder;
+                var sinhvien = from b in db.SinhViens select b;
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    sinhvien = db.SinhViens.Where(s => s.HoTen.Contains(searchString));
+                }
+                ViewBag.SearchString = searchString;
+                if (searchString != null)
+                {
+                    page = 1;
+                }
+                else
+                {
+                    searchString = currentFilter;
+                }
+                ViewBag.CurrentFilter = searchString;
+                int pageSize = 5;
+                int pageNumber = (page ?? 1);
+                return View(sinhvien.OrderBy(s => s.HoTen).ToList().ToPagedList(pageNumber, pageSize));
+            }
+                
         }
 
         // GET: SinhVien/Details/5
         public ActionResult Details(string id)
         {
-            if (id == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            SinhVien sinhVien = db.SinhViens.Find(id);
-            if (sinhVien == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                SinhVien sinhVien = db.SinhViens.Find(id);
+                if (sinhVien == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(sinhVien);
             }
-            return View(sinhVien);
+          
         }
 
         // GET: SinhVien/Create
         public ActionResult Create()
         {
-            return View();
+            if (!UserManager.Authenticated)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else return View();
         }
 
         // POST: SinhVien/Create
@@ -62,16 +102,25 @@ namespace ProjectManagement.Controllers.Admin
         // GET: SinhVien/Edit/5
         public ActionResult Edit(string id)
         {
-            if (id == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            SinhVien sinhVien = db.SinhViens.Find(id);
-            if (sinhVien == null)
+            else
             {
-                return HttpNotFound();
+
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                SinhVien sinhVien = db.SinhViens.Find(id);
+                if (sinhVien == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(sinhVien);
             }
-            return View(sinhVien);
+
         }
 
         // POST: SinhVien/Edit/5
@@ -93,16 +142,24 @@ namespace ProjectManagement.Controllers.Admin
         // GET: SinhVien/Delete/5
         public ActionResult Delete(string id)
         {
-            if (id == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            SinhVien sinhVien = db.SinhViens.Find(id);
-            if (sinhVien == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                SinhVien sinhVien = db.SinhViens.Find(id);
+                if (sinhVien == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(sinhVien);
             }
-            return View(sinhVien);
+          
         }
 
         // POST: SinhVien/Delete/5

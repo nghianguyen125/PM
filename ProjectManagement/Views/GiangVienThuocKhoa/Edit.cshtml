@@ -38,21 +38,21 @@
                 @Html.HiddenFor(model => model.GiangVienId)
                 @Html.HiddenFor(model => model.KhoaId)
                 <div class="form-group">
-                    @Html.Label("Tên Giảng Viên", new { @class = "control-label col-md-2" })
+                    @Html.Label("Tên Giảng Viên", new { @class = "control-label col-md-2", required = "required" })
                     <div class="col-md-10">
                         @Html.TextBoxFor(model => model.GiangVien.HoTen, new { @class = "form-control", @readonly = true })
                         @Html.ValidationMessageFor(model => model.GiangVienId)
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.Label("Tên Khoa", new { @class = "control-label col-md-2" })
+                    @Html.Label("Tên Khoa", new { @class = "control-label col-md-2", required = "required" })
                     <div class="col-md-10">
                         @Html.DropDownListFor(model => model.Khoa.TenKhoa, (SelectList)@ViewBag.KhoaId, new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => mode    l.KhoaId)
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.Label("Từ Ngày", new { @class = "control-label col-md-2" })
+                    @Html.Label("Từ Ngày", new { @class = "control-label col-md-2", required = "required" })
                     <div class="col-md-10">
                         @Html.TextBoxFor(model => model.TuNgay, new { @class = "form-control", id = "datepicker" })
                         @Html.ValidationMessageFor(model => model.TuNgay)

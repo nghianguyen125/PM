@@ -6,6 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using PagedList;
+using ProjectManagement.App_Start.Classes;
 using ProjectManagement.Models;
 
 namespace ProjectManagement.Controllers.Admin
@@ -15,32 +18,73 @@ namespace ProjectManagement.Controllers.Admin
         private ProjectManagementEntities db = new ProjectManagementEntities();
 
         // GET: Nganh
-        public ActionResult Index()
+        public ActionResult Index(string searchString, int? page, string sortOrder, string currentFilter)
         {
-            var nganhs = db.Nganhs.Include(n => n.Khoa);
-            return View(nganhs.ToList());
+            if (!UserManager.Authenticated)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                ViewBag.CurrentSort = sortOrder;
+                var nganh = from b in db.Nganhs select b;
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    nganh = db.Nganhs.Where(s => s.TenNganh.Contains(searchString));
+                }
+                ViewBag.SearchString = searchString;
+                if (searchString != null)
+                {
+                    page = 1;
+                }
+                else
+                {
+                    searchString = currentFilter;
+                }
+                ViewBag.CurrentFilter = searchString;
+                int pageSize = 5;
+                int pageNumber = (page ?? 1);
+                return View(nganh.OrderBy(s => s.TenNganh).ToList().ToPagedList(pageNumber, pageSize));
+            }
+               
         }
 
         // GET: Nganh/Details/5
         public ActionResult Details(decimal id)
         {
-            if (id == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            Nganh nganh = db.Nganhs.Find(id);
-            if (nganh == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Nganh nganh = db.Nganhs.Find(id);
+                if (nganh == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(nganh);
             }
-            return View(nganh);
+           
         }
 
         // GET: Nganh/Create
         public ActionResult Create()
         {
-            ViewBag.KhoaId = new SelectList(db.Khoas, "KhoaId", "TenKhoa");
-            return View();
+            if (!UserManager.Authenticated)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                ViewBag.KhoaId = new SelectList(db.Khoas, "KhoaId", "TenKhoa");
+                return View();
+            }
+               
         }
 
         // POST: Nganh/Create
@@ -62,17 +106,26 @@ namespace ProjectManagement.Controllers.Admin
         // GET: Nganh/Edit/5
         public ActionResult Edit(decimal id)
         {
-            if (id == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            Nganh nganh = db.Nganhs.Find(id);
-            if (nganh == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Nganh nganh = db.Nganhs.Find(id);
+                if (nganh == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.KhoaId = new SelectList(db.Khoas, "KhoaId", "TenKhoa", nganh.KhoaId);
+                return View(nganh);
+
             }
-            ViewBag.KhoaId = new SelectList(db.Khoas, "KhoaId", "TenKhoa", nganh.KhoaId);
-            return View(nganh);
+           
         }
 
         // POST: Nganh/Edit/5
@@ -95,16 +148,24 @@ namespace ProjectManagement.Controllers.Admin
         // GET: Nganh/Delete/5
         public ActionResult Delete(decimal id)
         {
-            if (id == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            Nganh nganh = db.Nganhs.Find(id);
-            if (nganh == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Nganh nganh = db.Nganhs.Find(id);
+                if (nganh == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(nganh);
             }
-            return View(nganh);
+          
         }
 
         // POST: Nganh/Delete/5

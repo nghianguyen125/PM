@@ -30,35 +30,35 @@
                 <div class="form-group">
                     @Html.Label("Mã Năm học", new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.TextBoxFor(model => model.NamHocHocKyId, new { @class = "form-control" })
+                        @Html.TextBoxFor(model => model.NamHocHocKyId, new { @class = "form-control", required = "required" })
                         @Html.ValidationMessageFor(model => model.NamHocHocKyId)
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.Label("Tên Năm học", new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.TextBoxFor(model => model.TenNamHocHocKy, new { @class = "form-control" })
+                        @Html.TextBoxFor(model => model.TenNamHocHocKy, new { @class = "form-control", required = "required" })
                         @Html.ValidationMessageFor(model => model.TenNamHocHocKy)
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.Label("Ngày Bắt đầu", new { @class = "control-label col-md-2" })
+                    @Html.Label("Ngày Bắt đầu", new { @class = "control-label col-md-2"})
                     <div class="col-md-10">
-                        @Html.TextBoxFor(model => model.TuNgay, new { @class = "form-control" })
+                        @Html.TextBoxFor(model => model.TuNgay, new { @class = "form-control", required = "required" })
                         @Html.ValidationMessageFor(model => model.TuNgay)
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.Label("Ngày Kết thúc", new { @class = "control-label col-md-2" })
+                    @Html.Label("Ngày Kết thúc", new { @class = "control-label col-md-2"})
                     <div class="col-md-10">
-                        @Html.TextBoxFor(model => model.DenNgay, new { @class = "form-control" })
+                        @Html.TextBoxFor(model => model.DenNgay, new { @class = "form-control", required = "required" })
                         @Html.ValidationMessageFor(model => model.DenNgay)
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.Label("Root", new { @class = "control-label col-md-2" })
+                    @Html.Label("Root", new { @class = "control-label col-md-2"})
                     <div class="col-md-10">
-                        @Html.TextBoxFor(model => model.NamHocHocKyIdRoot, new { @class = "form-control" })
+                        @Html.TextBoxFor(model => model.NamHocHocKyIdRoot, new { @class = "form-control", required = "required" })
                         @Html.ValidationMessageFor(model => model.NamHocHocKyIdRoot)
                     </div>
                 </div>

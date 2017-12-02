@@ -98,7 +98,26 @@ namespace ProjectManagement.Controllers.User
                     authCookie.Expires = DateTime.Now.AddMinutes(60);
                     Response.Cookies.Add(authCookie);
 
-                    return RedirectToAction("Index", "MainPage");
+                    var tk = db.TaiKhoans.Where(n => n.Username == user.Username).SingleOrDefault();
+                    
+                    //if (tk.SinhVienId != null)
+                    //{
+                    //    ViewBag.SinhVienId = tk.SinhVienId;
+                    //    return RedirectToAction("Index", "MainPage");
+                    //}
+
+                    if(tk.GiangVienId != null)
+                    {
+                        ViewBag.GiangVienId = tk.GiangVienId;
+                        return RedirectToAction("Index", "GiangVienMain", new { GVId = tk.GiangVienId });
+                    }
+                    if(tk.SinhVienId != null)
+                    {
+                        ViewBag.SinhVienId = tk.SinhVienId;
+                        return RedirectToAction("Index", "MainPage", new { SVId = tk.SinhVienId });
+                    }
+
+                    
                 }
                 else
                 {

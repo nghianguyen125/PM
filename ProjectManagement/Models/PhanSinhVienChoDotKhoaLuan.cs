@@ -12,11 +12,13 @@ namespace ProjectManagement.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class C__MigrationHistory
+    public partial class PhanSinhVienChoDotKhoaLuan
     {
-        public string MigrationId { get; set; }
-        public string ContextKey { get; set; }
-        public byte[] Model { get; set; }
-        public string ProductVersion { get; set; }
+        public decimal DotKhoaLuanId { get; set; }
+        public string SinhVienId { get; set; }
+        public Nullable<System.DateTime> NgayPhan { get; set; }
+    
+        public virtual DotKhoaLuan DotKhoaLuan { get; set; }
+        public virtual SinhVien SinhVien { get; set; }
     }
 }

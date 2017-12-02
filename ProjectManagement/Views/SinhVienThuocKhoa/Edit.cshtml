@@ -28,6 +28,7 @@
             @Html.AntiForgeryToken()
 
             @Html.HiddenFor(model => model.SinhVienId)
+            @Html.HiddenFor(model => model.KhoaId)
                 <div class="form-group">
                     @Html.Label("Ngày Bắt đầu", new { @class = "control-label col-md-2" })
                     <div class="col-md-10">

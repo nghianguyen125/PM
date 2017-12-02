@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using ProjectManagement.App_Start.Classes;
 using ProjectManagement.Models;
 
 namespace ProjectManagement.Controllers.Admin
@@ -17,30 +19,54 @@ namespace ProjectManagement.Controllers.Admin
         // GET: NamHoc
         public ActionResult Index()
         {
-            var namHocs = db.NamHocs.Include(n => n.NamHoc1);
-            return View(namHocs.ToList());
+            if (!UserManager.Authenticated)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                var namHocs = db.NamHocs.Include(n => n.NamHoc1);
+                return View(namHocs.ToList());
+            }
+
         }
 
         // GET: NamHoc/Details/5
         public ActionResult Details(decimal id)
         {
-            if (id == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            NamHoc namHoc = db.NamHocs.Find(id);
-            if (namHoc == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                NamHoc namHoc = db.NamHocs.Find(id);
+                if (namHoc == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(namHoc);
             }
-            return View(namHoc);
+          
         }
 
         // GET: NamHoc/Create
         public ActionResult Create()
         {
-            ViewBag.NamHocHocKyIdRoot = new SelectList(db.NamHocs, "NamHocHocKyId", "TenNamHocHocKy");
-            return View();
+            if (!UserManager.Authenticated)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                ViewBag.NamHocHocKyIdRoot = new SelectList(db.NamHocs, "NamHocHocKyId", "TenNamHocHocKy");
+                return View();
+            }
+                
         }
 
         // POST: NamHoc/Create
@@ -64,18 +90,26 @@ namespace ProjectManagement.Controllers.Admin
         // GET: NamHoc/Edit/5
         public ActionResult Edit(decimal id)
         {
-            if (id == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            NamHoc namHoc = db.NamHocs.Find(id);
-            if (namHoc == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                NamHoc namHoc = db.NamHocs.Find(id);
+                if (namHoc == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.NamHocHocKyIdRoot = new SelectList(db.NamHocs, "NamHocHocKyId", "TenNamHocHocKy", namHoc.NamHocHocKyIdRoot);
+                return View(namHoc);
             }
-            ViewBag.NamHocHocKyIdRoot = new SelectList(db.NamHocs, "NamHocHocKyId", "TenNamHocHocKy", namHoc.NamHocHocKyIdRoot);
-            return View(namHoc);
         }
+           
 
         // POST: NamHoc/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -97,16 +131,24 @@ namespace ProjectManagement.Controllers.Admin
         // GET: NamHoc/Delete/5
         public ActionResult Delete(decimal id)
         {
-            if (id == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            NamHoc namHoc = db.NamHocs.Find(id);
-            if (namHoc == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                NamHoc namHoc = db.NamHocs.Find(id);
+                if (namHoc == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(namHoc);
             }
-            return View(namHoc);
+            
         }
 
         // POST: NamHoc/Delete/5

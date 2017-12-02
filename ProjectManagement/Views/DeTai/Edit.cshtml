@@ -7,7 +7,7 @@
 }
 
 <section class="content-header">
-    <h1>Cập Đề Tài</h1>
+    <h1>Cập Nhật Đợt Khóa Luận</h1>
 </section>
 <section class="content">
     @{
@@ -20,7 +20,7 @@
     }
     <div class="box box-info">
         <div class="box-header with-border">
-            <h3 class="box-title">Cập Đề Tài</h3>
+            <h3 class="box-title">Cập Nhật Đợt Khóa Luận</h3>
         </div>
         @using (Html.BeginForm("Edit", "DeTai", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal" }))
         {
@@ -30,28 +30,28 @@
 
                 @Html.HiddenFor(model => model.DeTaiId)
                 <div class="form-group">
-                    @Html.Label("Mã Đề Tài", new { @class = "control-label col-md-2" })
+                    @Html.Label("Mã Đề Tài", new { @class = "control-label col-md-2", required = "required" })
                     <div class="col-md-10">
                         @Html.TextBoxFor(model => model.DeTaiId, new { @class = "form-control", @disabled = "disabled" })
                         @Html.ValidationMessageFor(model => model.DeTaiId)
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.Label("Tên Đề Tài", new { @class = "control-label col-md-2" })
+                    @Html.Label("Tên Đề Tài", new { @class = "control-label col-md-2", required = "required" })
                     <div class="col-md-10">
                         @Html.TextBoxFor(model => model.TenDeTai, new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.TenDeTai)
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.Label("Mô Tả", new { @class = "control-label col-md-2" })
+                    @Html.Label("Mô Tả", new { @class = "control-label col-md-2", required = "required" })
                     <div class="col-md-10">
                         @Html.TextAreaFor(model => model.MoTa, new { @class = "form-control", @placeholder = "Nhập mô tả...", @cols = "80", @rows = "4" })
                         @Html.ValidationMessageFor(model => model.MoTa)
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.Label("Số Lượng Thành Viên", new { @class = "control-label col-md-2" })
+                    @Html.Label("Số Lượng Thành Viên", new { @class = "control-label col-md-2", required = "required" })
                     <div class="col-md-10">
                         @Html.TextBoxFor(model => model.SoLuongThanhVien, new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.SoLuongThanhVien)

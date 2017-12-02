@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using ProjectManagement.App_Start.Classes;
 using ProjectManagement.Models;
 
 namespace ProjectManagement.Controllers.Admin
@@ -17,31 +19,56 @@ namespace ProjectManagement.Controllers.Admin
         // GET: PhanDeTaiChoNhomSV
         public ActionResult Index()
         {
-            var phanDeTaiChoNhomSVs = db.PhanDeTaiChoNhomSVs.Include(p => p.DeTai).Include(p => p.NhomSV);
-            return View(phanDeTaiChoNhomSVs.ToList());
+            if (!UserManager.Authenticated)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                var phanDeTaiChoNhomSVs = db.PhanDeTaiChoNhomSVs.Include(p => p.DeTai).Include(p => p.NhomSV);
+                return View(phanDeTaiChoNhomSVs.ToList());
+
+            }
+                
         }
 
         // GET: PhanDeTaiChoNhomSV/Details/5
         public ActionResult Details(decimal id)
         {
-            if (id == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            PhanDeTaiChoNhomSV phanDeTaiChoNhomSV = db.PhanDeTaiChoNhomSVs.Find(id);
-            if (phanDeTaiChoNhomSV == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                PhanDeTaiChoNhomSV phanDeTaiChoNhomSV = db.PhanDeTaiChoNhomSVs.Find(id);
+                if (phanDeTaiChoNhomSV == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(phanDeTaiChoNhomSV);
             }
-            return View(phanDeTaiChoNhomSV);
+            
         }
 
         // GET: PhanDeTaiChoNhomSV/Create
         public ActionResult Create()
         {
-            ViewBag.DeTaiId = new SelectList(db.DeTais, "DeTaiId", "TenDeTai");
-            ViewBag.NhomSVId = new SelectList(db.NhomSVs, "NhomSVId", "TenNhom");
-            return View();
+            if (!UserManager.Authenticated)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                ViewBag.DeTaiId = new SelectList(db.DeTais, "DeTaiId", "TenDeTai");
+                ViewBag.NhomSVId = new SelectList(db.NhomSVs, "NhomSVId", "TenNhom");
+                return View();
+            }
+                
         }
 
         // POST: PhanDeTaiChoNhomSV/Create
@@ -66,18 +93,26 @@ namespace ProjectManagement.Controllers.Admin
         // GET: PhanDeTaiChoNhomSV/Edit/5
         public ActionResult Edit(decimal? NId, decimal? DTId)
         {
-            if (NId == null || DTId == 0)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            PhanDeTaiChoNhomSV phanDeTaiChoNhomSV = db.PhanDeTaiChoNhomSVs.Find(NId, DTId);
-            if (phanDeTaiChoNhomSV == null)
+            else
             {
-                return HttpNotFound();
+                if (NId == null || DTId == 0)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                PhanDeTaiChoNhomSV phanDeTaiChoNhomSV = db.PhanDeTaiChoNhomSVs.Find(NId, DTId);
+                if (phanDeTaiChoNhomSV == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.DeTaiId = new SelectList(db.DeTais, "DeTaiId", "TenDeTai", phanDeTaiChoNhomSV.DeTaiId);
+                ViewBag.NhomSVId = new SelectList(db.NhomSVs, "NhomSVId", "TenNhom", phanDeTaiChoNhomSV.NhomSVId);
+                return View(phanDeTaiChoNhomSV);
             }
-            ViewBag.DeTaiId = new SelectList(db.DeTais, "DeTaiId", "TenDeTai", phanDeTaiChoNhomSV.DeTaiId);
-            ViewBag.NhomSVId = new SelectList(db.NhomSVs, "NhomSVId", "TenNhom", phanDeTaiChoNhomSV.NhomSVId);
-            return View(phanDeTaiChoNhomSV);
+           
         }
 
         // POST: PhanDeTaiChoNhomSV/Edit/5
@@ -101,16 +136,24 @@ namespace ProjectManagement.Controllers.Admin
         // GET: PhanDeTaiChoNhomSV/Delete/5
         public ActionResult Delete(decimal? NId, decimal? DTId)
         {
-            if (NId == 0 || DTId == 0)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            PhanDeTaiChoNhomSV phanDeTaiChoNhomSV = db.PhanDeTaiChoNhomSVs.Find(NId, DTId);
-            if (phanDeTaiChoNhomSV == null)
+            else
             {
-                return HttpNotFound();
+                if (NId == 0 || DTId == 0)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                PhanDeTaiChoNhomSV phanDeTaiChoNhomSV = db.PhanDeTaiChoNhomSVs.Find(NId, DTId);
+                if (phanDeTaiChoNhomSV == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(phanDeTaiChoNhomSV);
             }
-            return View(phanDeTaiChoNhomSV);
+          
         }
 
         // POST: PhanDeTaiChoNhomSV/Delete/5

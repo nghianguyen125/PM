@@ -1,0 +1,66 @@
+﻿@using ProjectManagement.Models
+@model IEnumerable<ProjectManagement.Models.DotKhoaLuan>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<section class="content-header">
+    <h1>Đợt Khóa Luận</h1>
+</section>
+<section class="content">
+    <div class="row" style="padding-bottom: 10px;">
+        <div class="col-md-12">
+            <h4>Danh sách đợt</h4>
+        </div>
+    </div>
+    <div class="box">
+        <table class="table table-hover table-bordered">
+            <tbody>
+                <tr>
+                    <th style="width: 50px">STT</th>
+                    <th>
+                        Mã Đợt
+                    </th>
+                    <th>
+                        Tên Đợt Khóa Luận
+                    </th>
+                    <th>
+                        Năm Học
+                    </th>
+                    <th>
+                        Danh Sách Đề Tài
+                    </th>
+                </tr>
+                @{
+                    int stt = 0;
+                    ProjectManagementEntities db = new ProjectManagementEntities();
+                }
+                @foreach (var item in Model)
+                {
+                    stt++;
+                    List<Khoa> userCreatedBy = db.Khoas.ToList();
+                    <tr>
+                        <td>@stt</td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DotKhoaLuanId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TenDotKhoaLuan)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NamHoc.TenNamHocHocKy)
+                        </td>
+                        <td>
+                            <a href="@Url.Action("DSDT", new { DId = item.DotKhoaLuanId, NHId = item.NamHocHocKyId })">Danh sách Đề Tài</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+
+
+        </table>
+    </div>
+</section>

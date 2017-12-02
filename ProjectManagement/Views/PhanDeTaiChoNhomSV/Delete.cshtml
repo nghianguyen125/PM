@@ -1,0 +1,42 @@
+﻿@model ProjectManagement.Models.PhanDeTaiChoNhomSV
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<section class="content-header">
+    <h1>Delete</h1>
+</section>
+<section class="content">
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">Bạn có chắc muốn xóa?</h3>
+        </div>
+        <dl class="dl-horizontal">
+            <dt>
+                Tên Nhóm:
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.NhomSV.TenNhom)
+            </dd>
+            <dt>
+                Tên Đề Tài:
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.DeTai.TenDeTai)
+            </dd>
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="box-footer">
+                @*<button type="submit" class="btn btn-default">Cancel</button>*@
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+                <input type="submit" value="Delete" class="btn btn-primary pull-right" />
+            </div>
+        }
+    </div>
+</section>
+

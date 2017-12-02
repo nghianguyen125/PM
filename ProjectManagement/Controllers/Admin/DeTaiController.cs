@@ -6,6 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
+using Microsoft.AspNet.Identity;
+using ProjectManagement.App_Start.Classes;
 using ProjectManagement.Models;
 
 namespace ProjectManagement.Controllers.Admin
@@ -17,65 +20,87 @@ namespace ProjectManagement.Controllers.Admin
         // GET: DeTai
         public ActionResult Index()
         {
-            return View(db.DeTais.ToList());
+            if (!UserManager.Authenticated)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                return View(db.DeTais.ToList());
+            }
         }
 
         // GET: DeTai/Details/5
         public ActionResult Details(decimal id)
         {
-            if (id == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            DeTai deTai = db.DeTais.Find(id);
-            if (deTai == null)
-            {
-                return HttpNotFound();
+            else {
+                if (id == 0)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                DeTai deTai = db.DeTais.Find(id);
+                if (deTai == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(deTai);
             }
-            return View(deTai);
         }
 
         // GET: DeTai/Create
         public ActionResult Create()
         {
-            return View();
+            if (!UserManager.Authenticated)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else return View();
         }
 
         // POST: DeTai/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "DeTaiId,TenDeTai,MoTa,SoLuongThanhVien,NgayTao,NgayDangKy")] DeTai deTai)
         {
-            if (ModelState.IsValid)
-            {
-                db.DeTais.Add(deTai);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                if (ModelState.IsValid)
+                {
+                    db.DeTais.Add(deTai);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
 
-            return View(deTai);
+                return View(deTai);
         }
 
         // GET: DeTai/Edit/5
         public ActionResult Edit(decimal id)
         {
-            if (id == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            DeTai deTai = db.DeTais.Find(id);
-            if (deTai == null)
+            else
             {
-                return HttpNotFound();
+                if (id == 0)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                DeTai deTai = db.DeTais.Find(id);
+                if (deTai == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(deTai);
             }
-            return View(deTai);
         }
 
         // POST: DeTai/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "DeTaiId,TenDeTai,MoTa,SoLuongThanhVien,NgayTao,NgayDangKy")] DeTai deTai)
@@ -92,16 +117,23 @@ namespace ProjectManagement.Controllers.Admin
         // GET: DeTai/Delete/5
         public ActionResult Delete(decimal id)
         {
-            if (id == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            DeTai deTai = db.DeTais.Find(id);
-            if (deTai == null)
+            else
             {
-                return HttpNotFound();
+                if (id == 0)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                DeTai deTai = db.DeTais.Find(id);
+                if (deTai == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(deTai);
             }
-            return View(deTai);
         }
 
         // POST: DeTai/Delete/5

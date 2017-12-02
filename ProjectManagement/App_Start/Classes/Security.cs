@@ -18,7 +18,6 @@ namespace ProjectManagement.App_Start.Classes
             byte[] hash = md.ComputeHash(buffer);
             var strHex = Convert.ToBase64String(hash);
             return strHex;
-
         }
         public static string RandomString(int size, bool isLower)
         {

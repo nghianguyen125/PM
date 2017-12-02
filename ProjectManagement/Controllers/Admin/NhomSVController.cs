@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using ProjectManagement.App_Start.Classes;
 using ProjectManagement.Models;
 
 namespace ProjectManagement.Controllers.Admin
@@ -17,28 +19,48 @@ namespace ProjectManagement.Controllers.Admin
         // GET: NhomSV
         public ActionResult Index()
         {
-            return View(db.NhomSVs.ToList());
+            if (!UserManager.Authenticated)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                return View(db.NhomSVs.ToList());
+            }
+                
         }
 
         // GET: NhomSV/Details/5
         public ActionResult Details(decimal Nid)
         {
-            if (Nid == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            NhomSV nhomSV = db.NhomSVs.Find(Nid);
-            if (nhomSV == null)
+            else
             {
-                return HttpNotFound();
+                if (Nid == 0)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                NhomSV nhomSV = db.NhomSVs.Find(Nid);
+                if (nhomSV == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(nhomSV);
             }
-            return View(nhomSV);
+           
         }
 
         // GET: NhomSV/Create
         public ActionResult Create()
         {
-            return View();
+            if (!UserManager.Authenticated)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else return View();
         }
 
         // POST: NhomSV/Create
@@ -61,16 +83,24 @@ namespace ProjectManagement.Controllers.Admin
         // GET: NhomSV/Edit/5
         public ActionResult Edit(decimal Nid)
         {
-            if (Nid == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            NhomSV nhomSV = db.NhomSVs.Find(Nid);
-            if (nhomSV == null)
+            else
             {
-                return HttpNotFound();
+                if (Nid == 0)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                NhomSV nhomSV = db.NhomSVs.Find(Nid);
+                if (nhomSV == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(nhomSV);
             }
-            return View(nhomSV);
+          
         }
 
         // POST: NhomSV/Edit/5
@@ -92,16 +122,24 @@ namespace ProjectManagement.Controllers.Admin
         // GET: NhomSV/Delete/5
         public ActionResult Delete(decimal Nid)
         {
-            if (Nid == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            NhomSV nhomSV = db.NhomSVs.Find(Nid);
-            if (nhomSV == null)
+            else
             {
-                return HttpNotFound();
+                if (Nid == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                NhomSV nhomSV = db.NhomSVs.Find(Nid);
+                if (nhomSV == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(nhomSV);
             }
-            return View(nhomSV);
+           
         }
 
         // POST: NhomSV/Delete/5
