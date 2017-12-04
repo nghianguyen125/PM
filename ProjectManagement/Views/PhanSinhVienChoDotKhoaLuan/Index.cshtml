@@ -1,5 +1,5 @@
 ﻿@using ProjectManagement.Models
-@model IEnumerable<ProjectManagement.Models.PhanSinhVienChoDotKhoaLuan>
+@model IEnumerable<ProjectManagement.Models.DotKhoaLuan>
 
 @{
     ViewBag.Title = "Index";
@@ -43,7 +43,7 @@
                             @Html.DisplayFor(modelItem => item.DotKhoaLuanId)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.DotKhoaLuan.TenDotKhoaLuan)
+                            @Html.DisplayFor(modelItem => item.TenDotKhoaLuan)
                         </td>
                         <td>
                             <a href="@Url.Action("DSSV", new { DId = item.DotKhoaLuanId })">Danh sách Sinh Viên</a>

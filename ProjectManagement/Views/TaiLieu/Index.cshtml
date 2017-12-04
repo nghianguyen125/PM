@@ -1,0 +1,46 @@
+﻿@model IEnumerable<ProjectManagement.Models.TaiLieu>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TenTaiLieu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TepTinDinhKem)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DeTai.TenDeTai)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenTaiLieu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TepTinDinhKem)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DeTai.TenDeTai)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.TaiLieuId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.TaiLieuId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.TaiLieuId })
+        </td>
+    </tr>
+}
+
+</table>

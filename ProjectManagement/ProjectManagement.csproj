@@ -218,6 +218,7 @@
     <Compile Include="Controllers\Admin\SinhVienThuocKhoaController.cs" />
     <Compile Include="Controllers\Admin\SinhVienThuocNhomSVController.cs" />
     <Compile Include="Controllers\Admin\TaiKhoanController.cs" />
+    <Compile Include="Controllers\Admin\TaiLieuController.cs" />
     <Compile Include="Controllers\Admin\TinTucController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -2243,12 +2244,19 @@
     <Content Include="Views\PhanSinhVienChoDotKhoaLuan\Edit.cshtml" />
     <Content Include="Views\PhanSinhVienChoDotKhoaLuan\Index.cshtml" />
     <Content Include="Views\PhanSinhVienChoDotKhoaLuan\DSSV.cshtml" />
+    <Content Include="Views\DeTai\TaiLieu.cshtml" />
+    <Content Include="Views\TaiLieu\Create.cshtml" />
+    <Content Include="Views\TaiLieu\Delete.cshtml" />
+    <Content Include="Views\TaiLieu\Details.cshtml" />
+    <Content Include="Views\TaiLieu\Edit.cshtml" />
+    <Content Include="Views\TaiLieu\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\GiangVien\" />
     <Folder Include="Controllers\SinhVien\" />
     <Folder Include="Views\Base\" />
+    <Folder Include="Views\Upload\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

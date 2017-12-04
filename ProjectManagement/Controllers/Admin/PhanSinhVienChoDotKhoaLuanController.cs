@@ -25,8 +25,7 @@ namespace ProjectManagement.Controllers.Admin
             }
             else
             {
-                var phanSinhVienChoDotKhoaLuans = db.PhanSinhVienChoDotKhoaLuans.Include(p => p.DotKhoaLuan).Include(p => p.SinhVien);
-                return View(phanSinhVienChoDotKhoaLuans.ToList());
+                return View(db.DotKhoaLuans.ToList());
             }
                 
         }
@@ -203,29 +202,42 @@ namespace ProjectManagement.Controllers.Admin
         }
 
         // GET: PhanSinhVienChoDotKhoaLuan/Delete/5
-        public ActionResult Delete(decimal id)
+        public ActionResult Delete(decimal? DId, string SVId)
         {
-            if (id == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Admin");
             }
-            PhanSinhVienChoDotKhoaLuan phanSinhVienChoDotKhoaLuan = db.PhanSinhVienChoDotKhoaLuans.Find(id);
-            if (phanSinhVienChoDotKhoaLuan == null)
+            else
             {
-                return HttpNotFound();
+                if (DId == 0 || SVId == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                PhanSinhVienChoDotKhoaLuan sinhVienKhoaLuan = db.PhanSinhVienChoDotKhoaLuans.Find(DId, SVId);
+                if (sinhVienKhoaLuan == null)
+                {
+                    return HttpNotFound();
+                }
+                var kh = db.DotKhoaLuans.Where(n => n.DotKhoaLuanId == DId).SingleOrDefault();
+                if (kh != null)
+                {
+                    ViewBag.IdDotKhoaLuan = kh.DotKhoaLuanId;
+                    ViewBag.TenDotKhoaLuan = kh.TenDotKhoaLuan;
+                }
+                return View(sinhVienKhoaLuan);
             }
-            return View(phanSinhVienChoDotKhoaLuan);
         }
 
         // POST: PhanSinhVienChoDotKhoaLuan/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(decimal id)
+        public ActionResult DeleteConfirmed(decimal? DId, string SVId)
         {
-            PhanSinhVienChoDotKhoaLuan phanSinhVienChoDotKhoaLuan = db.PhanSinhVienChoDotKhoaLuans.Find(id);
+            PhanSinhVienChoDotKhoaLuan phanSinhVienChoDotKhoaLuan = db.PhanSinhVienChoDotKhoaLuans.Find(DId, SVId);
             db.PhanSinhVienChoDotKhoaLuans.Remove(phanSinhVienChoDotKhoaLuan);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("DSSV", new { DId = phanSinhVienChoDotKhoaLuan.DotKhoaLuanId });
         }
 
         protected override void Dispose(bool disposing)
