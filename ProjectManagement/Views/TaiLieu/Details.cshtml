@@ -1,0 +1,43 @@
+﻿@model ProjectManagement.Models.TaiLieu
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TaiLieu</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenTaiLieu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenTaiLieu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TepTinDinhKem)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TepTinDinhKem)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeTai.TenDeTai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeTai.TenDeTai)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.TaiLieuId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

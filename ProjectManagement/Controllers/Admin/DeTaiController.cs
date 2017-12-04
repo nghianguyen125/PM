@@ -30,6 +30,18 @@ namespace ProjectManagement.Controllers.Admin
             }
         }
 
+        public ActionResult TaiLieu(decimal? DTid)
+        {
+            if (!UserManager.Authenticated)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                return View(db.TaiLieux.ToList());
+            }
+        }
+        
         // GET: DeTai/Details/5
         public ActionResult Details(decimal id)
         {

@@ -40,6 +40,9 @@
                     <th>
                         Ngày Đăng Ký
                     </th>
+                    <th>
+                        Tài Liệu
+                    </th>
                     <th style="width: 50px; text-align: center">Chức năng</th>
                 </tr>
                 @{
@@ -69,6 +72,9 @@
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.NgayDangKy, "{0:dd/MM/yyyy}")
+                        </td>
+                        <td>
+                            <a href="@Url.Action("TaiLieu", new { DTId = item.DeTaiId })">Tài Liệu</a>
                         </td>
                         <td align="center">
                             @*@Html.ActionLink("Sửa", "Edit", new {id = item.USER_ID}) |

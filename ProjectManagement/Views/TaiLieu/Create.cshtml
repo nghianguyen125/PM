@@ -1,0 +1,57 @@
+﻿@model ProjectManagement.Models.TaiLieu
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<section class="content-header">
+    <h1>Đề Tài</h1>
+</section>
+<section class="content">
+    @{
+        int countError = ViewBag.CountError != null ? (int)ViewBag.CountError : 0;
+        if (countError > 0)
+        {
+            @Html.ValidationSummary(true)
+            @Html.ValidationMessage("error", "", new { @class = "alert alert-danger alert-dismissable", style = "text-align:left; display: block" })
+        }
+    }
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">Tạo Đề Tài</h3>
+        </div>
+
+        @using (Html.BeginForm("Create", "TaiLieu", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="box-body">
+                <div class="form-group">
+                    @Html.Label("Mã Tài Liệu", new { @class = "control-label col-md-2", required = "required" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.TaiLieuId, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.TaiLieuId)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Tên Tài Liệu", new { @class = "control-label col-md-2", required = "required" })
+                    <div class="col-md-10">
+
+                        @Html.ValidationMessageFor(model => model.TenTaiLieu)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="ARTICLE_FILE_NAME_1">File đính kèm 1</label>
+                    @Html.TextBoxFor(model => model.TepTinDinhKem, new { @type = "file", @class = "form-control" })
+                </div>
+            </div>
+            <div class="box-footer">
+                @*<button type="submit" class="btn btn-default">Cancel</button>*@
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+                <input type="submit" value="Save" class="btn btn-primary pull-right" />
+            </div>
+        }
+    </div>
+</section>
