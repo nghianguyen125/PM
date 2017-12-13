@@ -22,7 +22,7 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("Login", "Admin");
+                return RedirectToAction("Login", "User");
             }
             else
             {
@@ -54,7 +54,7 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("Login", "Admin");
+                return RedirectToAction("Login", "User");
             }
             else
             {
@@ -77,7 +77,7 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("Login", "Admin");
+                return RedirectToAction("Login", "User");
             }
             else
             {
@@ -96,6 +96,8 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (ModelState.IsValid)
             {
+                var maxId = db.KhoaHocs.Max(u => u.KhoaHocID);
+                khoaHoc.KhoaHocID = maxId + 1;
                 db.KhoaHocs.Add(khoaHoc);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -110,7 +112,7 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("Login", "Admin");
+                return RedirectToAction("Login", "User");
             }
             else
             {
@@ -151,7 +153,7 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("Login", "Admin");
+                return RedirectToAction("Login", "User");
             }
             else
             {

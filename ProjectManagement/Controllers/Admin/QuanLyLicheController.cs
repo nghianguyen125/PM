@@ -19,54 +19,91 @@ namespace ProjectManagement.Controllers.Admin
         // GET: QuanLyLiche
         public ActionResult Index()
         {
-            if (!UserManager.Authenticated)
-            {
-                return RedirectToAction("Login", "Admin");
-            }
-            else
-            {
-                var quanLyLiches = db.QuanLyLiches.Include(q => q.DotKhoaLuan);
-                return View(quanLyLiches.OrderBy(n => n.MocThoiGian).ToList());
-            }
-                
+            //var quanLyLiches = db.QuanLyLiches.Include(q => q.DotKhoaLuan);
+            return View(db.DotKhoaLuans.ToList());
         }
 
         // GET: QuanLyLiche/Details/5
         public ActionResult Details(decimal id)
         {
-            if (!UserManager.Authenticated)
+            if (id == null)
             {
-                return RedirectToAction("Login", "Admin");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            else
+            QuanLyLich quanLyLich = db.QuanLyLiches.Find(id);
+            if (quanLyLich == null)
             {
-                if (id == 0)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                QuanLyLich quanLyLich = db.QuanLyLiches.Find(id);
-                if (quanLyLich == null)
-                {
-                    return HttpNotFound();
-                }
-                return View(quanLyLich);
+                return HttpNotFound();
             }
-            
+            return View(quanLyLich);
         }
 
-        // GET: QuanLyLiche/Create
-        public ActionResult Create()
+        public ActionResult DSD(decimal? DKId)
         {
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("Login", "Admin");
+                return RedirectToAction("Login", "User");
             }
             else
             {
-                ViewBag.DotKhoaLuanId = new SelectList(db.DotKhoaLuans, "DotKhoaLuanId", "TenDotKhoaLuan");
+                if (DKId == 0)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                var sinhVienKhoa = db.QuanLyLiches.Where(n => n.DotKhoaLuanId == DKId).ToList();
+                if (sinhVienKhoa == null)
+                {
+                    return HttpNotFound();
+                }
+                var kh = db.DotKhoaLuans.Where(n => n.DotKhoaLuanId == DKId).SingleOrDefault();
+                if (kh != null)
+                {
+                    ViewBag.DotKhoaLuanId = kh.DotKhoaLuanId;
+                    ViewBag.TenDotKhoaLuan = kh.TenDotKhoaLuan;
+                }
+                return View(sinhVienKhoa.ToList());
+            }
+        }
+
+        // GET: QuanLyLiche/Create
+        public ActionResult Create(decimal? DKId)
+        {
+            if (!UserManager.Authenticated)
+            {
+                return RedirectToAction("Login", "User");
+            }
+            else
+            {
+                if (DKId == 0)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                var sinhVienThuocKhoa = db.QuanLyLiches.Where(n => n.DotKhoaLuanId== DKId).ToList();
+                if (sinhVienThuocKhoa == null)
+                {
+                    return HttpNotFound();
+                }
+                var kh = db.DotKhoaLuans.Where(n => n.DotKhoaLuanId == DKId).SingleOrDefault();
+                if (kh != null)
+                {
+                    ViewBag.TenDotKhoaLuan = kh.TenDotKhoaLuan;
+                    ViewBag.IdDotKhoaLuan = kh.DotKhoaLuanId;
+                    ViewBag.DotKhoaLuanID = new SelectList(db.DotKhoaLuans, "DotKhoaLuanId", "TenDotKhoaLuan", kh.DotKhoaLuanId);
+                }
+                else
+                {
+                    ViewBag.DotKhoaLuanID = new SelectList(db.DotKhoaLuans, "DotKhoaLuanId", "TenDotKhoaLuan");
+                }
+                //var list1 = db.SinhViens.ToList();
+                //var list2 = db.SinhVienThuocKhoas.Where(p => p.KhoaId == KId).ToList();
+                //var sv = list1.Where(p => !list2.Any(p2 => p2.SinhVienId == p.SinhVienId)).ToList();
+
+                //ViewBag.SinhVienId = new SelectList(sv, "SinhVienId", "HoTen");
                 return View();
             }
-                
+
+            //ViewBag.DotKhoaLuanId = new SelectList(db.DotKhoaLuans, "DotKhoaLuanId", "TenDotKhoaLuan");
+            //return View();
         }
 
         // POST: QuanLyLiche/Create
@@ -78,37 +115,44 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (ModelState.IsValid)
             {
+                //if (db.QuanLyLiches.Any(p => p.DotKhoaLuanId == quanLyLich.DotKhoaLuanId))
+                //{
+                //    ModelState.AddModelError("TenSinhVien", "Sinh Vien Da Ton Tai.");
+                //}
+
+                var svKh = db.QuanLyLiches.Where(n => n.DotKhoaLuanId == quanLyLich.DotKhoaLuanId).ToList();
+                if (svKh == null)
+                {
+                    return HttpNotFound();
+                }
+                var kh = db.DotKhoaLuans.Where(n => n.DotKhoaLuanId == quanLyLich.DotKhoaLuanId).SingleOrDefault();
+                if (kh != null)
+                {
+                    ViewBag.IdDotKhoaLuan = kh.DotKhoaLuanId;
+                    ViewBag.TenDotKhoaLuan = kh.TenDotKhoaLuan;
+                }
+
                 db.QuanLyLiches.Add(quanLyLich);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("DSD", new { DKId = quanLyLich.DotKhoaLuanId });
             }
-
-            ViewBag.DotKhoaLuanId = new SelectList(db.DotKhoaLuans, "DotKhoaLuanId", "TenDotKhoaLuan", quanLyLich.DotKhoaLuanId);
             return View(quanLyLich);
         }
 
         // GET: QuanLyLiche/Edit/5
-        public ActionResult Edit(decimal? DId)
+        public ActionResult Edit(decimal id)
         {
-            if (!UserManager.Authenticated)
+            if (id == null)
             {
-                return RedirectToAction("Login", "Admin");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            else
+            QuanLyLich quanLyLich = db.QuanLyLiches.Find(id);
+            if (quanLyLich == null)
             {
-                if (DId == 0)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                QuanLyLich quanLyLich = db.QuanLyLiches.Find(DId);
-                if (quanLyLich == null)
-                {
-                    return HttpNotFound();
-                }
-                ViewBag.DotKhoaLuanId = new SelectList(db.DotKhoaLuans, "DotKhoaLuanId", "TenDotKhoaLuan", quanLyLich.DotKhoaLuanId);
-                return View(quanLyLich);
+                return HttpNotFound();
             }
-            
+            ViewBag.DotKhoaLuanId = new SelectList(db.DotKhoaLuans, "DotKhoaLuanId", "TenDotKhoaLuan", quanLyLich.DotKhoaLuanId);
+            return View(quanLyLich);
         }
 
         // POST: QuanLyLiche/Edit/5
@@ -129,34 +173,26 @@ namespace ProjectManagement.Controllers.Admin
         }
 
         // GET: QuanLyLiche/Delete/5
-        public ActionResult Delete(decimal? DId)
+        public ActionResult Delete(decimal id)
         {
-            if (!UserManager.Authenticated)
+            if (id == null)
             {
-                return RedirectToAction("Login", "Admin");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            else
+            QuanLyLich quanLyLich = db.QuanLyLiches.Find(id);
+            if (quanLyLich == null)
             {
-                if (DId == 0)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                QuanLyLich quanLyLich = db.QuanLyLiches.Find(DId);
-                if (quanLyLich == null)
-                {
-                    return HttpNotFound();
-                }
-                return View(quanLyLich);
+                return HttpNotFound();
             }
-            
+            return View(quanLyLich);
         }
 
         // POST: QuanLyLiche/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(decimal? Did)
+        public ActionResult DeleteConfirmed(decimal id)
         {
-            QuanLyLich quanLyLich = db.QuanLyLiches.Find(Did);
+            QuanLyLich quanLyLich = db.QuanLyLiches.Find(id);
             db.QuanLyLiches.Remove(quanLyLich);
             db.SaveChanges();
             return RedirectToAction("Index");

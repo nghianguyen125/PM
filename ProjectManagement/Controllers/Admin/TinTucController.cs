@@ -21,7 +21,7 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("Login", "Admin");
+                return RedirectToAction("Login", "User");
             }
             else
             {
@@ -35,7 +35,7 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("Login", "Admin");
+                return RedirectToAction("Login", "User");
             }
             else
             {
@@ -58,7 +58,7 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("Login", "Admin");
+                return RedirectToAction("Login", "User");
             }
             else
             {
@@ -77,6 +77,8 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (ModelState.IsValid)
             {
+                var maxId = db.TinTucThongBaos.Max(u => u.TinTucId);
+                tinTuc.TinTucId = maxId + 1;
                 db.TinTucThongBaos.Add(tinTuc);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -91,7 +93,7 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("Login", "Admin");
+                return RedirectToAction("Login", "User");
             }
             else
             {
@@ -132,7 +134,7 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("Login", "Admin");
+                return RedirectToAction("Login", "User");
             }
             else
             {

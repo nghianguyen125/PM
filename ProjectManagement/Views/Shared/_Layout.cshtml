@@ -83,20 +83,38 @@
                             <a href="@(urlHome + "TinTucThongBaos/Index")">News</a>
                         </li>
                         <li>
-                            <a href="@(urlHome + "SinhVienThuocNhomSVs/Index")">My Group</a>
+                            <a href="@(urlHome + "DeTais/Index")">My Thesis</a>
                         </li>
-                        <li>
-                            <a href="#">My Thesis</a>
-                        </li>
+                        @if (@ProjectManagement.App_Start.Classes.UserManager.GetUserName.ToString().Contains("GV") == true)
+                        {
+                            <li>
+                                <a href="@(urlHome + "DeTais/Create")">Create Topic</a>
+                            </li>
+                            <li>
+                                <a href="@(urlHome + "DanhGiaDeTais/Index")">Review</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <a href="@(urlHome + "SinhVienThuocNhomSVs/Index")">My Group</a>
+                            </li>
+                        }
                         <li>
                             <a href="javascript:void(0)" class="site-nav-sub"><i class="fa fa-angle-down site-nav-arrow"></i>@ProjectManagement.App_Start.Classes.UserManager.GetUserName</a>
                             <ul>
+                                @if (@ProjectManagement.App_Start.Classes.UserManager.GetUserName.ToString().Contains("admin") == true)
+                                {
                                 <li>
-                                    <a href="#"><i class="fa fa-info-circle fa-fw pull-right"></i> My Account</a>
+                                    <a href="@(urlHome + "Admin/taikhoan")"><i class="fa fa-info-circle fa-fw pull-right"></i> Manage</a>
+                                </li>
+                                }
+                                <li>
+                                    <a href="@(urlHome + "Profile/Edit/"+@ProjectManagement.App_Start.Classes.UserManager.GetUserId)"><i class="fa fa-info-circle fa-fw pull-right"></i> My Account</a>
                                 </li>
                                 <li>
-                                    <a href="#"><i class="fa fa-sign-out fa-fw pull-right"></i> Logout</a>
-                                </li>            
+                                    <a href="@(urlHome + "User/Logout")"><i class="fa fa-sign-out fa-fw pull-right"></i> Logout</a>
+                                </li>
                             </ul>
                         </li>
                        

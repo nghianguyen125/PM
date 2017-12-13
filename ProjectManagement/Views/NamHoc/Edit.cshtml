@@ -29,13 +29,6 @@
 
                 @Html.HiddenFor(model => model.NamHocHocKyId)
                 <div class="form-group">
-                    @Html.Label("Mã Năm học", new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(model => model.NamHocHocKyId, new { @class = "form-control", required = "required" })
-                        @Html.ValidationMessageFor(model => model.NamHocHocKyId)
-                    </div>
-                </div>
-                <div class="form-group">
                     @Html.Label("Chi tiết", new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.TextBoxFor(model => model.TenNamHocHocKy, new { @class = "form-control", required = "required" })

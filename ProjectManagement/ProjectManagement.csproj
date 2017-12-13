@@ -40,6 +40,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.6.2.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.6.2\lib\net45\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="CKFinder, Version=2.6.0.2792, Culture=neutral, PublicKeyToken=579e7adc719a1423, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\0 NHOM WEBSITE\QUAN_LY_HOI_NGHI\CONFERENCE_MANAGEMENT_SYSTEM\COMS\COMS\bin\CKFinder.dll</HintPath>
@@ -72,6 +76,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -202,7 +208,6 @@
     <Compile Include="Controllers\Admin\GiangVienThuocKhoaController.cs" />
     <Compile Include="Controllers\Admin\KhoaController.cs" />
     <Compile Include="Controllers\Admin\KhoaHocController.cs" />
-    <Compile Include="Controllers\Admin\LichController.cs" />
     <Compile Include="Controllers\Admin\LoaiTaiKhoanController.cs" />
     <Compile Include="Controllers\Admin\NamHocController.cs" />
     <Compile Include="Controllers\Admin\NganhController.cs" />
@@ -221,8 +226,11 @@
     <Compile Include="Controllers\Admin\TaiLieuController.cs" />
     <Compile Include="Controllers\Admin\TinTucController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\DanhGiaDeTaisController.cs" />
+    <Compile Include="Controllers\DeTaisController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MainPageController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\SinhVienThuocNhomSVsController.cs" />
     <Compile Include="Controllers\TaiLieuxController.cs" />
     <Compile Include="Controllers\TinTucThongBaosController.cs" />
@@ -230,6 +238,7 @@
     <Compile Include="DataAccess\BusinessService\ConnectBase.cs" />
     <Compile Include="DataAccess\BusinessService\DataAccessService.cs" />
     <Compile Include="DataAccess\Entity\DataAccess.cs" />
+    <Compile Include="Factories\CommentFactory.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -2039,11 +2048,16 @@
     <Content Include="images\icon\thongbao.pdf" />
     <Content Include="js\.DS_Store" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <None Include="Scripts\jquery-1.12.4.intellisense.js" />
-    <Content Include="Scripts\jquery-1.12.4.js" />
-    <Content Include="Scripts\jquery-1.12.4.min.js" />
-    <Content Include="Scripts\jquery-1.12.4.min.map" />
+    <None Include="Scripts\jquery-3.2.1.intellisense.js" />
+    <Content Include="Scripts\jquery-1.7.1.min.js" />
+    <Content Include="Scripts\jquery-3.2.1.js" />
+    <Content Include="Scripts\jquery-3.2.1.min.js" />
+    <Content Include="Scripts\jquery-3.2.1.slim.js" />
+    <Content Include="Scripts\jquery-3.2.1.slim.min.js" />
+    <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.2.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui-1.10.4.min.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
@@ -2074,7 +2088,6 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />
-    <Content Include="Views\Admin\Login.cshtml" />
     <Content Include="Views\Admin\Logon.cshtml" />
     <Content Include="Views\TaiKhoan\Index.cshtml" />
     <Content Include="Views\TaiKhoan\Create.cshtml" />
@@ -2250,11 +2263,30 @@
     <Content Include="Views\TaiLieu\Details.cshtml" />
     <Content Include="Views\TaiLieu\Edit.cshtml" />
     <Content Include="Views\TaiLieu\Index.cshtml" />
+    <Content Include="Views\DeTais\Create.cshtml" />
+    <Content Include="Views\DeTais\Delete.cshtml" />
+    <Content Include="Views\DeTais\Details.cshtml" />
+    <Content Include="Views\DeTais\Edit.cshtml" />
+    <Content Include="Views\DeTais\Index.cshtml" />
+    <Content Include="Views\DanhGiaDeTais\Create.cshtml" />
+    <Content Include="Views\DanhGiaDeTais\Delete.cshtml" />
+    <Content Include="Views\DanhGiaDeTais\Details.cshtml" />
+    <Content Include="Views\DanhGiaDeTais\Edit.cshtml" />
+    <Content Include="Views\DanhGiaDeTais\Index.cshtml" />
+    <Content Include="Views\Profile\Create.cshtml" />
+    <Content Include="Views\Profile\Delete.cshtml" />
+    <Content Include="Views\Profile\Details.cshtml" />
+    <Content Include="Views\Profile\Edit.cshtml" />
+    <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\QuanLyLiche\DSD.cshtml" />
+    <Content Include="Views\DeTai\TaiLieuCreate.cshtml" />
+    <Content Include="Views\SinhVienThuocNhomSVs\SV.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\GiangVien\" />
     <Folder Include="Controllers\SinhVien\" />
+    <Folder Include="upload\file\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Upload\" />
   </ItemGroup>

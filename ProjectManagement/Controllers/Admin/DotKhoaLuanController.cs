@@ -21,11 +21,11 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("Login", "Admin");
+                return RedirectToAction("Login", "User");
             }
             else
             {
-                var dotKhoaLuans = db.DotKhoaLuans.Include(d => d.NamHoc).Include(d => d.QuanLyLich);
+                var dotKhoaLuans = db.DotKhoaLuans.Include(d => d.NamHoc);
                 return View(dotKhoaLuans.ToList());
             }
         }
@@ -35,7 +35,7 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("Login", "Admin");
+                return RedirectToAction("Login", "User");
             }
             else
             {
@@ -58,7 +58,7 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("Login", "Admin");
+                return RedirectToAction("Login", "User");
             }
             else
             {
@@ -77,6 +77,8 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (ModelState.IsValid)
             {
+                var maxId = db.DotKhoaLuans.Max(u => u.DotKhoaLuanId);
+                dotKhoaLuan.DotKhoaLuanId = maxId + 1;
                 db.DotKhoaLuans.Add(dotKhoaLuan);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -92,7 +94,7 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("Login", "Admin");
+                return RedirectToAction("Login", "User");
             }
             else
             {
@@ -135,7 +137,7 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("Login", "Admin");
+                return RedirectToAction("Login", "User");
             }
             else
             {

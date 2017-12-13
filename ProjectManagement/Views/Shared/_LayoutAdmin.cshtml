@@ -43,7 +43,7 @@
                             </a>
                         </li>
                         <li class="user user-menu">
-                            <a class="dropdown-toggle" href="@(urlHome + "Admin/Admin/Logout")" class="btn btn-default btn-flat">Thoát</a>
+                            <a class="dropdown-toggle" href="@(urlHome + "User/Logout")" class="btn btn-default btn-flat">Thoát</a>
                         </li>
                     </ul>
                 </div>
@@ -54,7 +54,7 @@
                 <ul class="sidebar-menu">
                     <li class="header">MAIN NAVIGATION</li>
                     <li class="treeview">
-                        <a href="@urlHome" target="_blank">
+                        <a href="@(urlHome+"MainPage/Index")">
                             <i class="fa fa-home"></i><span>Trang chủ</span>
                         </a>
                     </li>
@@ -115,6 +115,7 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
+                            <li><a href="@(urlHome+"Admin/DeTai/Index")"><i class="fa fa-circle-o"></i>Đề Tài</a></li>
                             <li><a href="@(urlHome+"Admin/DotKhoaLuan/Index")"><i class="fa fa-circle-o"></i>Danh sách Đợt Khóa Luận</a></li>
                             <li><a href="@(urlHome+"Admin/PhanDeTaiChoDotKhoaLuan/Index")"><i class="fa fa-circle-o"></i>Đề Tài / Đợt Khóa Luận</a></li>
                             <li><a href="@(urlHome+"Admin/PhanDeTaiChoNhomSV/Index")"><i class="fa fa-circle-o"></i>Đề Tài / Nhóm SV</a></li>

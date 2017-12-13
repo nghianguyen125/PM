@@ -19,7 +19,7 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("Login", "Admin");
+                return RedirectToAction("Login", "User");
             }
             else
             {
@@ -38,7 +38,7 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("Login", "Admin");
+                return RedirectToAction("Login", "User");
             }
             else
             {
@@ -66,7 +66,7 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("Login", "Admin");
+                return RedirectToAction("Login", "User");
             }
             else
             {
@@ -88,7 +88,7 @@ namespace ProjectManagement.Controllers.Admin
         [HttpPost]
         [ValidateAntiForgeryToken]
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")] // This is for output cache false
-        public ActionResult Create([Bind(Include = "TaiKhoanId,Username,HoTen,Password,LoaiTaiKhoanId,SinhVienId,GiangVienId")] TaiKhoan user)
+        public ActionResult Create([Bind(Include = "TaiKhoanId,Username,HoTen,Password,LoaiTaiKhoanId,SinhVienId,GiangVienId,LaQuanTri")] TaiKhoan user)
         {
             if (ModelState.IsValid)
             {
@@ -142,7 +142,7 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("Login", "Admin");
+                return RedirectToAction("Login", "User");
             }
             else
             {
@@ -163,6 +163,8 @@ namespace ProjectManagement.Controllers.Admin
                 {
                     return HttpNotFound();
                 }
+                ViewBag.SinhVienId = new SelectList(db.SinhViens, "SinhVienId", "HoTen", user.SinhVienId);
+                ViewBag.GiangVienId = new SelectList(db.GiangViens, "GiangVienId", "HoTen", user.GiangVienId);
                 ViewBag.UserCreatedBy = db.TaiKhoans.ToList();
                 ViewBag.LoaiTaiKhoanId = new SelectList(db.LoaiTaiKhoans, "LoaiTaiKhoanId", "TenLoaiTaiKhoan", user.LoaiTaiKhoanId);
                 return View(user);
@@ -222,6 +224,8 @@ namespace ProjectManagement.Controllers.Admin
                     return RedirectToAction("Index");
                 }
             }
+            ViewBag.SinhVienId = new SelectList(db.SinhViens, "SinhVienId", "HoTen", user.SinhVienId);
+            ViewBag.GiangVienId = new SelectList(db.GiangViens, "GiangVienId", "HoTen", user.GiangVienId);
             ViewBag.LoaiTaiKhoanId = new SelectList(db.LoaiTaiKhoans, "LoaiTaiKhoanId", "TenLoaiTaiKhoan", user.LoaiTaiKhoanId);
             return View(user);
         }
@@ -231,7 +235,7 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("Login", "Admin");
+                return RedirectToAction("Login", "User");
             }
             else
             {

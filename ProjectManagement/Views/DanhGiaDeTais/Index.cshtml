@@ -1,0 +1,95 @@
+﻿@using ProjectManagement.Models
+@model IEnumerable<ProjectManagement.Models.DanhGiaDeTai>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string idGiangVien = ViewBag.id + "";
+}
+
+<h2>Đánh Giá Sinh Viên</h2>
+<section class="content">
+    <div class="row" style="padding-bottom: 10px;">
+        <div class="col-md-12">
+            @*@Html.ActionLink("Tạo mới", "Create", null, new { @class = "btn btn-primary pull-left" })*@
+            <a href="/DanhGiaDeTais/Create?KHId=@idGiangVien" class="btn btn-primary pull-left">Tạo mới</a>
+            <a></a>
+        </div>
+    </div>
+    <div class="box">
+        <table class="table table-bordered table-hover">
+            <tbody>
+                <tr>
+                    <th style="width: 50px;">STT</th>
+                    <th>
+                        Đề Tài
+                    </th>
+                    <th>
+                        Sinh Viên
+                    </th>
+                    <th>
+                        Ngày Sinh
+                    </th>
+                    <th>
+                        Điểm
+                    </th>
+                    <th>
+                        Nội dung
+                    </th>
+                    <th>
+                        GVDG
+                    </th>
+                    <th style="width: 50px; text-align: center">Chức năng</th>
+                </tr>
+                @{
+                    int stt = 0;
+                    ProjectManagementEntities db = new ProjectManagementEntities();
+                }
+                @foreach (var item in Model)
+                {
+                    stt++;
+                    List<DanhGiaDeTai> userCreatedBy = db.DanhGiaDeTais.ToList();
+                    <tr>
+                        <td>@stt</td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DeTai.TenDeTai)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SinhVien.HoTen)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SinhVien.NgaySinh)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Diem)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NoiDungDanhGia)
+                        </td>
+                        @*<td>
+                                <a href="@Url.Action("DSSV", new { KHId = item.KhoaHocID })">Danh sách Sinh Viên</a>
+                            </td>*@
+                        @*@Html.HiddenFor(model => itemModel.)*@
+                        <td align="center">
+                            @*@Html.ActionLink("Sửa", "Edit", new {id = item.USER_ID}) |
+                                @Html.ActionLink("Xóa", "Delete", new {id = item.USER_ID})*@
+                            <ul class="contro_function" style="width: 70px">
+                                <li>
+                                    <a title="Cập nhật" href="@Url.Action("Edit", new { detaiid = item.DeTaiId, svid = item.SinhVienId, gvid = item.GiangVienId })">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                </li>
+                                <li>|</li>
+                                <li>
+                                    <a title="Xóa" href="@Url.Action("Delete", new { detaiid = item.DeTaiId, svid = item.SinhVienId, gvid = item.GiangVienId })">
+                                        <i class="fa fa-remove" style="color:red;"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>

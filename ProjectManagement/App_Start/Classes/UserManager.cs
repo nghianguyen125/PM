@@ -48,7 +48,7 @@ namespace ProjectManagement.App_Start.Classes
                 return iden.GetUserId();
             }
         }
-        
+
         public static decimal OnlineUser
         {
             get { return totalOnlineUser; }            

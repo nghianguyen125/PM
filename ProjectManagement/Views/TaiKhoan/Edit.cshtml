@@ -61,10 +61,24 @@
             </div>
 
             <div class="form-group">
-                @Html.Label("Vai trò", new {@class = "control-label col-md-2"})
+                @Html.Label("Vai trò", new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.DropDownList("LoaiTaiKhoanId", null, "Chọn Vai Trò", new {@class = "form-control" })
+                    @Html.DropDownList("LoaiTaiKhoanId", null, "Chọn Vai Trò", new { @class = "form-control", @id = "role" })
                     @Html.ValidationMessageFor(model => model.LoaiTaiKhoanId)
+                </div>
+            </div>
+            <div class="form-group" id="chonSinhVien">
+                @Html.Label("Chọn Sinh Viên", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("SinhVienId", null, "Chọn Sinh Viên", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.SinhVienId)
+                </div>
+            </div>
+            <div class="form-group" id="chonGiangVien">
+                @Html.Label("Chọn Giảng Viên", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("GiangVienId", null, "Chọn Giảng Viên", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.GiangVienId)
                 </div>
             </div>
 
@@ -94,4 +108,30 @@
     $(document).ready(function () {
         CheckChangePass('AllowChangePass');
     });
+</script>
+<script>
+    console.clear();
+    $("#role").change(function (item) {
+        var role = $(this).val();
+        console.log('Da chon role: ' + role);
+        showHideSvGv(role);
+    });
+    function showHideSvGv(role) {
+        if (role == 1) {
+            $('#chonSinhVien').show();
+            $('#chonGiangVien').hide();
+            console.log('1');
+        } else if (role == 2) {
+            $('#chonSinhVien').hide();
+            $('#chonGiangVien').show();
+            console.log('2');
+        } else {
+            $('#chonSinhVien').hide();
+            $('#chonGiangVien').hide();
+            console.log('3');
+        }
+        console.log('4');
+    }
+    //Thiet lap cho lan chay dau tien
+    showHideSvGv($("#role").val());
 </script>

@@ -21,7 +21,7 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("Login", "Admin");
+                return RedirectToAction("Login", "User");
             }
             else
             {
@@ -35,7 +35,7 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("Login", "Admin");
+                return RedirectToAction("Login", "User");
             }
             else
             {
@@ -57,7 +57,7 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("Login", "Admin");
+                return RedirectToAction("Login", "User");
             }
             else
             {
@@ -88,7 +88,7 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("Login", "Admin");
+                return RedirectToAction("Login", "User");
             }
             else
             {
@@ -112,12 +112,11 @@ namespace ProjectManagement.Controllers.Admin
                 {
                     ViewBag.NHomSVId = new SelectList(db.NhomSVs, "NhomSVId", "TenNhom");
                 }
-
                 var list1 = db.SinhViens.ToList();
                 var list2 = db.SinhVienThuocNhomSVs.Where(p => p.NhomSVId == NId).ToList();
                 var sv = list1.Where(p => !list2.Any(p2 => p2.SinhVienId == p.SinhVienId)).ToList();
 
-                ViewBag.SinhVienId = new SelectList(db.SinhViens, "SinhVienId", "HoTen");
+                ViewBag.SinhVienId = new SelectList(sv, "SinhVienId", "HoTen");
                 return View();
             }
            
@@ -132,8 +131,6 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (ModelState.IsValid)
             {
-                db.SinhVienThuocNhomSVs.Add(sinhVienThuocNhomSV);
-                db.SaveChanges();
 
                 var svKh = db.SinhVienThuocNhomSVs.Where(n => n.NhomSVId == sinhVienThuocNhomSV.NhomSVId).ToList();
                 if (svKh == null)
@@ -143,11 +140,15 @@ namespace ProjectManagement.Controllers.Admin
                 var kh = db.NhomSVs.Where(n => n.NhomSVId == sinhVienThuocNhomSV.NhomSVId).SingleOrDefault();
                 if (kh != null)
                 {
-                    ViewBag.IdNhom = kh.NhomSVId;
-                    ViewBag.TenNhom = kh.TenNhom;
+                    ViewBag.NhomSVId = kh.NhomSVId;
+                    ViewBag.TenNhomSV = kh.TenNhom;
                 }
+
+                db.SinhVienThuocNhomSVs.Add(sinhVienThuocNhomSV);
+                db.SaveChanges();
                 return RedirectToAction("DSSV", new { NId = sinhVienThuocNhomSV.NhomSVId });
             }
+
             return View(sinhVienThuocNhomSV);
         }
 
@@ -156,7 +157,7 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("Login", "Admin");
+                return RedirectToAction("Login", "User");
             }
             else
             {
@@ -210,7 +211,7 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("Login", "Admin");
+                return RedirectToAction("Login", "User");
             }
             else
             {

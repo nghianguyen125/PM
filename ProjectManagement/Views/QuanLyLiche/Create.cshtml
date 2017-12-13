@@ -3,10 +3,12 @@
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    string TenDotKhoaLuan = ViewBag.TenDotKhoaLuan + "";
+    string IdDotKhoaLuan = ViewBag.IdDotKhoaLuan + "";
 }
 
 <section class="content-header">
-    <h1>Phân Đề Tài</h1>
+    <h1>MineStone</h1>
 </section>
 <section class="content">
     @{
@@ -18,44 +20,43 @@
         }
     }
     <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">Đợt Khóa Luận: <strong>@TenDotKhoaLuan</strong></h3>
+        </div>
 
         @using (Html.BeginForm("Create", "QuanLyLiche", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal" }))
         {
             @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.DotKhoaLuanId);
             <div class="box-body">
                 <div class="form-group">
-                    @Html.Label("Đợt Khóa Luận", new { @class = "control-label col-md-2" })
+                    @Html.Label("Tiêu Đề", new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.DropDownList("DotKhoaLuanId", null, String.Empty, new { @class = "form-control", required = "required" })
-                        @Html.ValidationMessageFor(model => model.DotKhoaLuanId)
-                    </div>
-                </div>
-                <div class="form-group">
-                    @Html.Label("Title", new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(model => model.TieuDe, new { @class = "form-control", required = "required" })
+                        @Html.TextBoxFor(model => model.TieuDe, new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.TieuDe)
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.Label("Mốc Thời Gian", new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
+                        @*<input type="date" value="submit" id="TuNgay"/>*@
                         @Html.TextBoxFor(model => model.MocThoiGian, new { @class = "form-control", type = "date", required = "required" })
                         @Html.ValidationMessageFor(model => model.MocThoiGian)
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.Label("Ghi Chú", new { @class = "control-label col-md-2" })
+                    @Html.Label("Nội Dung", new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.NoiDung, new { @class = "form-control", @placeholder = "Nhập nội dung...", @cols = "80", @rows = "4", required = "required" })
+                        @*<input type="date" value="submit" id="TuNgay"/>*@
+                        @Html.TextBoxFor(model => model.NoiDung, new { @class = "form-control", required = "required" })
                         @Html.ValidationMessageFor(model => model.NoiDung)
                     </div>
                 </div>
             </div>
             <div class="box-footer">
                 @*<button type="submit" class="btn btn-default">Cancel</button>*@
-                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
-                @*<a href="/Admin/SinhVienKhoaHoc/DSSV?KHId=@idKhoaHoc" class="btn btn-default">Back to List</a>*@
+                @*@Html.ActionLink("Back to List", "DSSV", null, new { @class = "btn btn-default" })*@
+                <a href="/Admin/QuanLyLiche/DSD?DKId=@IdDotKhoaLuan" class="btn btn-default">Back to List</a>
                 <input type="submit" value="Save" class="btn btn-primary pull-right" />
             </div>
         }

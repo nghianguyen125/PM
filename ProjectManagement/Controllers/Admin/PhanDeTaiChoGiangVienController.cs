@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using ProjectManagement.App_Start.Classes;
 using ProjectManagement.Models;
 
 namespace ProjectManagement.Controllers.Admin
@@ -17,8 +19,15 @@ namespace ProjectManagement.Controllers.Admin
         // GET: PhanDeTaiChoGiangVien
         public ActionResult Index()
         {
-            var phanDeTaiChoGiangViens = db.PhanDeTaiChoGiangViens.Include(p => p.DeTai).Include(p => p.GiangVien);
-            return View(phanDeTaiChoGiangViens.ToList());
+            if (!UserManager.Authenticated)
+            {
+                return RedirectToAction("Login", "User");
+            }
+            else
+            {
+                var phanDeTaiChoGiangViens = db.PhanDeTaiChoGiangViens.Include(p => p.DeTai).Include(p => p.GiangVien);
+                return View(phanDeTaiChoGiangViens.ToList());
+            }
         }
 
         // GET: PhanDeTaiChoGiangVien/Details/5
@@ -39,9 +48,16 @@ namespace ProjectManagement.Controllers.Admin
         // GET: PhanDeTaiChoGiangVien/Create
         public ActionResult Create()
         {
-            ViewBag.DeTaiId = new SelectList(db.DeTais, "DeTaiId", "TenDeTai");
-            ViewBag.GiangVienId = new SelectList(db.GiangViens, "GiangVienId", "HoTen");
-            return View();
+            if (!UserManager.Authenticated)
+            {
+                return RedirectToAction("Login", "User");
+            }
+            else
+            {
+                ViewBag.DeTaiId = new SelectList(db.DeTais, "DeTaiId", "TenDeTai");
+                ViewBag.GiangVienId = new SelectList(db.GiangViens, "GiangVienId", "HoTen");
+                return View();
+            }
         }
 
         // POST: PhanDeTaiChoGiangVien/Create
@@ -66,18 +82,25 @@ namespace ProjectManagement.Controllers.Admin
         // GET: PhanDeTaiChoGiangVien/Edit/5
         public ActionResult Edit(string id)
         {
-            if (id == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "User");
             }
-            PhanDeTaiChoGiangVien phanDeTaiChoGiangVien = db.PhanDeTaiChoGiangViens.Find(id);
-            if (phanDeTaiChoGiangVien == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                PhanDeTaiChoGiangVien phanDeTaiChoGiangVien = db.PhanDeTaiChoGiangViens.Find(id);
+                if (phanDeTaiChoGiangVien == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.DeTaiId = new SelectList(db.DeTais, "DeTaiId", "TenDeTai", phanDeTaiChoGiangVien.DeTaiId);
+                ViewBag.GiangVienId = new SelectList(db.GiangViens, "GiangVienId", "HoTen", phanDeTaiChoGiangVien.GiangVienId);
+                return View(phanDeTaiChoGiangVien);
             }
-            ViewBag.DeTaiId = new SelectList(db.DeTais, "DeTaiId", "TenDeTai", phanDeTaiChoGiangVien.DeTaiId);
-            ViewBag.GiangVienId = new SelectList(db.GiangViens, "GiangVienId", "HoTen", phanDeTaiChoGiangVien.GiangVienId);
-            return View(phanDeTaiChoGiangVien);
         }
 
         // POST: PhanDeTaiChoGiangVien/Edit/5
@@ -101,16 +124,23 @@ namespace ProjectManagement.Controllers.Admin
         // GET: PhanDeTaiChoGiangVien/Delete/5
         public ActionResult Delete(string id)
         {
-            if (id == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "User");
             }
-            PhanDeTaiChoGiangVien phanDeTaiChoGiangVien = db.PhanDeTaiChoGiangViens.Find(id);
-            if (phanDeTaiChoGiangVien == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                PhanDeTaiChoGiangVien phanDeTaiChoGiangVien = db.PhanDeTaiChoGiangViens.Find(id);
+                if (phanDeTaiChoGiangVien == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(phanDeTaiChoGiangVien);
             }
-            return View(phanDeTaiChoGiangVien);
         }
 
         // POST: PhanDeTaiChoGiangVien/Delete/5

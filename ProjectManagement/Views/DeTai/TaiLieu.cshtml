@@ -4,6 +4,7 @@
 @{
     ViewBag.Title = "TaiLieu";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    string DeTaiId = ViewBag.DeTaiId + "";
 }
 
 <section class="content-header">
@@ -12,7 +13,8 @@
 <section class="content">
     <div class="row" style="padding-bottom: 10px;">
         <div class="col-md-12">
-            @Html.ActionLink("Tạo mới", "Create", "TaiLieu" , null, new { @class = "btn btn-primary pull-left" })
+            @*@Html.ActionLink("Tạo mới", "TaiLieuCreate", null, new { @class = "btn btn-primary pull-left" })*@
+            <a href="/admin/detai/TaiLieuCreate?DTId=@DeTaiId" class="btn btn-primary pull-left">tạo mới</a>
         </div>
     </div>
     <div class="box">

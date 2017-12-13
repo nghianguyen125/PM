@@ -1,5 +1,6 @@
-﻿@using ProjectManagement.Models
-@model IEnumerable<ProjectManagement.Models.QuanLyLich>
+﻿@using ProjectManagement.App_Start.Classes
+@using ProjectManagement.Models
+@model IEnumerable<ProjectManagement.Models.DotKhoaLuan>
 
 @{
     ViewBag.Title = "Index";
@@ -7,12 +8,12 @@
 }
 
 <section class="content-header">
-    <h1>Quản Lý Lịch</h1>
+    <h1>Minestone</h1>
 </section>
 <section class="content">
     <div class="row" style="padding-bottom: 10px;">
         <div class="col-md-12">
-            @Html.ActionLink("Tạo mới", "Create", null, new { @class = "btn btn-primary pull-left" })
+            <h3>Danh Sách Đợt Khóa Luận</h3>
         </div>
     </div>
     <div class="box">
@@ -21,15 +22,14 @@
                 <tr>
                     <th style="width: 50px">STT</th>
                     <th>
-                        Đợt Khóa Luận
+                        Mã Đợt Khóa Luận
                     </th>
                     <th>
-                        Mốc Thời Gian
+                        Tên Đợt Khóa Luận
                     </th>
                     <th>
-                        Nội Dung
+                        Năm Học Học Kỳ
                     </th>
-                    <th style="width: 50px; text-align: center">Chức năng</th>
                 </tr>
                 @{
                     int stt = 0;
@@ -38,41 +38,25 @@
                 @foreach (var item in Model)
                 {
                     stt++;
-                    List<QuanLyLich> userCreatedBy = db.QuanLyLiches.ToList();
+                    List<DotKhoaLuan> userCreatedBy = db.DotKhoaLuans.ToList();
                     <tr>
                         <td>@stt</td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.DotKhoaLuan.TenDotKhoaLuan)
+                            @Html.DisplayFor(modelItem => item.DotKhoaLuanId)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.MocThoiGian)
+                            @Html.DisplayFor(modelItem => item.TenDotKhoaLuan)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.NoiDung)
+                            @Html.DisplayFor(modelItem => item.NamHoc.TenNamHocHocKy)
                         </td>
-                        <td align="center">
-                            @*@Html.ActionLink("Sửa", "Edit", new {id = item.USER_ID}) |
-                                @Html.ActionLink("Xóa", "Delete", new {id = item.USER_ID})*@
-                            <ul class="contro_function" style="width: 70px">
-                                <li>
-                                    <a title="Cập nhật" href="@Url.Action("Edit", new { DId = item.DotKhoaLuanId})">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
-                                </li>
-                                <li>|</li>
-                                <li>
-                                    <a title="Xóa" href="@Url.Action("Delete", new { DId = item.DotKhoaLuanId})">
-                                        <i class="fa fa-remove" style="color:red;"></i>
-                                    </a>
-                                </li>
-                            </ul>
+                        <td>
+                            <a href="@Url.Action("DSD", new { DKId = item.DotKhoaLuanId })">Kế Hoạch</a>
                         </td>
                     </tr>
                 }
             </tbody>
-
-
-
         </table>
+
     </div>
 </section>

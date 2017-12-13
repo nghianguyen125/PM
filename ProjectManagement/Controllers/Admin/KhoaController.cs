@@ -22,7 +22,7 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("Login", "Admin");
+                return RedirectToAction("Login", "User");
             }
             else
             {
@@ -54,7 +54,7 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("Login", "Admin");
+                return RedirectToAction("Login", "User");
             }
             else
             {
@@ -77,7 +77,7 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("Login", "Admin");
+                return RedirectToAction("Login", "User");
             }
             else return View();
         }
@@ -91,6 +91,8 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (ModelState.IsValid)
             {
+                var maxId = db.Khoas.Max(u => u.KhoaId);
+                khoa.KhoaId = maxId + 1;
                 db.Khoas.Add(khoa);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -104,7 +106,7 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("Login", "Admin");
+                return RedirectToAction("Login", "User");
             }
             else
             {
@@ -143,7 +145,7 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("Login", "Admin");
+                return RedirectToAction("Login", "User");
             }
             else
             {
@@ -166,6 +168,12 @@ namespace ProjectManagement.Controllers.Admin
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(decimal id)
         {
+
+            var q = db.SinhVienThuocKhoas.Where(a => a.KhoaId == id);
+            if (q.Any())
+            {
+                return View();
+            }
             Khoa khoa = db.Khoas.Find(id);
             db.Khoas.Remove(khoa);
             db.SaveChanges();

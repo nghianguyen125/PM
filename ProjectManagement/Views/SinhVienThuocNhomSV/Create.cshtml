@@ -1,10 +1,11 @@
-﻿@model ProjectManagement.Models.SinhVienThuocNhomSV
+﻿@using ProjectManagement.Models
+@model ProjectManagement.Models.SinhVienThuocNhomSV
 
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-    string tenNhom = ViewBag.TenNhom + "";
-    string idNhom = ViewBag.IdNhom + "";
+    string tenNhom = ViewBag.TenNhomSV + "";
+    string idNhom = ViewBag.IdNhomSV + "";
 }
 
 <section class="content-header">
@@ -31,7 +32,7 @@
                 <div class="form-group">
                     @Html.Label("Mã Nhóm", new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.DropDownList("NhomSVId", null, String.Empty, new { @class = "form-control", required = "required", @readonly="true" })
+                        @Html.DropDownList("NhomSVId", null, "Chọn Sinh Viên", new { @class = "form-control", required = "required", @readonly = "true" })
                         @Html.ValidationMessageFor(model => model.NhomSVId)
                     </div>
                 </div>

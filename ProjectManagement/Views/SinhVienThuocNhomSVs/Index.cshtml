@@ -1,48 +1,67 @@
-﻿@model IEnumerable<object>
+﻿@using ProjectManagement.Models
+@model IEnumerable<ProjectManagement.Models.SinhVienThuocNhomSV>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    List<ProjectManagement.Models.TaiKhoan> taikhoan = Model.ToList()[0] as List<ProjectManagement.Models.TaiKhoan>;
-    List<ProjectManagement.Models.SinhVienThuocNhomSV> sinhvien = Model.ToList()[1] as List<ProjectManagement.Models.SinhVienThuocNhomSV>;
+    string nhom = ViewBag.nhom + "";
 }
 
-<h2>Index</h2>
+<section class="content-header">
+    <h1>Nhóm Sinh Viên</h1>
+</section>
+<section class="content">
+    <h1>@nhom</h1>
+    <div class="row" style="padding-bottom: 10px;">
+    </div>
+    <div class="box">
+        <table class="table table-hover table-bordered">
+            <tbody>
+                <tr>
+                    <th style="width: 50px">STT</th>
+                    <th>
+                        Mã Sinh viên
+                    </th>
+                    <th>
+                        Tên Sinh viên
+                    </th>
+                    <th>
+                        Ngày sinh
+                    </th>
+                    <th>
+                        Chi Tiết
+                    </th>
+                </tr>
+                @{
+                    int stt = 0;
+                    ProjectManagementEntities db = new ProjectManagementEntities();
+                }
+                @foreach (var item in Model)
+                {
+                    stt++;
+                    List<SinhVienThuocNhomSV> userCreatedBy = db.SinhVienThuocNhomSVs.ToList();
+                    <tr>
+                        <td>@stt</td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SinhVienId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SinhVien.HoTen)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SinhVien.NgaySinh)
+                        </td>
+                        <td>
+                            <a href="@Url.Action("SV", new { SVId = item.SinhVienId })">Chi Tiết</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
 
 
-<table class="table">
-    <tr>
-        <th>Tên Nhóm</th>
-        <th>Họ Tên</th>
-        <th>Email</th>
-        <th>SDT</th>
-        <th>Khoa</th>
-        <th>Ngày Phân</th>
-    </tr>
-    @foreach (var item in sinhvien)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NhomSV.TenNhom)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SinhVien.HoTen)
-            </td>
-            @foreach (var item1 in taikhoan.Where(p => p.SinhVienId == item.SinhVienId))
-            {
-                <td>
-                    @Html.DisplayFor(modelItem => item1.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item1.SDT)
-                </td>
-            }
-            <td>
-                @Html.DisplayFor(modelItem => item.NhomSV.Khoa.TenKhoa)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NgayPhan)
-            </td>
-        </tr>
-    }
-</table>
+
+        </table>
+    </div>
+    <div class="box-footer">
+    </div>
+</section>

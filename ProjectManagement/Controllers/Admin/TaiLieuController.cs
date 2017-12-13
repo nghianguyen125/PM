@@ -20,10 +20,17 @@ namespace ProjectManagement.Controllers.Admin
         // GET: TaiLieu
         public ActionResult Index()
         {
-            var taiLieux = db.TaiLieux.Include(t => t.DeTai);
-            return View(taiLieux.ToList());
+            if (!UserManager.Authenticated)
+            {
+                return RedirectToAction("Login", "User");
+            }
+            else
+            {
+                var taiLieux = db.TaiLieux.Include(t => t.DeTai);
+                return View(taiLieux.ToList());
+            }
         }
-
+       
         // GET: TaiLieu/Details/5
         public ActionResult Details(decimal id)
         {
@@ -44,25 +51,32 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("Login", "Admin");
-            }
-            ViewBag.Id = id;
-            if (id == null)
-            {
-                return RedirectToAction("Index");
+                return RedirectToAction("Login", "User");
             }
             else
             {
-                decimal deTaiId = decimal.Parse(id);
-                DeTai DeTaiId = db.DeTais.Where(x => x.DeTaiId == deTaiId).FirstOrDefault();
-                if (DeTaiId == null)
+                if (!UserManager.Authenticated)
+                {
+                    return RedirectToAction("Login", "Admin");
+                }
+                ViewBag.Id = id;
+                if (id == null)
                 {
                     return RedirectToAction("Index");
                 }
-                //ViewBag.categoryName = category.CATEGORY_NAME;
-                ViewBag.DeTaiId = new SelectList(db.DeTais, "DeTaiId", "TenDeTai");
+                else
+                {
+                    decimal deTaiId = decimal.Parse(id);
+                    DeTai DeTaiId = db.DeTais.Where(x => x.DeTaiId == deTaiId).FirstOrDefault();
+                    if (DeTaiId == null)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    //ViewBag.categoryName = category.CATEGORY_NAME;
+                    ViewBag.DeTaiId = new SelectList(db.DeTais, "DeTaiId", "TenDeTai");
+                }
+                return View();
             }
-            return View();
         }
 
         // POST: TaiLieu/Create
@@ -76,6 +90,30 @@ namespace ProjectManagement.Controllers.Admin
             {
                 return RedirectToAction("Login", "Admin");
             }
+
+            #region //Lưu file
+                String filePath1 = null;
+                String fileName1 = null;
+                String filePath2 = null;
+                String fileName2 = null;
+                var file1 = Request.Files["ARTICLE_FILE_NAME_1"];
+                var file2 = Request.Files["ARTICLE_FILE_NAME_2"];
+                if (file1 != null && file1.ContentLength > 0)
+                {
+                    fileName1 = file1.FileName;
+                    filePath1 = "/upload/file/" + GetNewFileName(fileName1);
+                    file1.SaveAs(Path.Combine(Server.MapPath(filePath1)));
+                }
+                if (file2 != null && file2.ContentLength > 0)
+                {
+                    fileName2 = file2.FileName;
+                    filePath2 = "/upload/file/" + GetNewFileName(fileName2);
+                    file2.SaveAs(Path.Combine(Server.MapPath(filePath2)));
+                }
+                taiLieu.TenTaiLieu = fileName1;
+                taiLieu.TepTinDinhKem = filePath1;
+                #endregion
+
             ViewBag.Id = id;
             if (id == null)
             {
@@ -92,17 +130,24 @@ namespace ProjectManagement.Controllers.Admin
         // GET: TaiLieu/Edit/5
         public ActionResult Edit(decimal id)
         {
-            if (id == null)
+            if (!UserManager.Authenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "User");
             }
-            TaiLieu taiLieu = db.TaiLieux.Find(id);
-            if (taiLieu == null)
+            else
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                TaiLieu taiLieu = db.TaiLieux.Find(id);
+                if (taiLieu == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.DeTaiId = new SelectList(db.DeTais, "DeTaiId", "TenDeTai", taiLieu.DeTaiId);
+                return View(taiLieu);
             }
-            ViewBag.DeTaiId = new SelectList(db.DeTais, "DeTaiId", "TenDeTai", taiLieu.DeTaiId);
-            return View(taiLieu);
         }
 
         // POST: TaiLieu/Edit/5
@@ -142,10 +187,17 @@ namespace ProjectManagement.Controllers.Admin
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(decimal id)
         {
-            TaiLieu taiLieu = db.TaiLieux.Find(id);
-            db.TaiLieux.Remove(taiLieu);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (!UserManager.Authenticated)
+            {
+                return RedirectToAction("Login", "User");
+            }
+            else
+            {
+                TaiLieu taiLieu = db.TaiLieux.Find(id);
+                db.TaiLieux.Remove(taiLieu);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
         }
 
         protected override void Dispose(bool disposing)

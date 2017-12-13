@@ -24,6 +24,7 @@ namespace ProjectManagement.Controllers.User
         // GET: /User/
         public ActionResult Index()
         {
+            
             if (UserManager.Authenticated)
             {
                 //string checkValid = Session["userNameXaGan"].ToString();
@@ -49,16 +50,23 @@ namespace ProjectManagement.Controllers.User
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")] // This is for output cache false
         public ActionResult Login()
         {
-            if (UserManager.Authenticated)
-            {
-                HttpCookie authCookie =
+            //if (UserManager.Authenticated)
+            //{
+            //    HttpCookie authCookie =
+            //        System.Web.HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName];
+            //    if (authCookie != null) authCookie.Expires = DateTime.Now.AddDays(-1);
+            //    System.Web.Security.FormsAuthentication.SignOut();
+            //    Session.Abandon();
+            //    Session.Clear();
+            //    Session.RemoveAll();
+            //}
+            HttpCookie authCookie =
                     System.Web.HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName];
-                if (authCookie != null) authCookie.Expires = DateTime.Now.AddDays(-1);
-                System.Web.Security.FormsAuthentication.SignOut();
-                Session.Abandon();
-                Session.Clear();
-                Session.RemoveAll();
-            }
+            if (authCookie != null) authCookie.Expires = DateTime.Now.AddDays(-1);
+            System.Web.Security.FormsAuthentication.SignOut();
+            Session.Abandon();
+            Session.Clear();
+            Session.RemoveAll();
             return View();
         }
         // POST: /User/Create
@@ -79,10 +87,9 @@ namespace ProjectManagement.Controllers.User
                 if (login.Any())
                 {
                     string ss = Security.EncryptSha1(Security.EncryptMd5(login.Single().Username + "#" + login.Single().Password).ToLower());
-                    Session["userNameXaGan"] = ss;
                     this.Session.Timeout = 60;
 
-                    string data = Security.EncryptStringCbc(login.Single().Username + ";" + login.Single().TaiKhoanId, "dtuxagan");
+                    string data = Security.EncryptStringCbc(login.Single().Username + ";" + login.Single().TaiKhoanId, "ProjectManagement");
                     HttpCookie authCookie = FormsAuthentication.GetAuthCookie(data, false);
                     var ticket = FormsAuthentication.Decrypt(authCookie.Value);
 
@@ -109,7 +116,7 @@ namespace ProjectManagement.Controllers.User
                     if(tk.GiangVienId != null)
                     {
                         ViewBag.GiangVienId = tk.GiangVienId;
-                        return RedirectToAction("Index", "GiangVienMain", new { GVId = tk.GiangVienId });
+                        return RedirectToAction("Index", "MainPage", new { GVId = tk.GiangVienId });
                     }
                     if(tk.SinhVienId != null)
                     {

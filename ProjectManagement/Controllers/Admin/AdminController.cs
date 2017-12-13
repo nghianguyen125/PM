@@ -120,9 +120,13 @@ namespace ProjectManagement.Controllers.Admin
         }
         public ActionResult Logon()
         {
+            if(UserManager.GetUserName.ToString().Contains("admin") == false)
+            {
+                return RedirectToAction("Login", "User");
+            }
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("Login");
+                return RedirectToAction("Login", "User");
             }
             //decimal aCount = db.ARTICLEs.Count();
             //ViewBag.NumberOfArticles = aCount;

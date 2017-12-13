@@ -1,0 +1,105 @@
+﻿@model ProjectManagement.Models.TaiKhoan
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>TaiKhoan</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Username)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HoTen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HoTen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SDT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SDT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SDTK)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SDTK)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LaQuanTri)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LaQuanTri)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GiangVien.HoTen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GiangVien.HoTen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LoaiTaiKhoan.TenLoaiTaiKhoan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoaiTaiKhoan.TenLoaiTaiKhoan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SinhVien.HoTen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SinhVien.HoTen)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

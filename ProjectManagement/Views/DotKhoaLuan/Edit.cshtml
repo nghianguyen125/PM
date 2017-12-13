@@ -29,13 +29,6 @@
 
                 @Html.HiddenFor(model => model.DotKhoaLuanId)
                 <div class="form-group">
-                    @Html.Label("Mã Đợt Khóa Luận", new { @class = "control-label col-md-2", required = "required" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(model => model.DotKhoaLuanId, new { @class = "form-control", @disabled = "disabled" })
-                        @Html.ValidationMessageFor(model => model.DotKhoaLuanId)
-                    </div>
-                </div>
-                <div class="form-group">
                     @Html.Label("Tên Đợt Khóa Luận", new { @class = "control-label col-md-2", required = "required" })
                     <div class="col-md-10">
                         @Html.TextBoxFor(model => model.TenDotKhoaLuan, new { @class = "form-control" })

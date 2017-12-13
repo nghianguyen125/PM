@@ -1,7 +1,7 @@
 ﻿@using System.Linq
 @using ProjectManagement.Models
 @using ProjectManagement.App_Start.Classes
-@model IEnumerable<ProjectManagement.Models.TinTuc>
+@model IEnumerable<ProjectManagement.Models.TinTucThongBao>
 
 @{
     ViewBag.Title = "Index";
@@ -42,7 +42,7 @@
                 @foreach (var item in Model)
                 {
                     stt++;
-                    List<TinTuc> userCreatedBy = db.TinTucs.ToList();
+                    List<TinTucThongBao> userCreatedBy = db.TinTucThongBaos.ToList();
                     <tr>
                         <td>@stt</td>
                         <td>

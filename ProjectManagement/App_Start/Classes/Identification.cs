@@ -19,7 +19,7 @@ namespace ProjectManagement.App_Start.Classes
         private static Identification _manager;
         private Identification()
         {
-            UserData = Security.DecryptStringCbc(HttpContext.Current.User.Identity.Name + "", "dtuxagan");
+            UserData = Security.DecryptStringCbc(HttpContext.Current.User.Identity.Name + "", "ProjectManagement");
         }
         public static Identification GetInstance()
         {

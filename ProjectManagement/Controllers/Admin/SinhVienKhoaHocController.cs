@@ -21,7 +21,7 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("Login", "Admin");
+                return RedirectToAction("Login", "User");
             }
             else
             {
@@ -38,7 +38,7 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("Login", "Admin");
+                return RedirectToAction("Login", "User");
             }
             else
             {
@@ -60,7 +60,7 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("Login", "Admin");
+                return RedirectToAction("Login", "User");
             }
             else
             {
@@ -82,15 +82,14 @@ namespace ProjectManagement.Controllers.Admin
                 //var sinhVienKhoaHocs = db.SinhVienKhoaHocs.Include(s => s.KhoaHoc).Include(s => s.SinhVien).Where(n => (n.KhoaHocID == KHId && n.SinhVienId == SVId));
                 return View(sinhVienKhoaHoc.ToList());
             }
-
         }
 
         // GET: SinhVienKhoaHoc/Create
-        public ActionResult Create(decimal? KHId)
+        public ActionResult Create(decimal? KHId = 0)
         {
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("Login", "Admin");
+                return RedirectToAction("Login", "User");
             }
             else
             {
@@ -110,7 +109,6 @@ namespace ProjectManagement.Controllers.Admin
                     ViewBag.IdKhoaHoc = kh.KhoaHocID;
                     ViewBag.KhoaHocID = new SelectList(db.KhoaHocs, "KhoaHocID", "TenKhoaHoc", kh.KhoaHocID);
                 }
-
                 else
                 {
                     ViewBag.KhoaHocID = new SelectList(db.KhoaHocs, "KhoaHocID", "TenKhoaHoc");
@@ -159,7 +157,7 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("Login", "Admin");
+                return RedirectToAction("Login", "User");
             }
             else
             {
@@ -213,7 +211,7 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("Login", "Admin");
+                return RedirectToAction("Login", "User");
             }
             else
             {

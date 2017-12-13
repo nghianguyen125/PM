@@ -20,20 +20,27 @@ namespace ProjectManagement.Controllers.User
             {
                 return RedirectToAction("Login", "User");
             }
-            else
+            
+            var username = ProjectManagement.App_Start.Classes.UserManager.GetUserName;
+            var tk = db.TaiKhoans.Where(z => z.Username == username).FirstOrDefault();
+            if (tk.SinhVienId != null)
             {
-                //if (id == null)
-                //{
-                //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                //}
-                //SinhVienKhoaHoc sinhVienKhoaHoc = db.SinhVienKhoaHocs.Find(id);
-                //if (sinhVienKhoaHoc == null)
-                //{
-                //    return HttpNotFound();
-                //}
-                return View(db.QuanLyLiches.OrderBy(n => n.MocThoiGian).ToList());
+                var sinhVienId = tk.SinhVienId;
+                ViewBag.sinhvienId = sinhVienId;
             }
-               
+            if (tk.GiangVienId != null)
+            {
+                var giangVienId = tk.GiangVienId;
+                ViewBag.giangvienId = giangVienId;
+            }
+            //var nhom = db.SinhVienThuocNhomSVs.Where(a => a.SinhVienId == tk.SinhVienId).FirstOrDefault();
+            //ViewBag.nhom = nhom.NhomSV.TenNhom;
+
+            //var sinhviens = db.SinhVienThuocNhomSVs.Where(b => b.NhomSVId == nhom.NhomSVId).ToList();
+
+            //return View(sinhviens.ToList());
+            return View(db.QuanLyLiches.OrderBy(n => n.MocThoiGian).ToList());
+
         }
     }
 }

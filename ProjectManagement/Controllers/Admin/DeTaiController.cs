@@ -22,7 +22,7 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("Login", "Admin");
+                return RedirectToAction("Login", "User");
             }
             else
             {
@@ -30,24 +30,49 @@ namespace ProjectManagement.Controllers.Admin
             }
         }
 
-        public ActionResult TaiLieu(decimal? DTid)
+        public ActionResult TaiLieu(decimal? DTId)
         {
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("Login", "Admin");
+                return RedirectToAction("Login", "User");
             }
             else
             {
                 return View(db.TaiLieux.ToList());
             }
         }
-        
+
+        public ActionResult TaiLieuCreate(string id)
+        {
+            if (!UserManager.Authenticated)
+            {
+                return RedirectToAction("Login", "User");
+            }
+            ViewBag.Id = id;
+            if (id == null)
+            {
+                return RedirectToAction("TaiLieu");
+            }
+            else
+            {
+                decimal deTaiId = decimal.Parse(id);
+                DeTai DeTaiId = db.DeTais.Where(x => x.DeTaiId == deTaiId).FirstOrDefault();
+                if (DeTaiId == null)
+                {
+                    return RedirectToAction("Index");
+                }
+                //ViewBag.categoryName = category.CATEGORY_NAME;
+                ViewBag.DeTaiId = new SelectList(db.DeTais, "DeTaiId", "TenDeTai");
+            }
+            return View();
+        }
+
         // GET: DeTai/Details/5
         public ActionResult Details(decimal id)
         {
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("Login", "Admin");
+                return RedirectToAction("Login", "User");
             }
             else {
                 if (id == 0)
@@ -68,7 +93,7 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("Login", "Admin");
+                return RedirectToAction("Login", "User");
             }
             else return View();
         }
@@ -79,12 +104,14 @@ namespace ProjectManagement.Controllers.Admin
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "DeTaiId,TenDeTai,MoTa,SoLuongThanhVien,NgayTao,NgayDangKy")] DeTai deTai)
         {
-                if (ModelState.IsValid)
-                {
-                    db.DeTais.Add(deTai);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
+            if (ModelState.IsValid)
+            {
+                var maxId = db.DeTais.Max(u => u.DeTaiId);
+                deTai.DeTaiId = maxId + 1;
+                db.DeTais.Add(deTai);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
 
                 return View(deTai);
         }
@@ -94,7 +121,7 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("Login", "Admin");
+                return RedirectToAction("Login", "User");
             }
             else
             {
@@ -131,7 +158,7 @@ namespace ProjectManagement.Controllers.Admin
         {
             if (!UserManager.Authenticated)
             {
-                return RedirectToAction("Login", "Admin");
+                return RedirectToAction("Login", "User");
             }
             else
             {

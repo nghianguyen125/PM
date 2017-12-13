@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using ProjectManagement.Models;
 using Microsoft.AspNet.Identity;
+using ProjectManagement.App_Start.Classes;
 
 namespace ProjectManagement.Controllers.User
 {
@@ -18,10 +19,41 @@ namespace ProjectManagement.Controllers.User
         // GET: SinhVienThuocNhomSVs
         public ActionResult Index()
         {
-            List<object> model = new List<object>();
-            model.Add(db.TaiKhoans.ToList());
-            model.Add(db.SinhVienThuocNhomSVs.ToList());
-            return View(model.ToList());
+            if (!UserManager.Authenticated)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                var username = ProjectManagement.App_Start.Classes.UserManager.GetUserName;
+                var tk = db.TaiKhoans.Where(z => z.Username == username).FirstOrDefault();
+
+                if (tk.SinhVienId == "")
+                {
+                    return HttpNotFound();
+                }
+
+                // Lấy nhóm
+                var nhom = db.SinhVienThuocNhomSVs.Where(a => a.SinhVienId == tk.SinhVienId).FirstOrDefault();
+                ViewBag.nhom = nhom.NhomSV.TenNhom;
+
+                var sinhviens = db.SinhVienThuocNhomSVs.Where(b => b.NhomSVId == nhom.NhomSVId).ToList();
+
+                return View(sinhviens.ToList());
+            }
+        }
+
+        public ActionResult SV(string SVId)
+        {
+            if (!UserManager.Authenticated)
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                var sv = db.SinhViens.Where(a => a.SinhVienId == SVId).ToList();
+                return View(sv.ToList());
+            }
         }
 
         // GET: SinhVienThuocNhomSVs/Details/5

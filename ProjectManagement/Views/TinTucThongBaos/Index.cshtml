@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1 style="text-align:center; text-shadow:inherit">News</h1>
+<h1 style="text-align:center; text-shadow:inherit"><i class="fa fa-newspaper-o" aria-hidden="true"></i>  News</h1>
 
 @foreach (var item in Model)
 {
@@ -15,7 +15,7 @@
             <div class="site-block">
                 <div class="row">
                     <div class="col-md-8">
-                        <h3 class="site-heading"><strong>@Html.DisplayFor(modelItem => item.TieuDe)</strong></h3>
+                        <h3 class="site-heading"><strong>@Html.DisplayFor(modelItem => item.TieuDe)</strong><img src="~/images/icon-new.gif"></h3>
                         <p>@Html.DisplayFor(modelItem => item.NoiDung)</p>
                     </div>
                 </div>
@@ -32,4 +32,3 @@
         </div>
     </div>
 }
-   
