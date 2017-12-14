@@ -144,6 +144,11 @@ namespace ProjectManagement.Controllers.User
             Session.RemoveAll();
             return RedirectToAction("Login");
         }
+
+        public ActionResult KhongXoa()
+        {
+            return View();
+        }
         public ActionResult Logon()
         {
             if (!UserManager.Authenticated)

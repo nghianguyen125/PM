@@ -19,12 +19,18 @@ namespace ProjectManagement.Controllers.Admin
         // GET: QuanLyLiche
         public ActionResult Index()
         {
-            //var quanLyLiches = db.QuanLyLiches.Include(q => q.DotKhoaLuan);
-            return View(db.DotKhoaLuans.ToList());
+            if (!UserManager.Authenticated)
+            {
+                return RedirectToAction("Login", "User");
+            }
+            else
+            {
+                return View(db.DotKhoaLuans.ToList());
+            }
         }
 
         // GET: QuanLyLiche/Details/5
-        public ActionResult Details(decimal id)
+        public ActionResult Details(string id)
         {
             if (id == null)
             {
@@ -58,15 +64,21 @@ namespace ProjectManagement.Controllers.Admin
                 var kh = db.DotKhoaLuans.Where(n => n.DotKhoaLuanId == DKId).SingleOrDefault();
                 if (kh != null)
                 {
-                    ViewBag.DotKhoaLuanId = kh.DotKhoaLuanId;
+                    ViewBag.DKLId = kh.DotKhoaLuanId;
                     ViewBag.TenDotKhoaLuan = kh.TenDotKhoaLuan;
+                    ViewBag.DotKhoaLuanId = new SelectList(db.DotKhoaLuans, "DotKhoaLuanId", "TenDotKhoaLuan", kh.DotKhoaLuanId);
                 }
+                else
+                {
+                    ViewBag.DotKhoaLuanId = new SelectList(db.DotKhoaLuans, "DotKhoaLuanId", "TenDotKhoaLuan");
+                }
+                
                 return View(sinhVienKhoa.ToList());
             }
         }
 
         // GET: QuanLyLiche/Create
-        public ActionResult Create(decimal? DKId)
+        public ActionResult Create(decimal DKId)
         {
             if (!UserManager.Authenticated)
             {
@@ -78,7 +90,7 @@ namespace ProjectManagement.Controllers.Admin
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
-                var sinhVienThuocKhoa = db.QuanLyLiches.Where(n => n.DotKhoaLuanId== DKId).ToList();
+                var sinhVienThuocKhoa = db.QuanLyLiches.Where(n => n.DotKhoaLuanId == DKId).ToList();
                 if (sinhVienThuocKhoa == null)
                 {
                     return HttpNotFound();
@@ -88,22 +100,19 @@ namespace ProjectManagement.Controllers.Admin
                 {
                     ViewBag.TenDotKhoaLuan = kh.TenDotKhoaLuan;
                     ViewBag.IdDotKhoaLuan = kh.DotKhoaLuanId;
-                    ViewBag.DotKhoaLuanID = new SelectList(db.DotKhoaLuans, "DotKhoaLuanId", "TenDotKhoaLuan", kh.DotKhoaLuanId);
+                    ViewBag.DotKhoaLuanId = new SelectList(db.DotKhoaLuans, "DotKhoaLuanId", "TenDotKhoaLuan", kh.DotKhoaLuanId);
                 }
                 else
                 {
-                    ViewBag.DotKhoaLuanID = new SelectList(db.DotKhoaLuans, "DotKhoaLuanId", "TenDotKhoaLuan");
+                    ViewBag.DotKhoaLuanId = new SelectList(db.DotKhoaLuans, "DotKhoaLuanId", "TenDotKhoaLuan");
                 }
                 //var list1 = db.SinhViens.ToList();
                 //var list2 = db.SinhVienThuocKhoas.Where(p => p.KhoaId == KId).ToList();
                 //var sv = list1.Where(p => !list2.Any(p2 => p2.SinhVienId == p.SinhVienId)).ToList();
 
-                //ViewBag.SinhVienId = new SelectList(sv, "SinhVienId", "HoTen");
+                //ViewBag.DotKhoaLuanId = new SelectList(db.DotKhoaLuans, "DotKhoaLuanId", "TenDotKhoaLuan");
                 return View();
             }
-
-            //ViewBag.DotKhoaLuanId = new SelectList(db.DotKhoaLuans, "DotKhoaLuanId", "TenDotKhoaLuan");
-            //return View();
         }
 
         // POST: QuanLyLiche/Create
@@ -111,15 +120,12 @@ namespace ProjectManagement.Controllers.Admin
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "DotKhoaLuanId,TieuDe,MocThoiGian,NoiDung")] QuanLyLich quanLyLich)
+        public ActionResult Create([Bind(Include = "DotKhoaLuanId,QuanLyLichId,TieuDe,MocThoiGian,NoiDung")] QuanLyLich quanLyLich)
         {
             if (ModelState.IsValid)
             {
-                //if (db.QuanLyLiches.Any(p => p.DotKhoaLuanId == quanLyLich.DotKhoaLuanId))
-                //{
-                //    ModelState.AddModelError("TenSinhVien", "Sinh Vien Da Ton Tai.");
-                //}
-
+                var maxId = db.QuanLyLiches.Max(u => u.QuanLyLichId);
+                quanLyLich.QuanLyLichId = maxId + 1;
                 var svKh = db.QuanLyLiches.Where(n => n.DotKhoaLuanId == quanLyLich.DotKhoaLuanId).ToList();
                 if (svKh == null)
                 {
@@ -136,13 +142,15 @@ namespace ProjectManagement.Controllers.Admin
                 db.SaveChanges();
                 return RedirectToAction("DSD", new { DKId = quanLyLich.DotKhoaLuanId });
             }
+
+            ViewBag.DotKhoaLuanId = new SelectList(db.DotKhoaLuans, "DotKhoaLuanId", "TenDotKhoaLuan", quanLyLich.DotKhoaLuanId);
             return View(quanLyLich);
         }
 
         // GET: QuanLyLiche/Edit/5
-        public ActionResult Edit(decimal id)
+        public ActionResult Edit(decimal? id)
         {
-            if (id == null)
+           if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -160,7 +168,7 @@ namespace ProjectManagement.Controllers.Admin
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "DotKhoaLuanId,TieuDe,MocThoiGian,NoiDung")] QuanLyLich quanLyLich)
+        public ActionResult Edit([Bind(Include = "DotKhoaLuanId,QuanLyLichId,TieuDe,MocThoiGian,NoiDung")] QuanLyLich quanLyLich)
         {
             if (ModelState.IsValid)
             {
@@ -173,7 +181,7 @@ namespace ProjectManagement.Controllers.Admin
         }
 
         // GET: QuanLyLiche/Delete/5
-        public ActionResult Delete(decimal id)
+        public ActionResult Delete(string id)
         {
             if (id == null)
             {
@@ -190,7 +198,7 @@ namespace ProjectManagement.Controllers.Admin
         // POST: QuanLyLiche/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(decimal id)
+        public ActionResult DeleteConfirmed(string id)
         {
             QuanLyLich quanLyLich = db.QuanLyLiches.Find(id);
             db.QuanLyLiches.Remove(quanLyLich);

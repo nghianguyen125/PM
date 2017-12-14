@@ -6,7 +6,6 @@
     <edmx:Diagrams>
       <Diagram DiagramId="6c3283ee5371478baf5b286b81915e9c" Name="Diagram1" ZoomLevel="83">
         <EntityTypeShape EntityType="ProjectManagementModel.BinhLuan" Width="1.5" PointX="3" PointY="24.25" />
-        <EntityTypeShape EntityType="ProjectManagementModel.DanhGiaDeTai" Width="1.5" PointX="3" PointY="9.25" />
         <EntityTypeShape EntityType="ProjectManagementModel.DeTai" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="ProjectManagementModel.DotKhoaLuan" Width="1.5" PointX="0.75" PointY="24.25" />
         <EntityTypeShape EntityType="ProjectManagementModel.GiangVien" Width="1.5" PointX="3.75" PointY="20.5" />
@@ -30,8 +29,6 @@
         <EntityTypeShape EntityType="ProjectManagementModel.TaiLieu" Width="1.5" PointX="3" PointY="2.125" />
         <EntityTypeShape EntityType="ProjectManagementModel.TinTucThongBao" Width="1.5" PointX="8.25" PointY="12.125" />
         <AssociationConnector Association="ProjectManagementModel.FK_BinhLuans_DeTais" />
-        <AssociationConnector Association="ProjectManagementModel.FK_DanhGiaDeTai_DeTais" />
-        <AssociationConnector Association="ProjectManagementModel.FK_DanhGiaDeTai_SinhViens" />
         <AssociationConnector Association="ProjectManagementModel.FK_dbo_TaiLieux_dbo_DeTais_DeTaiId" />
         <AssociationConnector Association="ProjectManagementModel.FK_PhanDeTaiChoDotKhoaLuan_DeTais" />
         <AssociationConnector Association="ProjectManagementModel.FK_PhanDeTaiChoGiangVien_DeTais" />
@@ -60,6 +57,9 @@
         <AssociationConnector Association="ProjectManagementModel.FK_SinhVienThuocNhomSV_SinhViens" />
         <AssociationConnector Association="ProjectManagementModel.FK_TaiKhoans_SinhViens" />
         <AssociationConnector Association="ProjectManagementModel.FK_dbo_TinTucs_dbo_TaiKhoans_TaiKhoanId" />
+        <EntityTypeShape EntityType="ProjectManagementModel.DanhGiaDeTai" Width="1.5" PointX="3" PointY="8.875" />
+        <AssociationConnector Association="ProjectManagementModel.FK_DanhGiaDeTai_DeTais" />
+        <AssociationConnector Association="ProjectManagementModel.FK_DanhGiaDeTai_SinhViens" />
         <EntityTypeShape EntityType="ProjectManagementModel.QuanLyLich" Width="1.5" PointX="3" PointY="34.375" />
         <AssociationConnector Association="ProjectManagementModel.FK_QuanLyLiches_DotKhoaLuan1" />
       </Diagram>

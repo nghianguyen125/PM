@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using PagedList;
 using ProjectManagement.App_Start.Classes;
 using ProjectManagement.Models;
 
@@ -17,7 +18,7 @@ namespace ProjectManagement.Controllers.Admin
         private ProjectManagementEntities db = new ProjectManagementEntities();
 
         // GET: NamHoc
-        public ActionResult Index()
+        public ActionResult Index(string searchString, int? page, string sortOrder, string currentFilter)
         {
             if (!UserManager.Authenticated)
             {
@@ -25,8 +26,25 @@ namespace ProjectManagement.Controllers.Admin
             }
             else
             {
-                var namHocs = db.NamHocs.Include(n => n.NamHoc1);
-                return View(namHocs.ToList());
+                ViewBag.CurrentSort = sortOrder;
+                var namHoc = from b in db.NamHocs select b;
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    namHoc = db.NamHocs.Where(s => s.TenNamHocHocKy.Contains(searchString));
+                }
+                ViewBag.SearchString = searchString;
+                if (searchString != null)
+                {
+                    page = 1;
+                }
+                else
+                {
+                    searchString = currentFilter;
+                }
+                ViewBag.CurrentFilter = searchString;
+                int pageSize = 5;
+                int pageNumber = (page ?? 1);
+                return View(namHoc.OrderBy(s => s.TenNamHocHocKy).ToList().ToPagedList(pageNumber, pageSize));
             }
 
         }
@@ -158,6 +176,12 @@ namespace ProjectManagement.Controllers.Admin
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(decimal id)
         {
+            var q = db.KhoaHocs.Where(a => a.NamHocHocKyId == id);
+            var p = db.DotKhoaLuans.Where(b => b.NamHocHocKyId == id);
+            if (q.Any() || p.Any())
+            {
+                return RedirectToAction("KhongXoa", "User");
+            }
             NamHoc namHoc = db.NamHocs.Find(id);
             db.NamHocs.Remove(namHoc);
             db.SaveChanges();

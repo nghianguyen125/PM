@@ -2199,11 +2199,6 @@
     <Content Include="Views\SinhVienThuocNhomSV\Edit.cshtml" />
     <Content Include="Views\SinhVienThuocNhomSV\Index.cshtml" />
     <Content Include="Views\SinhVienThuocNhomSV\DSSV.cshtml" />
-    <Content Include="Views\QuanLyLiche\Create.cshtml" />
-    <Content Include="Views\QuanLyLiche\Delete.cshtml" />
-    <Content Include="Views\QuanLyLiche\Details.cshtml" />
-    <Content Include="Views\QuanLyLiche\Edit.cshtml" />
-    <Content Include="Views\QuanLyLiche\Index.cshtml" />
     <Content Include="Views\GiangVien\Create.cshtml" />
     <Content Include="Views\GiangVien\Delete.cshtml" />
     <Content Include="Views\GiangVien\Details.cshtml" />
@@ -2278,9 +2273,15 @@
     <Content Include="Views\Profile\Details.cshtml" />
     <Content Include="Views\Profile\Edit.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
-    <Content Include="Views\QuanLyLiche\DSD.cshtml" />
     <Content Include="Views\DeTai\TaiLieuCreate.cshtml" />
     <Content Include="Views\SinhVienThuocNhomSVs\SV.cshtml" />
+    <Content Include="Views\QuanLyLiche\Create.cshtml" />
+    <Content Include="Views\QuanLyLiche\Delete.cshtml" />
+    <Content Include="Views\QuanLyLiche\Details.cshtml" />
+    <Content Include="Views\QuanLyLiche\Edit.cshtml" />
+    <Content Include="Views\QuanLyLiche\Index.cshtml" />
+    <Content Include="Views\QuanLyLiche\DSD.cshtml" />
+    <Content Include="Views\User\KhongXoa.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

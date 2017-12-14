@@ -16,7 +16,6 @@ namespace ProjectManagement.Models
     {
         public decimal DeTaiId { get; set; }
         public string SinhVienId { get; set; }
-        public string GiangVienId { get; set; }
         public decimal Diem { get; set; }
         public string NoiDungDanhGia { get; set; }
     

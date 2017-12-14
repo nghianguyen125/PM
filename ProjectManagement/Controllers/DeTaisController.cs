@@ -77,9 +77,11 @@ namespace ProjectManagement.Controllers
         {
             if (ModelState.IsValid)
             {
+                var maxId = db.DeTais.Max(u => u.DeTaiId);
+                deTai.DeTaiId = maxId + 1;
                 db.DeTais.Add(deTai);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "MainPage");
             }
 
             return View(deTai);

@@ -17,11 +17,11 @@ namespace ProjectManagement.Models
         public DeTai()
         {
             this.BinhLuans = new HashSet<BinhLuan>();
-            this.DanhGiaDeTais = new HashSet<DanhGiaDeTai>();
             this.TaiLieux = new HashSet<TaiLieu>();
             this.PhanDeTaiChoDotKhoaLuans = new HashSet<PhanDeTaiChoDotKhoaLuan>();
             this.PhanDeTaiChoGiangViens = new HashSet<PhanDeTaiChoGiangVien>();
             this.PhanDeTaiChoNhomSVs = new HashSet<PhanDeTaiChoNhomSV>();
+            this.DanhGiaDeTais = new HashSet<DanhGiaDeTai>();
         }
     
         public decimal DeTaiId { get; set; }
@@ -32,10 +32,10 @@ namespace ProjectManagement.Models
         public Nullable<System.DateTime> NgayDangKy { get; set; }
     
         public virtual ICollection<BinhLuan> BinhLuans { get; set; }
-        public virtual ICollection<DanhGiaDeTai> DanhGiaDeTais { get; set; }
         public virtual ICollection<TaiLieu> TaiLieux { get; set; }
         public virtual ICollection<PhanDeTaiChoDotKhoaLuan> PhanDeTaiChoDotKhoaLuans { get; set; }
         public virtual ICollection<PhanDeTaiChoGiangVien> PhanDeTaiChoGiangViens { get; set; }
         public virtual ICollection<PhanDeTaiChoNhomSV> PhanDeTaiChoNhomSVs { get; set; }
+        public virtual ICollection<DanhGiaDeTai> DanhGiaDeTais { get; set; }
     }
 }

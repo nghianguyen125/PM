@@ -172,7 +172,7 @@ namespace ProjectManagement.Controllers.Admin
             var q = db.SinhVienThuocKhoas.Where(a => a.KhoaId == id);
             if (q.Any())
             {
-                return View();
+                return RedirectToAction("KhongXoa", "User");
             }
             Khoa khoa = db.Khoas.Find(id);
             db.Khoas.Remove(khoa);

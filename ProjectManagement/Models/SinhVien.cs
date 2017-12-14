@@ -16,13 +16,13 @@ namespace ProjectManagement.Models
     {
         public SinhVien()
         {
-            this.DanhGiaDeTais = new HashSet<DanhGiaDeTai>();
             this.PhanSinhVienChoDotKhoaLuans = new HashSet<PhanSinhVienChoDotKhoaLuan>();
             this.SinhVienKhoaHocs = new HashSet<SinhVienKhoaHoc>();
             this.SinhVienNganhHocs = new HashSet<SinhVienNganhHoc>();
             this.SinhVienThuocKhoas = new HashSet<SinhVienThuocKhoa>();
             this.SinhVienThuocNhomSVs = new HashSet<SinhVienThuocNhomSV>();
             this.TaiKhoans = new HashSet<TaiKhoan>();
+            this.DanhGiaDeTais = new HashSet<DanhGiaDeTai>();
         }
     
         public string SinhVienId { get; set; }
@@ -33,12 +33,12 @@ namespace ProjectManagement.Models
         public Nullable<int> SoTCCL { get; set; }
         public bool TrangThai { get; set; }
     
-        public virtual ICollection<DanhGiaDeTai> DanhGiaDeTais { get; set; }
         public virtual ICollection<PhanSinhVienChoDotKhoaLuan> PhanSinhVienChoDotKhoaLuans { get; set; }
         public virtual ICollection<SinhVienKhoaHoc> SinhVienKhoaHocs { get; set; }
         public virtual ICollection<SinhVienNganhHoc> SinhVienNganhHocs { get; set; }
         public virtual ICollection<SinhVienThuocKhoa> SinhVienThuocKhoas { get; set; }
         public virtual ICollection<SinhVienThuocNhomSV> SinhVienThuocNhomSVs { get; set; }
         public virtual ICollection<TaiKhoan> TaiKhoans { get; set; }
+        public virtual ICollection<DanhGiaDeTai> DanhGiaDeTais { get; set; }
     }
 }

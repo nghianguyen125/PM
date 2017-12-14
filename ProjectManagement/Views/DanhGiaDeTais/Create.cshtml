@@ -4,6 +4,7 @@
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    string Ten = ViewBag.Ten + "";
 }
 <section class="content">
     @{
@@ -16,16 +17,16 @@
     }
     <div class="box box-info">
         <div class="box-header with-border">
-            <h2 class="box-title" style="text-align:center">Rate</h2>
+            <h1>Rate</h1>
+            <h2 class="box-title" style="text-align:center">Giảng Viên: @Ten</h2>
         </div>
 
         @using (Html.BeginForm("Create", "DanhGiaDeTais", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal" }))
         {
             @Html.AntiForgeryToken()
-
             <div class="box-body">
                 <div class="form-group">
-                    @Html.Label("Topic", new { @class = "control-label col-md-2" })
+                    @Html.Label("Topic", new { @class = "control-label col-md-2"})
                     <div class="col-md-10">
                         @Html.DropDownList("DeTaiId", null, String.Empty, new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.DeTaiId)
@@ -50,13 +51,6 @@
                     <div class="col-md-10">
                         @Html.TextAreaFor(model => model.NoiDungDanhGia, new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.NoiDungDanhGia)
-                    </div>
-                </div>
-                <div class="form-group">
-                    @Html.Label("Lecturer", new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.GiangVienId, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.GiangVienId)
                     </div>
                 </div>
             </div>

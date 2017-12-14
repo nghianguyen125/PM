@@ -26,7 +26,6 @@ namespace ProjectManagement.Models
         }
     
         public virtual DbSet<BinhLuan> BinhLuans { get; set; }
-        public virtual DbSet<DanhGiaDeTai> DanhGiaDeTais { get; set; }
         public virtual DbSet<DeTai> DeTais { get; set; }
         public virtual DbSet<DotKhoaLuan> DotKhoaLuans { get; set; }
         public virtual DbSet<GiangVien> GiangViens { get; set; }
@@ -49,6 +48,7 @@ namespace ProjectManagement.Models
         public virtual DbSet<TaiKhoan> TaiKhoans { get; set; }
         public virtual DbSet<TaiLieu> TaiLieux { get; set; }
         public virtual DbSet<TinTucThongBao> TinTucThongBaos { get; set; }
+        public virtual DbSet<DanhGiaDeTai> DanhGiaDeTais { get; set; }
         public virtual DbSet<QuanLyLich> QuanLyLiches { get; set; }
     }
 }

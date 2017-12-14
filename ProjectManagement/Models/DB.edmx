@@ -19,11 +19,9 @@
           <Key>
             <PropertyRef Name="DeTaiId" />
             <PropertyRef Name="SinhVienId" />
-            <PropertyRef Name="GiangVienId" />
           </Key>
           <Property Name="DeTaiId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="SinhVienId" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="GiangVienId" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Diem" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="NoiDungDanhGia" Type="nvarchar" MaxLength="500" />
         </EntityType>
@@ -152,10 +150,11 @@
         </EntityType>
         <EntityType Name="QuanLyLiches">
           <Key>
+            <PropertyRef Name="DotKhoaLuanId" />
             <PropertyRef Name="QuanLyLichId" />
           </Key>
           <Property Name="DotKhoaLuanId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="QuanLyLichId" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="QuanLyLichId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="TieuDe" Type="nvarchar" MaxLength="50" />
           <Property Name="MocThoiGian" Type="datetime" Nullable="false" />
           <Property Name="NoiDung" Type="nvarchar(max)" />
@@ -793,7 +792,6 @@
       <Schema Namespace="ProjectManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="ProjectManagementEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="BinhLuans" EntityType="ProjectManagementModel.BinhLuan" />
-          <EntitySet Name="DanhGiaDeTais" EntityType="ProjectManagementModel.DanhGiaDeTai" />
           <EntitySet Name="DeTais" EntityType="ProjectManagementModel.DeTai" />
           <EntitySet Name="DotKhoaLuans" EntityType="ProjectManagementModel.DotKhoaLuan" />
           <EntitySet Name="GiangViens" EntityType="ProjectManagementModel.GiangVien" />
@@ -819,14 +817,6 @@
           <AssociationSet Name="FK_BinhLuans_DeTais" Association="ProjectManagementModel.FK_BinhLuans_DeTais">
             <End Role="DeTai" EntitySet="DeTais" />
             <End Role="BinhLuan" EntitySet="BinhLuans" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DanhGiaDeTai_DeTais" Association="ProjectManagementModel.FK_DanhGiaDeTai_DeTais">
-            <End Role="DeTai" EntitySet="DeTais" />
-            <End Role="DanhGiaDeTai" EntitySet="DanhGiaDeTais" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DanhGiaDeTai_SinhViens" Association="ProjectManagementModel.FK_DanhGiaDeTai_SinhViens">
-            <End Role="SinhVien" EntitySet="SinhViens" />
-            <End Role="DanhGiaDeTai" EntitySet="DanhGiaDeTais" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_TaiLieux_dbo_DeTais_DeTaiId" Association="ProjectManagementModel.FK_dbo_TaiLieux_dbo_DeTais_DeTaiId">
             <End Role="DeTai" EntitySet="DeTais" />
@@ -940,6 +930,15 @@
             <End Role="TaiKhoan" EntitySet="TaiKhoans" />
             <End Role="TinTucThongBao" EntitySet="TinTucThongBaos" />
           </AssociationSet>
+          <EntitySet Name="DanhGiaDeTais" EntityType="ProjectManagementModel.DanhGiaDeTai" />
+          <AssociationSet Name="FK_DanhGiaDeTai_DeTais" Association="ProjectManagementModel.FK_DanhGiaDeTai_DeTais">
+            <End Role="DeTai" EntitySet="DeTais" />
+            <End Role="DanhGiaDeTai" EntitySet="DanhGiaDeTais" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DanhGiaDeTai_SinhViens" Association="ProjectManagementModel.FK_DanhGiaDeTai_SinhViens">
+            <End Role="SinhVien" EntitySet="SinhViens" />
+            <End Role="DanhGiaDeTai" EntitySet="DanhGiaDeTais" />
+          </AssociationSet>
           <EntitySet Name="QuanLyLiches" EntityType="ProjectManagementModel.QuanLyLich" />
           <AssociationSet Name="FK_QuanLyLiches_DotKhoaLuan1" Association="ProjectManagementModel.FK_QuanLyLiches_DotKhoaLuan1">
             <End Role="DotKhoaLuan" EntitySet="DotKhoaLuans" />
@@ -957,20 +956,6 @@
           <Property Name="DeTaiId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <NavigationProperty Name="DeTai" Relationship="ProjectManagementModel.FK_BinhLuans_DeTais" FromRole="BinhLuan" ToRole="DeTai" />
         </EntityType>
-        <EntityType Name="DanhGiaDeTai">
-          <Key>
-            <PropertyRef Name="DeTaiId" />
-            <PropertyRef Name="SinhVienId" />
-            <PropertyRef Name="GiangVienId" />
-          </Key>
-          <Property Name="DeTaiId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="SinhVienId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="GiangVienId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Diem" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="NoiDungDanhGia" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="DeTai" Relationship="ProjectManagementModel.FK_DanhGiaDeTai_DeTais" FromRole="DanhGiaDeTai" ToRole="DeTai" />
-          <NavigationProperty Name="SinhVien" Relationship="ProjectManagementModel.FK_DanhGiaDeTai_SinhViens" FromRole="DanhGiaDeTai" ToRole="SinhVien" />
-        </EntityType>
         <EntityType Name="DeTai">
           <Key>
             <PropertyRef Name="DeTaiId" />
@@ -982,11 +967,11 @@
           <Property Name="NgayTao" Type="DateTime" Precision="3" />
           <Property Name="NgayDangKy" Type="DateTime" Precision="3" />
           <NavigationProperty Name="BinhLuans" Relationship="ProjectManagementModel.FK_BinhLuans_DeTais" FromRole="DeTai" ToRole="BinhLuan" />
-          <NavigationProperty Name="DanhGiaDeTais" Relationship="ProjectManagementModel.FK_DanhGiaDeTai_DeTais" FromRole="DeTai" ToRole="DanhGiaDeTai" />
           <NavigationProperty Name="TaiLieux" Relationship="ProjectManagementModel.FK_dbo_TaiLieux_dbo_DeTais_DeTaiId" FromRole="DeTai" ToRole="TaiLieu" />
           <NavigationProperty Name="PhanDeTaiChoDotKhoaLuans" Relationship="ProjectManagementModel.FK_PhanDeTaiChoDotKhoaLuan_DeTais" FromRole="DeTai" ToRole="PhanDeTaiChoDotKhoaLuan" />
           <NavigationProperty Name="PhanDeTaiChoGiangViens" Relationship="ProjectManagementModel.FK_PhanDeTaiChoGiangVien_DeTais" FromRole="DeTai" ToRole="PhanDeTaiChoGiangVien" />
           <NavigationProperty Name="PhanDeTaiChoNhomSVs" Relationship="ProjectManagementModel.FK_PhanDeTaiChoNhomSV_DeTais" FromRole="DeTai" ToRole="PhanDeTaiChoNhomSV" />
+          <NavigationProperty Name="DanhGiaDeTais" Relationship="ProjectManagementModel.FK_DanhGiaDeTai_DeTais" FromRole="DeTai" ToRole="DanhGiaDeTai" />
         </EntityType>
         <EntityType Name="DotKhoaLuan">
           <Key>
@@ -1168,13 +1153,13 @@
           <Property Name="SoTCHT" Type="Int32" />
           <Property Name="SoTCCL" Type="Int32" />
           <Property Name="TrangThai" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="DanhGiaDeTais" Relationship="ProjectManagementModel.FK_DanhGiaDeTai_SinhViens" FromRole="SinhVien" ToRole="DanhGiaDeTai" />
           <NavigationProperty Name="PhanSinhVienChoDotKhoaLuans" Relationship="ProjectManagementModel.FK_PhanSinhVienChoDotKhoaLuan_SinhViens" FromRole="SinhVien" ToRole="PhanSinhVienChoDotKhoaLuan" />
           <NavigationProperty Name="SinhVienKhoaHocs" Relationship="ProjectManagementModel.FK_SinhVienKhoaHoc_SinhViens" FromRole="SinhVien" ToRole="SinhVienKhoaHoc" />
           <NavigationProperty Name="SinhVienNganhHocs" Relationship="ProjectManagementModel.FK_SinhVienNganhHoc_SinhViens" FromRole="SinhVien" ToRole="SinhVienNganhHoc" />
           <NavigationProperty Name="SinhVienThuocKhoas" Relationship="ProjectManagementModel.FK_SinhVienThuocKhoa_SinhViens" FromRole="SinhVien" ToRole="SinhVienThuocKhoa" />
           <NavigationProperty Name="SinhVienThuocNhomSVs" Relationship="ProjectManagementModel.FK_SinhVienThuocNhomSV_SinhViens" FromRole="SinhVien" ToRole="SinhVienThuocNhomSV" />
           <NavigationProperty Name="TaiKhoans" Relationship="ProjectManagementModel.FK_TaiKhoans_SinhViens" FromRole="SinhVien" ToRole="TaiKhoan" />
+          <NavigationProperty Name="DanhGiaDeTais" Relationship="ProjectManagementModel.FK_DanhGiaDeTai_SinhViens" FromRole="SinhVien" ToRole="DanhGiaDeTai" />
         </EntityType>
         <EntityType Name="SinhVienThuocKhoa">
           <Key>
@@ -1251,30 +1236,6 @@
             </Principal>
             <Dependent Role="BinhLuan">
               <PropertyRef Name="DeTaiId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DanhGiaDeTai_DeTais">
-          <End Type="ProjectManagementModel.DeTai" Role="DeTai" Multiplicity="1" />
-          <End Type="ProjectManagementModel.DanhGiaDeTai" Role="DanhGiaDeTai" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DeTai">
-              <PropertyRef Name="DeTaiId" />
-            </Principal>
-            <Dependent Role="DanhGiaDeTai">
-              <PropertyRef Name="DeTaiId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DanhGiaDeTai_SinhViens">
-          <End Type="ProjectManagementModel.SinhVien" Role="SinhVien" Multiplicity="1" />
-          <End Type="ProjectManagementModel.DanhGiaDeTai" Role="DanhGiaDeTai" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SinhVien">
-              <PropertyRef Name="SinhVienId" />
-            </Principal>
-            <Dependent Role="DanhGiaDeTai">
-              <PropertyRef Name="SinhVienId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1614,12 +1575,49 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="DanhGiaDeTai">
+          <Key>
+            <PropertyRef Name="DeTaiId" />
+            <PropertyRef Name="SinhVienId" />
+          </Key>
+          <Property Name="DeTaiId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="SinhVienId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Diem" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="NoiDungDanhGia" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DeTai" Relationship="ProjectManagementModel.FK_DanhGiaDeTai_DeTais" FromRole="DanhGiaDeTai" ToRole="DeTai" />
+          <NavigationProperty Name="SinhVien" Relationship="ProjectManagementModel.FK_DanhGiaDeTai_SinhViens" FromRole="DanhGiaDeTai" ToRole="SinhVien" />
+        </EntityType>
+        <Association Name="FK_DanhGiaDeTai_DeTais">
+          <End Type="ProjectManagementModel.DeTai" Role="DeTai" Multiplicity="1" />
+          <End Type="ProjectManagementModel.DanhGiaDeTai" Role="DanhGiaDeTai" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeTai">
+              <PropertyRef Name="DeTaiId" />
+            </Principal>
+            <Dependent Role="DanhGiaDeTai">
+              <PropertyRef Name="DeTaiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DanhGiaDeTai_SinhViens">
+          <End Type="ProjectManagementModel.SinhVien" Role="SinhVien" Multiplicity="1" />
+          <End Type="ProjectManagementModel.DanhGiaDeTai" Role="DanhGiaDeTai" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SinhVien">
+              <PropertyRef Name="SinhVienId" />
+            </Principal>
+            <Dependent Role="DanhGiaDeTai">
+              <PropertyRef Name="SinhVienId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="QuanLyLich">
           <Key>
+            <PropertyRef Name="DotKhoaLuanId" />
             <PropertyRef Name="QuanLyLichId" />
           </Key>
           <Property Name="DotKhoaLuanId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="QuanLyLichId" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="QuanLyLichId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <Property Name="TieuDe" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="MocThoiGian" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -1651,17 +1649,6 @@
                 <ScalarProperty Name="NoiDungBinhLuan" ColumnName="NoiDungBinhLuan" />
                 <ScalarProperty Name="NguoiBinhLuan" ColumnName="NguoiBinhLuan" />
                 <ScalarProperty Name="BinhLuanId" ColumnName="BinhLuanId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DanhGiaDeTais">
-            <EntityTypeMapping TypeName="ProjectManagementModel.DanhGiaDeTai">
-              <MappingFragment StoreEntitySet="DanhGiaDeTai">
-                <ScalarProperty Name="NoiDungDanhGia" ColumnName="NoiDungDanhGia" />
-                <ScalarProperty Name="Diem" ColumnName="Diem" />
-                <ScalarProperty Name="GiangVienId" ColumnName="GiangVienId" />
-                <ScalarProperty Name="SinhVienId" ColumnName="SinhVienId" />
-                <ScalarProperty Name="DeTaiId" ColumnName="DeTaiId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1886,6 +1873,16 @@
                 <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
                 <ScalarProperty Name="TieuDe" ColumnName="TieuDe" />
                 <ScalarProperty Name="TinTucId" ColumnName="TinTucId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DanhGiaDeTais">
+            <EntityTypeMapping TypeName="ProjectManagementModel.DanhGiaDeTai">
+              <MappingFragment StoreEntitySet="DanhGiaDeTai">
+                <ScalarProperty Name="NoiDungDanhGia" ColumnName="NoiDungDanhGia" />
+                <ScalarProperty Name="Diem" ColumnName="Diem" />
+                <ScalarProperty Name="SinhVienId" ColumnName="SinhVienId" />
+                <ScalarProperty Name="DeTaiId" ColumnName="DeTaiId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

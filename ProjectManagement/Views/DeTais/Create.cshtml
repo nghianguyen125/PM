@@ -5,8 +5,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
-
 <section class="content">
     @{
         int countError = ViewBag.CountError != null ? (int)ViewBag.CountError : 0;
@@ -26,13 +24,6 @@
             @Html.AntiForgeryToken()
 
             <div class="box-body">
-                <div class="form-group">
-                    @Html.Label("Mã Đề Tài", new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(model => model.DeTaiId, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.DeTaiId)
-                    </div>
-                </div>
                 <div class="form-group">
                     @Html.Label("Tên Đề Tài", new { @class = "control-label col-md-2" })
                     <div class="col-md-10">

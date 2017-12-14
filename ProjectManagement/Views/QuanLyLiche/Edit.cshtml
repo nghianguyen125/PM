@@ -15,7 +15,15 @@
         <h4>QuanLyLich</h4>
         <hr />
         @Html.ValidationSummary(true)
-        @Html.HiddenFor(model => model.DotKhoaLuanId)
+        <div class="form-group">
+            @Html.LabelFor(model => model.DotKhoaLuanId, "DotKhoaLuanId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("DotKhoaLuanId", String.Empty)
+                @Html.ValidationMessageFor(model => model.DotKhoaLuanId)
+            </div>
+        </div>
+
+        @Html.HiddenFor(model => model.QuanLyLichId)
 
         <div class="form-group">
             @Html.LabelFor(model => model.TieuDe, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -25,7 +33,13 @@
             </div>
         </div>
 
-        @Html.HiddenFor(model => model.MocThoiGian)
+        <div class="form-group">
+            @Html.LabelFor(model => model.MocThoiGian, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MocThoiGian)
+                @Html.ValidationMessageFor(model => model.MocThoiGian)
+            </div>
+        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.NoiDung, htmlAttributes: new { @class = "control-label col-md-2" })

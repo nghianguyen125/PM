@@ -180,6 +180,13 @@ namespace ProjectManagement.Controllers.Admin
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(decimal id)
         {
+            var q = db.PhanDeTaiChoDotKhoaLuans.Where(a => a.DeTaiId == id);
+            var p = db.BinhLuans.Where(b => b.DeTaiId == id);
+            var r = db.TaiLieux.Where(c => c.DeTaiId == id);
+            if (q.Any() || p.Any() || r.Any())
+            {
+                return RedirectToAction("KhongXoa", "User");
+            }
             DeTai deTai = db.DeTais.Find(id);
             db.DeTais.Remove(deTai);
             db.SaveChanges();

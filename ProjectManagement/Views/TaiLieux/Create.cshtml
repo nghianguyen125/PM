@@ -27,13 +27,6 @@
 
             <div class="box-body">
                 <div class="form-group">
-                    @Html.Label("Mã Tài Liệu", new { @class = "control-label col-md-2", required = "required" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(model => model.TaiLieuId, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.TaiLieuId)
-                    </div>
-                </div>
-                <div class="form-group">
                     @Html.Label("Tên Tài Liệu", new { @class = "control-label col-md-2", required = "required" })
                     <div class="col-md-10">
                         @Html.TextBoxFor(model => model.TenTaiLieu, new { @class = "form-control" })

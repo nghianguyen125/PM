@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using ProjectManagement.App_Start.Classes;
 using ProjectManagement.Models;
 
 namespace ProjectManagement.Controllers
@@ -15,12 +17,14 @@ namespace ProjectManagement.Controllers
         private ProjectManagementEntities db = new ProjectManagementEntities();
 
         // GET: DanhGiaDeTais
-        public ActionResult Index(string id)
+        public ActionResult Index()
         {
-            var kh = db.DanhGiaDeTais.Where(p => p.GiangVienId == id).SingleOrDefault();
-            if (kh != null)
+            var username = ProjectManagement.App_Start.Classes.UserManager.GetUserName;
+            var tk = db.TaiKhoans.Where(z => z.Username == username).FirstOrDefault();
+            if (tk.GiangVienId != null)
             {
-                ViewBag.IdGiangVien = kh.GiangVienId;
+                var gv = db.GiangViens.Where(a => a.GiangVienId == tk.GiangVienId).SingleOrDefault();
+                ViewBag.giangVienId = gv.GiangVienId;
             }
             var danhGiaDeTais = db.DanhGiaDeTais.Include(d => d.DeTai).Include(d => d.SinhVien);
             return View(danhGiaDeTais.ToList());
@@ -44,9 +48,23 @@ namespace ProjectManagement.Controllers
         // GET: DanhGiaDeTais/Create
         public ActionResult Create()
         {
-            ViewBag.DeTaiId = new SelectList(db.DeTais, "DeTaiId", "TenDeTai");
-            ViewBag.SinhVienId = new SelectList(db.SinhViens, "SinhVienId", "HoTen");
-            return View();
+            if (!UserManager.Authenticated)
+            {
+                return RedirectToAction("Login", "User");
+            }
+            else
+            {
+                var username = ProjectManagement.App_Start.Classes.UserManager.GetUserName;
+                var tk = db.TaiKhoans.Where(z => z.Username == username).FirstOrDefault();
+
+                var gv = db.GiangViens.Where(a => a.GiangVienId == tk.GiangVienId).FirstOrDefault();
+                ViewBag.Ten = gv.HoTen;
+
+                ViewBag.GiangVienId = gv.GiangVienId;
+                ViewBag.DeTaiId = new SelectList(db.DeTais, "DeTaiId", "TenDeTai");
+                ViewBag.SinhVienId = new SelectList(db.SinhViens, "SinhVienId", "HoTen");
+                return View();
+            }
         }
 
         // POST: DanhGiaDeTais/Create
@@ -54,7 +72,7 @@ namespace ProjectManagement.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "DeTaiId,SinhVienId,GiangVienId,Diem,NoiDungDanhGia")] DanhGiaDeTai danhGiaDeTai)
+        public ActionResult Create([Bind(Include = "DeTaiId,SinhVienId,Diem,NoiDungDanhGia")] DanhGiaDeTai danhGiaDeTai)
         {
             if (ModelState.IsValid)
             {
@@ -69,13 +87,13 @@ namespace ProjectManagement.Controllers
         }
 
         // GET: DanhGiaDeTais/Edit/5
-        public ActionResult Edit(decimal detaiid, string svid, string gvid)
+        public ActionResult Edit(decimal detaiid, string svid)
         {
-            if (svid == null || gvid == null || detaiid == 0)
+            if (svid == null || detaiid == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DanhGiaDeTai danhGiaDeTai = db.DanhGiaDeTais.Find(detaiid, svid, gvid);
+            DanhGiaDeTai danhGiaDeTai = db.DanhGiaDeTais.Find(detaiid, svid);
             if (danhGiaDeTai == null)
             {
                 return HttpNotFound();
@@ -90,7 +108,7 @@ namespace ProjectManagement.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "DeTaiId,SinhVienId,GiangVienId,Diem,NoiDungDanhGia")] DanhGiaDeTai danhGiaDeTai)
+        public ActionResult Edit([Bind(Include = "DeTaiId,SinhVienId,Diem,NoiDungDanhGia")] DanhGiaDeTai danhGiaDeTai)
         {
             if (ModelState.IsValid)
             {
@@ -104,13 +122,13 @@ namespace ProjectManagement.Controllers
         }
 
         // GET: DanhGiaDeTais/Delete/5
-        public ActionResult Delete(decimal detaiid, string svid, string gvid)
+        public ActionResult Delete(decimal detaiid, string svid)
         {
-            if (svid == null || gvid == null || detaiid == 0)
+            if (svid == null || detaiid == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DanhGiaDeTai danhGiaDeTai = db.DanhGiaDeTais.Find(detaiid, svid, gvid);
+            DanhGiaDeTai danhGiaDeTai = db.DanhGiaDeTais.Find(detaiid, svid);
             if (danhGiaDeTai == null)
             {
                 return HttpNotFound();
@@ -121,12 +139,19 @@ namespace ProjectManagement.Controllers
         // POST: DanhGiaDeTais/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(decimal id)
+        public ActionResult DeleteConfirmed(decimal detaiid, string svid)
         {
-            DanhGiaDeTai danhGiaDeTai = db.DanhGiaDeTais.Find(id);
-            db.DanhGiaDeTais.Remove(danhGiaDeTai);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (!UserManager.Authenticated)
+            {
+                return RedirectToAction("Login", "User");
+            }
+            else
+            {
+                DanhGiaDeTai danhGiaDeTai = db.DanhGiaDeTais.Find(detaiid, svid);
+                db.DanhGiaDeTais.Remove(danhGiaDeTai);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
         }
 
         protected override void Dispose(bool disposing)

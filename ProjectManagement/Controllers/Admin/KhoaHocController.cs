@@ -176,6 +176,11 @@ namespace ProjectManagement.Controllers.Admin
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(decimal id)
         {
+            var q = db.SinhVienKhoaHocs.Where(a => a.KhoaHocID == id);
+            if (q.Any())
+            {
+                return RedirectToAction("KhongXoa", "User");
+            }
             KhoaHoc khoaHoc = db.KhoaHocs.Find(id);
             db.KhoaHocs.Remove(khoaHoc);
             db.SaveChanges();

@@ -20,6 +20,14 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.MocThoiGian)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MocThoiGian)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.NoiDung)
         </dt>
 
@@ -38,6 +46,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.QuanLyLichId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

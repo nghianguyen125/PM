@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "KhongXoa";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<section class="content-header">
+    <h2>Không thể xóa vì đang tồn tại dữ liệu ở bảng</h2>
+    <div class="box-footer">
+        @*<button type="submit" class="btn btn-default">Cancel</button>*@
+        @Html.ActionLink("Back to List", "Index", "Admin", null, new { @class = "btn btn-default" })
+    </div>
+</section>
+

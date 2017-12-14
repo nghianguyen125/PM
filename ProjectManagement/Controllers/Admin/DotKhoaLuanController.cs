@@ -160,6 +160,12 @@ namespace ProjectManagement.Controllers.Admin
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(decimal id)
         {
+            var q = db.PhanDeTaiChoDotKhoaLuans.Where(a => a.DotKhoaLuanId == id);
+            var p = db.QuanLyLiches.Where(b => b.DotKhoaLuanId == id);
+            if (q.Any() || p.Any())
+            {
+                return RedirectToAction("KhongXoa", "User");
+            }
             DotKhoaLuan dotKhoaLuan = db.DotKhoaLuans.Find(id);
             db.DotKhoaLuans.Remove(dotKhoaLuan);
             db.SaveChanges();

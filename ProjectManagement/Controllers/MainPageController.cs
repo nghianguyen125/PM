@@ -22,6 +22,10 @@ namespace ProjectManagement.Controllers.User
             }
             
             var username = ProjectManagement.App_Start.Classes.UserManager.GetUserName;
+            if(username.Contains("admin") == true)
+            {
+                return RedirectToAction("Index", "Admin");
+            }
             var tk = db.TaiKhoans.Where(z => z.Username == username).FirstOrDefault();
             if (tk.SinhVienId != null)
             {
